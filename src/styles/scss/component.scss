@@ -224,29 +224,6 @@ footer {
   }
 }
 
-/* 게시물 */
-.user-follow {
-  height: 2.625rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .img-cover {
-    @include image-cover;
-    @include width-height(2.25rem, 2.25rem);
-    @include profile-img-tag;
-    border: $border-gray100-1px;
-  }
-  .profile-img {
-    order: 0;
-    margin-right: 0.75rem;
-  }
-  .user-info {
-    order: 1;
-    margin-right: auto;
-  }
-}
-
 .home-post {
   position: relative;
   .btn-option {
