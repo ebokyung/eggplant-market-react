@@ -1,0 +1,26 @@
+@import '/src/styles/scss/global';
+@import '/src/styles/scss/mixin';
+
+.btn-back,
+.btn-option {
+  @include width-height(2.75rem, 2.75rem);
+}
+
+.btn-back {
+  background: url('/assets/icon/icon-arrow-left.svg') no-repeat center;
+}
+
+.btn-option,
+.btn-more {
+  background: url('/assets/icon/icon-more-vertical.svg') no-repeat center;
+}
+
+.highContrast {
+  .btn-back {
+    background-image: url('/assets/icon/icon-arrow-left-hc.svg');
+  }
+  .btn-option,
+  .btn-more {
+    background-image: url('/assets/icon/icon-more-vertical-hc.svg');
+  }
+}
