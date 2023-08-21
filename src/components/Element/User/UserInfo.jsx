@@ -1,44 +1,28 @@
 import React from 'react';
 import './style/UserInfo.scss';
 
-function returnType(category) {
-  switch (category) {
-    case 'post':
-      return { nameTag: 'p', detailCategory: 'id' };
-    case 'chat':
-      return { nameTag: 'p', detailCategory: 'chat' };
-    case 'search':
-      return { nameTag: 'h3', detailCategory: 'id' };
-    case 'follow':
-      return { nameTag: 'strong', detailCategory: 'intro' };
-    case 'comment':
-      return { nameTag: 'strong', detailCategory: null };
-    default:
-      return { nameTag: 'p', detailCategory: 'id' };
-  }
-}
+const categoryMap = {
+  post: { nameTag: 'p', detailCategory: 'id' },
+  chat: { nameTag: 'p', detailCategory: 'chat' },
+  search: { nameTag: 'h3', detailCategory: 'id' },
+  follow: { nameTag: 'strong', detailCategory: 'intro' },
+  comment: { nameTag: 'strong', detailCategory: null },
+};
 
-function returnClassName(detailCategory) {
-  switch (detailCategory) {
-    case 'id':
-      return 'user-id';
-    case 'chat':
-      return 'chat-content ellipsis';
-    case 'intro':
-      return 'user-intro ellipsis';
-    default:
-      return 'user-id';
-  }
-}
+const detailClassMap = {
+  id: 'user-id',
+  chat: 'chat-content ellipsis',
+  intro: 'user-intro ellipsis',
+};
 
 // userNameTag : strong(default), h2, h3, p
 // detailcategory : chat, intro, id(default)
 export default function UserInfo({ category = 'post', userName, detail }) {
-  const { nameTag: UserNameTag, detailCategory } = returnType(category);
+  const { nameTag: UserNameTag, detailCategory } = categoryMap[category];
   return (
     <div className="user-info">
       <UserNameTag className="user-name">{userName}</UserNameTag>
-      {detailCategory ? <p className={returnClassName(detailCategory)}>{detail}</p> : null}
+      {detailCategory ? <p className={detailClassMap[detailCategory]}>{detail}</p> : null}
     </div>
   );
 }
