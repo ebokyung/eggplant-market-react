@@ -12,15 +12,13 @@
   &-main {
     padding: 0.8125rem 1rem;
   }
-  &-search{
-    padding: .5625rem 1rem;
-  }
   &-basic,
-  &-chat {
+  &-follow {
     padding: 0.1875rem 0.3125rem;
   }
-  &-upload {
-      padding: 0.1875rem 1rem 0.3125rem 0.1875rem;
+  &-upload,
+  &-search {
+    padding: 0.1875rem 1rem 0.1875rem 0.3125rem;
   }
 }
 
@@ -46,10 +44,4 @@
 }
 input::placeholder{
   color: $gray200-color;
-}
-
-// 임시
-.backbtn{
-  margin-right: .625rem;
-  order: -1;
 }
