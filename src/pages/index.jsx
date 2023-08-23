@@ -4,8 +4,8 @@ import React from 'react';
 import { Button, ButtonBack, ButtonOption } from '../components/Element/Buttons';
 import { User } from '../components/Element/User';
 import Post from '../components/Element/Post/Post';
-import FollowingItem from '../components/Element/Follow/FollowingItem';
-import Comment from '../components/Element/Comment/Comment';
+// import FollowingItem from '../components/Element/Follow/FollowingItem';
+// import Comment from '../components/Element/Comment/Comment';
 
 function TestComponent() {
   // const post = {
@@ -102,10 +102,6 @@ function TestComponent() {
       <hr />
       <Post post={postDummy} />
       <Post post={postDummy2} />
-      <hr />
-      <FollowingItem />
-      <hr />
-      <Comment />
     </>
   );
 }
