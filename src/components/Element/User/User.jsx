@@ -19,11 +19,11 @@ function returnSize(category) {
   }
 }
 
-export default function User({ category, userName, detail, children }) {
+export default function User({ category, accountName, userName, detail, children, profileImg }) {
   return (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <Link className="user-container" to="#">
-      <ProfileImg size={returnSize(category)} />
+    <Link className="user-container" to={`./profile_info.html?accountName=${accountName}`}>
+      <ProfileImg profileImg={profileImg} size={returnSize(category)} />
       <UserInfo category={category} userName={userName} detail={detail} />
       {children}
     </Link>

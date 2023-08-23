@@ -2,11 +2,11 @@ import React from 'react';
 import './style/UserInfo.scss';
 
 const categoryMap = {
-  post: { nameTag: 'p', detailCategory: 'id' },
-  chat: { nameTag: 'p', detailCategory: 'chat' },
-  search: { nameTag: 'h3', detailCategory: 'id' },
-  follow: { nameTag: 'strong', detailCategory: 'intro' },
-  comment: { nameTag: 'strong', detailCategory: null },
+  post: { NameTag: 'p', detailCategory: 'id' },
+  chat: { NameTag: 'p', detailCategory: 'chat' },
+  search: { NameTag: 'h3', detailCategory: 'id' },
+  follow: { NameTag: 'strong', detailCategory: 'intro' },
+  comment: { NameTag: 'strong', detailCategory: null },
 };
 
 const detailClassMap = {
@@ -18,10 +18,10 @@ const detailClassMap = {
 // userNameTag : strong(default), h2, h3, p
 // detailcategory : chat, intro, id(default)
 export default function UserInfo({ category = 'post', userName, detail }) {
-  const { nameTag: UserNameTag, detailCategory } = categoryMap[category];
+  const { NameTag, detailCategory } = categoryMap[category];
   return (
     <div className="user-info">
-      <UserNameTag className="user-name">{userName}</UserNameTag>
+      <NameTag className="user-name">{userName}</NameTag>
       {detailCategory ? <p className={detailClassMap[detailCategory]}>{detail}</p> : null}
     </div>
   );
