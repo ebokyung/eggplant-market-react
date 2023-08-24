@@ -1,0 +1,13 @@
+@import '/src/styles/scss/mixin';
+
+li {
+  margin-bottom: 1rem;
+}
+
+// user-id 에는 왜 돼있지..? <- js프로젝트에는 user-name에만 적용돼있음
+.user-id,
+.user-name {
+  strong {
+    @include get-color(color, point-color);
+  }
+}
