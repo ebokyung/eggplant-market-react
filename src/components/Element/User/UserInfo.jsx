@@ -15,14 +15,15 @@ const detailClassMap = {
   intro: 'user-intro ellipsis',
 };
 
-// userNameTag : strong(default), h2, h3, p
 // detailcategory : chat, intro, id(default)
 export default function UserInfo({ category = 'post', userName, detail }) {
   const { NameTag, detailCategory } = categoryMap[category];
   return (
     <div className="user-info">
+      {/* NameTag : strong(default), h2, h3, p */}
       <NameTag className="user-name">{userName}</NameTag>
-      {detailCategory ? <p className={detailClassMap[detailCategory]}>{detail}</p> : null}
+      {/* detailcategory : chat, intro, id(default) */}
+      {detailCategory && <p className={detailClassMap[detailCategory]}>{detail}</p>}
     </div>
   );
 }
