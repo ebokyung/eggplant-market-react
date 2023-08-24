@@ -1,0 +1,47 @@
+@import '../../../styles/scss/global';
+@import '/src/styles/scss/mixin';
+
+.l_header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: $border-gray100-1px;
+}
+
+.header{
+  &-main {
+    padding: 0.8125rem 1rem;
+  }
+  &-basic,
+  &-follow {
+    padding: 0.1875rem 0.3125rem;
+  }
+  &-upload,
+  &-search {
+    padding: 0.1875rem 1rem 0.1875rem 0.3125rem;
+  }
+}
+
+.title {
+  font-size: map-get($font-sizes,"size14");
+  font-weight: 500;
+  margin-right: auto;
+  &-main {
+    font-size: map-get($font-sizes,"size18");
+  }
+}
+
+.l_inp-search{
+  flex-grow: 1;
+  margin-left: 1.25rem;
+}
+#inp-search{
+  width: 100%;
+  border-radius: 2rem;
+  padding: .4375rem 0rem .4375rem 1rem;
+  background-color: $gray50-color;
+  line-height: 1.125rem;
+}
+input::placeholder{
+  color: $gray200-color;
+}
