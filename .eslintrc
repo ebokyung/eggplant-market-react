@@ -4,9 +4,14 @@
     "es6": true,
     "node": true
   },
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "requireConfigFile": "false"
+  },
   "extends": ["airbnb", "prettier", "eslint:recommended", "plugin:prettier/recommended"],
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/newline-after-import": "off"
   }
 }

@@ -1,0 +1,97 @@
+@import '/src/styles/scss/global';
+@import '/src/styles/scss/mixin';
+
+.tab-menu{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: $white-color;
+}
+
+.tab-item-list {
+  border-top: .0313rem solid $gray100-color;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  @include get-color(background-color, bg-color);
+
+  li {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+
+    &>* {
+      width: calc(100vw / 4);
+      display: inline-block;
+      position: relative;
+      text-align: center;
+      color: $gray300-color;
+      font-size: map-get($font-sizes, "size10");
+      padding-top: 2.5rem;
+      padding-bottom: .625rem;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        transform: translate(-50%, -50%);
+        top: 35%;
+        left: 50%;
+        background-repeat: no-repeat;
+        background-size: 352px 44px;
+        @include get-color(background-image, footer-icon-sprites);
+      }
+
+      &.here {
+        @include get-color(color, font-color);
+      }
+
+      &:hover {
+        background-color: #F1F1F1;
+        color: $black-color;
+      } 
+    }
+  }
+
+  li:first-child {
+    a::before {
+      background-position: -142px -10px;
+    }
+
+    a.here::before {
+      background-position: -98px -10px;
+    }
+  }
+
+  li:nth-child(2) {
+    a::before {
+      background-position: -230px -10px;
+    }
+
+    a.here::before {
+      background-position: -186px -10px;
+    }
+  }
+
+  li:nth-child(3) {
+    a::before {
+      background-position: -54px -10px;
+    }
+
+    a.here::before {
+      background-position: -54px -10px;
+    }
+  }
+
+  li:nth-child(4) {
+    a::before {
+      background-position: -318px -10px;
+    }
+
+    a.here::before {
+      background-position: -274px -10px;
+    }
+  }
+}
