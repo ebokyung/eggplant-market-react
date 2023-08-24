@@ -14,6 +14,8 @@ function returnContentTag() {
   return 'h2';
 }
 
+// Post 링크 분기
+// 게시글 상세 페이지에서는 게시글 상세보기 링크 막기
 function Post({ post }) {
   const { author, commentCount, content, createdAt, heartCount, hearted, id, image } = post;
   const ContentTag = returnContentTag();
@@ -27,11 +29,11 @@ function Post({ post }) {
             <span className="a11y-hidden">게시글 상세보기</span>
             {/* home : h2, profile : h3, detail : p  */}
             <ContentTag className="post-text">{content}</ContentTag>
-            {image ? (
+            {image && (
               <div className="img-cover">
                 <img className="post-img" src={image} alt="" />
               </div>
-            ) : null}
+            )}
           </Link>
           <div className="post-icon">
             <button type="button" className={`btn-like${hearted ? ' like' : ''}`}>
@@ -52,6 +54,7 @@ function Post({ post }) {
               <span className="cnt">{commentCount}</span>
             </Link>
           </div>
+          {/* 날짜 처리 함수 적용 필요 */}
           <p className="post-date">{createdAt}</p>
         </div>
 
