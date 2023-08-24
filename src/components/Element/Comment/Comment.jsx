@@ -25,6 +25,7 @@ function Comment() {
   return (
     <li key={id} className="comment-item">
       <User category="comment" accountName={author.accountname} userName={author.username} profileImg={author.image} />
+      {/* 날짜 함수 적용 필요 */}
       <p className="comment-time">{createdAt}</p>
       <h3 className="comment-text">{content}</h3>
       <ButtonOption data-commentid={id} />
