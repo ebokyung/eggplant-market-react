@@ -5,16 +5,17 @@ function FollowButton({ isFollow }) {
   const [following, setIsFollowing] = useState(isFollow);
 
   const buttonClasses = following ? 'size-s btn-follow cancle' : 'size-s btn-follow';
+  const buttonText = following ? '팔로잉' : '팔로우';
+  const hiddenText = following ? '취소' : '하기';
 
   function handleFollow() {
     setIsFollowing(prevState => !prevState);
-    // e.target.classList.toggle('cancle', following);
   }
 
   return (
     <Button className={buttonClasses} onClick={() => handleFollow()}>
-      {/* {following ? `팔로잉` : `팔로우`} */}
-      {following ? <span className="a11y-hidden">취소</span> : <span className="a11y-hidden">하기</span>}
+      {buttonText}
+      <span className="a11y-hidden">{hiddenText}</span>
     </Button>
   );
 }
