@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { User } from '../User';
 import ButtonOption from '../Buttons/ButtonOption';
@@ -8,9 +8,11 @@ import './Post.scss';
 import messageCircle from '../../../assets/icon/icon-message-circle.svg';
 
 function returnContentTag() {
-  if (window.location.href.includes('home')) return 'h2';
-  if (window.location.href.includes('profile')) return 'h3';
-  if (window.location.href.includes('detail')) return 'p';
+  const location = useLocation();
+
+  if (location.pathname.includes('home')) return 'h2';
+  if (location.pathname.includes('profile')) return 'h3';
+  if (location.pathname.includes('detail')) return 'p';
   return 'h2';
 }
 
