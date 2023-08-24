@@ -1,0 +1,28 @@
+@import '/src/styles/scss/mixin';
+
+// size
+// 36 {comment}
+// 42 {post, upload , chat}
+// 50 {search, follower, following}
+// 110 {profile}
+$img-sizes: (
+  comment: 36px,
+  user: 42px,
+  item: 50px,
+  main: 110px,
+);
+
+@mixin set-img-size($size) {
+  @include width-height($size, $size);
+}
+
+.profile-img {
+  @include image-cover;
+  @include profile-img-tag;
+}
+
+@each $name, $size in $img-sizes {
+  .#{$name} {
+    @include set-img-size($size);
+  }
+}
