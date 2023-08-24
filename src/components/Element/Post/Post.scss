@@ -1,0 +1,76 @@
+@import '/src/styles/scss/mixin';
+
+#post {
+  margin-top: 1.25rem;
+}
+
+#post {
+  position: relative;
+  margin-top: 1.25rem;
+  .btn-option {
+    width: 1.5rem;
+    position: absolute;
+    top: 0;
+    right: -0.75rem;
+    transform: translateX(-25%);
+    img {
+      width: 100%;
+    }
+  }
+  .btn-like.like {
+    svg {
+      fill: $highlight-color;
+      path {
+        stroke: $highlight-color;
+      }
+    }
+  }
+}
+
+.post-edit {
+  margin: 1rem auto 1rem 3.375rem;
+  padding-bottom: 0.3125rem;
+  a:first-child {
+    display: block;
+  }
+
+  .post-text {
+    @include get-color(color, font-color);
+    margin-bottom: 1rem;
+    line-height: 1.125rem;
+    word-break: break-all;
+    white-space: pre-line;
+  }
+
+  .img-cover {
+    max-width: 19rem;
+    margin-bottom: 0.75rem;
+    border-radius: 0.625rem;
+    overflow: hidden;
+    border: $border-gray100-1px;
+
+    .post-img {
+      @include width-height(100%, 100%);
+      object-fit: cover;
+    }
+  }
+}
+
+.post-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: $gray300-color;
+  font-size: map-get($font-sizes, 'size12');
+  & > * {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: inherit;
+  }
+}
+.post-date {
+  @include get-color(color, gray-color);
+  font-size: map-get($font-sizes, 'size10');
+}
