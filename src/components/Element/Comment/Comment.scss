@@ -4,6 +4,10 @@
   margin-top: 1.25rem;
   position: relative;
 
+  &:first-child {
+    margin-top: 0;
+  }
+
   .user-info {
     display: inline-block;
     line-height: 1.1875rem;
