@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.scss';
 import searchIcon from '../../../assets/icon/icon-search.svg';
-import { Button, ButtonOption, ButtonBack } from '../Buttons/index';
+import { Button, ButtonOption, ButtonBack } from '../Buttons';
 
 function Header({ page, text, btnText }) {
   // props : page (main || search || upload || follow) , text , btnText
