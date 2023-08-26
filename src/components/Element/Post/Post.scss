@@ -1,10 +1,6 @@
 @import '/src/styles/scss/mixin';
 
 #post {
-  margin-top: 1.25rem;
-}
-
-#post {
   position: relative;
   margin-top: 1.25rem;
   .btn-option {
@@ -70,6 +66,15 @@
     color: inherit;
   }
 }
+.post-icon {
+  path {
+    @include get-color(stroke, gray-color);
+  }
+  span {
+    @include get-color(color, gray-color);
+  }
+}
+
 .post-date {
   @include get-color(color, gray-color);
   font-size: map-get($font-sizes, 'size10');
