@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
-import { createPortal } from 'react-dom';
+import React, { useEffect, useRef } from 'react';
 import ButtonCancel from './ButtonCancel';
 import './Popup.scss';
 
@@ -28,24 +27,41 @@ const actionMap = {
 function Popup({ onClose, target, action }) {
   const currAction = actionMap[action];
   const descriptionText = action === 'logout' ? '로그아웃하시겠어요?' : `${targetMap[target]}을 ${currAction}할까요?`;
-  return createPortal(
+
+  const actionButtonRef = useRef(null);
+
+  useEffect(() => {
+    if (actionButtonRef.current) {
+      actionButtonRef.current.focus();
+    }
+  }, []);
+
+  const handleKeyDown = e => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
+  return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
-      onClick={onClose}
-      onKeyDown={e => {
-        if (e.key === 'ESC') onClose();
+      onClick={e => {
+        onClose();
+        e.stopPropagation();
       }}
       className="modal-background"
     >
       <h2 className="a11y-hidden">팝업</h2>
-      <div className="modal-content">
+      <div className="modal-content" onClick={e => e.stopPropagation()} onKeyDown={handleKeyDown}>
         <p className="modal-description">{descriptionText}?</p>
         <div className="modal-actions">
-          <button type="button">{currAction}</button>
+          <button ref={actionButtonRef} type="button">
+            {currAction}
+          </button>
           <ButtonCancel onClose={onClose} />
         </div>
       </div>
-    </div>,
-    document.body,
+    </div>
   );
 }
 
