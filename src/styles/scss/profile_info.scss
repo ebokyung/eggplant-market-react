@@ -4,8 +4,9 @@
 .img-crop {
     margin: 0 auto;
     width: 6.875rem;
-    border-radius: 50%;
-    overflow: hidden;
+    @include image-cover;
+    // border-radius: 50%;
+    // overflow: hidden;
     border: $border-gray100-1px;
     @include profile-img-tag;
 }
@@ -181,33 +182,6 @@ main {
     @include get-color(background-color, bg-color);
 }
 
-.user-follow .user-info {
-    .user-id {
-        @include get-color(color, gray-color);
-    }
-    @include get-color(color, font-color);
-}
-
-.post-text {
-    @include get-color(color, font-color);
-}
-
-.cnt{
-    @include get-color(color, gray-color);
-}
-
-.btn-comment {
-    @include get-color(color, gray-color);
-}
-
-.post-date {
-    @include get-color(color, gray-color);
-}
-
 .content-wrap {
     margin-top: 3px;
-}
-
-:root{
-    background-color: $gray50-color;
 }
