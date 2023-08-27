@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useRef } from 'react';
-import ButtonCancel from './ButtonCancel';
 import './Popup.scss';
+import { ButtonCancel, ButtonDelete, ButtonReport, ButtonSignOut } from './Buttons';
 
 // target : 게시글, 상품, 댓글, 로그아웃
 // role : report, delete, logout
@@ -24,9 +25,16 @@ const actionMap = {
   logout: '로그아웃',
 };
 
-function Popup({ onClose, target, action }) {
+const actionComponentMap = {
+  로그아웃: ButtonSignOut,
+  신고: ButtonReport,
+  삭제: ButtonDelete,
+};
+
+function Popup({ onClose, target, action, commentId, productId, postId }) {
   const currAction = actionMap[action];
   const descriptionText = action === 'logout' ? '로그아웃하시겠어요?' : `${targetMap[target]}을 ${currAction}할까요?`;
+  const ActionComponent = actionComponentMap[currAction];
 
   const actionButtonRef = useRef(null);
 
@@ -54,9 +62,7 @@ function Popup({ onClose, target, action }) {
       <div className="modal-content" onClick={e => e.stopPropagation()} onKeyDown={handleKeyDown}>
         <p className="modal-description">{descriptionText}?</p>
         <div className="modal-actions">
-          <button ref={actionButtonRef} type="button">
-            {currAction}
-          </button>
+          {ActionComponent && <ActionComponent postId={postId} productid={productId} commentId={commentId} ref={actionButtonRef} />}
           <ButtonCancel onClose={onClose} />
         </div>
       </div>
