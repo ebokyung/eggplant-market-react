@@ -1,0 +1,11 @@
+@import '/src/styles/scss/mixin';
+
+li {
+  margin-bottom: 1rem;
+}
+
+.user-name {
+  strong {
+    @include get-color(color, point-color);
+  }
+}
