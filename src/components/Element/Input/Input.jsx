@@ -7,7 +7,7 @@ function Input(props) {
   return (
     <>
       <label htmlFor={inputId}>{label}</label>
-      <input type={type || 'text'} className={hasError && 'error'} placeholder={placeholder} required={required} {...props} />
+      <input type={type || 'text'} id={inputId} className={hasError && 'error'} placeholder={placeholder} required={required} {...props} />
     </>
   );
 }
