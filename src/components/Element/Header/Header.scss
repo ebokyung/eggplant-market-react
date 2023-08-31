@@ -1,14 +1,14 @@
 @import '../../../styles/scss/global';
 @import '/src/styles/scss/mixin';
 
-.l_header{
+.l_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: $border-gray100-1px;
 }
 
-.header{
+.header {
   &-main {
     padding: 0.8125rem 1rem;
   }
@@ -23,25 +23,26 @@
 }
 
 .title {
-  font-size: map-get($font-sizes,"size14");
+  font-size: map-get($font-sizes, 'size14');
   font-weight: 500;
   margin-right: auto;
   &-main {
-    font-size: map-get($font-sizes,"size18");
+    font-size: map-get($font-sizes, 'size18');
+    font-weight: 500;
   }
 }
 
-.l_inp-search{
+.l_inp-search {
   flex-grow: 1;
   margin-left: 1.25rem;
 }
-#inp-search{
+#inp-search {
   width: 100%;
   border-radius: 2rem;
-  padding: .4375rem 0rem .4375rem 1rem;
+  padding: 0.4375rem 0rem 0.4375rem 1rem;
   background-color: $gray50-color;
   line-height: 1.125rem;
 }
-input::placeholder{
+input::placeholder {
   color: $gray200-color;
 }
