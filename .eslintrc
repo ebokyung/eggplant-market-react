@@ -7,10 +7,11 @@
   "parserOptions": {
     "parser": "@babel/eslint-parser"
   },
-  "extends": ["airbnb", "prettier", "eslint:recommended", "plugin:prettier/recommended"],
+  "extends": ["airbnb", "eslint:recommended", "plugin:prettier/recommended"],
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "react/prop-types": "off",
-    "import/newline-after-import": "off"
+    "import/newline-after-import": "off",
+    "react/jsx-props-no-spreading": ["warn"]
   }
 }

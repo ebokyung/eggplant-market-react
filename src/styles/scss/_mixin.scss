@@ -41,7 +41,6 @@
 @mixin warning-message($property, $color){
     @include get-color($property, $color);
     font-size: map-get($font-sizes, "size12");
-    display: none;
 }
 
 @mixin join-btn-size-l{
