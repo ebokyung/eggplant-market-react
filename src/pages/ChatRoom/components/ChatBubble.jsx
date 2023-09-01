@@ -1,7 +1,8 @@
 import React from 'react';
+import '../styles/ChatBubble.scss';
 import ProfileImg from '../../../components/Element/User/ProfileImg';
 
-function ChatBubble({ data }) {
+export function ChatBubble({ data }) {
   const { who, body, src, time } = data;
   return (
     <div className={`chat-cover ${who ? 'my-chat' : 'your-chat'}`}>
@@ -12,5 +13,3 @@ function ChatBubble({ data }) {
     </div>
   );
 }
-
-export default ChatBubble;

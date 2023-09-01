@@ -16,7 +16,8 @@ export default {
     },
     {
       who: false,
-      body: '안녕하세요. 감귤 사고싶어요요요요요',
+      body: '',
+      src: dummyImg,
       time: '12:41',
     },
     {

@@ -1,10 +1,10 @@
 import React from 'react';
-import './ChatRoom.scss';
-import Header from '../../components/Element/Header/Header';
-import { chatData } from '../../libs/dummy';
-import ChatBubble from './components/ChatBubble';
+import '../styles/ChatRoom.scss';
+import Header from '../../../components/Element/Header/Header';
+import { chatData } from '../../../libs/dummy';
+import { ChatBubble } from '../components/ChatBubble';
 
-function ChatRoom() {
+export function ChatRoom() {
   return (
     <>
       <Header text={chatData.userName} className="fixed-header">
@@ -57,5 +57,3 @@ function ChatRoom() {
     </>
   );
 }
-
-export default ChatRoom;
