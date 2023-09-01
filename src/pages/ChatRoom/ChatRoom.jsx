@@ -25,7 +25,6 @@ function ChatRoom() {
             <span className="a11y-hidden">메세지 입력</span>
             <input type="text" id="inputMessage" placeholder="댓글 입력하기..." />
           </label>
-
           <label htmlFor="inputImg" role="tabpanel" className="label-input-img" tabIndex={0}>
             <span className="a11y-hidden">이미지 첨부 버튼</span>
             <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,19 +52,7 @@ function ChatRoom() {
           </button>
         </section>
 
-        {/* 모달창 */}
-        {/* <article className="post-modal-background">
-          <h2 className="a11y-hidden">모달창</h2>
-          <div className="post-modal-content">
-            <div className="post-modal-bar" />
-            <p className="a11y-hidden">채팅방 나가기</p>
-            <div className="modal-content">
-              <button type="button" className="modal-description">
-                채팅방 나가기
-              </button>
-            </div>
-          </div>
-        </article> */}
+        {/* 모달창 - 채팅방 나가기 */}
       </main>
     </>
   );
