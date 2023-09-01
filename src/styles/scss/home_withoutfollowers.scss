@@ -10,6 +10,10 @@
     }
 }
 
+main{
+  margin-bottom: 3.8125rem;
+}
+
 .title-main {
     @include get-color(color, font-color);
 }
@@ -42,8 +46,6 @@
         left: 1rem;
         right : 1rem;
     }
-
-    margin-bottom: 4.0625rem;
 }
 
 .home-background {
@@ -61,28 +63,4 @@
     padding: 0.8125rem 0;
     border-radius: 2.75rem;
     font-size: map-get($font-sizes, "size14" );
-}
-
-.home-post .user-follow .user-info {
-    .user-id {
-        @include get-color(color, gray-color);
-    }
-
-    @include get-color(color, font-color);
-}
-
-.post-text {
-    @include get-color(color, font-color);
-}
-
-.cnt {
-    @include get-color(color, gray-color);
-}
-
-.btn-comment {
-    @include get-color(color, gray-color);
-}
-
-.post-date {
-    @include get-color(color, gray-color);
 }
