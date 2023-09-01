@@ -1,8 +1,8 @@
 import React from 'react';
 import './ChatRoom.scss';
 import Header from '../../components/Element/Header/Header';
-import ProfileImg from '../../components/Element/User/ProfileImg';
 import { chatData } from '../../libs/dummy';
+import ChatBubble from './components/ChatBubble';
 
 function ChatRoom() {
   return (
@@ -14,17 +14,9 @@ function ChatRoom() {
 
       <main>
         <section className="chat-sheet">
-          {chatData.contents.map(item => {
-            const { who, body, src, time } = item;
-            return (
-              <div className={`chat-cover ${who ? 'my-chat' : 'your-chat'}`}>
-                {!who && <ProfileImg category="chat" />}
-                {!src && <p className="chat-content">{body}</p>}
-                {src && <img src={src} alt="" />}
-                <p className="chat-time">{time}</p>
-              </div>
-            );
-          })}
+          {chatData.contents.map(item => (
+            <ChatBubble data={item} />
+          ))}
         </section>
 
         <section className="chat-input">
