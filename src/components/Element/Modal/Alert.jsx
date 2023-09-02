@@ -4,7 +4,7 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { createPortal } from 'react-dom';
 import { openAlert, doAlert } from '../../../recoil/modal/atoms';
 
-function Alert({ handleModalClose }) {
+function Alert({ handleModal }) {
   const isAlert = useSetRecoilState(openAlert);
   const doFunc = useRecoilValue(doAlert);
 
@@ -19,7 +19,7 @@ function Alert({ handleModalClose }) {
             onClick={() => {
               doFunc.func();
               isAlert(false);
-              handleModalClose();
+              handleModal();
             }}
           >
             {doFunc.text}

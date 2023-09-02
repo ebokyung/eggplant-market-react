@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { User } from '../User';
-import ButtonOption from '../Buttons/ButtonOption';
+import ButtonOptionPost from '../Buttons/ButtonOptionPost';
 import ButtonLike from './ButtonLike';
 
 import './Post.scss';
@@ -48,7 +48,7 @@ function Post({ post }) {
         <p className="post-date">{createdAt}</p>
       </div>
 
-      <ButtonOption />
+      <ButtonOptionPost />
     </section>
   );
 }
