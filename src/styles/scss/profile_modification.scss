@@ -79,7 +79,7 @@ form {
   }
 
   input:focus {
-    @include get-color(border-bottom, profile-border-bottom);
+    @include get-color(border-bottom, focus-border-bottom);
     outline: none;
   }
 
