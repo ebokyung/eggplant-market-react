@@ -1,0 +1,19 @@
+import React from 'react';
+import '../styles/UserProfile.scss';
+import Header from '../../../components/Element/Header/Header';
+import Navbar from '../../../components/Element/Navbar/Navbar';
+import { ProfileSection, ProductSection, PostSection } from '../components';
+
+export function UserProfile() {
+  return (
+    <>
+      <Header />
+      <main className="main-with-nav">
+        <ProfileSection />
+        <ProductSection />
+        <PostSection />
+      </main>
+      <Navbar />
+    </>
+  );
+}
