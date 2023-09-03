@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/ProfileSection.scss';
 import { UserInfomation, ButtonsYourProfile, ButtonsMyProfile } from './ProfileSection/index';
 
 export function ProfileSection() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/ProductSection.scss';
 import { ProductItem } from './ProductSection/ProductItem';
 
 export function ProductSection() {

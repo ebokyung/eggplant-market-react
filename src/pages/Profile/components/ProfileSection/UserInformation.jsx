@@ -1,13 +1,11 @@
 import React from 'react';
+import ProfileImg from '../../../../components/Element/User/ProfileImg';
 
 export function UserInfomation() {
   return (
     <header className="profile-header">
       <h2 className="a11y-hidden">사용자 정보</h2>
-      <div className="img-crop">
-        {/* <!-- 임시 이미지 --> */}
-        <img src="../assets/basic-profile.png" alt="" />
-      </div>
+      <ProfileImg />
       <strong className="profile-name">
         <span className="a11y-hidden">사용자 이름:</span>
       </strong>

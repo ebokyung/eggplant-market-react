@@ -14,7 +14,7 @@ function returnSize(category) {
     case 'comment':
       return 'comment';
     default:
-      return 'user';
+      return 'main';
   }
 }
 
