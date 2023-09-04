@@ -38,7 +38,7 @@ export function Post({ post }) {
             ))}
         </Link>
         <div className="post-icon">
-          <ButtonLike id={id} hearted={hearted} heartCount={heartCount} />
+          <ButtonLike postid={id} hearted={hearted} heartCount={heartCount} />
           <Link to="/">
             <span className="a11y-hidden">게시물 댓글 보러가기</span>
             <img src={messageCircle} alt="" />
