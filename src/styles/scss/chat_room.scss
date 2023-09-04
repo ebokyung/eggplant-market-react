@@ -112,7 +112,7 @@ main{
         @include get-color(background-color, bg-color);
     }
     .btn-comment:disabled{
-        @include get-color(color, btn-color);
+        @include get-color(color, disabled-btn-color);
     }
     .btn-comment:not(:disabled){
         @include get-color(color, send-color);
@@ -121,37 +121,4 @@ main{
 
 #comment-input::placeholder {
     @include get-color(color, gray-color);
-}
-
-// 하단 모달창 부분
-.post-modal-background{
-    display: none;
-    position: fixed;
-    @include width-height(100%, 100%);
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    .post-modal-content{
-        background-color: $white-color;
-        padding-bottom: 0.625rem;
-        border-radius: 1.25rem 1.25rem 0 0;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
-    .modal-content{
-        padding: 0.875rem 1.625rem 0.875rem;
-        font-size: map-get($font-sizes, size14);
-        font-weight: 400;
-        line-height: 1.125rem;
-    }
-    .post-modal-bar{
-        background-color: $gray100-color;
-        @include width-height(3.125rem, 0.25rem);
-        margin: 1rem auto;
-    }
-    .modal-description{
-        width: 100%;
-        text-align: left;
-    }
 }
