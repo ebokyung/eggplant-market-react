@@ -6,8 +6,8 @@ export default {
       image: '',
       createdAt: '2023-08-30T12:47:35.720Z',
       updatedAt: '2023-08-30T12:47:35.720Z',
-      hearted: false,
-      heartCount: 0,
+      hearted: true,
+      heartCount: 1,
       comments: [],
       commentCount: 0,
       author: {

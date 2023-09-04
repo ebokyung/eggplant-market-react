@@ -41,7 +41,7 @@
         left: 50%;
         background-repeat: no-repeat;
         background-size: 352px 44px;
-        @include get-color(background-image, footer-icon-sprites);
+        @include get-color(background-image, navbar-icon-sprites);
       }
 
       &.here {

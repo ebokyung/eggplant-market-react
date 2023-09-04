@@ -2,7 +2,7 @@ import React from 'react';
 import './Navbar.scss';
 import { Link } from 'react-router-dom';
 
-function Footer() {
+function Navbar() {
   return (
     <nav className="tab-menu">
       <p className="a11y-hidden">하단 탭 메뉴</p>
@@ -32,4 +32,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default Navbar;
