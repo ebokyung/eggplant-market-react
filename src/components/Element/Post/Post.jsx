@@ -30,14 +30,15 @@ export function Post({ post }) {
           <span className="a11y-hidden">게시글 상세보기</span>
           {/* home : h2, profile : h3, detail : p  */}
           <ContentTag className="post-text">{content}</ContentTag>
-          {image && (
-            <div className="img-cover">
-              <img className="post-img" src={image} alt="" />
-            </div>
-          )}
+          {image &&
+            image.split(',').map(img => (
+              <div className="img-cover">
+                <img className="post-img" src={img} alt="" />
+              </div>
+            ))}
         </Link>
         <div className="post-icon">
-          <ButtonLike hearted={hearted} heartCount={heartCount} />
+          <ButtonLike id={id} hearted={hearted} heartCount={heartCount} />
           <Link to="/">
             <span className="a11y-hidden">게시물 댓글 보러가기</span>
             <img src={messageCircle} alt="" />
