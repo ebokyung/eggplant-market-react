@@ -3,11 +3,16 @@ import './Header.scss';
 import searchIcon from '../../../assets/icon/icon-search.svg';
 import { Button, ButtonOption, ButtonBack } from '../Buttons';
 
-function Header({ page, text, btnText }) {
+function Header({ page, text, btnText, children, className }) {
   // props : page (main || search || upload || follow) , text , btnText
   return (
-    <header className={`l_header header-${page || 'basic'}`}>
-      {text && <h1 className={page === 'main' ? 'title-main' : 'title'}>{text}</h1>}
+    <header className={`l_header header-${page || 'basic'} ${className}`}>
+      {text && (
+        <h1 className={page === 'main' ? 'title-main' : 'title'}>
+          {text}
+          {children}
+        </h1>
+      )}
       {page === 'main' && (
         <button type="button">
           <img src={searchIcon} alt="검색하기" />

@@ -76,6 +76,7 @@ $theme: (
     profile-border-bottom:1px solid $highlight-color,
     cancle-btn-color: $gray300-color,
     cancle-btn-border: $border-gray100-1px,
+    icon-404: url(../../assets/icon/icon-404.svg),
   ),
   highContrast: (bg-color:$black-color,
     root-color: $black-color,
@@ -122,5 +123,6 @@ $theme: (
     profile-border-bottom:1px solid $highContrast-point-color,
     cancle-btn-color: $purple100-color,
     cancle-btn-border: 2px solid $purple100-color,
+    icon-404: url(../../assets/icon/icon-404-hc.svg),
   )
 );
