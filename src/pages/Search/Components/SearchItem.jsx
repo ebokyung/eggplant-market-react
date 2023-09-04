@@ -1,6 +1,5 @@
 import React from 'react';
 import { User } from '../../../components/Element/User';
-import './SearchItem.scss';
 
 function highlightKeyword(text, keyword) {
   if (text.indexOf(keyword) !== -1) {

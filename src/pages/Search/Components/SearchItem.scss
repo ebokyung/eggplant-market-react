@@ -1,7 +1,0 @@
-@import '/src/styles/scss/mixin';
-
-.user-name {
-  strong {
-    @include get-color(color, point-color);
-  }
-}

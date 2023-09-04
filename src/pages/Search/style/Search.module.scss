@@ -1,0 +1,17 @@
+@import '/src/styles/scss/mixin';
+
+:local {
+  .searchUserList {
+    margin-left: 1rem;
+    margin-top: 1.25rem;
+
+    li {
+      width: fit-content;
+      margin-bottom: 1rem;
+    }
+
+    strong {
+      @include get-color(color, point-color);
+    }
+  }
+}
