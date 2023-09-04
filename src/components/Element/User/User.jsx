@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ProfileImg from './ProfileImg';
-import UserInfo from './UserInfo';
+import { ProfileImg } from './ProfileImg';
+import { UserInfo } from './UserInfo';
 import './style/User.scss';
 
 // 링크 분기처리 필요
