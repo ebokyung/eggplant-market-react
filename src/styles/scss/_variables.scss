@@ -49,7 +49,7 @@ $theme: (
     placeholder-color:$gray200-color,
     warning-color: $warning-color-text,
     bg-logo:url(../../assets/symbol/light-basic.svg),
-    footer-icon-sprites : url(../../assets/footer-sprites.png),
+    navbar-icon-sprites : url(../../assets/navbar-sprites.png),
     btn-post-view: url('../../assets/post-view-sprites.png'),
     input-color: $gray50-color,
     icon-sprites : url(../../assets/icon-sprites.png),
@@ -73,6 +73,7 @@ $theme: (
     img-icon: $enabled-color,
     cancle-btn-color: $gray300-color,
     cancle-btn-border: $border-gray100-1px,
+    icon-404: url(../../assets/icon/icon-404.svg),
   ),
   highContrast: (bg-color:$black-color,
     root-color: $black-color,
@@ -91,7 +92,7 @@ $theme: (
     search-placeholder-color:$black-color,
     warning-color: $highContrast-point-color,
     bg-logo:url(../../assets/symbol/hc-basic.svg),
-    footer-icon-sprites : url(../../assets/footer-sprites-hc.png),
+    navbar-icon-sprites : url(../../assets/navbar-sprites-hc.png),
     btn-post-view: url('../../assets/post-view-sprites-hc.png'),
     input-color: $gray250-color,
     icon-sprites : url(../../assets/icon-sprites-hc.png),
@@ -116,5 +117,6 @@ $theme: (
     img-icon: $purple100-color,
     cancle-btn-color: $purple100-color,
     cancle-btn-border: 2px solid $purple100-color,
+    icon-404: url(../../assets/icon/icon-404-hc.svg),
   )
 );
