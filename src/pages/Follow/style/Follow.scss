@@ -9,6 +9,14 @@
   align-items: center;
   height: 3.125rem;
   margin-top: 1rem;
+
+  a {
+    @include get-color(color, font-color);
+  }
+
+  p {
+    @include get-color(color, gray-color);
+  }
 }
 
 .btn-follow {
@@ -18,10 +26,6 @@
   margin-left: auto;
 }
 
-a {
-  @include get-color(color, font-color);
-}
-
-p {
-  @include get-color(color, gray-color);
+.follow-list {
+  padding: 1.5rem 1rem;
 }
