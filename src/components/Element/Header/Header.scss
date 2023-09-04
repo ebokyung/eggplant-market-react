@@ -1,4 +1,3 @@
-@import '../../../styles/scss/global';
 @import '/src/styles/scss/mixin';
 
 .l_header {
@@ -6,6 +5,14 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: $border-gray100-1px;
+  @include get-color(background-color, bg-color);
+}
+
+.fixed-header{
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
 .header {
@@ -23,6 +30,7 @@
 }
 
 .title {
+  @include get-color(color, font-color);
   font-size: map-get($font-sizes, 'size14');
   font-weight: 500;
   margin-right: auto;
