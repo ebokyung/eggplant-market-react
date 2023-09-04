@@ -11,7 +11,6 @@ export default function User({ category, accountName, userName, detail, profileI
   const linkClassName = category === 'comment' ? 'comment-user-info' : 'user-container';
 
   return (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <Link className={linkClassName} to={`./profile_info.html?accountName=${accountName}`}>
       <ProfileImg profileImg={profileImg} category={category} />
       <UserInfo category={category} userName={userName} detail={detail || accountName} />
