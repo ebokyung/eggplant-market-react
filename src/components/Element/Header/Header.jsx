@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.scss';
+import { Link } from 'react-router-dom';
 import searchIcon from '../../../assets/icon/icon-search.svg';
 import { Button, ButtonOption, ButtonBack } from '../Buttons';
 
@@ -14,9 +15,9 @@ function Header({ page, text, btnText, children, className }) {
         </h1>
       )}
       {page === 'main' && (
-        <button type="button">
+        <Link to="/search" type="button">
           <img src={searchIcon} alt="검색하기" />
-        </button>
+        </Link>
       )}
       {page === 'search' && (
         <label htmlFor="inp-search" className="l_inp-search">
