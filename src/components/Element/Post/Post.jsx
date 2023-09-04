@@ -18,13 +18,13 @@ function returnContentTag() {
 
 // Post 링크 분기
 // 게시글 상세 페이지에서는 게시글 상세보기 링크 막기
-function Post({ post }) {
+export function Post({ post }) {
   const { author, commentCount, content, createdAt, heartCount, hearted, id, image } = post;
   const ContentTag = returnContentTag();
 
   return (
     <section id="post" className="home-post" data-postid={id}>
-      <User category="post" userName={author.username} detail={author.accountname} profileImg={author.profileImg} />
+      <User category="post" accountName={author.accountname} userName={author.username} detail={author.accountname} profileImg={author.image} />
       <div className="post-edit">
         <Link to="/">
           <span className="a11y-hidden">게시글 상세보기</span>
@@ -52,5 +52,3 @@ function Post({ post }) {
     </section>
   );
 }
-
-export default Post;

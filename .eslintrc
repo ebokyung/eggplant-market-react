@@ -13,6 +13,7 @@
     "react/prop-types": "off",
     "import/newline-after-import": "off",
     "react/jsx-props-no-spreading": ["warn"],
+    "import/prefer-default-export": "off",
     "jsx-a11y/no-noninteractive-tabindex": [
       "error",
       {
@@ -20,7 +21,6 @@
         "roles": ["tabpanel"],
         "allowExpressionValues": true
       }
-    ],
-    "import/prefer-default-export": "off"
+    ]
   }
 }
