@@ -75,7 +75,13 @@
   }
 }
 
+.post-text,
+.cnt,
+.btn-comment,
 .post-date {
   @include get-color(color, gray-color);
+}
+
+.post-date {
   font-size: map-get($font-sizes, 'size10');
 }
