@@ -16,7 +16,7 @@ export function ChatList() {
         <ul className="chat-list">
           {chatListData.map(item => {
             return (
-              <li>
+              <li key={item.id}>
                 <ChatListItem data={item} />
               </li>
             );

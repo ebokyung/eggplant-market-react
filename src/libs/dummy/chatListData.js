@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1,
     roomId: 34,
     members: '애월읍 위니브 가지밭',
     memberImg: '',
@@ -8,6 +9,7 @@ export default [
     unreadCount: 3,
   },
   {
+    id: 2,
     roomId: 22,
     members: '누구네 농장 친환경 가지',
     memberImg: '',
@@ -16,6 +18,7 @@ export default [
     unreadCount: 0,
   },
   {
+    id: 3,
     roomId: 17,
     members: '애월읍 위니브 가지밭',
     memberImg: '',
