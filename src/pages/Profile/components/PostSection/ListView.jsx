@@ -1,9 +1,16 @@
 import React from 'react';
+import { Post } from '../../../../components/Element/Post/Post';
 
-export function ListView() {
+export function ListView({ post }) {
   return (
     <ul className="post-list">
-      <li>리스트형</li>
+      {post?.map(item => {
+        return (
+          <li key={item.id}>
+            <Post post={item} />
+          </li>
+        );
+      })}
     </ul>
   );
 }

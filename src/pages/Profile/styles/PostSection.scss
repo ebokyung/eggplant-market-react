@@ -68,19 +68,28 @@
     }
 
     .post-album-item {
+      position: relative;
       @include profile-img-tag;
       @include width-height(100%, 100%);
       overflow: hidden;
+
+      &.multiple::after{
+        content: url('../../../assets/icon/icon-img-layers.svg');
+        width: 1.25rem;
+        height: 1.25rem;
+        position: absolute;
+        top: 0.3125rem;
+        right: .3125rem;
+      }
+
+      &:focus-within {
+        outline: $highlight-color 0.125rem solid;
+      }
     
       a {
         display: inline-block;
         @include width-height(100%, 100%);
       }
-    
-      a:focus {
-        border: 0.25rem solid currentColor;
-      }
-    
     }
   }
 }

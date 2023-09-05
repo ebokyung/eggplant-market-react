@@ -12,7 +12,7 @@ export function UserProfile() {
       <main className="main-with-nav">
         <ProfileSection data={userProfile.profile} />
         {!!userProduct.data && <ProductSection data={userProduct.product} />}
-        <PostSection data={userPost} />
+        <PostSection data={userPost.post} />
       </main>
       <Navbar />
     </>
