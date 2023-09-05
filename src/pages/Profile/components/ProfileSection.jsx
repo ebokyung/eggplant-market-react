@@ -2,12 +2,12 @@ import React from 'react';
 import '../styles/ProfileSection.scss';
 import { UserInfomation, ButtonsYourProfile, ButtonsMyProfile } from './ProfileSection/index';
 
-export function ProfileSection() {
+export function ProfileSection({ data }) {
+  const who = localStorage.getItem('user-accountname');
   return (
     <section id="profile" className="profile-container">
-      <UserInfomation />
-      <ButtonsYourProfile />
-      <ButtonsMyProfile />
+      <UserInfomation data={data} />
+      {data.accountname === who ? <ButtonsMyProfile /> : <ButtonsYourProfile isFollow={data.isfollow} />}
     </section>
   );
 }

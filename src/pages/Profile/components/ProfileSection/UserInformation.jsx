@@ -1,34 +1,41 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ProfileImg from '../../../../components/Element/User/ProfileImg';
 
-export function UserInfomation() {
+export function UserInfomation({ data }) {
+  const { username, accountname, intro, followerCount, followingCount } = data;
   return (
     <header className="profile-header">
       <h2 className="a11y-hidden">사용자 정보</h2>
       <ProfileImg />
       <strong className="profile-name">
-        <span className="a11y-hidden">사용자 이름:</span>
+        <span className="a11y-hidden">이름:</span>
+        {username}
       </strong>
       <strong className="profile-id">
-        <span className="a11y-hidden">사용자 아이디:</span>
+        <span className="a11y-hidden">계정 아이디:</span>
+        {accountname}
       </strong>
       <p className="profile-intro">
-        <span className="a11y-hidden">사용자 소개:</span>소개를 입력해주세요!
+        <span className="a11y-hidden">소개:</span>
+        {intro || '소개를 입력해주세요!'}
       </p>
-      <a className="follow-wrap" href="./profile_follower.html">
-        <span className="a11y-hidden">유저의 팔로워 목록 링크</span>
+      <Link className="follow-wrap" to="/follower">
+        <span className="a11y-hidden">유저의 팔로워 목록 보기</span>
         <p>followers</p>
         <strong className="follower">
-          0<span className="a11y-hidden">명</span>
+          {followerCount}
+          <span className="a11y-hidden">명</span>
         </strong>
-      </a>
-      <a className="follow-wrap" href="./profile_following.html">
-        <span className="a11y-hidden">유저의 팔로잉 목록 링크</span>
+      </Link>
+      <Link className="follow-wrap" to="/following">
+        <span className="a11y-hidden">유저의 팔로잉 목록 보기</span>
         <p>followings</p>
         <strong className="following">
-          0<span className="a11y-hidden">명</span>
+          {followingCount}
+          <span className="a11y-hidden">명</span>
         </strong>
-      </a>
+      </Link>
     </header>
   );
 }
