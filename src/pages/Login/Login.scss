@@ -1,33 +1,30 @@
 @import '/src/styles/scss/mixin';
 
-body{
+.login-wrapper {
   background-color: $enabled-color;
-  position: relative;
   text-align: center;
 }
 
-.background{
+.background {
   height: calc(100vh - 19.375rem);
   @include get-color(background-image, bg-logo);
   background-repeat: no-repeat;
   background-position: 95% 95%;
 }
 
-.login{
+.login {
   @include get-color(background-color, bg-color);
-  border-radius: 1.25rem 1.25rem 0 0 ;
-  padding : 3.125rem 2.125rem 5.125rem;
+  border-radius: 1.25rem 1.25rem 0 0;
+  padding: 3.125rem 2.125rem 5.125rem;
   // min-width: 24.375rem;
   width: 100%;
-  position: fixed;
-  bottom: 0;
 }
 
-.domain{
+.domain {
   display: block;
   border: 0.0625rem solid $gray300-color;
   border-radius: 2.75rem;
-  font-size: map-get($font-sizes, "size14");
+  font-size: map-get($font-sizes, 'size14');
   padding: 0.8125rem;
   position: relative;
 
@@ -36,7 +33,7 @@ body{
   }
 
   &::before {
-    content: "";
+    content: '';
     display: inline-block;
     width: 24px;
     height: 24px;
@@ -46,21 +43,21 @@ body{
     left: 10px;
   }
 
-  &.kakao{
+  &.kakao {
     @include get-color(border-color, kakao-color);
     @include get-color(color, gray-color);
     &::before {
       background: no-repeat url(../../assets/sns-logo-sprites.png) -10px -10px / 132px 44px;
     }
   }
-  &.google{
+  &.google {
     @include get-color(border-color, google-color);
     @include get-color(color, gray-color);
     &::before {
-            background: no-repeat url(../../assets/sns-logo-sprites.png) -54px -10px / 132px 44px;
-        }
+      background: no-repeat url(../../assets/sns-logo-sprites.png) -54px -10px / 132px 44px;
+    }
   }
-  &.facebook{
+  &.facebook {
     @include get-color(border-color, facebook-color);
     @include get-color(color, gray-color);
     &::before {
@@ -70,14 +67,14 @@ body{
 }
 
 .others {
-  font-size: map-get($font-sizes, "size12");
+  font-size: map-get($font-sizes, 'size12');
   margin-top: 1.25rem;
 
-  >* {
+  > * {
     @include get-color(color, gray-color);
   }
 
-  span{
+  span {
     margin: 0 0.75rem;
   }
 }
