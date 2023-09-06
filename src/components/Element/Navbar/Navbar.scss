@@ -1,7 +1,6 @@
-@import '/src/styles/scss/global';
 @import '/src/styles/scss/mixin';
 
-.tab-menu{
+.tab-menu {
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -9,7 +8,7 @@
 }
 
 .tab-item-list {
-  border-top: .0313rem solid $gray100-color;
+  border-top: 0.0313rem solid $gray100-color;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -20,18 +19,18 @@
     display: flex;
     justify-content: center;
 
-    &>* {
+    & > * {
       width: calc(100vw / 4);
       display: inline-block;
       position: relative;
       text-align: center;
       color: $gray300-color;
-      font-size: map-get($font-sizes, "size10");
+      font-size: map-get($font-sizes, 'size10');
       padding-top: 2.5rem;
-      padding-bottom: .625rem;
+      padding-bottom: 0.625rem;
 
       &::before {
-        content: "";
+        content: '';
         display: inline-block;
         position: absolute;
         width: 1.5rem;
@@ -49,9 +48,9 @@
       }
 
       &:hover {
-        background-color: #F1F1F1;
+        background-color: #f1f1f1;
         color: $black-color;
-      } 
+      }
     }
   }
 
