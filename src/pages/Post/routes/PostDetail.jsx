@@ -11,7 +11,7 @@ export function PostDetail() {
   const { post } = singlePost;
   const { comments } = commentList;
   return (
-    <div>
+    <>
       <Header />
       <main className="main-with-nav post-main">
         <Post post={post} />
@@ -30,6 +30,6 @@ export function PostDetail() {
       </main>
       <CommentInput userImg={user.image} />
       <section />
-    </div>
+    </>
   );
 }
