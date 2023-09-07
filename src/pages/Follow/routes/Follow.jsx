@@ -12,7 +12,7 @@ export function Follow() {
   return (
     <>
       <Header page="follow" text={isFollower ? 'Follower' : 'Following'} />
-      <main>
+      <main className="main-with-nav">
         <FollowList isFollower={isFollower} />
       </main>
       <Navbar />

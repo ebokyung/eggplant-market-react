@@ -17,9 +17,6 @@
     margin-left: auto;
   }
 
-  .follow-list {
-    padding: 1.5rem 1rem;
-  }
   a {
     @include get-color(color, font-color);
   }
@@ -27,4 +24,8 @@
   p {
     @include get-color(color, gray-color);
   }
+}
+
+.follow-list {
+  margin: 1.5rem 1rem 0;
 }
