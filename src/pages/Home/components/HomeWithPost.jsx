@@ -4,7 +4,7 @@ import { Post } from '../../../components/Element/Post';
 export function HomeWithPost({ data }) {
   const { posts } = data;
   return (
-    <main>
+    <main className="main-with-nav main-with-post">
       <ul className="post-list">
         {posts.map(post => (
           <li key={post.id}>

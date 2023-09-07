@@ -8,11 +8,19 @@
   }
 }
 
-.post-list {
+.main-with-post {
   padding : {
+    top: 1.25rem;
     left: 1rem;
     right: 1rem;
-    bottom: 4.0625rem;
+  }
+  .post-list {
+    & > li {
+      margin-top: 1.25rem;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 }
 
