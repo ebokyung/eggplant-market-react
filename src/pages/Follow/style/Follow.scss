@@ -10,6 +10,16 @@
   height: 3.125rem;
   margin-top: 1rem;
 
+  .btn-follow {
+    flex-shrink: 0;
+    flex-basis: 3.5rem;
+    height: 1.75rem;
+    margin-left: auto;
+  }
+
+  .follow-list {
+    padding: 1.5rem 1rem;
+  }
   a {
     @include get-color(color, font-color);
   }
@@ -17,15 +27,4 @@
   p {
     @include get-color(color, gray-color);
   }
-}
-
-.btn-follow {
-  flex-shrink: 0;
-  flex-basis: 3.5rem;
-  height: 1.75rem;
-  margin-left: auto;
-}
-
-.follow-list {
-  padding: 1.5rem 1rem;
 }
