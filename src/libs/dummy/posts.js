@@ -1,4 +1,4 @@
-export default {
+export const posts = {
   posts: [
     {
       id: '64ef3a67b2cb20566354ba7d',

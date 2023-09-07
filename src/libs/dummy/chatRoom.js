@@ -1,6 +1,6 @@
 import dummyImg from '../../assets/og(800x400).png';
 
-export default {
+export const chatData = {
   userName: '애월읍 가지밭',
   contents: [
     {
