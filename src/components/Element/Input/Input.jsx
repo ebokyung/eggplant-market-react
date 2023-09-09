@@ -2,12 +2,12 @@ import React from 'react';
 import './Input.scss';
 
 function Input(props) {
-  const { inputId, label, type, hasError, placeholder, required } = props;
+  const { inputid, label, type, className, placeholder, required, onChange } = props;
 
   return (
     <>
-      <label htmlFor={inputId}>{label}</label>
-      <input type={type || 'text'} id={inputId} className={hasError && 'error'} placeholder={placeholder} required={required} {...props} />
+      <label htmlFor={inputid}>{label}</label>
+      <input type={type || 'text'} id={inputid} className={className} placeholder={placeholder} required={required} onChange={onChange} />
     </>
   );
 }
