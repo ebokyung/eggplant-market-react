@@ -5,6 +5,7 @@ import { Home } from '../pages/Home';
 import { Search } from '../pages/Search';
 import { ChatList } from '../pages/ChatList';
 import { ChatRoom } from '../pages/ChatRoom';
+import { Product } from '../pages/Product/routes/Product';
 
 export default function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ export default function AppRoutes() {
       <Route path="/search" element={<Search />} />
       <Route path="/chat" element={<ChatList />} />
       <Route path="/chat-room" element={<ChatRoom />} />
+      <Route path="/product" element={<Product />} />
     </Routes>
   );
 }
