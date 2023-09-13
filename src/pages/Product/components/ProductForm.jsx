@@ -1,13 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input, ErrorMsg } from '../../../components/Element/Input';
 
-export function ProductForm() {
+export function ProductForm({ isOnSubmit, setIsOnSubmit }) {
+  const urlRegEx = /^(https?:\/\/)?(www\.)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/;
+  // const [imgValue, setImgValue] = useState('');
+  const [nameValue, setNameValue] = useState('');
+  const [priceValue, setPriceValue] = useState('');
+  const [linkValue, setLinkValue] = useState('');
+  const [isErrorName, setIsErrorName] = useState(false);
+  const [isErrorPrice, setIsErrorPrice] = useState(false);
+  const [isErrorLink, setIsErrorLink] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(isOnSubmit);
+
+  useEffect(() => {
+    if (isOnSubmit) {
+      // api GET
+      // setImgValue();
+      setNameValue('dkof');
+      setPriceValue(1232);
+      setLinkValue('www.nolmeock.com');
+    }
+  }, []);
+
+  const validateName = name => {
+    if (name.trim().length >= 2 && name.trim().length <= 15) {
+      setIsErrorName(false);
+    } else {
+      setIsErrorName(true);
+    }
+  };
+
+  const validatePrice = price => {
+    if (price !== '' && Number(price) <= 1000000000) {
+      setIsErrorPrice(false);
+    } else {
+      setIsErrorPrice(true);
+    }
+  };
+
+  const validateLink = link => {
+    if (urlRegEx.test(link)) {
+      setIsErrorLink(false);
+    } else {
+      setIsErrorLink(true);
+    }
+  };
+
+  useEffect(() => {
+    setIsDisabled(!(nameValue && priceValue && linkValue && !isErrorName && !isErrorPrice && !isErrorLink));
+  }, [nameValue, priceValue, linkValue, isErrorName, isErrorPrice, isErrorLink]);
+
+  useEffect(() => {
+    setIsOnSubmit(!isDisabled);
+  }, [isDisabled]);
+
   return (
     <form id="form-product">
       <article className="product-img-cover">
-        <h2 className="a11y-hidden">상품 이미지</h2>
+        <h2 className="a11y-hidden">판매 상품 이미지</h2>
         <label className="btn-upload" htmlFor="product-img-input" role="tabpanel" tabIndex="0">
-          <span className="a11y-hidden">상품 이미지 업로드 버튼</span>
+          <span className="a11y-hidden">판매 상품 이미지 업로드 버튼</span>
           <svg className="btn-upload-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="18" cy="18" r="18" fill="#C4C4C4" />
             <path
@@ -29,12 +81,54 @@ export function ProductForm() {
           <input id="product-img-input" type="file" />
         </label>
       </article>
-      <Input inputid="product-name" label="상품명" minLength="2" maxLength="15" placeholder="2~15자 이내여야 합니다." required />
-      <ErrorMsg errorText="2~15자 이내여야 합니다." />
-      <Input type="number" inputid="product-price" label="가격" min="0" max="1000000000" placeholder="숫자만 입력 가능합니다." />
-      <ErrorMsg errorText="숫자만 입력 가능합니다." />
-      <Input type="url" inputid="purchase-link" label="판매 링크" placeholder="URL을 입력해 주세요" />
-      <ErrorMsg errorText="URL 형식으로 입력해주세요" />
+
+      <Input
+        inputid="product-name"
+        label="상품명"
+        className={isErrorName ? 'error' : undefined}
+        minLength="2"
+        maxLength="15"
+        placeholder="2~15자 이내여야 합니다."
+        required
+        onChange={e => {
+          setNameValue(e.target.value);
+          validateName(e.target.value);
+        }}
+        value={nameValue}
+      />
+      {isErrorName && <ErrorMsg errorText="2~15자 이내여야 합니다." />}
+
+      <Input
+        type="number"
+        inputid="product-price"
+        label="가격"
+        className={isErrorPrice ? 'error' : undefined}
+        min="0"
+        max="1000000000"
+        placeholder="숫자만 입력 가능합니다."
+        required
+        onChange={e => {
+          setPriceValue(e.target.value);
+          validatePrice(e.target.value);
+        }}
+        value={priceValue}
+      />
+      {isErrorPrice && <ErrorMsg errorText="0~1000000000 숫자를 입력해 주세요." />}
+
+      <Input
+        type="url"
+        inputid="purchase-link"
+        label="판매 링크"
+        className={isErrorLink ? 'error' : undefined}
+        placeholder="URL을 입력해 주세요"
+        required
+        onChange={e => {
+          setLinkValue(e.target.value);
+          validateLink(e.target.value);
+        }}
+        value={linkValue}
+      />
+      {isErrorLink && <ErrorMsg errorText="URL 형식으로 입력해 주세요" />}
     </form>
   );
 }

@@ -17,7 +17,8 @@ export default function AppRoutes() {
       <Route path="/search" element={<Search />} />
       <Route path="/chat" element={<ChatList />} />
       <Route path="/chat-room" element={<ChatRoom />} />
-      <Route path="/product" element={<Product />} />
+      <Route path="/product-upload" element={<Product />} />
+      <Route path="/product-modify" element={<Product />} />
     </Routes>
   );
 }
