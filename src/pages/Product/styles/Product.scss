@@ -5,7 +5,8 @@
   margin-top: 1.875rem;
   box-sizing: border-box;
 
-  >* {
+  .title, 
+  #form-product {
     min-width: calc(390px - 34px * 2);
     max-width: 40%;
     font-size: map-get($font-sizes, "size12");
