@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ProfileImg from '../../../../components/Element/User/ProfileImg';
+import { ProfileImg } from '../../../../components/Element/User';
 
 export function UserInfomation({ data }) {
   const { username, accountname, intro, followerCount, followingCount } = data;
