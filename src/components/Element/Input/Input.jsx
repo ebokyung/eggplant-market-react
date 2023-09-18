@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import './Input.scss';
 
 export function Input(props) {
-  const { inputid, label, type, placeholder, required, onChange, errorText, ...other } = props;
+  const { inputId, label, type, placeholder, required, onChange, errorText, ...other } = props;
   const [inpValue, setInpValue] = useState('');
 
   return (
     <fieldset className="fieldset">
-      <label htmlFor={inputid}>{label}</label>
+      <label htmlFor={inputId}>{label}</label>
       <input
         type={type || 'text'}
-        id={inputid}
+        id={inputId}
         className={errorText ? 'error' : null}
         placeholder={placeholder}
         required={required}
