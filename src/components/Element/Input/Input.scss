@@ -21,7 +21,9 @@
     }
     
     &:focus {
-      border-bottom: 0.0625rem solid $highlight-color;
+      border-bottom-width: 0.0625rem;
+      border-bottom-style: solid;
+      @include get-color(border-bottom-color, point-color);
       outline: none;
     }
     

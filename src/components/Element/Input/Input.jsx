@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './Input.scss';
 
 export function Input(props) {
-  const { inputId, label, type, placeholder, required, onChange, errorText, ...other } = props;
-  const [inpValue, setInpValue] = useState('');
+  const { inputId, label, type, placeholder, required, errorText, initialValue, ...other } = props;
+  const [inpValue, setInpValue] = useState(initialValue || '');
 
   return (
     <fieldset className="fieldset">
