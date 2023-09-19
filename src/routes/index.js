@@ -6,6 +6,8 @@ import { Search } from '../pages/Search';
 import { ChatList } from '../pages/ChatList';
 import { ChatRoom } from '../pages/ChatRoom';
 import { Product } from '../pages/Product/routes/Product';
+import { UserProfile } from '../pages/Profile';
+import { Follow } from '../pages/Follow';
 
 export default function AppRoutes() {
   return (
@@ -17,8 +19,12 @@ export default function AppRoutes() {
       <Route path="/search" element={<Search />} />
       <Route path="/chat" element={<ChatList />} />
       <Route path="/chat-room" element={<ChatRoom />} />
+      <Route path="/profile" element={<UserProfile />} />
       <Route path="/product-upload" element={<Product />} />
       <Route path="/product-modify" element={<Product />} />
+      {['/follower', '/following'].map(path => (
+        <Route key={path} path={path} element={<Follow />} />
+      ))}
     </Routes>
   );
 }
