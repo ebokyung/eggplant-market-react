@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/ProductSection.scss';
-import { ProductItem } from './ProductSection/ProductItem';
+import { ProductItem } from './ProductSectionElement/ProductItem';
 
 export function ProductSection({ data }) {
   return (

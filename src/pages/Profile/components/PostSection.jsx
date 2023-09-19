@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/PostSection.scss';
-import { PostViewTab, ListView, AlbumView } from './PostSection/index';
+import { PostViewTab, AlbumView, ListView } from './PostSectionElement';
 
 export function PostSection({ data }) {
   const [islistViewOn, setIsListViewOn] = useState(true);

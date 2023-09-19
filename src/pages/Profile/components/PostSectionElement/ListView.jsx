@@ -1,5 +1,5 @@
 import React from 'react';
-import { Post } from '../../../../components/Element/Post/Post';
+import { Post } from '../../../../components/Element/Post';
 
 export function ListView({ post }) {
   return (

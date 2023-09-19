@@ -1,7 +1,8 @@
 @import '/src/styles/scss/mixin';
 
-main {
+.main-user-profile {
   min-width: 24.375rem;
+  background-color: $gray50-color;
 
   &>section {
     background-color: $white-color;
@@ -10,6 +11,4 @@ main {
       margin-top: .1875rem;
     }
   }
-
-  background-color: $gray50-color;
 }

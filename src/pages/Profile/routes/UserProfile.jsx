@@ -9,7 +9,7 @@ export function UserProfile() {
   return (
     <>
       <Header />
-      <main className="main-with-nav">
+      <main className="main-with-nav main-user-profile">
         <ProfileSection data={userProfile.profile} />
         {!!userProduct.data && <ProductSection data={userProduct.product} />}
         <PostSection data={userPost.post} />
