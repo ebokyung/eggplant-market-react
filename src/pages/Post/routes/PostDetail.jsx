@@ -18,13 +18,11 @@ export function PostDetail() {
         <section className="comment-sec">
           <h2 className="a11y-hidden">게시물에 대한 답변</h2>
           <ul className="comment-list">
-            {comments &&
-              comments.map(comment => (
-                // eslint-disable-next-line no-underscore-dangle
-                <li key={comment.id} className="comment-item">
-                  <Comment comment={comment} />
-                </li>
-              ))}
+            {comments?.map(comment => (
+              <li key={comment.id} className="comment-item">
+                <Comment comment={comment} />
+              </li>
+            ))}
           </ul>
         </section>
       </main>

@@ -21,7 +21,6 @@ function returnContentTag() {
 export function Post({ post }) {
   const { author, commentCount, content, createdAt, heartCount, hearted, id, image } = post;
   const ContentTag = returnContentTag();
-
   return (
     <section id="post" className="home-post" data-postid={id}>
       <User category="post" accountName={author.accountname} userName={author.username} detail={author.accountname} profileImg={author.image} />
@@ -30,8 +29,10 @@ export function Post({ post }) {
           <span className="a11y-hidden">게시글 상세보기</span>
           {/* home : h2, profile : h3, detail : p  */}
           <ContentTag className="post-text">{content}</ContentTag>
-          {image &&
-            image.split(',').map(img => (
+          {image
+            .split(',')
+            .filter(img => !!img)
+            .map(img => (
               <div className="img-cover">
                 <img className="post-img" src={img} alt="" />
               </div>
