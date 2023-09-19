@@ -8,7 +8,7 @@ export function FollowList({ isFollower }) {
 
   return (
     <ul className="follow-list">
-      {data.map(followitem => (
+      {data?.map(followitem => (
         <li key={followitem._id} className="follow-item">
           <FollowItem user={followitem} />
         </li>
