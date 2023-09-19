@@ -12,11 +12,6 @@ p {
   font-size: map-get($font-sizes, 'size14');
 }
 
-.title {
-  font-size: map-get($font-sizes, 'size24');
-  @include get-color(color, font-color);
-}
-
 .join-email form {
   margin-top: 2.5rem;
 }

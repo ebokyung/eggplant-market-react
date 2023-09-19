@@ -1,8 +1,12 @@
 @import '/src/styles/scss/mixin';
 
+fieldset:not(:first-of-type) {
+  margin-top: 1rem;
+}
+
 label {
   @include label-tag;
-  margin-top: 1rem
+  font-size: 0.75rem;
 }
 
 input {
@@ -15,9 +19,8 @@ input {
   padding: 0.5rem 0;
 }
 
-
 input::placeholder {
-  font-size: map-get($font-sizes, "size14");
+  font-size: map-get($font-sizes, 'size14');
   color: $gray100-color;
 }
 
