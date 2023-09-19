@@ -16,7 +16,7 @@ const detailClassMap = {
 };
 
 // detailcategory : chat, intro, id(default)
-export default function UserInfo({ category = 'post', userName, detail }) {
+export function UserInfo({ category = 'post', userName, detail }) {
   const { NameTag, detailCategory } = categoryMap[category];
   return (
     <div className="user-info">

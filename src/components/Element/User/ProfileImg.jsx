@@ -19,7 +19,7 @@ function returnSize(category) {
 }
 
 // 이미지 처리 함수 추가 필요
-function ProfileImg({ profileImg, category, constrast = false }) {
+export function ProfileImg({ profileImg, category, constrast = false }) {
   let image;
 
   if (!profileImg) {
@@ -32,5 +32,3 @@ function ProfileImg({ profileImg, category, constrast = false }) {
     </div>
   );
 }
-
-export default ProfileImg;
