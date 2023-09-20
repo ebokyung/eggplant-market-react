@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Input } from '../../../components/Element/Input';
+import { singleProduct } from '../../../libs/dummy';
 
 export function ProductForm({ isOnSubmit, setIsOnSubmit }) {
   const urlRegEx = /^(https?:\/\/)?(www\.)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/;
@@ -7,14 +8,32 @@ export function ProductForm({ isOnSubmit, setIsOnSubmit }) {
   const [priceErrorMsg, setPriceErrorMsg] = useState('');
   const [linkErrorMsg, setLinkErrorMsg] = useState('');
   const [isDisabled, setIsDisabled] = useState(isOnSubmit);
+  const imageRef = useRef(null);
+  const nameRef = useRef(null);
+  const priceRef = useRef(null);
+  const linkRef = useRef(null);
 
   // 수정 페이지 경우
-  // let [data, setData] = useState();
-  // useEffect(() => {
-  //   if (isOnSubmit) {
-  //     data = api();
-  //   }
-  // }, []);
+  const [data, setData] = useState({
+    itemImage: '',
+    itemName: '',
+    price: '',
+    link: '',
+  });
+  useEffect(() => {
+    if (isOnSubmit) {
+      // postId에 따라 get 요청
+      const { itemImage, itemName, price, link } = singleProduct.product;
+      setData({ itemImage, itemName, price, link });
+    }
+  }, []);
+  useEffect(() => {
+    // document.querySelector('#product-name').value = data.itemName;
+    // imageRef.current.background = !!imgInp.files[0];
+    nameRef.current.value = data.itemName;
+    priceRef.current.value = data.price;
+    linkRef.current.value = data.link;
+  }, [data]);
 
   const validateName = name => {
     if (name.trim().length >= 2 && name.trim().length <= 15) {
@@ -25,7 +44,7 @@ export function ProductForm({ isOnSubmit, setIsOnSubmit }) {
   };
 
   const validatePrice = price => {
-    if (price !== '' && Number(price) <= 1000000000) {
+    if (Number(price) <= 1000000000) {
       setPriceErrorMsg('');
     } else {
       setPriceErrorMsg('0~1000000000 숫자를 입력해 주세요.');
@@ -41,8 +60,9 @@ export function ProductForm({ isOnSubmit, setIsOnSubmit }) {
   };
 
   useEffect(() => {
-    setIsDisabled(!(!nameErrorMsg && !priceErrorMsg && !linkErrorMsg));
-  }, [nameErrorMsg, priceErrorMsg, linkErrorMsg]);
+    console.log(nameRef.current.value, priceRef.current.value, linkRef.current.value);
+    setIsDisabled(!(nameRef.current.value && priceRef.current.value && linkRef.current.value && !nameErrorMsg && !priceErrorMsg && !linkErrorMsg));
+  }, [nameRef.current.value, priceRef.current.value, linkRef.current.value, nameErrorMsg, priceErrorMsg, linkErrorMsg]);
 
   useEffect(() => {
     setIsOnSubmit(!isDisabled);
@@ -50,7 +70,7 @@ export function ProductForm({ isOnSubmit, setIsOnSubmit }) {
 
   return (
     <form id="form-product">
-      <article className="product-img-cover">
+      <article className="product-img-cover" ref={imageRef}>
         <h2 className="a11y-hidden">판매 상품 이미지</h2>
         <label className="btn-upload" htmlFor="product-img-input" role="tabpanel" tabIndex="0">
           <span className="a11y-hidden">판매 상품 이미지 업로드 버튼</span>
@@ -84,7 +104,7 @@ export function ProductForm({ isOnSubmit, setIsOnSubmit }) {
         required
         onBlur={e => validateName(e.target.value)}
         errorText={nameErrorMsg}
-        // initialValue={data.product.name}
+        ref={nameRef}
       />
 
       <Input
@@ -97,19 +117,10 @@ export function ProductForm({ isOnSubmit, setIsOnSubmit }) {
         required
         onBlur={e => validatePrice(e.target.value)}
         errorText={priceErrorMsg}
-        // initialValue={data.product.price}
+        ref={priceRef}
       />
 
-      <Input
-        type="url"
-        inputId="purchase-link"
-        label="판매 링크"
-        placeholder="URL을 입력해 주세요"
-        required
-        onBlur={e => validateLink(e.target.value)}
-        errorText={linkErrorMsg}
-        // initialValue={data.product.link}
-      />
+      <Input type="url" inputId="purchase-link" label="판매 링크" placeholder="URL을 입력해 주세요" required onBlur={e => validateLink(e.target.value)} errorText={linkErrorMsg} ref={linkRef} />
     </form>
   );
 }
