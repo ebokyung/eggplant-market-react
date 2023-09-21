@@ -7,15 +7,11 @@ import { ProductForm } from '../components/ProductForm';
 export function Product() {
   const location = useLocation();
   const btnText = location.pathname.includes('upload') ? '업로드' : '수정';
-  const [isOnSubmit, setIsOnSubmit] = useState(!location.pathname.includes('upload'));
-
-  // const handleSubmit = () => {
-  //   // api POST
-  // };
+  const [isOnSubmit, setIsOnSubmit] = useState(location.pathname.includes('modify'));
 
   return (
     <>
-      <Header page="upload" disabled={!isOnSubmit} btnText={btnText} />
+      <Header page="upload" disabled={!isOnSubmit} btnText={btnText} formName="form-product" />
       <main className="upload">
         <h1 className="title">상품 등록</h1>
         <ProductForm isOnSubmit={isOnSubmit} setIsOnSubmit={setIsOnSubmit} />
