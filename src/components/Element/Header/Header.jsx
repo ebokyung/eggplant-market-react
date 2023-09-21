@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import searchIcon from '../../../assets/icon/icon-search.svg';
 import { Button, ButtonOption, ButtonBack } from '../Buttons';
 
-function Header({ page, text, btnText, children, className }) {
+function Header({ page, text, btnText, children, className, btnDisabled = true, onClick }) {
   // props : page (main || search || upload || follow) , text , btnText
   return (
     <header className={`l_header header-${page || 'basic'} ${className}`}>
@@ -26,7 +26,7 @@ function Header({ page, text, btnText, children, className }) {
         </label>
       )}
       {page === 'upload' && (
-        <Button type="submit" className="size-ms" disabled>
+        <Button type="submit" className="size-ms" disabled={btnDisabled} onClick={onClick}>
           {btnText || '업로드'}
         </Button>
       )}
