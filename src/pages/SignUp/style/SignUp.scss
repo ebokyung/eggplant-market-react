@@ -7,12 +7,23 @@
   h1 {
     @include get-color(color, black-color);
   }
+  .subtitle {
+    color: #767676;
+    text-align: center;
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+  }
 }
 
 .signup-main {
   padding: 0 30px;
   max-width: 390px;
   margin: 0 auto;
+
+  label.email,
+  label.username {
+    margin-top: 0;
+  }
 
   button {
     display: block;

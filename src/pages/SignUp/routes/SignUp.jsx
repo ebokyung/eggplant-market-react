@@ -1,73 +1,75 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { Button } from '../../../components/Element/Buttons';
-import { Input, ErrorMsg } from '../../../components/Element/Input';
+/* eslint-disable react/jsx-no-bind */
+import React, { useState, useRef, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
 
 import '../style/SignUp.scss';
+import { Account } from '../components/Account';
+import { Information } from '../../../components/Information';
+import { Button } from '../../../components/Element/Buttons';
 
 export function SignUp() {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState(false);
-  const [emailErrorText, setEmailErrorText] = useState('');
-  // const [validEmail, setValidEmail] = useState(false);
-  const [pw, setPw] = useState('');
-  const [pwError, setPwError] = useState(false);
-  // const [validPw, setValidPw] = useState(false);
+  const [isNext, setIsNext] = useState(false);
+  const [isCompleteDisabled, setIsCompleteDisabled] = useState(true);
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+    username: '',
+    accountname: '',
+    intro: '',
+    image: '',
+  });
 
-  const navigate = useNavigate();
+  const formRef = useRef();
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    setEmailError(false);
-    setPwError(false);
-    setEmailErrorText('이메일 오류');
-  }, []);
+    // const { email, password, accountname, username, intro, image } = formRef.current.elements;
+    console.log(data);
+  }, [data]);
 
-  const emailProps = {
-    inputId: 'email',
-    label: '이메일',
-    type: 'email',
-    hasError: emailError,
-    placeholder: '이메일 주소를 입력해 주세요',
-    required: true,
-    value: email,
-    onChange: e => {
-      setEmail(e.target.value);
-    },
-  };
-
-  const passwordProps = {
-    inputId: 'pw',
-    label: '비밀번호',
-    type: 'password',
-    hasError: pwError,
-    placeholder: '비밀번호를 설정해 주세요',
-    required: true,
-    minLength: '6',
-    value: pw,
-    onChange: e => {
-      setPw(e.target.value);
-    },
-  };
+  function handleNext() {
+    const { email, password } = formRef.current.elements;
+    const update = {
+      ...data,
+      email: email.value,
+      password: password.value,
+    };
+    setIsNext(true);
+    setData(update);
+  }
+  function handleComplete(e) {
+    e.preventDefault();
+    const { accountname, username, intro, image } = formRef.current.elements;
+    const update = {
+      ...data,
+      accountname: accountname.value,
+      username: username.value,
+      intro: intro.value,
+      image: image.value,
+    };
+    setData(update);
+  }
 
   return (
     <>
       <header className="signup-header">
-        <h1 className="signup-title">이메일로 회원가입</h1>
+        {!isNext ? (
+          <h1 className="signup-title">이메일로 회원가입</h1>
+        ) : (
+          <>
+            <h1 className="signup-title">프로필 설정</h1>
+            <p className="subtitle">나중에 언제든지 변경할 수 있습니다</p>
+          </>
+        )}
       </header>
       <main className="signup-main">
-        <form className="signup-form" action="">
-          <fieldset>
-            <Input {...emailProps} />
-            {emailError && <ErrorMsg errorText={emailErrorText} />}
-          </fieldset>
-          <fieldset>
-            <Input {...passwordProps} />
-            {pwError && <ErrorMsg errorText="*비밀번호는 6자 이상이어야 합니다." />}
-          </fieldset>
-          <Button className="size-l" onClick={() => navigate('/sign-up-profile')}>
-            다음
-          </Button>
+        <form ref={formRef} className="signup-form" action="">
+          {!isNext ? <Account handleNext={handleNext} /> : <Information setIsCompleteDisabled={setIsCompleteDisabled} />}
+          {isNext && (
+            <Button className="size-l" onClick={e => handleComplete(e)} disabled={isCompleteDisabled}>
+              감귤마켓 시작하기
+            </Button>
+          )}
         </form>
       </main>
     </>
