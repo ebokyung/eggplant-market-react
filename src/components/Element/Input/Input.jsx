@@ -2,8 +2,8 @@ import React, { useState, forwardRef } from 'react';
 import './Input.scss';
 
 export const Input = forwardRef((props, ref) => {
-  const { inputId, label, type, placeholder, required, errorText, ...other } = props;
-  const [inpValue, setInpValue] = useState('');
+  const { inputId, label, type, placeholder, required, errorState, defaultValue, ...other } = props;
+  const [inpValue, setInpValue] = useState(defaultValue);
 
   return (
     <fieldset className="fieldset">
@@ -11,15 +11,15 @@ export const Input = forwardRef((props, ref) => {
       <input
         type={type || 'text'}
         id={inputId}
-        className={errorText ? 'error' : null}
+        className={errorState.isError ? 'error' : null}
         placeholder={placeholder}
         required={required}
-        onChange={e => setInpValue(e.target.value)}
-        value={inpValue}
+        onChange={() => setInpValue(ref.current.value)}
         ref={ref}
+        defaultValue={inpValue}
         {...other}
       />
-      {errorText && <strong className="error-msg">*{errorText}</strong>}
+      {errorState.isError && <strong className="error-msg">*{errorState.errorMsg}</strong>}
     </fieldset>
   );
 });
