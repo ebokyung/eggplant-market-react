@@ -2,23 +2,27 @@ import React, { useState } from 'react';
 import './Input.scss';
 
 export function Input(props) {
-  const { inputId, label, type, placeholder, required, errorText, initialValue, ...other } = props;
+  const { inputId, label, type, placeholder, required, error, initialValue, ...other } = props;
   const [inpValue, setInpValue] = useState(initialValue || '');
+  const { isError, errorText } = error;
 
   return (
     <fieldset className="fieldset">
-      <label htmlFor={inputId}>{label}</label>
+      <label className={inputId} htmlFor={inputId}>
+        {label}
+      </label>
       <input
         type={type || 'text'}
         id={inputId}
-        className={errorText ? 'error' : null}
+        className={isError && errorText ? 'error' : null}
         placeholder={placeholder}
         required={required}
         onChange={e => setInpValue(e.target.value)}
         value={inpValue}
+        autoComplete="off"
         {...other}
       />
-      {errorText && <strong className="error-msg">*{errorText}</strong>}
+      {errorText && <strong className="error-msg">* {errorText}</strong>}
     </fieldset>
   );
 }
