@@ -28,7 +28,7 @@ export function Information({ initialData, setIsCompleteDisabled }) {
     <>
       <InputImg initialImg={profile ? profile.image : undefined} />
       <InputUsername initialValue={profile ? profile.username : ''} error={usernameError} seterror={setUsernameError} />
-      <InputAcctname isSignUp={isSignUp} initialValue={profile ? profile.accountname : ''} error={accountnameError} seterror={setAccountnameError} />
+      <InputAcctname initialValue={profile ? profile.accountname : ''} error={accountnameError} seterror={setAccountnameError} />
       <InputIntro initialValue={profile ? profile.intro : ''} />
     </>
   );
