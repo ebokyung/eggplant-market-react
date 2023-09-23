@@ -1,25 +1,26 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState } from 'react';
 import './Input.scss';
 
-export const Input = forwardRef((props, ref) => {
-  const { inputId, label, type, placeholder, required, errorState, defaultValue, ...other } = props;
-  const [inpValue, setInpValue] = useState(defaultValue);
+export function Input(props) {
+  const { name, inputId, label, type, placeholder, required, error, initialValue, ...other } = props;
+  const [inpValue, setInpValue] = useState(initialValue);
+  const { isError, errorText } = error;
 
   return (
     <fieldset className="fieldset">
       <label htmlFor={inputId}>{label}</label>
       <input
+        name={name}
         type={type || 'text'}
         id={inputId}
-        className={errorState.isError ? 'error' : null}
+        className={isError && errorText ? 'error' : null}
         placeholder={placeholder}
         required={required}
-        onChange={() => setInpValue(ref.current.value)}
-        ref={ref}
-        defaultValue={inpValue}
+        onChange={e => setInpValue(e.target.value)}
+        value={inpValue}
         {...other}
       />
-      {errorState.isError && <strong className="error-msg">*{errorState.errorMsg}</strong>}
+      {errorText && <strong className="error-msg">*{errorText}</strong>}
     </fieldset>
   );
-});
+}

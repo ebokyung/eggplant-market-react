@@ -1,159 +1,123 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Input } from '../../../components/Element/Input';
-import { singleProduct } from '../../../libs/dummy';
+import { InputProductImage } from './InputProductImage';
 
-export function ProductForm({ isOnSubmit, setIsOnSubmit }) {
+export function ProductForm({ setIsOnSubmit, initialData }) {
+  const isUploadPage = useLocation().pathname.includes('product-upload');
+  const [isBtnDisabled, setIsBtnDisabled] = useState(isUploadPage);
+  const formRef = useRef();
   const [nameError, setNameError] = useState({
-    isError: false,
-    errorMsg: '',
+    isError: isUploadPage,
+    errorText: '',
   });
   const [priceError, setPriceError] = useState({
-    isError: false,
-    errorMsg: '',
+    isError: isUploadPage,
+    errorText: '',
   });
   const [linkError, setLinkError] = useState({
-    isError: false,
-    errorMsg: '',
+    isError: isUploadPage,
+    errorText: '',
   });
-  const [isDisabled, setIsDisabled] = useState(!isOnSubmit);
-  const imageRef = useRef();
-  const nameRef = useRef();
-  const priceRef = useRef();
-  const linkRef = useRef();
-
-  const [data, setData] = useState({
-    itemImage: '',
-    itemName: '',
-    price: '',
-    link: '',
-  });
-  useEffect(() => {
-    // 수정 페이지일때
-    if (isOnSubmit) {
-      // postId에 따라 get 요청
-      const { itemImage, itemName, price, link } = singleProduct.product;
-      setData({ itemImage, itemName, price, link });
-    }
-  }, []);
-  useEffect(() => {
-    if (isOnSubmit) {
-      imageRef.current.style.backgroundImage = data.itemImage ? `url(${data.itemImage})` : '';
-      nameRef.current.value = data.itemName;
-      priceRef.current.value = data.price;
-      linkRef.current.value = data.link;
-    }
-  }, [data]);
 
   const validateName = name => {
-    if (name.trim().length >= 2 && name.trim().length <= 15) {
-      setNameError({ isError: false, errorMsg: '' });
+    const valid = name.validity;
+    if (valid.valueMissing || valid.tooShort) {
+      setNameError({
+        isError: true,
+        errorText: '2~15자 이내여야 합니다.',
+      });
     } else {
-      setNameError({ isError: true, errorMsg: '2~15자 이내여야 합니다.' });
+      setNameError({
+        isError: false,
+        errorText: '',
+      });
     }
   };
 
   const validatePrice = price => {
-    if (Number(price) <= 1000000000) {
-      setPriceError({ isError: false, errorMsg: '' });
+    const valid = price.validity;
+    if (valid.valueMissing || valid.rangeOverflow) {
+      setPriceError({ isError: true, errorText: '0~1000000000 숫자를 입력해 주세요.' });
     } else {
-      setPriceError({ isError: true, errorMsg: '0~1000000000 숫자를 입력해 주세요.' });
+      setPriceError({ isError: false, errorText: '' });
     }
   };
 
   const validateLink = link => {
-    const urlRegEx = /^(https?:\/\/)?(www\.)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/;
-    if (urlRegEx.test(link)) {
-      setLinkError({ isError: false, errorMsg: '' });
+    const valid = link.validity;
+    const urlPattern = /^(https?:\/\/)?(www\.)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/;
+    if (valid.valueMissing || !urlPattern.test(link.value)) {
+      setLinkError({ isError: true, errorText: 'URL 형식으로 입력해 주세요.' });
     } else {
-      setLinkError({ isError: true, errorMsg: 'URL 형식으로 입력해 주세요.' });
+      setLinkError({ isError: false, errorText: '' });
     }
   };
 
   useEffect(() => {
-    setIsDisabled(!(nameRef.current.value && priceRef.current.value && linkRef.current.value && !nameError.isError && !priceError.isError && !linkError.isError));
-  }, [nameRef.current, priceRef.current, linkRef.current, nameError, priceError, linkError]);
+    setIsBtnDisabled(!(!nameError.isError && !priceError.isError && !linkError.isError));
+  }, [nameError, priceError, linkError]);
 
   useEffect(() => {
-    setIsOnSubmit(!isDisabled);
-  }, [isDisabled]);
+    setIsOnSubmit(!isBtnDisabled);
+  }, [isBtnDisabled]);
 
   const handleSubmit = e => {
     e.preventDefault();
+    const { productImg, productName, productPrice, productLink } = formRef.current.elements;
     // post 요청
     alert(
       JSON.stringify({
-        itemImage: imageRef.current.style.backgroundImage.slice(5, -2),
-        itemName: nameRef.current.value,
-        price: priceRef.current.value,
-        link: linkRef.current.value,
+        // todo : 이미지 분기 처리 (input의 fileName[0] 있으면 그거, 없고 modify면 그대로)
+        itemImage: productImg.style.backgroundImage.slice(5, -2),
+        itemName: productName.value,
+        price: productPrice.value,
+        link: productLink.value,
       }),
     );
   };
 
   return (
-    <form onSubmit={handleSubmit} id="form-product">
-      <article className="product-img-cover" ref={imageRef}>
-        <h2 className="a11y-hidden">판매 상품 이미지</h2>
-        <label className="btn-upload" htmlFor="product-img-input" role="tabpanel" tabIndex="0">
-          <span className="a11y-hidden">판매 상품 이미지 업로드 버튼</span>
-          <svg className="btn-upload-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="18" cy="18" r="18" fill="#C4C4C4" />
-            <path
-              d="M24.4167 9.75H11.5833C10.5708 9.75 9.75 10.5708 9.75 11.5833V24.4167C9.75 25.4292 10.5708 26.25 11.5833 26.25H24.4167C25.4292 26.25 26.25 25.4292 26.25 24.4167V11.5833C26.25 10.5708 25.4292 9.75 24.4167 9.75Z"
-              stroke="white"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M14.7915 16.1665C15.5509 16.1665 16.1665 15.5509 16.1665 14.7915C16.1665 14.0321 15.5509 13.4165 14.7915 13.4165C14.0321 13.4165 13.4165 14.0321 13.4165 14.7915C13.4165 15.5509 14.0321 16.1665 14.7915 16.1665Z"
-              stroke="white"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path d="M26.2502 20.7498L21.6668 16.1665L11.5835 26.2498" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <input id="product-img-input" type="file" />
-        </label>
-      </article>
+    <form onSubmit={handleSubmit} id="form-product" ref={formRef}>
+      <InputProductImage initialValue={initialData?.itemImage} />
       <Input
         inputId="product-name"
+        name="productName"
         label="상품명"
         minLength="2"
         maxLength="15"
         placeholder="2~15자 이내여야 합니다."
         required
-        onBlur={() => validateName(nameRef.current.value)}
-        errorState={nameError}
-        ref={nameRef}
-        defaultValue={data.itemName}
+        onBlur={e => validateName(e.target)}
+        error={nameError}
+        initialValue={initialData?.itemName}
       />
 
       <Input
         type="number"
         inputId="product-price"
+        name="productPrice"
         label="가격"
         min="0"
         max="1000000000"
+        maxLength="10"
         placeholder="숫자만 입력 가능합니다."
         required
-        onBlur={() => validatePrice(priceRef.current.value)}
-        errorState={priceError}
-        ref={priceRef}
-        defaultValue={data.price}
+        onBlur={e => validatePrice(e.target)}
+        error={priceError}
+        initialValue={initialData?.price}
       />
 
       <Input
         type="url"
         inputId="purchase-link"
+        name="productLink"
         label="판매 링크"
         placeholder="URL을 입력해 주세요"
         required
-        onBlur={() => validateLink(linkRef.current.value)}
-        errorState={linkError}
-        ref={linkRef}
-        defaultValue={data.link}
+        onBlur={e => validateLink(e.target)}
+        error={linkError}
+        initialValue={initialData?.link}
       />
     </form>
   );
