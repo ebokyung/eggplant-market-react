@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Input.scss';
 
-function Input(props) {
-  const { inputid, label, type, className, placeholder, required, onChange } = props;
+export function Input(props) {
+  const { inputId, label, type, placeholder, required, errorText, initialValue, ...other } = props;
+  const [inpValue, setInpValue] = useState(initialValue || '');
 
   return (
-    <>
-      <label htmlFor={inputid}>{label}</label>
-      <input type={type || 'text'} id={inputid} className={className} placeholder={placeholder} required={required} onChange={onChange} />
-    </>
+    <fieldset className="fieldset">
+      <label htmlFor={inputId}>{label}</label>
+      <input
+        type={type || 'text'}
+        id={inputId}
+        className={errorText ? 'error' : null}
+        placeholder={placeholder}
+        required={required}
+        onChange={e => setInpValue(e.target.value)}
+        value={inpValue}
+        {...other}
+      />
+      {errorText && <strong className="error-msg">*{errorText}</strong>}
+    </fieldset>
   );
 }
-
-export default Input;

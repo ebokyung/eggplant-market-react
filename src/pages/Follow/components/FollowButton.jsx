@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '../Buttons';
+import { Button } from '../../../components/Element/Buttons';
 
 function FollowButton({ isFollow }) {
   const [following, setIsFollowing] = useState(isFollow);

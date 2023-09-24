@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/ChatBubble.scss';
-import ProfileImg from '../../../components/Element/User/ProfileImg';
+import { ProfileImg } from '../../../components/Element/User';
 
 export function ChatBubble({ data }) {
   const { who, body, src, time } = data;

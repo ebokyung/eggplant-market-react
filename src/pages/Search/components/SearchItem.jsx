@@ -1,6 +1,5 @@
 import React from 'react';
-import { User } from '../User';
-import './SearchItem.scss';
+import { User } from '../../../components/Element/User';
 
 function highlightKeyword(text, keyword) {
   if (text.indexOf(keyword) !== -1) {
@@ -16,7 +15,7 @@ function highlightKeyword(text, keyword) {
   return text;
 }
 
-function SearchItem({ user, keyword }) {
+export function SearchItem({ user, keyword }) {
   const { _id, username, accountname, image } = user;
   // highlight 처리하기
   const content = highlightKeyword(username, keyword);
@@ -27,5 +26,3 @@ function SearchItem({ user, keyword }) {
     </li>
   );
 }
-
-export default SearchItem;
