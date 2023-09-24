@@ -36,7 +36,7 @@ export const singlePost = {
   post: {
     id: '649befa5b2cb205663b2482e',
     content: 'asdf',
-    image: '',
+    image: '1690607151930.png,1690607152008.png',
     createdAt: '2023-06-28T08:30:29.758Z',
     updatedAt: '2023-08-04T05:50:22.863Z',
     hearted: false,
