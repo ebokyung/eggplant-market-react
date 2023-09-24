@@ -3,6 +3,19 @@ import { useLocation } from 'react-router-dom';
 import { Input } from '../../../components/Element/Input';
 import { InputProductImage } from './InputProductImage';
 
+async function postImage(item) {
+  const formData = new FormData();
+  formData.append('image', item);
+
+  const res = await fetch(`https://api.mandarin.weniv.co.kr/image/uploadfile`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  const json = await res.json();
+  return json.filename;
+}
+
 export function ProductForm({ setIsOnSubmit, initialData }) {
   const isUploadPage = useLocation().pathname.includes('product-upload');
   const [isBtnDisabled, setIsBtnDisabled] = useState(isUploadPage);
@@ -62,14 +75,20 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
     setIsOnSubmit(!isBtnDisabled);
   }, [isBtnDisabled]);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const { productImg, productName, productPrice, productLink } = formRef.current.elements;
+    // img 서버에 올리기
+    let productImgFileName = '';
+    if (productImg.files[0]) {
+      productImgFileName = await postImage(productImg.files[0]);
+    } else {
+      productImgFileName = document.querySelector('.product-img-cover').style.backgroundImage.slice(38, -2);
+    }
     // post 요청
     alert(
       JSON.stringify({
-        // todo : 이미지 분기 처리 (input의 fileName[0] 있으면 그거, 없고 modify면 그대로)
-        itemImage: productImg.style.backgroundImage.slice(5, -2),
+        itemImage: productImgFileName,
         itemName: productName.value,
         price: productPrice.value,
         link: productLink.value,
