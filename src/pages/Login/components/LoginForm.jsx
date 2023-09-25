@@ -1,59 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '../../../components/Element/Buttons';
-import { Input, ErrorMsg } from '../../../components/Element/Input';
-
-const apiResult = false;
+import { Input } from '../../../components/Element/Input';
 
 export function LoginForm() {
-  const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  const [isError, setIsError] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const formRef = useRef();
+  const [emailError, setEmailError] = useState({
+    isError: true,
+    errorText: '',
+  });
+  const [pwError, setPwError] = useState({
+    isError: true,
+    errorText: '',
+  });
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
 
   const validateEmail = email => {
-    if (emailRegEx.test(email)) {
-      setEmailValue(email);
-      setIsEmailValid(true);
-    } else setIsEmailValid(false);
+    const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+    if (!email.validity.valueMissing && emailRegEx.test(email.value)) {
+      setEmailError({ isError: false, errorText: '' });
+    } else setEmailError({ isError: true, errorText: '이메일 양식에 맞게 아이디를 입력해주세요.' });
+  };
+
+  const validatePw = pw => {
+    if (!pw.validity.valueMissing) setPwError({ isError: false, errorText: '' });
+    else setPwError({ isError: true, errorText: '' });
   };
 
   useEffect(() => {
-    setIsDisabled(!(emailValue && passwordValue && !isError));
-  }, [emailValue, passwordValue, isError]);
+    setIsBtnDisabled(!(!emailError.isError && !pwError.isError));
+  }, [emailError, pwError]);
 
-  const submitLoginForm = () => {
+  const submitLoginForm = e => {
+    e.preventDefault();
+    const { email, password } = formRef.current.elements;
+    const data = {
+      email: email.value,
+      pw: password.value,
+    };
+    console.log(data);
     // api 연결
-    console.log('로그인 폼 제출');
-    if (!apiResult) setIsError(true);
+    const apiResult = false;
+    if (!apiResult) setPwError({ isError: false, errorText: '이메일 또는 비밀번호가 일치하지 않습니다.' });
   };
 
   return (
-    <form>
-      <Input
-        inputid="email"
-        label="이메일"
-        type="email"
-        className={!isEmailValid || isError ? 'error' : undefined}
-        required
-        onChange={e => {
-          validateEmail(e.target.value);
-        }}
-      />
-      {!isEmailValid && <ErrorMsg errorText="이메일 양식에 맞게 아이디를 입력해주세요." />}
-      <Input
-        inputid="pw"
-        label="비밀번호"
-        type="password"
-        className={isError ? 'error' : undefined}
-        required
-        onChange={e => {
-          setPasswordValue(e.target.value);
-        }}
-      />
-      {isError && <ErrorMsg errorText="이메일 또는 비밀번호가 일치하지 않습니다." />}
-      <Button className="size-l btn-login" disabled={isDisabled} onClick={() => submitLoginForm()}>
+    <form onSubmit={submitLoginForm} ref={formRef}>
+      <Input inputid="email" name="email" label="이메일" type="email" required onBlur={e => validateEmail(e.target)} error={emailError} />
+      <Input inputid="pw" name="password" label="비밀번호" type="password" required onChange={e => validatePw(e.target)} error={pwError} />
+      <Button type="submit" className="size-l btn-login" disabled={isBtnDisabled}>
         로그인
       </Button>
     </form>
