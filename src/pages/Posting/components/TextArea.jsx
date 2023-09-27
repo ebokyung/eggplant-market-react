@@ -1,12 +1,17 @@
-/* eslint-disable no-multi-assign */
-import React, { useState } from 'react';
+/* eslint-disable no-unused-expressions */
+import React, { useState, useEffect } from 'react';
 import '../style/TextArea.scss';
 
-export function TextArea({ initialValue }) {
+export function TextArea({ initialValue, setIsTextError }) {
   const [textValue, setTextValue] = useState(initialValue);
   const handleSetValue = e => {
     setTextValue(e.target.value);
   };
+
+  useEffect(() => {
+    console.log(textValue);
+    textValue === '' ? setIsTextError(true) : setIsTextError(false);
+  }, [textValue]);
   // tab 누르면 포커스 잃지않고 4칸 공백 넣기
   // const handleSetTab = e => {
   //   if (e.key === 'Tab') {

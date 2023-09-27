@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useEffect, useState, useRef } from 'react';
 import '../style/Posting.scss';
 import { useSearchParams } from 'react-router-dom';
@@ -11,7 +12,8 @@ export function Posting() {
   const formRef = useRef();
   const [searchParams] = useSearchParams();
 
-  const [isError, setIsError] = useState(true);
+  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [isTextError, setIsTextError] = useState(true);
 
   const [initialText, setInitialText] = useState('');
   const [imgData, setImgData] = useState([]);
@@ -37,32 +39,25 @@ export function Posting() {
     if (searchParams.get('id')) {
       const { post } = singlePost;
       setInitialText(post.content);
+
       setImgData(post.image.split(','));
     }
     setIsLoading(false);
   }, []);
 
-  // 제출버튼 disabled
   useEffect(() => {
-    if (formRef.current) {
-      const { textarea } = formRef.current.elements;
-      if (textarea.value !== '' || imgData.length !== 0) {
-        setIsError(false);
-      } else {
-        setIsError(true);
-      }
-    }
-  }, [formRef, imgData]);
+    isTextError && imgData.length === 0 ? setBtnDisabled(true) : setBtnDisabled(false);
+  }, [isTextError, imgData]);
 
   return isLoading ? (
     <>로딩중</>
   ) : (
     <>
-      <Header page="upload" btnDisabled={isError} onClick={onSubmit} />
+      <Header page="upload" btnDisabled={btnDisabled} onClick={onSubmit} />
       <main className="posting-main">
         <ProfileImg profileImg="" category="post" />
         <form ref={formRef} className="posting-form" action="">
-          <TextArea initialValue={initialText} />
+          <TextArea initialValue={initialText} setIsTextError={setIsTextError} />
           <ImageArea imgData={imgData} setImgData={setImgData} />
         </form>
       </main>
