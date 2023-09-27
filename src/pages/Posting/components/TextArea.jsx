@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React, { useState, useEffect } from 'react';
 import '../style/TextArea.scss';
 

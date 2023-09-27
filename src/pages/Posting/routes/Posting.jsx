@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React, { useEffect, useState, useRef } from 'react';
 import '../style/Posting.scss';
 import { useSearchParams } from 'react-router-dom';
