@@ -9,7 +9,6 @@ export function TextArea({ initialValue, setIsTextError }) {
   };
 
   useEffect(() => {
-    console.log(textValue);
     textValue === '' ? setIsTextError(true) : setIsTextError(false);
   }, [textValue]);
   // tab 누르면 포커스 잃지않고 4칸 공백 넣기
