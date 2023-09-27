@@ -1,41 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import uploadIcon from '../../../assets/icon/upload-file.svg';
 import { ImageItem } from './ImageItem';
 
-export function ImageArea({ initialData = [], imgData, setImgData }) {
-  const [imageList, setImageList] = useState(initialData.map(img => `https://api.mandarin.weniv.co.kr/${img}`));
-
+export function ImageArea({ imgData, setImgData }) {
+  // 이미지 처리 로직
   const handleImage = e => {
-    const temp = [...e.target.files].map(image => URL.createObjectURL(image));
-    const Images = [...imageList, ...temp];
-    setImageList(Images);
-    setImgData(prev => [...prev, ...e.target.files]);
+    // e.target.value = null 처리를 위해서 임시로 복사본 생성
+    const temp = [...e.target.files];
+    if (imgData.length + temp.length <= 3) {
+      setImgData(prev => [...prev, ...temp]);
+      e.target.value = null;
+    } else {
+      alert('이미지가 만아요2');
+    }
   };
 
-  const handleRemoveImage = (removedImage, idx) => {
-    const updatedImageList = imageList.filter(image => image !== removedImage);
-    setImageList(updatedImageList);
-    const updatedImageData = [...imgData];
-    updatedImageData.splice(idx, 1);
-    setImgData(updatedImageData);
+  const checkImageLength = e => {
+    if (imgData.length >= 3) {
+      e.preventDefault();
+      alert('이미지가 만아요');
+    }
   };
 
-  // 확인용
-  useEffect(() => {
-    console.log('이미지 미리보기 리스트:', imageList, ' file name:', imgData);
-  }, [imgData, imageList]);
+  const handleRemoveImage = removedImage => {
+    setImgData(prev => prev.filter(currImg => currImg !== removedImage));
+  };
+
   return (
     <>
       <ul className="upload-imgs-list">
-        {imageList.map((image, idx) => (
-          <li key={`${image}`}>
-            <ImageItem img={image} onRemove={removedImage => handleRemoveImage(removedImage, idx)} />
+        {imgData.map(image => (
+          <li key={uuidv4()}>
+            <ImageItem img={image} onRemove={removedImage => handleRemoveImage(removedImage)} />
           </li>
         ))}
       </ul>
       <label className="input-file-btn" htmlFor="input-file">
         <img id="image-upload-btn" src={uploadIcon} alt="" />
-        <input name="images" type="file" id="input-file" accept="img/*" multiple onChange={e => handleImage(e)} />
+        <input type="file" id="input-file" accept="img/*" multiple onClick={e => checkImageLength(e)} onChange={e => handleImage(e)} />
       </label>
     </>
   );

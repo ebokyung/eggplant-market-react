@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import '../style/TextArea.scss';
 
-export function TextArea({ initialValue = '' }) {
+export function TextArea({ initialValue }) {
   const [textValue, setTextValue] = useState(initialValue);
   const handleSetValue = e => {
     setTextValue(e.target.value);
   };
+  // tab 누르면 포커스 잃지않고 4칸 공백 넣기
   // const handleSetTab = e => {
   //   if (e.key === 'Tab') {
   //     e.preventDefault();
