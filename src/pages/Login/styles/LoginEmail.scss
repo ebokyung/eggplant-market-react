@@ -1,0 +1,36 @@
+@import '/src/styles/scss/mixin';
+
+.login-email {
+  padding: 1.875rem;
+  
+  .title {
+    text-align: center;
+    font-size: map-get($font-sizes, "size24");
+    @include get-color(color, font-color);
+  }
+  
+  form {
+    min-width: calc(24.375rem - 1.875rem * 2);
+    max-width: 40%;
+    margin: 2.5rem auto 0;
+    @include get-color(color, gray-color);
+    font-size: map-get($font-sizes, "size12");
+
+    .btn-login {
+      display: block;
+      margin-top: 1.875rem;
+      width: 100%;
+      min-width: 20.125rem;
+    }
+  }
+  
+  .email-join {
+    display: block;
+    width: fit-content;
+    margin: 1.25rem auto 0;
+    text-align: center;
+    font-size: map-get($font-sizes, "size12");
+    @include get-color(color, gray-color);
+  }
+}
+

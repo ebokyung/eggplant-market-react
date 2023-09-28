@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Error, Splash, Login } from '../pages';
+import { Error, Splash } from '../pages';
+import { Login, LoginEmail } from '../pages/Login';
 import { Home } from '../pages/Home';
 import { Search } from '../pages/Search';
 import { ChatList } from '../pages/ChatList';
@@ -14,6 +15,8 @@ export default function AppRoutes() {
       <Route path="/error" element={<Error />} />
       <Route path="/splash" element={<Splash />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/login-email" element={<LoginEmail />} />
+      <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/search" element={<Search />} />
       <Route path="/chat" element={<ChatList />} />
