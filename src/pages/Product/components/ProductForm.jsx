@@ -68,7 +68,7 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
   };
 
   useEffect(() => {
-    setIsBtnDisabled(!(!nameError.isError && !priceError.isError && !linkError.isError));
+    setIsBtnDisabled(nameError.isError || priceError.isError || linkError.isError);
   }, [nameError, priceError, linkError]);
 
   useEffect(() => {
