@@ -9,6 +9,7 @@ import { ChatRoom } from '../pages/ChatRoom';
 import { Product } from '../pages/Product/routes/Product';
 import { UserProfile } from '../pages/Profile';
 import { Follow } from '../pages/Follow';
+import { SignUp } from '../pages/SignUp';
 
 export default function AppRoutes() {
   return (
@@ -17,7 +18,7 @@ export default function AppRoutes() {
       <Route path="/splash" element={<Splash />} />
       <Route path="/login" element={<Login />} />
       <Route path="/login-email" element={<LoginEmail />} />
-      <Route path="/" element={<Home />} />
+      <Route path="/sign-up" element={<SignUp />} />
       <Route path="/home" element={<Home />} />
       <Route path="/search" element={<Search />} />
       <Route path="/chat" element={<ChatList />} />

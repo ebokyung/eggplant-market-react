@@ -32,7 +32,7 @@ export function Post({ post }) {
           <ContentTag className="post-text">{content}</ContentTag>
           {image &&
             image.split(',').map(img => (
-              <div className="img-cover">
+              <div key={img} className="img-cover">
                 <img className="post-img" src={img} alt="" />
               </div>
             ))}

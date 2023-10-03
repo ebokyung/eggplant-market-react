@@ -8,7 +8,9 @@ export function Input(props) {
 
   return (
     <fieldset className="fieldset">
-      <label htmlFor={inputId}>{label}</label>
+      <label className={inputId} htmlFor={inputId}>
+        {label}
+      </label>
       <input
         name={name}
         type={type || 'text'}
@@ -18,9 +20,10 @@ export function Input(props) {
         required={required}
         onChange={e => setInpValue(e.target.value)}
         value={inpValue}
+        autoComplete="off"
         {...other}
       />
-      {errorText && <strong className="error-msg">*{errorText}</strong>}
+      {errorText && <strong className="error-msg">* {errorText}</strong>}
     </fieldset>
   );
 }

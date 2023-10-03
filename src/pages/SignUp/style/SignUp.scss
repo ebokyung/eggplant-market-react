@@ -1,0 +1,38 @@
+@import '/src/styles/scss/mixin';
+
+.signup-header {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  h1 {
+    @include get-color(color, black-color);
+  }
+  .subtitle {
+    color: #767676;
+    text-align: center;
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+  }
+}
+
+.signup-main {
+  padding: 0 30px;
+  max-width: 390px;
+  margin: 0 auto;
+
+  label.email,
+  label.username {
+    margin-top: 0;
+  }
+
+  button {
+    display: block;
+    margin: 30px auto 0;
+  }
+}
+
+.signup-title {
+  font-size: map-get($font-sizes, 'size24');
+  @include get-color(color, font-color);
+  line-height: 30px;
+}
