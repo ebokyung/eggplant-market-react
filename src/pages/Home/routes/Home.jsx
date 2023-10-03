@@ -11,7 +11,7 @@ export function Home() {
   return (
     <>
       <Header page="main" text="가지마켓 피드" />
-      {data ? <HomeWithPost data={data} /> : <HomeWithoutPost />}
+      {data.posts.length ? <HomeWithPost data={data} /> : <HomeWithoutPost />}
       <Footer />
     </>
   );

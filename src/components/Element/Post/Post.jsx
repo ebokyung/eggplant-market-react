@@ -33,7 +33,7 @@ export function Post({ post }) {
             .split(',')
             .filter(img => !!img)
             .map(img => (
-              <div className="img-cover">
+              <div key={img} className="img-cover">
                 <img className="post-img" src={img} alt="" />
               </div>
             ))}
