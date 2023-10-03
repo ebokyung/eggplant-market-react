@@ -52,10 +52,10 @@ export function Posting() {
     <>로딩중</>
   ) : (
     <>
-      <Header page="upload" btnDisabled={btnDisabled} onClick={onSubmit} />
+      <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
       <main className="posting-main">
         <ProfileImg profileImg="" category="post" />
-        <form ref={formRef} className="posting-form" action="">
+        <form id="form-posting" onSubmit={onSubmit} ref={formRef} className="posting-form" action="">
           <TextArea initialValue={initialText} setIsTextError={setIsTextError} />
           <ImageArea imgData={imgData} setImgData={setImgData} />
         </form>
