@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/Login.scss';
 import { Link } from 'react-router-dom';
 
 export function Login() {
+  useEffect(() => {
+    document.body.classList.add('login-body-color');
+    return () => {
+      document.body.classList.remove('login-body-color');
+    };
+  }, []);
+
   return (
-    <div className="login-wrapper">
+    <main className="main-login">
       <h1 className="a11y-hidden">로그인 화면</h1>
       <div className="background" id="bg-icon" />
       <section className="login">
@@ -23,11 +30,11 @@ export function Login() {
             이메일로 로그인
           </Link>
           <span>|</span>
-          <Link className="signin" to="/join-membership">
+          <Link className="signin" to="/sign-up">
             회원가입
           </Link>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

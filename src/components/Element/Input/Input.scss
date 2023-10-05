@@ -1,9 +1,10 @@
 @import '/src/styles/scss/mixin';
 
 .fieldset {
+  margin-bottom: 1rem;
+
   label {
     @include label-tag;
-    margin-top: 1rem;
     font-size: 12px;
   }
 

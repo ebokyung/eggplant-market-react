@@ -45,8 +45,8 @@ export function LoginForm() {
 
   return (
     <form onSubmit={submitLoginForm} ref={formRef}>
-      <Input inputid="email" name="email" label="이메일" type="email" required onBlur={e => validateEmail(e.target)} error={emailError} />
-      <Input inputid="pw" name="password" label="비밀번호" type="password" required onChange={e => validatePw(e.target)} error={pwError} />
+      <Input inputId="email" name="email" label="이메일" type="email" required onBlur={e => validateEmail(e.target)} error={emailError} />
+      <Input inputId="pw" name="password" label="비밀번호" type="password" required onChange={e => validatePw(e.target)} error={pwError} />
       <Button type="submit" className="size-l btn-login" disabled={isBtnDisabled}>
         로그인
       </Button>

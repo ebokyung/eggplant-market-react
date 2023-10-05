@@ -13,7 +13,7 @@ export function PostDetail() {
   return (
     <>
       <Header />
-      <main className="main-with-nav post-main">
+      <main className="main-with-nav main-post">
         <Post post={post} />
         <section className="comment-sec">
           <h2 className="a11y-hidden">게시물에 대한 답변</h2>

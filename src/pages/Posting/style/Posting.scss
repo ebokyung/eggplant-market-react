@@ -1,52 +1,53 @@
 @import '/src/styles/scss/mixin';
 
-.posting-main {
+.main-posting {
   padding: 1.25rem 1rem;
   display: flex;
   justify-content: center;
   max-width: 50rem;
   margin: auto;
-}
 
-.posting-form {
-  width: 100%;
-  max-height: 31.25rem;
-  overflow: hidden;
-
-  & > * {
-    display: block;
-  }
-
-  .input-file-btn {
-    img {
-      @include width-height(3.125rem, 3.125rem);
+  .posting-form {
+    width: 100%;
+    max-height: 31.25rem;
+    overflow: hidden;
+  
+    & > * {
+      display: block;
     }
-    @include width-height(3.125rem, 3.125rem);
-    margin-left: auto;
-    cursor: pointer;
+  
+    .input-file-btn {
+      img {
+        @include width-height(3.125rem, 3.125rem);
+      }
+      @include width-height(3.125rem, 3.125rem);
+      margin-left: auto;
+      cursor: pointer;
+    }
+    input {
+      display: none;
+    }
   }
-  input {
-    display: none;
+  
+  .upload-imgs-list {
+    white-space: nowrap;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  
+    margin: {
+      top: 1rem;
+      left: 0.75rem;
+      bottom: 0.625rem;
+    }
+  
+    & > li {
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+  
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
-.upload-imgs-list {
-  white-space: nowrap;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-
-  margin: {
-    top: 1rem;
-    left: 0.75rem;
-    bottom: 0.625rem;
-  }
-
-  & > li {
-    display: inline-block;
-    margin-right: 0.5rem;
-  }
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}

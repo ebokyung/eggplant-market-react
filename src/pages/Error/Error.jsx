@@ -9,7 +9,7 @@ export function Error() {
   };
 
   return (
-    <article className="error">
+    <article className="error-page">
       <h2 className="a11y-hidden">404에러</h2>
       <p className="desc">페이지를 찾을 수 없습니다. :(</p>
       <button className="btn-back" onClick={goBack} type="button">

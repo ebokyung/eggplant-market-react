@@ -41,7 +41,7 @@ export function Product() {
   ) : (
     <>
       <Header page="upload" btnDisabled={!isOnSubmit} btnText={btnText} formName="form-product" />
-      <main className="upload">
+      <main className="main-product">
         <h1 className="title">상품 등록</h1>
         <ProductForm setIsOnSubmit={setIsOnSubmit} initialData={data} />
       </main>

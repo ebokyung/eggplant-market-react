@@ -5,10 +5,10 @@ import { LoginForm } from '../components/LoginForm';
 
 export function LoginEmail() {
   return (
-    <main className="login-email">
+    <main className="main-login-email">
       <h1 className="title">이메일로 로그인</h1>
       <LoginForm />
-      <Link className="email-join" to="/join-membership">
+      <Link className="email-join" to="/sign-up">
         이메일로 회원가입
       </Link>
     </main>

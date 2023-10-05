@@ -45,7 +45,7 @@ export function EditProfile() {
   return (
     <>
       <Header page="upload" btnText="저장" btnDisabled={isCompleteDisabled} onClick={() => handleSubmit()} />
-      <main className="edit-profile-main">
+      <main className="main-profile-edit">
         <form ref={formRef} action="">
           <Information initialData={profile} setIsCompleteDisabled={setIsCompleteDisabled} />
         </form>

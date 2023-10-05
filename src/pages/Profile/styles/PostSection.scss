@@ -1,11 +1,5 @@
 @import '/src/styles/scss/mixin';
 
-// :root {
-//   --profile-height: 360px;
-//   --product-height: 210px;
-//   --tab-height: 44px;
-// }
-
 .post-container {
   margin-top: 0.1875rem;
   @include get-color(background-color, bg-color);
@@ -53,7 +47,6 @@
   .post-sec {
     width: 100%;
     padding: 1rem;
-    // min-height: calc(100vh - var(--profile-height) - var(--product-height) - var(--tab-height));
 
     .post-list {
       li:first-child>section:first-child {

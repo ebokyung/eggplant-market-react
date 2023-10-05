@@ -12,125 +12,125 @@
     right: 3.125rem;
     left: 3.125rem;
   }
-}
 
-.profile-header {
-  display: flex;
-  flex-direction: column;
-  strong{
-    display: block;
-  }
-
-  .profile-img{
-    margin: 0 auto;
-  }
-
-  .profile-name {
-    font-size: map-get($font-sizes, "size16");
-    font-weight: 700;
-    @include get-color(color, font-color);
-
-    margin : {
-      top: 1rem;
-      bottom: 0.625rem;
-    }
-  }
-
-  .profile-id {
-    @include get-color(color, gray-color);
-    font-size: map-get($font-sizes, "size12");
-    &::before {
-      content: "@ ";
-    }
-  }
-
-  .profile-intro {
-    @include get-color(color, gray-color);
-    font-size: map-get($font-sizes, "size14");
-
-    margin: {
-      top: 1rem;
-      bottom: 1.5rem;
-    }
-  }
-
-  .follow-wrap {
-    position: absolute;
-    top: 4.0625rem;
-    left: 50%;
-    transform: translateX(calc(-50% + 1.5rem + 94px));
+  .profile-header {
     display: flex;
-    flex-direction: column-reverse;
-    order: -1;
-
-    p {
-      margin-top: 0.375rem;
-      font-size: map-get($font-sizes, "size8");
-      @include get-color(color, gray-color);
+    flex-direction: column;
+    strong{
+      display: block;
     }
-
-    &>strong {
-      font-size: map-get($font-sizes, "size18");
+  
+    .profile-img{
+      margin: 0 auto;
+    }
+  
+    .profile-name {
+      font-size: map-get($font-sizes, "size16");
       font-weight: 700;
-      color: $gray300-color;
+      @include get-color(color, font-color);
+  
+      margin : {
+        top: 1rem;
+        bottom: 0.625rem;
+      }
+    }
+  
+    .profile-id {
+      @include get-color(color, gray-color);
+      font-size: map-get($font-sizes, "size12");
+      &::before {
+        content: "@ ";
+      }
+    }
+  
+    .profile-intro {
+      @include get-color(color, gray-color);
+      font-size: map-get($font-sizes, "size14");
+  
+      margin: {
+        top: 1rem;
+        bottom: 1.5rem;
+      }
+    }
+  
+    .follow-wrap {
+      position: absolute;
+      top: 4.0625rem;
+      left: 50%;
+      transform: translateX(calc(-50% + 1.5rem + 94px));
+      display: flex;
+      flex-direction: column-reverse;
+      order: -1;
+  
+      p {
+        margin-top: 0.375rem;
+        font-size: map-get($font-sizes, "size8");
+        @include get-color(color, gray-color);
+      }
+  
+      &>strong {
+        font-size: map-get($font-sizes, "size18");
+        font-weight: 700;
+        color: $gray300-color;
+      }
+    }
+  
+    .follow-wrap:nth-of-type(1) {
+      transform: translateX(calc(-50% - 1.5rem - 94px));
+  
+      &>strong {
+        color: $black-color;
+      }
     }
   }
-
-  .follow-wrap:nth-of-type(1) {
-    transform: translateX(calc(-50% - 1.5rem - 94px));
-
-    &>strong {
-      color: $black-color;
+  
+  .btn-wrap-my {
+    a {
+      display: inline-block;
+    }
+  
+    & :first-child {
+      margin-right: 0.75rem;
+    }
+  
+    .btn-link {
+      height: 2.125rem;
+      @include get-color(background-color, btn-back-color);
+      @include get-color(color, btn-font);
+      border: $border-gray100-1px;
+      border-radius: 1.875rem;
+      padding: 0.5rem 1.6875rem;
+      font-size: map-get($font-sizes, "size14");
+      font-weight: 500;
+      line-height: initial;
     }
   }
-}
-
-.btn-wrap-my {
-  a {
-    display: inline-block;
-  }
-
-  & :first-child {
-    margin-right: 0.75rem;
-  }
-
-  .btn-link {
-    height: 2.125rem;
-    @include get-color(background-color, btn-back-color);
-    @include get-color(color, btn-font);
-    border: $border-gray100-1px;
-    border-radius: 1.875rem;
-    padding: 0.5rem 1.6875rem;
-    font-size: map-get($font-sizes, "size14");
-    font-weight: 500;
-    line-height: initial;
-  }
-}
-
-.btn-wrap-your {
-  display: flex;
-  justify-content: center;
-
-  .circle {
-    @include width-height(2.125rem, 2.125rem);
-    border: 1px solid $gray100-color;
-    border-radius: 50%;
-    @include get-color(background-image, icon-sprites);
-    background-repeat: no-repeat;
-    background-size: 90px 30px;
-  }
-
-  .btn-chat {
-    background-position: -29px 0;
-  }
-
-  .btn-share {
-    background-position: -60px 0;
-  }
-
-  .size-m {
-    margin: 0 0.75rem;
-    height: 2.125rem;
-    box-sizing: border-box;
+  
+  .btn-wrap-your {
+    display: flex;
+    justify-content: center;
+  
+    .circle {
+      @include width-height(2.125rem, 2.125rem);
+      border: 1px solid $gray100-color;
+      border-radius: 50%;
+      @include get-color(background-image, icon-sprites);
+      background-repeat: no-repeat;
+      background-size: 90px 30px;
+    }
+  
+    .btn-chat {
+      background-position: -29px 0;
+    }
+  
+    .btn-share {
+      background-position: -60px 0;
+    }
+  
+    .size-m {
+      margin: 0 0.75rem;
+      height: 2.125rem;
+      box-sizing: border-box;
+    }
   }
 }
