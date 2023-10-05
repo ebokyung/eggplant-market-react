@@ -21,7 +21,6 @@ function returnContentTag() {
 export function Post({ post }) {
   const { author, commentCount, content, createdAt, heartCount, hearted, id, image } = post;
   const ContentTag = returnContentTag();
-
   return (
     <section id="post" className="home-post" data-postid={id}>
       <User category="post" accountName={author.accountname} userName={author.username} detail={author.accountname} profileImg={author.image} />
@@ -30,14 +29,17 @@ export function Post({ post }) {
           <span className="a11y-hidden">게시글 상세보기</span>
           {/* home : h2, profile : h3, detail : p  */}
           <ContentTag className="post-text">{content}</ContentTag>
-          {image && (
-            <div className="img-cover">
-              <img className="post-img" src={image} alt="" />
-            </div>
-          )}
+          {image
+            .split(',')
+            .filter(img => !!img)
+            .map(img => (
+              <div key={img} className="img-cover">
+                <img className="post-img" src={img} alt="" />
+              </div>
+            ))}
         </Link>
         <div className="post-icon">
-          <ButtonLike hearted={hearted} heartCount={heartCount} />
+          <ButtonLike postid={id} hearted={hearted} heartCount={heartCount} />
           <Link to="/">
             <span className="a11y-hidden">게시물 댓글 보러가기</span>
             <img src={messageCircle} alt="" />

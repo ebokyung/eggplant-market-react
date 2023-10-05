@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
-function ButtonLike({ hearted, heartCount }) {
+function ButtonLike({ postid, hearted, heartCount }) {
   const [isHeart, setIsHeart] = useState(hearted);
   const [heartCnt, setHeartCnt] = useState(heartCount);
+  // 좋아요 기능 처리용 id
 
   function handleLike() {
+    console.log(postid);
     setIsHeart(prev => !prev);
 
     // 추후에 api연결하면 변경

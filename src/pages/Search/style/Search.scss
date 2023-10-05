@@ -9,7 +9,9 @@
     margin-bottom: 1rem;
   }
 
-  strong {
-    @include get-color(color, point-color);
+  .user-name {
+    strong {
+      @include get-color(color, point-color);
+    }
   }
 }

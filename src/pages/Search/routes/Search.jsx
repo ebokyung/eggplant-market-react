@@ -13,8 +13,7 @@ export function Search() {
       <Header page="search" />
       <main className="main-with-nav">
         <ul className="search-user-list">
-          {data.map(result => (
-            // eslint-disable-next-line no-underscore-dangle
+          {data?.map(result => (
             <SearchItem key={result._id} user={result} keyword="가지" />
           ))}
         </ul>

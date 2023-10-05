@@ -6,7 +6,7 @@ export * from './chatListData';
 export * from './myData';
 // profile product post followers followings
 export * from './post';
-// myinfo singlePost
+// myinfo singlePost commentList
 export * from './storage';
 // token accountname
 export * from './userData';

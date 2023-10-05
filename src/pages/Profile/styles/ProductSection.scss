@@ -1,0 +1,68 @@
+@import '/src/styles/scss/mixin';
+
+.product-container {
+  overflow: hidden;
+  padding: 1.25rem 0;
+  position: relative;
+  border-top: $border-gray100-1px;
+  border-bottom: $border-gray100-1px;
+  @include get-color(background-color, bg-color);
+
+  h2 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    margin-left: 1rem;
+    @include get-color(color, font-color);
+  }
+
+  .product-list{
+    white-space: nowrap;
+    transform: translate(0, 0);
+
+    >:first-child {
+      margin-left: 1rem;
+    }
+
+    >:last-child {
+      margin-right: 1rem;
+    }
+  }
+
+  .product-item{
+    display: inline-block;
+    margin-left: 0.625rem;
+  }
+
+  .product {
+    display: flex;
+    flex-direction: column;
+    width: 24vw;
+    min-width: 8.75rem;
+    text-align: left;
+
+    &-img {
+      width: 100%;
+      order: -1;
+      border-radius: 0.5rem;
+      aspect-ratio: 14/9;
+      -webkit-user-drag: none;
+    }
+
+    &-name {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      margin: 0.4375rem 0;
+      font-size: map-get($font-sizes, 'size14');
+      @include get-color(color, font-color);
+    }
+
+    &-price {
+      font-weight: 700;
+      font-size: map-get($font-sizes, 'size12');
+      @include get-color(color, price-color);
+    }
+  }
+}
