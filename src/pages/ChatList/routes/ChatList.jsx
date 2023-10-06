@@ -12,7 +12,7 @@ export function ChatList() {
       <Header>
         <span className="a11y-hidden">채팅목록</span>
       </Header>
-      <main className="main-with-nav">
+      <main className="main-with-nav main-chat-list">
         <ul className="chat-list">
           {chatListData.map(item => {
             return (

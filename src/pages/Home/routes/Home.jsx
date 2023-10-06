@@ -4,7 +4,6 @@ import Footer from '../../../components/Element/Navbar/Navbar';
 import { HomeWithPost, HomeWithoutPost } from '../components';
 
 import { posts } from '../../../libs/dummy';
-import '../style/Home.scss';
 
 export function Home() {
   const data = posts;

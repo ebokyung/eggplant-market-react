@@ -12,7 +12,7 @@ export function ChatRoom() {
         <span className="a11y-hidden">님과의 채팅방</span>
       </Header>
 
-      <main>
+      <main className="main-chat-room">
         <section className="chat-sheet">
           {chatData.contents.map(item => (
             <ChatBubble data={item} />

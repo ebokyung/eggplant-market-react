@@ -1,5 +1,6 @@
 import React from 'react';
 import { Post } from '../../../components/Element/Post';
+import '../style/Home.scss';
 
 export function HomeWithPost({ data }) {
   const { posts } = data;

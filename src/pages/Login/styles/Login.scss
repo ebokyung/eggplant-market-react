@@ -1,12 +1,13 @@
 @import '/src/styles/scss/mixin';
 
-.login-wrapper {
-  body{
-    background-color: $enabled-color;
-    position: relative;
-    text-align: center;
-  }
-  
+.login-body-color{
+  background-color: $enabled-color;
+}
+
+.main-login {
+  position: relative;
+  text-align: center;
+
   .background{
     height: calc(100vh - 19.375rem);
     @include get-color(background-image, bg-logo);

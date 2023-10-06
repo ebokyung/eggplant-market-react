@@ -53,7 +53,7 @@ export function Posting() {
   ) : (
     <>
       <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
-      <main className="posting-main">
+      <main className="main-posting">
         <ProfileImg profileImg="" category="post" />
         <form id="form-posting" onSubmit={onSubmit} ref={formRef} className="posting-form" action="">
           <TextArea initialValue={initialText} setIsTextError={setIsTextError} />
