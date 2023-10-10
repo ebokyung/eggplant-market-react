@@ -17,7 +17,7 @@ async function postImage(item) {
 }
 
 export function ProductForm({ setIsOnSubmit, initialData }) {
-  const isUploadPage = useLocation().pathname.includes('product-upload');
+  const isUploadPage = !useLocation().search;
   const [isBtnDisabled, setIsBtnDisabled] = useState(isUploadPage);
   const formRef = useRef();
   const [nameError, setNameError] = useState({

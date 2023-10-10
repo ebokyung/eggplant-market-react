@@ -3,13 +3,16 @@ import '../styles/Product.scss';
 import { useLocation } from 'react-router-dom';
 import Header from '../../../components/Element/Header/Header';
 import { ProductForm } from '../components/ProductForm';
-import { singleProduct } from '../../../libs/dummy';
+import { getProductAPI } from '../api';
+// productId=652507cbb2cb205663776e2c
 
 export function Product() {
   const location = useLocation();
-  const btnText = location.pathname.includes('upload') ? '업로드' : '수정';
-  const [isOnSubmit, setIsOnSubmit] = useState(location.pathname.includes('modify'));
+  const productId = location.search;
+  const btnText = productId ? '수정' : '업로드';
+  const [isOnSubmit, setIsOnSubmit] = useState(!!productId);
 
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState({
     itemImage: '',
     itemName: '',
@@ -18,26 +21,21 @@ export function Product() {
   });
 
   useEffect(() => {
-    // 수정 페이지일때
-    if (isOnSubmit) {
-      // postId에 따라 get 요청
-      const { itemImage, itemName, price, link } = singleProduct.product;
-      setData({ itemImage, itemName, price, link });
-    }
-  }, []);
-
-  // 임시 loading 상태 관리
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    if (isOnSubmit) {
-      if (data.itemName) setLoading(() => false);
+    if (productId) {
+      const getData = async () => {
+        const res = await getProductAPI(new URLSearchParams(location.search).get('productId'));
+        const { itemImage, itemName, price, link } = res.product;
+        setData({ itemImage, itemName, price, link });
+        setLoading(() => false);
+      };
+      getData();
     } else {
       setLoading(() => false);
     }
-  }, [data]);
+  }, []);
 
   return loading ? (
-    console.log('loading...')
+    <h1>loading...</h1>
   ) : (
     <>
       <Header page="upload" btnDisabled={!isOnSubmit} btnText={btnText} formName="form-product" />
