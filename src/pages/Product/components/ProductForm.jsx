@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Input } from '../../../components/Element/Input';
 import { InputProductImage } from './InputProductImage';
-import { postProductImgAPI, postProductAPI } from '../api';
+import { postProductImgAPI, postProductAPI, putProductAPI } from '../api';
 
 export function ProductForm({ setIsOnSubmit, initialData }) {
   const navigate = useNavigate();
-  const isUploadPage = !useLocation().search;
+  const location = useLocation();
+  const isUploadPage = !location.search;
   const [isBtnDisabled, setIsBtnDisabled] = useState(isUploadPage);
   const formRef = useRef();
   const [nameError, setNameError] = useState({
@@ -84,10 +85,13 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
         itemImage: productImgUrl,
       },
     };
-    const res = await postProductAPI(data);
 
-    if (res.status === 200) {
-      navigate('/profile');
+    let result;
+    if (isUploadPage) result = await postProductAPI(data);
+    else result = await putProductAPI(new URLSearchParams(location.search).get('productId'), data);
+
+    if (result.status === 200) {
+      navigate('/profile'); // 수정
     }
   };
 

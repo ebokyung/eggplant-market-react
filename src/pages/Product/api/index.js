@@ -21,6 +21,16 @@ export const postProductAPI = async data => {
   }
 };
 
+export const putProductAPI = async (productId, data) => {
+  try {
+    const res = await defaultAxios.put(`/product/${productId}`, data);
+    return res;
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
+};
+
 export const postProductImgAPI = async img => {
   try {
     const formData = new FormData();

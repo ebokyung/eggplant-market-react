@@ -8,9 +8,9 @@ import { getProductAPI } from '../api';
 
 export function Product() {
   const location = useLocation();
-  const productId = location.search;
-  const btnText = productId ? '수정' : '업로드';
-  const [isOnSubmit, setIsOnSubmit] = useState(!!productId);
+  const hasProductId = !!location.search;
+  const btnText = hasProductId ? '수정' : '업로드';
+  const [isOnSubmit, setIsOnSubmit] = useState(hasProductId);
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({
@@ -21,7 +21,7 @@ export function Product() {
   });
 
   useEffect(() => {
-    if (productId) {
+    if (hasProductId) {
       const getData = async () => {
         const res = await getProductAPI(new URLSearchParams(location.search).get('productId'));
         const { itemImage, itemName, price, link } = res.product;
