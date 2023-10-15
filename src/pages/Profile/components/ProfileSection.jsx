@@ -7,7 +7,7 @@ export function ProfileSection({ data }) {
   return (
     <section id="profile" className="profile-container">
       <UserInfomation data={data} />
-      {data.accountname === who ? <ButtonsMyProfile /> : <ButtonsYourProfile isFollow={data.isfollow} />}
+      {data.accountname === who ? <ButtonsMyProfile /> : <ButtonsYourProfile followState={data.isfollow} userName={data.accountname} />}
     </section>
   );
 }
