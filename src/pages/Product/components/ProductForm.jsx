@@ -1,23 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Input } from '../../../components/Element/Input';
 import { InputProductImage } from './InputProductImage';
-
-async function postImage(item) {
-  const formData = new FormData();
-  formData.append('image', item);
-
-  const res = await fetch(`https://api.mandarin.weniv.co.kr/image/uploadfile`, {
-    method: 'POST',
-    body: formData,
-  });
-
-  const json = await res.json();
-  return json.filename;
-}
+import { postProductImgAPI, postProductAPI, putProductAPI } from '../api';
 
 export function ProductForm({ setIsOnSubmit, initialData }) {
-  const isUploadPage = useLocation().pathname.includes('product-upload');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isUploadPage = !location.search;
   const [isBtnDisabled, setIsBtnDisabled] = useState(isUploadPage);
   const formRef = useRef();
   const [nameError, setNameError] = useState({
@@ -78,22 +68,31 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
   const handleSubmit = async e => {
     e.preventDefault();
     const { productImg, productName, productPrice, productLink } = formRef.current.elements;
-    // img 서버에 올리기
-    let productImgFileName = '';
+
+    let productImgUrl = '';
     if (productImg.files[0]) {
-      productImgFileName = await postImage(productImg.files[0]);
+      productImgUrl = await postProductImgAPI(productImg.files[0]);
     } else {
-      productImgFileName = document.querySelector('.product-img-cover').style.backgroundImage.slice(38, -2);
+      productImgUrl = document.querySelector('.product-img-cover').style.backgroundImage.slice(5, -2);
     }
-    // post 요청
-    alert(
-      JSON.stringify({
-        itemImage: productImgFileName,
+
+    const data = {
+      product: {
         itemName: productName.value,
-        price: productPrice.value,
+        /* eslint "radix": ["error", "as-needed"] */
+        price: parseInt(productPrice.value),
         link: productLink.value,
-      }),
-    );
+        itemImage: productImgUrl,
+      },
+    };
+
+    let result;
+    if (isUploadPage) result = await postProductAPI(data);
+    else result = await putProductAPI(new URLSearchParams(location.search).get('productId'), data);
+
+    if (result.status === 200) {
+      navigate('/profile'); // 수정
+    }
   };
 
   return (

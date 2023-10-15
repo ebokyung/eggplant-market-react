@@ -32,8 +32,7 @@ export default function AppRoutes() {
       <Route path="/chat-room" element={<ChatRoom />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="/edit-profile" element={<EditProfile />} />
-      <Route path="/product-upload" element={<Product />} />
-      <Route path="/product-modify" element={<Product />} />
+      <Route path="/product" element={<Product />} />
       {['/follower', '/following'].map(path => (
         <Route key={path} path={path} element={<Follow />} />
       ))}
