@@ -1,4 +1,4 @@
-import { defaultAxios } from '../../../libs/axios';
+import { defaultAxios } from '../../../libs/api/axios';
 
 export const getSearchAPI = async keyword => {
   try {
