@@ -15,6 +15,10 @@ import { Posting } from '../pages/Posting/routes/Posting';
 import { EditProfile } from '../pages/EditProfile';
 
 export default function AppRoutes() {
+  if (!localStorage.getItem('theme')) {
+    localStorage.setItem('theme', 'light');
+  }
+
   return (
     <Routes>
       <Route path="/error" element={<Error />} />
