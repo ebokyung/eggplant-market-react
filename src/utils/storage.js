@@ -1,12 +1,12 @@
 export const storage = {
   getToken: () => {
-    return JSON.parse(window.localStorage.getItem('user-token'));
+    return window.localStorage.getItem('user-token');
   },
   setToken: token => {
     window.localStorage.setItem('user-token', JSON.stringify(token));
   },
   getAccountName: () => {
-    return JSON.parse(window.localStorage.getItem('user-accountname'));
+    return window.localStorage.getItem('user-accountname');
   },
   setAccountName: accountName => {
     window.localStorage.setItem('user-accountname', JSON.stringify(accountName));
