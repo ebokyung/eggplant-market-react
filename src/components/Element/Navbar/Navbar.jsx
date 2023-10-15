@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './Navbar.scss';
 import { Link, useLocation } from 'react-router-dom';
+import { storage } from '../../../utils/storage';
 
 function Navbar() {
   const location = useLocation();
   const [curPage, setCurPage] = useState(location.pathname);
-  console.log(curPage);
+  const accountName = storage.getAccountName();
+  const isMyPage = new URLSearchParams(location.search).get('accountName') === accountName;
 
   return (
     <nav className="tab-menu">
@@ -27,7 +29,7 @@ function Navbar() {
           </Link>
         </li>
         <li className="tab-item-more">
-          <Link to="/profile" onClick={() => setCurPage('/profile')} className={curPage === '/profile' ? 'here' : undefined}>
+          <Link to={`/profile?accountName=${accountName}`} onClick={() => setCurPage('/profile')} className={curPage === '/profile' && isMyPage ? 'here' : undefined}>
             프로필<span className="a11y-hidden">로 이동</span>
           </Link>
         </li>
