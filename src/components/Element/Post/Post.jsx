@@ -54,7 +54,7 @@ export function Post({ post }) {
         </Link>
         <div className="post-icon">
           <ButtonLike postid={id} hearted={hearted} heartCnts={heartCount} />
-          <Link to={`/post?postIdd=${id}`} onClick={preventClick} style={preventPointer}>
+          <Link to={`/post?postId=${id}`} onClick={preventClick} style={preventPointer}>
             <span className="a11y-hidden">게시물 댓글 보러가기</span>
             <img src={messageCircle} alt="" />
             <span className="cnt">{commentCount}</span>
