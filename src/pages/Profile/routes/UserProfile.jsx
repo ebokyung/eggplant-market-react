@@ -32,7 +32,7 @@ export function UserProfile() {
 
   useEffect(() => {
     if (userProfile?.profile) setLoading(() => false);
-  }, [userProfile, userProduct, userPost]);
+  }, [userProfile]);
 
   return loading ? (
     <h1>loading...</h1>
