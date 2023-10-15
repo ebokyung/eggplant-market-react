@@ -22,17 +22,18 @@ export function Product() {
 
   useEffect(() => {
     if (hasProductId) {
-      const getData = async () => {
+      (async () => {
         const res = await getProductAPI(new URLSearchParams(location.search).get('productId'));
         const { itemImage, itemName, price, link } = res.product;
         setData({ itemImage, itemName, price, link });
-        setLoading(() => false);
-      };
-      getData();
-    } else {
-      setLoading(() => false);
+      })();
     }
   }, []);
+
+  useEffect(() => {
+    if (hasProductId) data.itemName && setLoading(() => false);
+    else setLoading(() => false);
+  }, [data]);
 
   return loading ? (
     <h1>loading...</h1>
