@@ -1,9 +1,11 @@
 import React from 'react';
+import { storage } from '../../../utils/storage';
 import '../styles/ProfileSection.scss';
 import { UserInfomation, ButtonsYourProfile, ButtonsMyProfile } from './ProfileSectionElement';
+storage;
 
 export function ProfileSection({ data }) {
-  const who = localStorage.getItem('user-accountname');
+  const who = storage.getAccountName();
   return (
     <section id="profile" className="profile-container">
       <UserInfomation data={data} />

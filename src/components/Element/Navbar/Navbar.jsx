@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './Navbar.scss';
 import { Link, useLocation } from 'react-router-dom';
+import { storage } from '../../../utils/storage';
 
 function Navbar() {
   const location = useLocation();
   const [curPage, setCurPage] = useState(location.pathname);
-  const accountName = localStorage.getItem('user-accountname');
+  const accountName = storage.getAccountName();
   const isMyPage = new URLSearchParams(location.search).get('accountName') === accountName;
 
   return (
