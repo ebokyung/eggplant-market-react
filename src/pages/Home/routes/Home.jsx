@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../../components/Element/Header/Header';
 import Footer from '../../../components/Element/Navbar/Navbar';
-import { defaultAxios } from '../../../libs/api/axios';
 import '../style/Home.scss';
 import { HomeWithPost } from '../components/HomeWithPost';
 import { HomeWithoutPost } from '../components/HomeWithoutPost';
+import { getFeedAPI } from '../api';
 
 export function Home() {
   const [posts, setPosts] = useState([]);
@@ -13,8 +13,8 @@ export function Home() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await defaultAxios.get('/post/feed/');
-      setPosts(data.posts);
+      const res = await getFeedAPI('/post/feed/');
+      setPosts(res.posts);
       setIsLoading(false);
     })();
   }, []);
