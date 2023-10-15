@@ -5,7 +5,6 @@ import { Link, useLocation } from 'react-router-dom';
 function Navbar() {
   const location = useLocation();
   const [curPage, setCurPage] = useState(location.pathname);
-  console.log(curPage);
 
   return (
     <nav className="tab-menu">
