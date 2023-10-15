@@ -1,4 +1,4 @@
-import { defaultAxios, postImage } from '../../../libs/axios';
+import { defaultAxios, postImage } from '../../../libs/api/axios';
 import { API_URL } from '../../../configs/config';
 
 export const getProductAPI = async productId => {
