@@ -1,9 +1,23 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Input } from '../Element/Input';
+import { defaultAxios } from '../../libs/api/axios';
 
 export function InputAcctname({ error, seterror, initialValue = '' }) {
   const isSignUp = useLocation().pathname.includes('sign-up');
+
+  async function validateAccountName(accountname) {
+    try {
+      const res = await defaultAxios.post(`/user/accountnamevalid`, {
+        user: {
+          accountname,
+        },
+      });
+      return res.data.message;
+    } catch (e) {
+      return e;
+    }
+  }
 
   const acctProps = {
     name: 'accountname',
@@ -25,14 +39,23 @@ export function InputAcctname({ error, seterror, initialValue = '' }) {
               errorText: '영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.',
             });
           } else {
-            seterror({
-              isError: false,
-              errorText: '사용 가능한 계정ID 입니다.',
-            });
+            // 유효성 검사
+            (async () => {
+              const resMsg = await validateAccountName(e.target.value);
+              if (resMsg === '사용 가능한 계정ID 입니다.') {
+                seterror({
+                  isError: false,
+                  errorText: resMsg,
+                });
+              } else if (resMsg === '이미 가입된 계정ID 입니다.') {
+                seterror({
+                  isError: true,
+                  errorText: resMsg,
+                });
+              }
+            })();
           }
         } else {
-          console.log(e.target.validity);
-
           seterror({
             isError: true,
             errorText: '',
