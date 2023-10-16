@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-extraneous-dependencies */
 
 import React, { useEffect, useState } from 'react';
@@ -21,13 +22,13 @@ export function Search() {
       setIsLoading(true);
       timer = setTimeout(async () => {
         const result = await getSearchAPI(searchKeyword);
-        console.log(result);
         setIsLoading(false);
         setData(handleDimension(result));
       }, 1000); // 1초 대기 후 검색 시작
     }
     if (searchKeyword === '') {
       setData([]);
+      setIsLoading(false);
     }
 
     return () => {
@@ -47,6 +48,8 @@ export function Search() {
       <main className="main-with-nav">
         {isLoading ? (
           <>검색중 스켈레톤</>
+        ) : searchKeyword !== '' && data.length === 0 ? (
+          <p className="no-data">검색결과가 없습니다.</p>
         ) : (
           <ul className="search-user-list">
             {data?.map(result => (
