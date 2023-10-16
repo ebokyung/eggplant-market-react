@@ -25,7 +25,7 @@ export function User({ category, accountName, userName, detail, profileImg }) {
     : null;
 
   return (
-    <Link className={linkClassName} to={`/profile?accountName=${accountName}`}>
+    <Link style={preventPointer} onClick={e => preventClick(e)} className={linkClassName} to={`/profile?accountName=${accountName}`}>
       <ProfileImg profileImg={profileImg} category={category} />
       <UserInfo category={category} userName={userName} detail={detail || accountName} />
     </Link>
