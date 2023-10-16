@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/Element/Buttons';
 import { Input } from '../../../components/Element/Input';
-import { signInApi } from '../api/login';
+import { signInApi } from '../api';
 
 export function LoginForm() {
   const navigate = useNavigate();

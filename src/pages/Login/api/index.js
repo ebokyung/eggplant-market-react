@@ -1,4 +1,4 @@
-import { defaultAxios } from '../../../libs/axios';
+import { defaultAxios } from '../../../libs/api/axios';
 import { storage } from '../../../utils/storage';
 
 // 둘다 공백 : "이메일 또는 비밀번호를 입력해주세요."
