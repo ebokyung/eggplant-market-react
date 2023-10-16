@@ -1,11 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../styles/UserProfile.scss';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ProfileSection, ProductSection, PostSection } from '../components';
-import { userProfile, userProduct, userPost } from '../../../libs/dummy';
+import { getProfileAPI, getProductAPI, getPostAPI } from '../api';
 
 export function UserProfile() {
+  const location = useLocation();
+  const accountname = new URLSearchParams(location.search).get('accountName');
+  const [loading, setLoading] = useState(true);
+  const [userProfile, setUserProfile] = useState();
+  const [userProduct, setUserProduct] = useState();
+  const [userPost, setUserPost] = useState();
+
   useEffect(() => {
     document.body.classList.add('profile-body-color');
     return () => {
@@ -13,13 +21,28 @@ export function UserProfile() {
     };
   }, []);
 
-  return (
+  useEffect(() => {
+    (async () => {
+      const [userProfileData, userProductData, userPostData] = await Promise.all([getProfileAPI(accountname), getProductAPI(accountname), getPostAPI(accountname)]);
+      setUserProfile(userProfileData);
+      setUserProduct(userProductData);
+      setUserPost(userPostData);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (userProfile?.profile) setLoading(() => false);
+  }, [userProfile]);
+
+  return loading ? (
+    <h1>loading...</h1>
+  ) : (
     <>
       <Header />
       <main className="main-with-nav main-user-profile">
         <ProfileSection data={userProfile.profile} />
-        {!!userProduct.data && <ProductSection data={userProduct.product} />}
-        {!!userPost.post.length && <PostSection data={userPost.post} />}
+        <ProductSection data={userProduct.product} />
+        <PostSection data={userPost.post} />
       </main>
       <Navbar />
     </>
