@@ -21,8 +21,9 @@ export default function AppRoutes() {
 
   return (
     <Routes>
+      <Route path="/" element={<Splash />} />
+
       <Route path="/error" element={<Error />} />
-      <Route path="/splash" element={<Splash />} />
       <Route path="/login" element={<Login />} />
       <Route path="/login-email" element={<LoginEmail />} />
       <Route path="/sign-up" element={<SignUp />} />
