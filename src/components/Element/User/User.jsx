@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ProfileImg } from './ProfileImg';
 import { UserInfo } from './UserInfo';
 import './style/User.scss';
@@ -10,8 +10,22 @@ import './style/User.scss';
 export function User({ category, accountName, userName, detail, profileImg }) {
   const linkClassName = category === 'comment' ? 'comment-user-info' : 'user-container';
 
+  const location = useLocation();
+
+  const preventClick = e => {
+    if (location.pathname.includes('profile')) {
+      e.preventDefault();
+    }
+  };
+
+  const preventPointer = location.pathname.includes('profile')
+    ? {
+        pointerEvents: 'none',
+      }
+    : null;
+
   return (
-    <Link className={linkClassName} to={`./profile_info.html?accountName=${accountName}`}>
+    <Link className={linkClassName} to={`/profile?accountName=${accountName}`}>
       <ProfileImg profileImg={profileImg} category={category} />
       <UserInfo category={category} userName={userName} detail={detail || accountName} />
     </Link>

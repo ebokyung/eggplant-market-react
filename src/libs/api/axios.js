@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 // axios.js
 import axios from 'axios';
-import { API_URL } from '../configs/config';
-import { storage } from '../utils/storage';
+import { API_URL } from '../../configs/config';
+import { storage } from '../../utils/storage';
 
 export const defaultAxios = axios.create({
   baseURL: API_URL,
