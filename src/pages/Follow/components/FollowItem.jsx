@@ -16,7 +16,7 @@ function FollowItem({ user }) {
   return (
     <>
       <User {...UserProp} />
-      <FollowButton isFollow={isfollow} />
+      <FollowButton accountName={accountname} isFollow={isfollow} />
     </>
   );
 }
