@@ -18,10 +18,10 @@ function returnSize(category) {
 }
 
 // 이미지 처리 함수 추가 필요
-export function ProfileImg({ profileImg = '', category }) {
+export function ProfileImg({ profileImg = '', profileImgPreview, category }) {
   return (
     <div className={`profile-img ${returnSize(category)}`}>
-      <img src={checkImageUrl(profileImg, 'profile')} alt="" />
+      <img src={profileImgPreview ?? checkImageUrl(profileImg, 'profile')} alt="" />
     </div>
   );
 }
