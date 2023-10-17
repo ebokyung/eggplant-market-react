@@ -10,12 +10,12 @@ export function InputImg({ initialImg }) {
   return (
     <section className="setting-profile-img">
       <h2 className="a11y-hidden">프로필 이미지 설정</h2>
-      <ProfileImg profileImgPreview={profileImg} />
+      <ProfileImg profileImg={profileImg} />
       <label
         className="btn-upload"
         htmlFor="btn-upload"
         onChange={e => {
-          if (e.target.files.length === 1) setProfileImg(URL.createObjectURL(e.target.files[0]));
+          if (e.target.files.length === 1) setProfileImg(e.target.files[0]);
           else setProfileImg('');
         }}
       >
