@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Input.scss';
 
 export function Input(props) {
-  const { name, inputId, label, type, placeholder, required, error, initialValue, ...other } = props;
+  const { name, inputId, label, type, placeholder, required, error, initialValue = '', ...other } = props;
   const [inpValue, setInpValue] = useState(initialValue);
   const { isError, errorText } = error;
 
