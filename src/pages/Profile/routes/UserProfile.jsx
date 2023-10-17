@@ -27,12 +27,9 @@ export function UserProfile() {
       setUserProfile(userProfileData);
       setUserProduct(userProductData);
       setUserPost(userPostData);
+      setLoading(() => false);
     })();
-  }, []);
-
-  useEffect(() => {
-    if (userProfile?.profile) setLoading(() => false);
-  }, [userProfile]);
+  }, [location.search]);
 
   return loading ? (
     <h1>loading...</h1>
