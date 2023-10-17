@@ -70,11 +70,9 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
     e.preventDefault();
     const { productImg, productName, productPrice, productLink } = formRef.current.elements;
 
-    let productImgUrl = '';
+    let productImgUrl = initialData?.itemImage;
     if (productImg.files[0]) {
       productImgUrl = await postImageAPI(productImg.files[0]);
-    } else {
-      productImgUrl = document.querySelector('.product-img-cover').style.backgroundImage.slice(5, -2);
     }
 
     const data = {
