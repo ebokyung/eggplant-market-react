@@ -28,8 +28,8 @@ export function UserInfomation({ data }) {
         <span className="a11y-hidden">소개:</span>
         {intro || '소개를 입력해주세요!'}
       </p>
-      <Followers />
-      <Link className="follow-wrap" to="/following">
+      <Followers accountname={accountname} />
+      <Link className="follow-wrap" to={`/following?accountName=${accountname}`}>
         <span className="a11y-hidden">유저의 팔로잉 목록 보기</span>
         <p>followings</p>
         <strong className="following">
