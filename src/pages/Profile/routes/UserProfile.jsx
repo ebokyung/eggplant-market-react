@@ -22,28 +22,28 @@ export function UserProfile() {
   }, []);
 
   useEffect(() => {
+    setLoading(() => true);
     (async () => {
       const [userProfileData, userProductData, userPostData] = await Promise.all([getProfileAPI(accountname), getProductAPI(accountname), getPostAPI(accountname)]);
       setUserProfile(userProfileData);
       setUserProduct(userProductData);
       setUserPost(userPostData);
+      setLoading(() => false);
     })();
-  }, []);
+  }, [location.search]);
 
-  useEffect(() => {
-    if (userProfile?.profile) setLoading(() => false);
-  }, [userProfile]);
-
-  return loading ? (
-    <h1>loading...</h1>
-  ) : (
+  return (
     <>
       <Header />
-      <main className="main-with-nav main-user-profile">
-        <ProfileSection data={userProfile.profile} />
-        <ProductSection data={userProduct.product} />
-        <PostSection data={userPost.post} />
-      </main>
+      {loading ? (
+        <h1>loading...</h1>
+      ) : (
+        <main className="main-with-nav main-user-profile">
+          <ProfileSection data={userProfile.profile} />
+          <ProductSection data={userProduct.product} />
+          <PostSection data={userPost.post} />
+        </main>
+      )}
       <Navbar />
     </>
   );
