@@ -55,12 +55,12 @@ export function Posting() {
 
   // 데이터 처음 불러오기
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       if (postId) {
         const { author, content, image } = await getPostAPI(postId);
         setUserImg(author.image);
         setInitialText(content);
-        setImgData(image.split(imgReg));
+        setImgData(image.split(imgReg).filter(img => img !== ''));
       } else {
         const {
           user: { image },
@@ -68,9 +68,7 @@ export function Posting() {
         setUserImg(image);
       }
       setIsLoading(false);
-    };
-
-    fetchData();
+    })();
   }, []);
 
   useEffect(() => {

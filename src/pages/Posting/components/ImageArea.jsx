@@ -4,6 +4,7 @@ import uploadIcon from '../../../assets/icon/upload-file.svg';
 import { ImageItem } from './ImageItem';
 
 export function ImageArea({ imgData, setImgData }) {
+  console.log(imgData);
   // 이미지 처리 로직
   const handleImage = e => {
     // e.target.value = null 처리를 위해서 임시로 복사본 생성
