@@ -1,0 +1,60 @@
+@import '/src/styles/scss/mixin';
+
+@mixin get-color($property, $color) {
+  #{$property}: get-color($color);
+
+  @at-root .home-wrapper.highContrast & {
+    #{$property}: get-color($color, highContrast);
+  }
+}
+
+.main-with-post {
+  padding : {
+    top: 1.25rem;
+    left: 1rem;
+    right: 1rem;
+  }
+  .post-list {
+    & > li {
+      margin-top: 1.25rem;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.main-without-post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  p {
+    font-size: map-get($font-sizes, 'size14');
+    @include get-color(color, gray-color);
+  }
+
+  p::before {
+    display: block;
+    margin: 0 auto;
+    content: '';
+    @include get-color(background-image, bg-image);
+    background-size: contain;
+    @include width-height(4.5rem, 6.25rem);
+  }
+
+  p,
+  p::before {
+    margin-bottom: 1.25rem;
+  }
+
+  button {
+    padding: 0.8125rem 0;
+    border-radius: 2.75rem;
+    height: 40px;
+  }
+}

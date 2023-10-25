@@ -1,0 +1,88 @@
+@import '/src/styles/scss/mixin';
+
+.post-container {
+  margin-top: 0.1875rem;
+  @include get-color(background-color, bg-color);
+
+  // 게시글 보기 탭
+  .post-tab {
+    height: 2.75rem;
+    padding: 0.5625rem 1.3125rem;
+    border-top: $border-gray100-1px;
+    border-bottom: $border-gray100-1px;
+
+    .tab-btn-wrap {
+      display: flex;
+      justify-content: flex-end;
+    
+      button {
+        @include width-height(1.625rem, 1.625rem);
+        border: none;
+        background-color: inherit;
+        margin-left: 1rem;
+        background-repeat: no-repeat;
+        background-size: 124px 31px;
+        @include get-color(background-image, btn-post-view);
+      }
+    
+      .btn-post-list {
+        background-position: -64.5px -2.5px;
+      }
+    
+      .btn-post-list.on {
+        background-position: -95.5px -2.5px;
+      }
+    
+      .btn-post-album {
+        background-position: -2.5px -2.5px;
+      }
+    
+      .btn-post-album.on {
+        background-position: -33.5px -2.5px;
+      }
+    }
+  }
+
+  // 게시글 목록 섹션
+  .post-sec {
+    width: 100%;
+    padding: 1rem;
+
+    .post-list {
+      li:first-child>section:first-child {
+        margin-top: 0;
+      }
+    }
+
+    .post-album {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .post-album-item {
+      position: relative;
+      @include profile-img-tag;
+      @include width-height(100%, 100%);
+      overflow: hidden;
+
+      &.multiple::after{
+        content: url('../../../assets/icon/icon-img-layers.svg');
+        width: 1.25rem;
+        height: 1.25rem;
+        position: absolute;
+        top: 0.3125rem;
+        right: .3125rem;
+      }
+
+      &:focus-within {
+        outline: $highlight-color 0.125rem solid;
+      }
+    
+      a {
+        display: inline-block;
+        @include width-height(100%, 100%);
+      }
+    }
+  }
+}

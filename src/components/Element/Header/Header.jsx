@@ -1,17 +1,23 @@
 import React from 'react';
 import './Header.scss';
+import { Link } from 'react-router-dom';
 import searchIcon from '../../../assets/icon/icon-search.svg';
 import { Button, ButtonOption, ButtonBack } from '../Buttons';
 
-function Header({ page, text, btnText }) {
+function Header({ page, text, btnText, children, className, btnDisabled = true, formName }) {
   // props : page (main || search || upload || follow) , text , btnText
   return (
-    <header className={`l_header header-${page || 'basic'}`}>
-      {text && <h1 className={page === 'main' ? 'title-main' : 'title'}>{text}</h1>}
+    <header className={`l_header header-${page || 'basic'} ${className}`}>
+      {text && (
+        <h1 className={page === 'main' ? 'title-main' : 'title'}>
+          {text}
+          {children}
+        </h1>
+      )}
       {page === 'main' && (
-        <button type="button">
+        <Link to="/search" type="button">
           <img src={searchIcon} alt="검색하기" />
-        </button>
+        </Link>
       )}
       {page === 'search' && (
         <label htmlFor="inp-search" className="l_inp-search">
@@ -20,7 +26,7 @@ function Header({ page, text, btnText }) {
         </label>
       )}
       {page === 'upload' && (
-        <Button type="submit" className="size-ms" disabled>
+        <Button type="submit" className="size-ms" disabled={btnDisabled} form={formName}>
           {btnText || '업로드'}
         </Button>
       )}

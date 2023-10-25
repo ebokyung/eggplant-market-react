@@ -3,12 +3,12 @@
 /* 게시물 */
 .user-container {
   display: flex;
-
   align-items: center;
+  width: fit-content;
 
   .profile-img {
     margin-right: 0.75rem;
-    border: $border-gray100-1px;
+    box-shadow: 0 0 0 .0625rem inset #dbdbdb;
   }
 
   .user-info {

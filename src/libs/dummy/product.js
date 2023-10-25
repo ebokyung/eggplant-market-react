@@ -1,4 +1,4 @@
-export default {
+export const singleProduct = {
   product: {
     id: '64c364d2b2cb2056635facea',
     itemName: 'rewqqwe123123',

@@ -1,5 +1,3 @@
-import ProfileImg from './ProfileImg';
-// import UserInfo from './UserInfo';
-import User from './User';
-
-export { ProfileImg, User };
+export * from './ProfileImg';
+export * from './UserInfo';
+export * from './User';

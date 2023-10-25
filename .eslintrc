@@ -5,13 +5,25 @@
     "node": true
   },
   "parserOptions": {
-    "parser": "@babel/eslint-parser"
+    "parser": "@babel/eslint-parser",
+    "ecmaVersion": 2020
   },
   "extends": ["airbnb", "eslint:recommended", "plugin:prettier/recommended"],
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "react/prop-types": "off",
     "import/newline-after-import": "off",
-    "react/jsx-props-no-spreading": ["warn"]
+    "react/jsx-props-no-spreading": ["warn"],
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-expressions": "off",
+    "jsx-a11y/no-noninteractive-tabindex": [
+      "error",
+      {
+        "tags": ["label"],
+        "roles": ["tabpanel"],
+        "allowExpressionValues": true
+      }
+    ]
   }
 }

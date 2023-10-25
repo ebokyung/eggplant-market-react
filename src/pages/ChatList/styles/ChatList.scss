@@ -1,0 +1,38 @@
+@import '/src/styles/scss/mixin';
+
+.main-chat-list{
+  .dot{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: $enabled-color;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  .chat-list {
+    padding: 1.5rem 1rem;
+  }
+  
+  .chat-item {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+  
+  .user-info{
+    width: calc(100% - 130px);
+    flex-shrink: 1;
+    margin-right: 0.8125rem;
+    margin-left: 0.75rem;
+  }
+  
+  .chat-date {
+    font-size: 0.625rem;
+    color: $gray100-color;
+  }
+}

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import './style/UserInfo.scss';
 
@@ -16,14 +17,24 @@ const detailClassMap = {
 };
 
 // detailcategory : chat, intro, id(default)
-export default function UserInfo({ category = 'post', userName, detail }) {
+export function UserInfo({ category = 'post', userName, detail }) {
   const { NameTag, detailCategory } = categoryMap[category];
+
+  const preventClick = e => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
   return (
     <div className="user-info">
       {/* NameTag : strong(default), h2, h3, p */}
       <NameTag className="user-name">{userName}</NameTag>
       {/* detailcategory : chat, intro, id(default) */}
-      {detailCategory && <p className={detailClassMap[detailCategory]}>{detail}</p>}
+      {detailCategory && (
+        <p onClick={detailCategory === 'intro' ? e => preventClick(e) : undefined} className={detailClassMap[detailCategory]}>
+          {detail}
+        </p>
+      )}
     </div>
   );
 }

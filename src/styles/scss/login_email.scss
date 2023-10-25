@@ -70,7 +70,7 @@ form {
 }
 
 input:focus {
-    border-bottom: 0.0625rem solid $highlight-color;
+    @include get-color(border-bottom, focus-border-bottom);
     outline: none;
 }
 

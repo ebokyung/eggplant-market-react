@@ -1,0 +1,30 @@
+@import '/src/styles/scss/mixin';
+
+.signup-header {
+  text-align: center;
+  margin-top: 1.875rem;;
+  .signup-title {
+    font-size: map-get($font-sizes, "size24");
+    @include get-color(color, font-color);
+    text-align: center;
+    font-weight: 500;
+  }
+  .subtitle {
+    color: #767676;
+    text-align: center;
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+  }
+}
+
+.signup-main {
+  padding: 0 30px;
+  max-width: 390px;
+  margin: 2.5rem auto 0;
+
+  button {
+    display: block;
+    width: 100%;
+    margin-top: 1.875rem;
+  }
+}

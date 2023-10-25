@@ -2,7 +2,6 @@
 
 #post {
   position: relative;
-  margin-top: 1.25rem;
   .btn-option {
     width: 1.5rem;
     position: absolute;
@@ -75,7 +74,13 @@
   }
 }
 
+.post-text,
+.cnt,
+.btn-comment,
 .post-date {
   @include get-color(color, gray-color);
+}
+
+.post-date {
   font-size: map-get($font-sizes, 'size10');
 }

@@ -1,5 +1,5 @@
 // keyword : 가지
-export default [
+export const searchList = [
   {
     _id: '649b9451b2cb2056636dab14',
     username: '가지나라',

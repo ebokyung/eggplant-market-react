@@ -1,0 +1,24 @@
+@import '/src/styles/scss/mixin';
+
+.setting-profile-img {
+  position: relative;
+  width: 6.875rem;
+  margin: 0 auto 1.875rem;
+
+  label.btn-upload {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border: none;
+    background-color: transparent;
+    margin: 0;
+
+    svg > circle {
+      fill: $enabled-color;
+    }
+  }
+
+  input.btn-upload {
+    display: none;
+  }
+}

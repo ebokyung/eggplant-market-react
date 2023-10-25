@@ -2,29 +2,32 @@
 @import 'variables';
 
 .error {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-    &>* {
-        display: block;
-        margin: auto;
-        text-align: center;
-    }
+  &>* {
+    display: block;
+    margin: auto;
+    text-align: center;
+  }
 
-    .desc {
-        margin-bottom: 1.25rem;
-        color: $gray300-color;
-        padding-top: 15.625rem;
-        background: url(../assets/icon/icon-404.svg) no-repeat center/contain;
-    }
+  .desc {
+    font-size: map-get($font-sizes, 'size14');
+    margin-bottom: 1.25rem;
+    padding-top: 9.25rem;
+    @include get-color(color, gray-color);
+    @include get-color(background-image, icon-404);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: 7.625rem;
+  }
 
-    .btn-back {
-        padding: 0.8125rem 1.625rem;
-        background-color: $enabled-color;
-        border: none;
-        border-radius: 2.75rem;
-        color: $white-color;
-    }
+  .btn-back {
+    padding: 0.8125rem 1.625rem;
+    @include get-color(background-color, btn-color);
+    @include get-color(color, btn-font-color);
+    border-radius: 2.75rem;
+  }
 }

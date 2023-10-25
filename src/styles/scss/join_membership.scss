@@ -12,11 +12,6 @@ p {
   font-size: map-get($font-sizes, 'size14');
 }
 
-.title {
-  font-size: map-get($font-sizes, 'size24');
-  @include get-color(color, font-color);
-}
-
 .join-email form {
   margin-top: 2.5rem;
 }
@@ -40,18 +35,6 @@ form {
   color: $gray300-color;
   font-size: map-get($font-sizes, 'size12');
 
-  .profile-img {
-    position: relative;
-    width: 6.875rem;
-    margin: 0 auto 1.875rem;
-
-    .img-cover {
-      width: 6.875rem;
-      @include image-cover;
-      @include profile-img-tag;
-    }
-  }
-
   .upload-img {
     circle {
       @include get-color(fill, profile-image-btn);
@@ -70,19 +53,6 @@ form {
     text-align: start;
   }
 
-  label.btn-upload {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    border: none;
-    background-color: transparent;
-    margin: 0;
-
-    svg > circle {
-      fill: $active-color;
-    }
-  }
-
   input {
     display: block;
     @include get-color(background-color, bg-color);
@@ -97,17 +67,13 @@ form {
     @include get-color(color, placeholder-color);
   }
 
-  input.btn-upload {
-    display: none;
-  }
-
   input::placeholder {
     font-size: map-get($font-sizes, 'size14');
     color: $gray100-color;
   }
 
   input:focus {
-    border-bottom: 0.0625rem solid $highlight-color;
+    @include get-color(border-bottom, focus-border-bottom);
     outline: none;
   }
 

@@ -1,0 +1,36 @@
+@import '/src/styles/scss/mixin';
+
+.comment-section {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  @include get-color(background-color, bg-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+
+  border-top: $border-gray100-1px;
+  border-bottom: $border-gray100-1px;
+  padding: 10px 20px 10px 16px;
+
+  #commemt-input {
+    padding: 0.5rem;
+    @include get-color(color, font-color);
+    @include get-color(background-color, bg-color);
+    order: 1;
+    flex-grow: 1;
+  }
+  #comment-input::placeholder {
+    @include get-color(color, comment-placeholder);
+  }
+  .btn-comment {
+    order: 2;
+  }
+  button {
+    font-size: map-get($font-sizes, 'size14');
+  }
+  button:not(:disabled) {
+    @include get-color(color, comment-btn);
+  }
+}

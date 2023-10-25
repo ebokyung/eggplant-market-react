@@ -89,22 +89,6 @@
   }
 }
 
-.comment {
-  @include get-color(background-color, bg-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: $border-gray100-1px;
-  border-bottom: $border-gray100-1px;
-  padding: 0.1875rem 0.3125rem;
-  button {
-    font-size: map-get($font-sizes, 'size14');
-  }
-  input::placeholder {
-    color: $gray200-color;
-  }
-}
-
 // 모달창
 // 하단 모달창 부분
 .post-modal-background {
@@ -141,12 +125,12 @@
   }
 }
 
-footer {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  background-color: $white-color;
-}
+// footer {
+//   width: 100%;
+//   position: fixed;
+//   bottom: 0;
+//   background-color: $white-color;
+// }
 
 // 삭제 모달창
 .modal-background {
