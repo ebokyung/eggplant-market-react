@@ -60,7 +60,7 @@ export function Posting() {
         const { author, content, image } = await getPostAPI(postId);
         setUserImg(author.image);
         setInitialText(content);
-        setImgData(image.split(imgReg).filter(img => img !== ''));
+        setImgData(image.split(imgReg).filter(img => !!img));
       } else {
         const {
           user: { image },
