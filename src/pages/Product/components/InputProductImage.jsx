@@ -10,7 +10,9 @@ export function InputProductImage({ initialValue }) {
 
   useEffect(() => {
     return () => {
-      URL.revokeObjectURL(productImg);
+      if (productImg !== '' || productImg !== initialValue) {
+        URL.revokeObjectURL(productImg);
+      }
     };
   }, []);
 

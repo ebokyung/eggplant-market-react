@@ -9,7 +9,7 @@ export function InputImg({ initialImg }) {
 
   useEffect(() => {
     return () => {
-      if (profileImg !== '') URL.revokeObjectURL(profileImg);
+      if (profileImg !== '' || profileImg !== initialImg) URL.revokeObjectURL(profileImg);
     };
   }, []);
 
