@@ -2,20 +2,20 @@ import React from 'react';
 import { defaultAxios } from '../../libs/api/axios';
 import { Input } from '../Element/Input';
 
-export function InputEmail({ error, seterror }) {
-  async function validateEmail(email) {
-    try {
-      const res = await defaultAxios.post(`/user/emailvalid`, {
-        user: {
-          email,
-        },
-      });
-      return res.data.message;
-    } catch (e) {
-      return e;
-    }
+async function validateEmail(email) {
+  try {
+    const res = await defaultAxios.post(`/user/emailvalid`, {
+      user: {
+        email,
+      },
+    });
+    return res.data.message;
+  } catch (e) {
+    return e;
   }
+}
 
+export function InputEmail({ error, seterror }) {
   const emailProps = {
     name: 'email',
     inputId: 'email',

@@ -3,22 +3,21 @@ import { useLocation } from 'react-router-dom';
 import { Input } from '../Element/Input';
 import { defaultAxios } from '../../libs/api/axios';
 
+async function validateAccountName(accountname) {
+  try {
+    const res = await defaultAxios.post(`/user/accountnamevalid`, {
+      user: {
+        accountname,
+      },
+    });
+    return res.data.message;
+  } catch (e) {
+    return e;
+  }
+}
+
 export function InputAcctname({ error, seterror, initialValue = '' }) {
   const isSignUp = useLocation().pathname.includes('sign-up');
-
-  async function validateAccountName(accountname) {
-    try {
-      const res = await defaultAxios.post(`/user/accountnamevalid`, {
-        user: {
-          accountname,
-        },
-      });
-      return res.data.message;
-    } catch (e) {
-      return e;
-    }
-  }
-
   const acctProps = {
     name: 'accountname',
     inputId: 'accountname',
