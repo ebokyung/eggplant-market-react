@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Input } from '../../../components/Element/Input';
 import { InputProductImage } from './InputProductImage';
-import { postProductImgAPI, postProductAPI, putProductAPI } from '../api';
+import { postProductAPI, putProductAPI } from '../api';
+import { postImageAPI } from '../../../libs/api/PostImage';
 
 export function ProductForm({ setIsOnSubmit, initialData }) {
   const navigate = useNavigate();
@@ -69,11 +70,9 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
     e.preventDefault();
     const { productImg, productName, productPrice, productLink } = formRef.current.elements;
 
-    let productImgUrl = '';
+    let productImgUrl = initialData?.itemImage;
     if (productImg.files[0]) {
-      productImgUrl = await postProductImgAPI(productImg.files[0]);
-    } else {
-      productImgUrl = document.querySelector('.product-img-cover').style.backgroundImage.slice(5, -2);
+      productImgUrl = await postImageAPI(productImg.files[0]);
     }
 
     const data = {

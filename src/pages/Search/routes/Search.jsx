@@ -24,7 +24,7 @@ export function Search() {
         const result = await getSearchAPI(searchKeyword);
         setIsLoading(false);
         setData(handleDimension(result));
-      }, 1000); // 1초 대기 후 검색 시작
+      }, 500); // 0.5초 대기 후 검색 시작
     }
     if (searchKeyword === '') {
       setData([]);
