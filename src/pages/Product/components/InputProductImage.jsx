@@ -8,6 +8,14 @@ export function InputProductImage({ initialValue }) {
     imageRef.current.style.backgroundImage = `url(${productImg})`;
   }, [productImg]);
 
+  useEffect(() => {
+    return () => {
+      if (productImg !== '' || productImg !== initialValue) {
+        URL.revokeObjectURL(productImg);
+      }
+    };
+  }, []);
+
   return (
     <article className="product-img-cover" ref={imageRef}>
       <h2 className="a11y-hidden">판매 상품 이미지</h2>

@@ -1,11 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ProfileImg } from '../User';
 import './InputImg.scss';
 
 export function InputImg({ initialImg }) {
   const [profileImg, setProfileImg] = useState(initialImg);
+
+  useEffect(() => {
+    return () => {
+      if (profileImg !== '' || profileImg !== initialImg) URL.revokeObjectURL(profileImg);
+    };
+  }, []);
 
   return (
     <section className="setting-profile-img">
