@@ -15,8 +15,8 @@ export function InputImg({ initialImg }) {
         className="btn-upload"
         htmlFor="btn-upload"
         onChange={e => {
-          if (e.target.files.length === 0) setProfileImg('');
-          if (e.target.files.length === 1) setProfileImg(URL.createObjectURL(e.target.files[0]));
+          if (e.target.files.length === 1) setProfileImg(e.target.files[0]);
+          else setProfileImg('');
         }}
       >
         <svg className="upload-img" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">

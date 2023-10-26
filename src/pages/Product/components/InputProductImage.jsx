@@ -17,7 +17,7 @@ export function InputProductImage({ initialValue }) {
         role="tabpanel"
         tabIndex="0"
         onChange={e => {
-          if (e.target.files.length === 1) setProductImg(URL.createObjectURL(e.target.files[0]));
+          if (e.target.files.length === 1) setProductImg(e.target.files[0]);
           else setProductImg('');
         }}
       >
