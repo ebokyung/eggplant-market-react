@@ -9,6 +9,7 @@ import './Post.scss';
 import messageCircle from '../../../assets/icon/icon-message-circle.svg';
 import { checkImageUrl } from '../../../utils/imageUrlProcess';
 import { dateProcess } from '../../../utils/date';
+import { imgReg } from '../../../libs/constant/regex';
 
 function returnContentTag(location) {
   if (location.includes('home')) return 'h2';
@@ -44,7 +45,7 @@ export function Post({ post }) {
           <span className="a11y-hidden">게시글 상세보기</span>
           <ContentTag className="post-text">{content}</ContentTag>
           {image
-            .split(',')
+            .split(imgReg)
             .filter(img => !!img)
             .map(img => (
               <div key={img} className="img-cover">
