@@ -1,5 +1,4 @@
-import { defaultAxios, postImage } from '../../../libs/api/axios';
-import { API_URL } from '../../../configs/config';
+import { defaultAxios } from '../../../libs/api/axios';
 
 export const getProductAPI = async productId => {
   try {
@@ -25,18 +24,6 @@ export const putProductAPI = async (productId, data) => {
   try {
     const res = await defaultAxios.put(`/product/${productId}`, data);
     return res;
-  } catch (e) {
-    console.log(e);
-    return e;
-  }
-};
-
-export const postProductImgAPI = async img => {
-  try {
-    const formData = new FormData();
-    formData.append('image', img);
-    const res = await postImage.post(`/image/uploadfile`, formData);
-    return `${API_URL}/${res.filename}`;
   } catch (e) {
     console.log(e);
     return e;
