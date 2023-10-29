@@ -95,7 +95,7 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} id="form-product" ref={formRef}>
+    <form onSubmit={handleSubmit} id="form-product" className="formProduct" ref={formRef}>
       <InputProductImage initialValue={initialData?.itemImage} />
       <Input
         inputId="product-name"
