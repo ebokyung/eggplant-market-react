@@ -25,11 +25,17 @@ function Header({ page, text, btnText, children, className, btnDisabled = true, 
           <input type="text" id="inp-search" placeholder="이름 혹은 계정으로 사용자 검색하기" />
         </label>
       )}
-      {page === 'upload' && (
-        <Button type="submit" className="size-ms" disabled={btnDisabled} form={formName}>
-          {btnText || '업로드'}
-        </Button>
-      )}
+      {page === 'upload' &&
+        (children ? (
+          <div>
+            {/* expected children : button skeleton for loading state */}
+            {children}
+          </div>
+        ) : (
+          <Button type="submit" className="size-ms" disabled={btnDisabled} form={formName}>
+            {btnText || '업로드'}
+          </Button>
+        ))}
       {!page && <ButtonOption />}
       {page !== 'main' && <ButtonBack />}
     </header>
