@@ -1,22 +1,15 @@
 import React from 'react';
-import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import './Modal.scss';
-import { openAlert, doAlert, modalItems } from '../../../recoil/modal/atoms';
+import { createPortal } from 'react-dom';
+import { isAlertOpen, doAlert } from '../../../recoil/modal/atoms';
 import Alert from './Alert';
 
-function Modal({ options, children, handleModal }) {
-  const alert = useRecoilValue(openAlert);
-  const isAlert = useSetRecoilState(openAlert);
+function Modal({ options, children, closeModal }) {
+  const [isAlert, setIsAlert] = useRecoilState(isAlertOpen);
   const doFunc = useSetRecoilState(doAlert);
-  const [modalitems, setModalItems] = useRecoilState(modalItems);
 
-  const handleModalClose = () => {
-    setModalItems(prev => [...prev.slice(0, prev.length - 1)]);
-    console.log('모달 삭제:', modalitems);
-    if (modalitems.length === 1) handleModal();
-  };
-
-  return (
+  const renderModal = (
     <>
       <article className="modal-background">
         <h2 className="a11y-hidden">모달창</h2>
@@ -27,7 +20,7 @@ function Modal({ options, children, handleModal }) {
               type="button"
               onClick={() => {
                 if (i.openAlert) {
-                  isAlert(true);
+                  setIsAlert(true);
                   doFunc({ text: i.text, func: i.func });
                 } else {
                   i.func();
@@ -38,14 +31,16 @@ function Modal({ options, children, handleModal }) {
             </button>
           ))}
           {children}
-          <button type="button" onClick={() => handleModalClose()}>
+          <button type="button" onClick={() => closeModal()}>
             취소
           </button>
         </div>
       </article>
-      {alert && <Alert handleModal={handleModalClose} />}
+      {isAlert && <Alert closeModal={closeModal} />}
     </>
   );
+
+  return createPortal(renderModal, document.getElementById('root'));
 }
 
 export default Modal;
