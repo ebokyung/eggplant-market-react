@@ -5,8 +5,6 @@ import { InputUsername, InputAcctname, InputIntro } from '../InputComponents';
 
 export function Information({ initialData, setIsCompleteDisabled }) {
   const isSignUp = useLocation().pathname.includes('sign-up');
-  const profile = initialData ?? null;
-
   const [usernameError, setUsernameError] = useState({
     isError: isSignUp,
     errorText: '',
@@ -26,10 +24,10 @@ export function Information({ initialData, setIsCompleteDisabled }) {
 
   return (
     <>
-      <InputImg initialImg={profile ? profile.image : undefined} />
-      <InputUsername initialValue={profile ? profile.username : ''} error={usernameError} seterror={setUsernameError} />
-      <InputAcctname initialValue={profile ? profile.accountname : ''} error={accountnameError} seterror={setAccountnameError} />
-      <InputIntro initialValue={profile ? profile.intro : ''} />
+      <InputImg initialImg={initialData?.image} />
+      <InputUsername initialValue={initialData?.username ?? ''} error={usernameError} seterror={setUsernameError} />
+      <InputAcctname initialValue={initialData?.accountname ?? ''} error={accountnameError} seterror={setAccountnameError} />
+      <InputIntro initialValue={initialData?.intro ?? ''} />
     </>
   );
 }

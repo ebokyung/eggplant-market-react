@@ -7,7 +7,6 @@ export function InputIntro({ initialValue = '' }) {
     inputId: 'intro',
     label: '소개',
     placeholder: '자신과 판매할 상품에 대해 소개해 주세요!',
-    required: true,
     error: {
       isError: false,
       errorText: '',
