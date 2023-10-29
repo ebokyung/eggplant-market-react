@@ -1,40 +1,141 @@
-import React from 'react';
-import { Input, ErrorMsg } from '../../../components/Element/Input';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Input } from '../../../components/Element/Input';
+import { InputProductImage } from './InputProductImage';
+import { postProductAPI, putProductAPI } from '../api';
+import { postImageAPI } from '../../../libs/api/PostImage';
 
-export function ProductForm() {
+export function ProductForm({ setIsOnSubmit, initialData }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isUploadPage = !location.search;
+  const [isBtnDisabled, setIsBtnDisabled] = useState(isUploadPage);
+  const formRef = useRef();
+  const [nameError, setNameError] = useState({
+    isError: isUploadPage,
+    errorText: '',
+  });
+  const [priceError, setPriceError] = useState({
+    isError: isUploadPage,
+    errorText: '',
+  });
+  const [linkError, setLinkError] = useState({
+    isError: isUploadPage,
+    errorText: '',
+  });
+
+  const validateName = name => {
+    const valid = name.validity;
+    if (valid.valueMissing || valid.tooShort) {
+      setNameError({
+        isError: true,
+        errorText: '2~15자 이내여야 합니다.',
+      });
+    } else {
+      setNameError({
+        isError: false,
+        errorText: '',
+      });
+    }
+  };
+
+  const validatePrice = price => {
+    const valid = price.validity;
+    if (valid.valueMissing || valid.rangeOverflow) {
+      setPriceError({ isError: true, errorText: '0~1000000000 숫자를 입력해 주세요.' });
+    } else {
+      setPriceError({ isError: false, errorText: '' });
+    }
+  };
+
+  const validateLink = link => {
+    const valid = link.validity;
+    const urlPattern = /^(https?:\/\/)?(www\.)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/;
+    if (valid.valueMissing || !urlPattern.test(link.value)) {
+      setLinkError({ isError: true, errorText: 'URL 형식으로 입력해 주세요.' });
+    } else {
+      setLinkError({ isError: false, errorText: '' });
+    }
+  };
+
+  useEffect(() => {
+    setIsBtnDisabled(nameError.isError || priceError.isError || linkError.isError);
+  }, [nameError, priceError, linkError]);
+
+  useEffect(() => {
+    setIsOnSubmit(!isBtnDisabled);
+  }, [isBtnDisabled]);
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const { productImg, productName, productPrice, productLink } = formRef.current.elements;
+
+    let productImgUrl = initialData?.itemImage;
+    if (productImg.files[0]) {
+      productImgUrl = await postImageAPI(productImg.files[0]);
+    }
+
+    const data = {
+      product: {
+        itemName: productName.value,
+        /* eslint "radix": ["error", "as-needed"] */
+        price: parseInt(productPrice.value),
+        link: productLink.value,
+        itemImage: productImgUrl,
+      },
+    };
+
+    let result;
+    if (isUploadPage) result = await postProductAPI(data);
+    else result = await putProductAPI(new URLSearchParams(location.search).get('productId'), data);
+
+    if (result.status === 200) {
+      navigate('/profile'); // 수정
+    }
+  };
+
   return (
-    <form id="form-product">
-      <article className="product-img-cover">
-        <h2 className="a11y-hidden">상품 이미지</h2>
-        <label className="btn-upload" htmlFor="product-img-input" role="tabpanel" tabIndex="0">
-          <span className="a11y-hidden">상품 이미지 업로드 버튼</span>
-          <svg className="btn-upload-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="18" cy="18" r="18" fill="#C4C4C4" />
-            <path
-              d="M24.4167 9.75H11.5833C10.5708 9.75 9.75 10.5708 9.75 11.5833V24.4167C9.75 25.4292 10.5708 26.25 11.5833 26.25H24.4167C25.4292 26.25 26.25 25.4292 26.25 24.4167V11.5833C26.25 10.5708 25.4292 9.75 24.4167 9.75Z"
-              stroke="white"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M14.7915 16.1665C15.5509 16.1665 16.1665 15.5509 16.1665 14.7915C16.1665 14.0321 15.5509 13.4165 14.7915 13.4165C14.0321 13.4165 13.4165 14.0321 13.4165 14.7915C13.4165 15.5509 14.0321 16.1665 14.7915 16.1665Z"
-              stroke="white"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path d="M26.2502 20.7498L21.6668 16.1665L11.5835 26.2498" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <input id="product-img-input" type="file" />
-        </label>
-      </article>
-      <Input inputid="product-name" label="상품명" minLength="2" maxLength="15" placeholder="2~15자 이내여야 합니다." required />
-      <ErrorMsg errorText="2~15자 이내여야 합니다." />
-      <Input type="number" inputid="product-price" label="가격" min="0" max="1000000000" placeholder="숫자만 입력 가능합니다." />
-      <ErrorMsg errorText="숫자만 입력 가능합니다." />
-      <Input type="url" inputid="purchase-link" label="판매 링크" placeholder="URL을 입력해 주세요" />
-      <ErrorMsg errorText="URL 형식으로 입력해주세요" />
+    <form onSubmit={handleSubmit} id="form-product" ref={formRef}>
+      <InputProductImage initialValue={initialData?.itemImage} />
+      <Input
+        inputId="product-name"
+        name="productName"
+        label="상품명"
+        minLength="2"
+        maxLength="15"
+        placeholder="2~15자 이내여야 합니다."
+        required
+        onBlur={e => validateName(e.target)}
+        error={nameError}
+        initialValue={initialData?.itemName}
+      />
+
+      <Input
+        type="number"
+        inputId="product-price"
+        name="productPrice"
+        label="가격"
+        min="0"
+        max="1000000000"
+        maxLength="10"
+        placeholder="숫자만 입력 가능합니다."
+        required
+        onBlur={e => validatePrice(e.target)}
+        error={priceError}
+        initialValue={initialData?.price}
+      />
+
+      <Input
+        type="url"
+        inputId="purchase-link"
+        name="productLink"
+        label="판매 링크"
+        placeholder="URL을 입력해 주세요"
+        required
+        onBlur={e => validateLink(e.target)}
+        error={linkError}
+        initialValue={initialData?.link}
+      />
     </form>
   );
 }

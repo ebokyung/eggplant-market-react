@@ -44,7 +44,7 @@
       }
 
       &.here {
-        @include get-color(color, font-color);
+        @include get-color(color, font-color); //수정
       }
 
       &:hover {

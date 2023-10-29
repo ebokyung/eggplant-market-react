@@ -8,11 +8,19 @@
   }
 }
 
-.post-list {
+.main-with-post {
   padding : {
+    top: 1.25rem;
     left: 1rem;
     right: 1rem;
-    bottom: 4.0625rem;
+  }
+  .post-list {
+    & > li {
+      margin-top: 1.25rem;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 }
 
@@ -44,7 +52,7 @@
     margin-bottom: 1.25rem;
   }
 
-  .search-btn {
+  button {
     padding: 0.8125rem 0;
     border-radius: 2.75rem;
     height: 40px;

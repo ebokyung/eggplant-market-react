@@ -1,6 +1,6 @@
 @import '/src/styles/scss/mixin';
 
-.error {
+.error-page {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -28,5 +28,10 @@
     @include get-color(background-color, btn-color);
     @include get-color(color, btn-font-color);
     border-radius: 2.75rem;
+
+    // 추가
+    width: auto;
+    height: auto;
+    background-image: none;
   }
 }

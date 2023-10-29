@@ -1,3 +1,9 @@
+@import '/src/styles/scss/mixin';
+
+.no-data {
+  // 스타일 필요
+}
+
 .search-user-list {
   margin-left: 1rem;
   margin-top: 1.25rem;
@@ -5,5 +11,11 @@
   li {
     width: fit-content;
     margin-bottom: 1rem;
+  }
+
+  .user-name {
+    strong {
+      @include get-color(color, point-color);
+    }
   }
 }

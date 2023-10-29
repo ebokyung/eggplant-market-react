@@ -1,6 +1,6 @@
 @import '/src/styles/scss/mixin';
 
-.upload{
+.main-product{
   padding: 0 2.125rem;
   margin-top: 1.875rem;
   box-sizing: border-box;
@@ -23,6 +23,10 @@
       position: relative;
       aspect-ratio: 5/3;
       margin-bottom: 1.875rem;
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
     };
 
     .btn-upload {

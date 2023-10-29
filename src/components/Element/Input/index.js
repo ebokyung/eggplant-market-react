@@ -1,4 +1,2 @@
-import Input from './Input';
-import ErrorMsg from './ErrorMsg';
-
-export { Input, ErrorMsg };
+export * from './Input';
+export * from './InputImg';

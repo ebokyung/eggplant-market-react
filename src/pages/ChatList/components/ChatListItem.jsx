@@ -7,7 +7,7 @@ export function ChatListItem({ data }) {
   return (
     <Link className="chat-item" to={`/chat-room/${roomId}`}>
       {unreadCount > 0 && <span className="dot" />}
-      <ProfileImg profileImg={memberImg} />
+      <ProfileImg profileImg={memberImg} category="chat" />
       <UserInfo category="chat" userName={members} detail={lastMessage} className="user-info" />
       <p className="chat-date">{lastChatDate}</p>
     </Link>

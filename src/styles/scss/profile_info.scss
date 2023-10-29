@@ -25,7 +25,7 @@ main {
 }
 
 .profile-container {
-    @include get-color(border, profile-border);
+    border-bottom: $border-gray100-1px;
     border-top: 0;
     @include get-color(background-color, bg-color);
     position: relative;
@@ -136,7 +136,7 @@ main {
         font-size: 0;
         line-height: 0;
         .circle{
-            @include get-color(border, icon-border);
+            border: 1px solid $gray100-color;
             border-radius: 50%;
             @include width-height(2.125rem, 2.125rem);
             background-repeat: no-repeat;

@@ -1,7 +1,6 @@
 import React from 'react';
-import basicProfile from '../../../assets/basic-profile.png';
-import contrastProfile from '../../../assets/basic-profile-hc.png';
 import './style/ProfileImg.scss';
+import { checkImageUrl } from '../../../utils/imageUrlProcess';
 
 function returnSize(category) {
   switch (category) {
@@ -14,21 +13,16 @@ function returnSize(category) {
     case 'comment':
       return 'comment';
     default:
-      return 'user';
+      return 'main';
   }
 }
 
 // 이미지 처리 함수 추가 필요
-export function ProfileImg({ profileImg, category, constrast = false }) {
-  let image;
-
-  if (!profileImg) {
-    image = !constrast ? basicProfile : contrastProfile;
-  }
-
+export function ProfileImg({ profileImg = '', category }) {
+  const imgsrc = profileImg instanceof File ? URL.createObjectURL(profileImg) : checkImageUrl(profileImg, 'profile');
   return (
     <div className={`profile-img ${returnSize(category)}`}>
-      <img src={profileImg || image} alt="" />
+      <img src={imgsrc} alt="" />
     </div>
   );
 }
