@@ -30,7 +30,7 @@ export function Search() {
     }
     if (searchKeyword === '') {
       setData([]);
-      setIsLoading(true);
+      setIsLoading(false);
     }
 
     return () => {
@@ -56,7 +56,7 @@ export function Search() {
                   <Skeleton style={{ display: 'block', height: '100%' }} />
                 </div>
                 <div className="user-info">
-                  <Skeleton className="user-name" width={300} />
+                  <Skeleton className="user-name" width={250} />
                   <Skeleton className="user-id before-none" width={150} />
                 </div>
               </div>
