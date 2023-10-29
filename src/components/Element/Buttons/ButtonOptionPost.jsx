@@ -1,46 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './style/OtherButton.scss';
-import { useRecoilState } from 'recoil';
-import { modalItems } from '../../../recoil/modal/atoms';
-import ModalContainer from '../Modal/ModalContainer';
+import Modal from '../Modal/Modal';
 
-function ButtonOptionPost({ props }) {
-  const [modal, openModal] = useState(false);
-  const [modalitems, setModalItems] = useRecoilState(modalItems);
+function ButtonOptionPost({ postid, isMyPost }) {
+  const [isModal, setIsModal] = useState(false);
 
   const handleModal = () => {
-    openModal(prev => !prev);
+    setIsModal(prev => !prev);
   };
 
   const handleUpdate = () => {
-    console.log('게시글 수정');
+    console.log(`${postid} 게시글 수정`);
   };
 
   const handleDelete = () => {
-    console.log('게시글 삭제');
+    console.log(`${postid} 게시글 삭제`);
   };
 
   const handleReport = () => {
     console.log('신고');
   };
 
-  const options = [
+  const myOptions = [
     { text: '수정', func: handleUpdate },
     { text: '삭제', func: handleDelete, openAlert: true },
-    { text: '신고', func: handleReport, openAlert: true },
   ];
 
-  useEffect(() => {
-    if (modal) setModalItems(prev => [...prev, { options, handleModal }]);
-    console.log('모달 추가 ', modalitems);
-  }, [modal]);
+  const options = [{ text: '신고', func: handleReport, openAlert: true }];
 
   return (
     <>
-      <button type="button" className="btn-option" {...props} onClick={() => handleModal()}>
-        <span className="a11y-hidden">설정</span>
+      <button type="button" className="btn-option" onClick={() => handleModal()}>
+        <span className="a11y-hidden">더보기</span>
       </button>
-      {modal && <ModalContainer />}
+      {isModal && <Modal options={isMyPost ? myOptions : options} closeModal={handleModal} />}
     </>
   );
 }
