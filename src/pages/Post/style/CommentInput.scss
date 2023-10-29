@@ -1,6 +1,6 @@
 @import '/src/styles/scss/mixin';
 
-.comment-section {
+.comment-section form {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -33,4 +33,10 @@
   button:not(:disabled) {
     @include get-color(color, comment-btn);
   }
+}
+
+.test {
+  position: fixed;
+  bottom: 0;
+  padding: 10px 20px 10px 16px;
 }
