@@ -4,6 +4,7 @@ import uploadIcon from '../../../assets/icon/upload-file.svg';
 import { ImageItem } from './ImageItem';
 
 export function ImageArea({ imgData, setImgData }) {
+  console.log(imgData);
   // 이미지 처리 로직
   const handleImage = e => {
     // e.target.value = null 처리를 위해서 임시로 복사본 생성
@@ -38,7 +39,7 @@ export function ImageArea({ imgData, setImgData }) {
       </ul>
       <label className="input-file-btn" htmlFor="input-file">
         <img id="image-upload-btn" src={uploadIcon} alt="" />
-        <input type="file" id="input-file" accept="img/*" multiple onClick={e => checkImageLength(e)} onChange={e => handleImage(e)} />
+        <input type="file" id="input-file" accept="image/*" multiple onClick={e => checkImageLength(e)} onChange={e => handleImage(e)} />
       </label>
     </>
   );
