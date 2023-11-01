@@ -6,6 +6,7 @@ import '../style/Home.scss';
 import { HomeWithPost } from '../components/HomeWithPost';
 import { HomeWithoutPost } from '../components/HomeWithoutPost';
 import { getFeedAPI } from '../api';
+import PostSkeleton from '../../../components/Element/Post/PostSkeleton';
 
 export function Home() {
   const [posts, setPosts] = useState([]);
@@ -15,14 +16,31 @@ export function Home() {
     (async () => {
       const res = await getFeedAPI('/post/feed/');
       setPosts(res.posts);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 300);
     })();
   }, []);
 
   return (
     <>
       <Header page="main" text="가지마켓 피드" />
-      {isLoading ? <main>스켈레톤이 들어갈 자리</main> : posts.length ? <HomeWithPost posts={posts} /> : <HomeWithoutPost />}
+      {isLoading ? (
+        <main className="main-with-nav main-with-post">
+          <ul className="post-list">
+            <li>
+              <PostSkeleton />
+            </li>
+            <li>
+              <PostSkeleton />
+            </li>
+          </ul>
+        </main>
+      ) : posts.length ? (
+        <HomeWithPost posts={posts} />
+      ) : (
+        <HomeWithoutPost />
+      )}
       <Footer />
     </>
   );

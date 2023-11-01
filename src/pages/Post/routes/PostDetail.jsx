@@ -8,6 +8,9 @@ import { Post } from '../../../components/Element/Post';
 import '../style/PostDetail.scss';
 import { CommentInput } from '../components/CommentInput';
 import { getPostDetailAPI } from '../api';
+import CommentSkeleton from '../components/CommentSkeleton';
+import PostSkeleton from '../../../components/Element/Post/PostSkeleton';
+import CommentInputSkeleton from '../components/CommentInputSkeleton';
 
 export function PostDetail() {
   const [userImg, setUserImg] = useState('');
@@ -25,18 +28,22 @@ export function PostDetail() {
         setUserImg(image);
         setPost(post);
         setComments(comments);
-
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 300);
       }
     })();
-  }, [isLoading]);
+  }, []);
 
   return (
     <>
       <Header />
       <main className="main-with-nav main-post">
         {isLoading ? (
-          <>스켈레톤</>
+          <>
+            <PostSkeleton />
+            <CommentSkeleton />
+          </>
         ) : (
           <>
             <Post post={post} />
@@ -53,7 +60,7 @@ export function PostDetail() {
           </>
         )}
       </main>
-      {isLoading ? <footer className="test">스켈레톤</footer> : <CommentInput postId={postId} setIsLoading={setIsLoading} userImg={userImg} />}
+      {isLoading ? <CommentInputSkeleton /> : <CommentInput postId={postId} setIsLoading={setIsLoading} userImg={userImg} />}
       <section />
     </>
   );
