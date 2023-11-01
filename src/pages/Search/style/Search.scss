@@ -18,8 +18,4 @@
       @include get-color(color, point-color);
     }
   }
-
-  .before-none::before {
-    display: none;
-  }
 }
