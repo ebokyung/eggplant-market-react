@@ -3,6 +3,7 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles/scss/reset.scss';
 import './styles/scss/global.scss';
+import 'react-loading-skeleton/dist/skeleton.css';
 import App from './App';
 
 const container = document.getElementById('root');
