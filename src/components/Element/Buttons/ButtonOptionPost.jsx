@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
 import './style/OtherButton.scss';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Modal from '../Modal/Modal';
+import { deletePostAPI, postPostReportAPI } from './api';
 
 function ButtonOptionPost({ postid, isMyPost }) {
   const [isModal, setIsModal] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleModal = () => {
     setIsModal(prev => !prev);
   };
 
   const handleUpdate = () => {
-    console.log(`${postid} 게시글 수정`);
+    navigate(`/posting?postId=${postid}`);
   };
 
-  const handleDelete = () => {
-    console.log(`${postid} 게시글 삭제`);
+  const handleDelete = async () => {
+    const res = await deletePostAPI(postid);
+    if (res.status === '200') {
+      if (location.pathname === '/post') navigate(-1);
+      else window.location.reload();
+    }
   };
 
-  const handleReport = () => {
-    console.log('신고');
+  const handleReport = async () => {
+    const res = await postPostReportAPI(postid);
+    if (res.status !== 404) {
+      console.log('신고 완료');
+    }
   };
 
   const myOptions = [
