@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { User } from '../User';
-import ButtonOptionPost from '../Buttons/ButtonOptionPost';
+import { ButtonOptionPost } from '../Buttons';
 import ButtonLike from './ButtonLike';
 
 import './Post.scss';

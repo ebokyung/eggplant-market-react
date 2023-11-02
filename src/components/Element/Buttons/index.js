@@ -1,7 +1,7 @@
 import Button from './Button';
 import ButtonBack from './ButtonBack';
 import ButtonOption from './ButtonOption';
+import ButtonOptionPost from './ButtonOptionPost';
+import ButtonOptionComment from './ButtonOptionComment';
 
-export { Button, ButtonBack, ButtonOption };
-
-// 여기서 이렇게 하고 불러올때
+export { Button, ButtonBack, ButtonOption, ButtonOptionPost, ButtonOptionComment };
