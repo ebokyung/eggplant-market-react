@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './style/OtherButton.scss';
+import { useNavigate } from 'react-router-dom';
 import Modal from '../Modal/Modal';
+import { storage } from '../../../utils/storage';
 
 // 고대비 테마 radio 설정
 function ThemeRadio({ name, id, label, checked }) {
@@ -17,6 +19,7 @@ function ThemeRadio({ name, id, label, checked }) {
 }
 
 function ButtonOption() {
+  const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
 
@@ -29,7 +32,8 @@ function ButtonOption() {
   };
 
   const handleLogout = () => {
-    console.log('logout');
+    storage.clearStorage();
+    navigate('/login');
   };
 
   const options = [
