@@ -21,3 +21,23 @@ export const postPostReportAPI = async postid => {
     return e;
   }
 };
+
+export const deleteCommentAPI = async (postid, commentid) => {
+  try {
+    const res = await defaultAxios.delete(`/post/${postid}/comments/${commentid}`);
+    return res.data;
+  } catch (e) {
+    console.error(e);
+    return e;
+  }
+};
+
+export const postCommentReportAPI = async (postid, commentid) => {
+  try {
+    const res = await defaultAxios.post(`/post/${postid}/comments/${commentid}/report`);
+    return res.data;
+  } catch (e) {
+    console.error(e);
+    return e;
+  }
+};
