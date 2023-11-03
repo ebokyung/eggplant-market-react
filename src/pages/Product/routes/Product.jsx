@@ -6,6 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import Header from '../../../components/Element/Header/Header';
 import { ProductForm } from '../components/ProductForm';
 import { getProductAPI } from '../api';
+import Fieldset from '../../../components/Skeleton/Fieldset';
 // productId=652b7f9db2cb2056637a0daf
 
 export function Product() {
@@ -31,7 +32,9 @@ export function Product() {
         setIsLoading(() => false);
       })();
     } else {
-      setIsLoading(() => false);
+      setTimeout(() => {
+        setIsLoading(() => false);
+      }, 5000);
     }
   }, []);
 
@@ -46,18 +49,9 @@ export function Product() {
         </div>
         <div className="formProduct">
           <Skeleton className="product-img-cover" />
-          <div style={{ marginBottom: '1rem' }}>
-            <Skeleton width={50} height="0.75rem" style={{ marginBottom: '0.125rem' }} />
-            <Skeleton height={30} />
-          </div>
-          <div style={{ marginBottom: '1rem' }}>
-            <Skeleton width={50} height="0.75rem" style={{ marginBottom: '0.125rem' }} />
-            <Skeleton height={30} />
-          </div>
-          <div style={{ marginBottom: '1rem' }}>
-            <Skeleton width={50} height="0.75rem" style={{ marginBottom: '0.125rem' }} />
-            <Skeleton height={30} />
-          </div>
+          <Fieldset />
+          <Fieldset />
+          <Fieldset />
         </div>
       </main>
     </>
