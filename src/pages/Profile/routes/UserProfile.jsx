@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/UserProfile.scss';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ProfileSection, ProductSection, PostSection } from '../components';
@@ -28,7 +30,9 @@ export function UserProfile() {
       setUserProfile(userProfileData);
       setUserProduct(userProductData);
       setUserPost(userPostData);
-      setLoading(() => false);
+      setTimeout(() => {
+        setLoading(() => false);
+      }, 30000);
     })();
   }, [location.search]);
 
@@ -36,7 +40,34 @@ export function UserProfile() {
     <>
       <Header />
       {loading ? (
-        <h1>loading...</h1>
+        <main className='"main-with-nav main-user-profile'>
+          <div className="profile-container">
+            <div className="profile-header">
+              <div className="setting-profile-img">
+                <Skeleton className="profile-img main" circle />
+              </div>
+              <Skeleton width={220} style={{ marginBottom: '0.625rem' }} />
+              <Skeleton width={150} style={{ marginBottom: '0.625rem' }} />
+              <Skeleton style={{ marginBottom: '0.625rem' }} />
+              <div className="follow-wrap">
+                <Skeleton width={40} height={30} />
+              </div>
+              <Skeleton className="follow-wrap" width={40} height={30} />
+            </div>
+            <div className="btn-wrap-my">
+              <Skeleton width={80} height={34} style={{ borderRadius: 30 }} inline />
+              <Skeleton width={80} height={34} style={{ borderRadius: 30 }} inline />
+            </div>
+          </div>
+          <div className="product-container">
+            <Skeleton />
+          </div>
+          <div className="post-container">
+            <div className="post-sec">
+              <Skeleton />
+            </div>
+          </div>
+        </main>
       ) : (
         <main className="main-with-nav main-user-profile">
           <ProfileSection data={userProfile.profile} />
