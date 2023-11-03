@@ -5,7 +5,7 @@ import { ProfileImg, UserInfo } from '../../../components/Element/User';
 export function ChatListItem({ data }) {
   const { roomId, members, memberImg, lastMessage, lastChatDate, unreadCount } = data;
   return (
-    <Link className="chat-item" to={`/chat-room/${roomId}`}>
+    <Link className="chat-item" to="/chat-room" state={{ roomId }}>
       {unreadCount > 0 && <span className="dot" />}
       <ProfileImg profileImg={memberImg} category="chat" />
       <UserInfo category="chat" userName={members} detail={lastMessage} className="user-info" />
