@@ -5,7 +5,7 @@ export function InputProductImage({ initialValue }) {
   const imageRef = useRef();
 
   useEffect(() => {
-    imageRef.current.style.backgroundImage = `url(${productImg})`;
+    imageRef.current.style.backgroundImage = `url(${URL.createObjectURL(productImg)})`;
   }, [productImg]);
 
   useEffect(() => {
