@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './style/OtherButton.scss';
 import { useLocation } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import Modal from '../Modal/Modal';
 import { deleteCommentAPI, postCommentReportAPI } from './api';
 
@@ -20,7 +21,7 @@ function ButtonOptionComment({ commentid, isMyCmt }) {
 
   const handleReport = async () => {
     const res = await postCommentReportAPI(postid, commentid);
-    if (res.report) console.log('신고 완료');
+    if (res.report) toast('댓글 신고 완료', { icon: '⚠️', position: 'bottom-center', ariaProps: { role: 'alert', 'aria-live': 'polite' } });
   };
 
   const myOptions = [{ text: '삭제', func: handleDelete, openAlert: true }];

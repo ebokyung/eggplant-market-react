@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './style/OtherButton.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import Modal from '../Modal/Modal';
 import { deletePostAPI, postPostReportAPI } from './api';
 
@@ -27,9 +28,7 @@ function ButtonOptionPost({ postid, isMyPost }) {
 
   const handleReport = async () => {
     const res = await postPostReportAPI(postid);
-    if (res.status !== 404) {
-      console.log('신고 완료');
-    }
+    if (res.status !== 404) toast('게시글 신고 완료', { icon: '⚠️', position: 'bottom-center', ariaProps: { role: 'alert', 'aria-live': 'polite' } });
   };
 
   const myOptions = [
