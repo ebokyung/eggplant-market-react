@@ -27,9 +27,7 @@ export function EditProfile() {
       const response = await getMyProfileAPI();
       const { username, accountname, intro, image } = response;
       setData({ username, accountname, intro, image });
-      setTimeout(() => {
-        setIsLoading(() => false);
-      }, 6000);
+      setIsLoading(() => false);
     })();
   }, []);
 
