@@ -30,9 +30,7 @@ export function UserProfile() {
       setUserProfile(userProfileData);
       setUserProduct(userProductData);
       setUserPost(userPostData);
-      setTimeout(() => {
-        setLoading(() => false);
-      }, 30000);
+      setLoading(() => false);
     })();
   }, [location.search]);
 
@@ -79,16 +77,25 @@ export function UserProfile() {
             </ul>
           </div>
           <div className="post-container">
+            <div className="post-tab">
+              <div className="tab-btn-wrap">
+                <Skeleton width={26} height={26} style={{ 'margin-right': 5 }} />
+                <Skeleton width={26} height={26} />
+              </div>
+            </div>
             <div className="post-sec">
-              <Skeleton />
+              <ul className="post-list">
+                {/* post 스켈레톤 컴포넌트 넣기 */}
+                <Skeleton />
+              </ul>
             </div>
           </div>
         </main>
       ) : (
         <main className="main-with-nav main-user-profile">
-          <ProfileSection data={userProfile.profile} />
-          <ProductSection data={userProduct.product} />
-          <PostSection data={userPost.post} />
+          <ProfileSection data={userProfile?.profile} />
+          <ProductSection data={userProduct?.product} />
+          <PostSection data={userPost?.post} />
         </main>
       )}
       <Navbar />
