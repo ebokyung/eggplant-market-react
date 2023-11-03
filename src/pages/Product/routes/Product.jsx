@@ -32,9 +32,7 @@ export function Product() {
         setIsLoading(() => false);
       })();
     } else {
-      setTimeout(() => {
-        setIsLoading(() => false);
-      }, 5000);
+      setIsLoading(() => false);
     }
   }, []);
 
