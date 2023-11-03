@@ -60,7 +60,23 @@ export function UserProfile() {
             </div>
           </div>
           <div className="product-container">
-            <Skeleton />
+            <Skeleton width={80} style={{ margin: '0 0 1rem 1rem' }} />
+            <ul className="product-list">
+              <li className="product-item">
+                <div className="product">
+                  <Skeleton className="product-img" />
+                  <Skeleton className="product-name" />
+                  <Skeleton className="product-price" />
+                </div>
+              </li>
+              <li className="product-item">
+                <div className="product">
+                  <Skeleton className="product-img" />
+                  <Skeleton className="product-name" />
+                  <Skeleton className="product-price" />
+                </div>
+              </li>
+            </ul>
           </div>
           <div className="post-container">
             <div className="post-sec">
