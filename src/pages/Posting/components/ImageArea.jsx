@@ -1,6 +1,7 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import uploadIcon from '../../../assets/icon/upload-file.svg';
+import uploadFileIconHc from '../../../assets/icon/upload-file-hc.svg';
+import uploadFileIcon from '../../../assets/icon/upload-file.svg';
 import { ImageItem } from './ImageItem';
 
 export function ImageArea({ imgData, setImgData }) {
@@ -38,7 +39,7 @@ export function ImageArea({ imgData, setImgData }) {
         ))}
       </ul>
       <label className="input-file-btn" htmlFor="input-file">
-        <img id="image-upload-btn" src={uploadIcon} alt="" />
+        <img id="image-upload-btn" src={localStorage.getItem('theme') === 'light' ? uploadFileIcon : uploadFileIconHc} alt="" />
         <input type="file" id="input-file" accept="image/*" multiple onClick={e => checkImageLength(e)} onChange={e => handleImage(e)} />
       </label>
     </>

@@ -13,7 +13,7 @@
 @mixin get-color($property, $color) {
     #{$property}: get-color($color);
 
-    @at-root .theme-wrapper.highContrast & {
+    @at-root html[data-theme="highContrast"] & {
         #{$property}: get-color($color, highContrast);
     }
 }

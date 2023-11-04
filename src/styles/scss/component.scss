@@ -319,7 +319,7 @@
   }
 }
 
-.highContrast .skip-nav a {
+html[data-theme='highContrast'] .skip-nav a {
   background: $white-color;
   color: #1c1c1c;
 }

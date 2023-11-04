@@ -7,7 +7,7 @@
     top: 0;
     width: 0.75rem;
     height: 0.75rem;
-    background-color: $enabled-color;
+    @include get-color(background-color, on-chat-color);
     border-radius: 50%;
     z-index: 1;
   }
