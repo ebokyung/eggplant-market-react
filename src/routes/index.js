@@ -6,7 +6,7 @@ import { Home } from '../pages/Home';
 import { Search } from '../pages/Search';
 import { ChatList } from '../pages/ChatList';
 import { ChatRoom } from '../pages/ChatRoom';
-import { Product } from '../pages/Product/routes/Product';
+import { Product } from '../pages/Product';
 import { UserProfile } from '../pages/Profile';
 import { Follow } from '../pages/Follow';
 import { SignUp } from '../pages/SignUp';

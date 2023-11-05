@@ -1,6 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
-import '../style/Posting.scss';
+
 import { useNavigate, useLocation } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+
+import '../style/Posting.scss';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import Header from '../../../components/Element/Header/Header';
 import { ProfileImg } from '../../../components/Element/User/ProfileImg';
 import { TextArea } from '../components/TextArea';
@@ -8,6 +13,7 @@ import { ImageArea } from '../components/ImageArea';
 import { postingAPI, postPostImgAPI, getPostAPI, putPostAPI, getUserAPI } from '../api/index';
 import { storage } from '../../../utils/storage';
 import { imgReg } from '../../../libs/constant/regex';
+import uploadIcon from '../../../assets/icon/upload-file.svg';
 
 export function Posting() {
   const formRef = useRef();
@@ -77,9 +83,33 @@ export function Posting() {
 
   return (
     <>
-      <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
       {isLoading ? (
-        <>로딩중</>
+        <Header page="upload">
+          <Skeleton width={90} height={30} />
+        </Header>
+      ) : (
+        <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
+      )}
+
+      {isLoading ? (
+        <main className="main-posting">
+          <div className="profile-img user">
+            <Skeleton style={{ display: 'block', height: '100%' }} />
+          </div>
+          <form action="" className="posting-form">
+            <Skeleton className="textarea" height="150px" />
+
+            <ul className="upload-imgs-list">
+              <li>
+                <Skeleton className="posting-img-cover" style={{ boxShadow: 'none' }} />
+              </li>
+            </ul>
+            <label className="input-file-btn" htmlFor="input-file">
+              <img id="image-upload-btn" src={uploadIcon} alt="" />
+              <input type="file" id="input-file" accept="image/*" multiple />
+            </label>
+          </form>
+        </main>
       ) : (
         <main className="main-posting">
           <ProfileImg profileImg={userImg} category="post" />
