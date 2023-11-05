@@ -5,7 +5,7 @@ export function InputProductImage({ initialValue }) {
   const imageRef = useRef();
 
   useEffect(() => {
-    imageRef.current.style.backgroundImage = `url(${URL.createObjectURL(productImg)})`;
+    imageRef.current.style.backgroundImage = `url(${productImg})`;
   }, [productImg]);
 
   useEffect(() => {
@@ -25,8 +25,7 @@ export function InputProductImage({ initialValue }) {
         role="tabpanel"
         tabIndex="0"
         onChange={e => {
-          if (e.target.files.length === 1) setProductImg(e.target.files[0]);
-          else setProductImg('');
+          if (e.target.files[0]) setProductImg(URL.createObjectURL(e.target.files[0]));
         }}
       >
         <span className="a11y-hidden">판매 상품 이미지 업로드 버튼</span>
