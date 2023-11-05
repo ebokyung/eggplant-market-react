@@ -12,6 +12,10 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
   const isUploadPage = !location.search;
   const [isBtnDisabled, setIsBtnDisabled] = useState(isUploadPage);
   const formRef = useRef();
+  const [imgError, setImgError] = useState({
+    isError: isUploadPage,
+    errorText: '',
+  });
   const [nameError, setNameError] = useState({
     isError: isUploadPage,
     errorText: '',
@@ -60,8 +64,8 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
   };
 
   useEffect(() => {
-    setIsBtnDisabled(nameError.isError || priceError.isError || linkError.isError);
-  }, [nameError, priceError, linkError]);
+    setIsBtnDisabled(imgError.isError || nameError.isError || priceError.isError || linkError.isError);
+  }, [imgError, nameError, priceError, linkError]);
 
   useEffect(() => {
     setIsOnSubmit(!isBtnDisabled);
@@ -97,7 +101,7 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
 
   return (
     <form onSubmit={handleSubmit} id="form-product" className="formProduct" ref={formRef}>
-      <InputProductImage initialValue={initialData?.itemImage} />
+      <InputProductImage initialValue={initialData?.itemImage} setImgError={setImgError} />
       <Input
         inputId="product-name"
         name="productName"
