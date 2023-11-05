@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/ImageItem.scss';
 import closeIcon from '../../../assets/icon/x.svg';
 import { checkImageUrl } from '../../../utils/imageUrlProcess';
 
 export function ImageItem({ img, onRemove }) {
-  const imgSrc = img instanceof File ? URL.createObjectURL(img) : checkImageUrl(img);
+  const [imgSrc, setImgSrc] = useState('');
 
   useEffect(() => {
+    const temp = img instanceof File ? URL.createObjectURL(img) : checkImageUrl(img);
+    setImgSrc(temp);
+
     return () => {
       if (img instanceof File) URL.revokeObjectURL(imgSrc);
     };
