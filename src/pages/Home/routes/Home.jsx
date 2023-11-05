@@ -6,7 +6,7 @@ import '../style/Home.scss';
 import { HomeWithPost } from '../components/HomeWithPost';
 import { HomeWithoutPost } from '../components/HomeWithoutPost';
 import { getFeedAPI } from '../api';
-import PostSkeleton from '../../../components/Element/Post/PostSkeleton';
+import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
 
 export function Home() {
   const [posts, setPosts] = useState([]);
@@ -16,9 +16,8 @@ export function Home() {
     (async () => {
       const res = await getFeedAPI('/post/feed/');
       setPosts(res.posts);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 300);
+
+      setIsLoading(false);
     })();
   }, []);
 

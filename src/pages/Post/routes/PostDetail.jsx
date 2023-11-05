@@ -9,8 +9,8 @@ import '../style/PostDetail.scss';
 import { CommentInput } from '../components/CommentInput';
 import { getPostDetailAPI } from '../api';
 import CommentSkeleton from '../components/CommentSkeleton';
-import PostSkeleton from '../../../components/Element/Post/PostSkeleton';
 import CommentInputSkeleton from '../components/CommentInputSkeleton';
+import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
 
 export function PostDetail() {
   const [userImg, setUserImg] = useState('');
@@ -28,9 +28,8 @@ export function PostDetail() {
         setUserImg(image);
         setPost(post);
         setComments(comments);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 300);
+
+        setIsLoading(false);
       }
     })();
   }, []);

@@ -1,6 +1,6 @@
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
-import ButtonOption from '../Buttons/ButtonOption';
+import ButtonOption from '../Element/Buttons/ButtonOption';
 
 export default function PostSkeleton() {
   return (
