@@ -5,7 +5,6 @@ import { useSetRecoilState } from 'recoil';
 import Modal from '../Modal/Modal';
 import { storage } from '../../../utils/storage';
 import { themeAtom } from '../../../recoil/theme/atoms';
-import { applyThemeToBackground } from '../../../utils/applyTheme';
 
 // 고대비 테마 radio 설정
 function ThemeRadio({ name, id, label, checked }) {
@@ -14,7 +13,6 @@ function ThemeRadio({ name, id, label, checked }) {
     localStorage.setItem('theme', theme);
     document.documentElement.setAttribute('data-theme', theme); // css 이미지 url
     setTheme(theme); // 동적으로 생성되어 직접 바꾸어줘야하는 이미지 src (기본 프로필 이미지)
-    applyThemeToBackground(theme);
     // applyThemeToErrorImage(theme);
   };
   return (

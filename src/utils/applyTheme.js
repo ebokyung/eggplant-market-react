@@ -9,18 +9,6 @@ import hcError from '../assets/error-image-hc.png';
       -> useEffect atom
 */
 
-export function applyThemeToBackground(theme = 'light') {
-  if (theme === 'highContrast') {
-    if (document.querySelector('.login-body-color')) document.body.style.backgroundColor = '#E4D6FF';
-    else document.body.style.backgroundColor = '#000000';
-  }
-  if (theme === 'light') {
-    if (document.querySelector('.login-body-color')) document.body.style.backgroundColor = '#635CA5';
-    else if (document.querySelector('.profile-body-color')) document.body.style.backgroundColor = '#f2f2f2';
-    else document.body.style.backgroundColor = '#ffffff';
-  }
-}
-
 // TODO: post-img-error나타나는 경우 확인하고 테마에 따른 이미지 적용
 export function applyThemeToErrorImage(theme) {
   const LightPost = defaultError;
