@@ -8,6 +8,9 @@ import { Post } from '../../../components/Element/Post';
 import '../style/PostDetail.scss';
 import { CommentInput } from '../components/CommentInput';
 import { getPostDetailAPI } from '../api';
+import CommentSkeleton from '../components/CommentSkeleton';
+import CommentInputSkeleton from '../components/CommentInputSkeleton';
+import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
 
 export function PostDetail() {
   const [userImg, setUserImg] = useState('');
@@ -29,14 +32,17 @@ export function PostDetail() {
         setIsLoading(false);
       }
     })();
-  }, [isLoading]);
+  }, []);
 
   return (
     <>
       <Header />
       <main className="main-with-nav main-post">
         {isLoading ? (
-          <>스켈레톤</>
+          <>
+            <PostSkeleton />
+            <CommentSkeleton />
+          </>
         ) : (
           <>
             <Post post={post} />
@@ -53,7 +59,7 @@ export function PostDetail() {
           </>
         )}
       </main>
-      {isLoading ? <footer className="test">스켈레톤</footer> : <CommentInput postId={postId} setIsLoading={setIsLoading} userImg={userImg} />}
+      {isLoading ? <CommentInputSkeleton /> : <CommentInput postId={postId} setIsLoading={setIsLoading} userImg={userImg} />}
       <section />
     </>
   );

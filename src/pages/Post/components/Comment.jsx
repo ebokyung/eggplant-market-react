@@ -1,8 +1,9 @@
 import React from 'react';
 import { User } from '../../../components/Element/User';
-import { ButtonOption } from '../../../components/Element/Buttons';
+import { ButtonOptionComment } from '../../../components/Element/Buttons';
 import '../style/Comment.scss';
 import { displayedAt } from '../../../utils/date';
+import { storage } from '../../../utils/storage';
 
 function Comment({ comment }) {
   const { id, author, content, createdAt } = comment;
@@ -12,7 +13,7 @@ function Comment({ comment }) {
       {/* 날짜 함수 적용 필요 */}
       <p className="comment-time">{displayedAt(createdAt)}</p>
       <h3 className="comment-text">{content}</h3>
-      <ButtonOption data-commentid={id} />
+      <ButtonOptionComment commentid={id} isMyCmt={author.accountname === storage.getAccountName()} />
     </>
   );
 }

@@ -1,11 +1,9 @@
 @import '/src/styles/scss/mixin';
 
 textarea {
-  @include get-color(background-color, bg-color);
   @include get-color(color, font-color);
-  @include width-height(calc(100% - 24px), fit-content);
-  min-height: 9.375rem;
-  margin: 0.75rem;
+  @include get-color(background-color, bg-color);
+
   border: none;
   resize: none;
 
@@ -15,4 +13,11 @@ textarea {
 }
 textarea::placeholder {
   @include get-color(color, gray-color);
+}
+
+textarea,
+.textarea {
+  @include width-height(calc(100% - 24px), fit-content);
+  min-height: 9.375rem;
+  margin: 0.75rem;
 }

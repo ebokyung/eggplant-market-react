@@ -1,37 +1,45 @@
 // global
 
 .a11y-hidden {
-    clip: rect(1px, 1px, 1px, 1px);
-    clip-path: inset(50%);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
 }
 
 .ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-button{
-    border: none;
-    background-color: initial;
-    padding: 0;
+button {
+  border: none;
+  background-color: initial;
+  padding: 0;
 }
-input{
-    border: none;
+input {
+  border: none;
 }
 
-a{
-    color: initial;
-    text-decoration: initial;
+a {
+  color: initial;
+  text-decoration: initial;
 }
 
 .main-with-nav {
   height: calc(100% + 61px);
   margin-bottom: 3.8125rem;
+}
+.before-none::before {
+  display: none;
+}
+
+nav,
+footer {
+  z-index: 1;
 }

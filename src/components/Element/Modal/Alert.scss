@@ -1,0 +1,50 @@
+@import '/src/styles/scss/mixin';
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  @include width-height(100%, 100%);
+  @include get-color(background-color, background-color);
+  display: flex;
+  .modal-content {
+    width: 15.75rem;
+    @include get-color(background-color, bg-color);
+    border-radius: 0.625rem;
+    text-align: center;
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    .modal-description {
+      padding: 1.375rem 2.5rem;
+      font-size: map-get($font-sizes, 'size16');
+      border-bottom: 0.0313rem solid $gray100-color;
+      @include get-color(color, font-color);
+      font-weight: 500;
+    }
+  }
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  font-weight: 400;
+  button {
+    text-align: center;
+    width: 7.875rem;
+  }
+  button:nth-child(2) {
+    order: 0;
+    padding: 0.875rem 3rem;
+    font-size: map-get($font-sizes, 'size14');
+    @include get-color(color, font-color);
+    border-right: 0.0313rem solid $gray100-color;
+  }
+  button:nth-child(1) {
+    order: 1;
+    padding: 0.875rem 2.1875rem;
+    @include get-color(color, point-color);
+    font-size: map-get($font-sizes, 'size14');
+  }
+}

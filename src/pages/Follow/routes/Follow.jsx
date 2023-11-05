@@ -7,7 +7,7 @@ import { getFollowAPI } from '../api';
 import FollowItem from '../components/FollowItem';
 
 import '../style/Follow.scss';
-import FollowItemSkeleton from '../components/FollowItemSkeleton';
+import FollowItemSkeleton from '../../../components/Skeleton/FollowItemSkeleton';
 
 export function Follow() {
   const [data, setData] = useState([]);
