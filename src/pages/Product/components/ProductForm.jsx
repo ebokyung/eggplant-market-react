@@ -4,6 +4,7 @@ import { Input } from '../../../components/Element/Input';
 import { InputProductImage } from './InputProductImage';
 import { postProductAPI, putProductAPI } from '../api';
 import { postImageAPI } from '../../../libs/api/PostImage';
+import { storage } from '../../../utils/storage';
 
 export function ProductForm({ setIsOnSubmit, initialData }) {
   const navigate = useNavigate();
@@ -11,6 +12,10 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
   const isUploadPage = !location.search;
   const [isBtnDisabled, setIsBtnDisabled] = useState(isUploadPage);
   const formRef = useRef();
+  const [imgError, setImgError] = useState({
+    isError: isUploadPage,
+    errorText: '',
+  });
   const [nameError, setNameError] = useState({
     isError: isUploadPage,
     errorText: '',
@@ -59,8 +64,8 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
   };
 
   useEffect(() => {
-    setIsBtnDisabled(nameError.isError || priceError.isError || linkError.isError);
-  }, [nameError, priceError, linkError]);
+    setIsBtnDisabled(imgError.isError || nameError.isError || priceError.isError || linkError.isError);
+  }, [imgError, nameError, priceError, linkError]);
 
   useEffect(() => {
     setIsOnSubmit(!isBtnDisabled);
@@ -90,13 +95,13 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
     else result = await putProductAPI(new URLSearchParams(location.search).get('productId'), data);
 
     if (result.status === 200) {
-      navigate('/profile'); // 수정
+      navigate(`/profile?accountName=${storage.getAccountName()}`);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} id="form-product" className="formProduct" ref={formRef}>
-      <InputProductImage initialValue={initialData?.itemImage} />
+      <InputProductImage initialValue={initialData?.itemImage} setImgError={setImgError} />
       <Input
         inputId="product-name"
         name="productName"
