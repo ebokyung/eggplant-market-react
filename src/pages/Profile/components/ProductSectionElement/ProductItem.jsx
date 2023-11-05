@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkImageUrl } from '../../../../utils/imageUrlProcess';
 import Modal from '../../../../components/Element/Modal/Modal';
+import { deleteProductAPI } from '../../api';
 
 export function ProductItem({ item }) {
   const { id, itemImage, itemName, price } = item;
@@ -12,8 +13,11 @@ export function ProductItem({ item }) {
     setIsModal(prev => !prev);
   };
 
-  const handleDelete = () => {
-    console.log(`${id} 삭제하기`);
+  const handleDelete = async () => {
+    const res = await deleteProductAPI(id);
+    if (res.status === '200') {
+      window.location.reload();
+    }
   };
 
   const handleUpdate = () => {
