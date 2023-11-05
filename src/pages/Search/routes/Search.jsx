@@ -2,6 +2,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import React, { useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import Footer from '../../../components/Element/Navbar/Navbar';
 import { SearchItem } from '../components/SearchItem';
@@ -46,17 +48,25 @@ export function Search() {
     <>
       <HeaderSearch page="search" searchKeyword={searchKeyword} handleSearch={handleSearch} />
       <main className="main-with-nav">
-        {isLoading ? (
-          <>검색중 스켈레톤</>
-        ) : searchKeyword !== '' && data.length === 0 ? (
-          <p className="no-data">검색결과가 없습니다.</p>
-        ) : (
-          <ul className="search-user-list">
-            {data?.map(result => (
-              <SearchItem key={result._id} user={result} keyword={searchKeyword} />
-            ))}
-          </ul>
-        )}
+        <ul className="search-user-list">
+          {isLoading ? (
+            <li>
+              <div className="user-container">
+                <div className="profile-img item">
+                  <Skeleton style={{ display: 'block', height: '100%' }} />
+                </div>
+                <div className="user-info">
+                  <Skeleton className="user-name" width={250} />
+                  <Skeleton className="user-id before-none" width={150} />
+                </div>
+              </div>
+            </li>
+          ) : searchKeyword !== '' && data.length === 0 ? (
+            <p className="no-data">검색결과가 없습니다.</p>
+          ) : (
+            data?.map(result => <SearchItem key={result._id} user={result} keyword={searchKeyword} />)
+          )}
+        </ul>
       </main>
       <Footer />
     </>
