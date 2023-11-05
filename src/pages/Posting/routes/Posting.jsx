@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState, useRef } from 'react';
 
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -75,9 +73,7 @@ export function Posting() {
         } = await getUserAPI();
         setUserImg(image);
       }
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
+      setIsLoading(false);
     })();
   }, []);
 

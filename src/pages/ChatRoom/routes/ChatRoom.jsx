@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/ChatRoom.scss';
+import { useLocation } from 'react-router-dom';
 import Header from '../../../components/Element/Header/Header';
 import { chatData } from '../../../libs/dummy';
 import { ChatBubble } from '../components/ChatBubble';
 
 export function ChatRoom() {
-  return (
+  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    setData(...chatData.filter(item => item.roomId === location.state.roomId));
+    setIsLoading(false);
+  }, []);
+
+  return isLoading ? (
+    <p>loading...</p>
+  ) : (
     <>
-      <Header text={chatData.userName} className="fixed-header">
+      <Header text={data?.userName} className="fixed-header">
         {/* user name 누르면 이동하게 하기 */}
         <span className="a11y-hidden">님과의 채팅방</span>
       </Header>
 
       <main className="main-chat-room">
         <section className="chat-sheet">
-          {chatData.contents.map(item => (
+          {data?.contents?.map(item => (
             <ChatBubble data={item} />
           ))}
         </section>
