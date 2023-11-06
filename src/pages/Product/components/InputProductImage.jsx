@@ -26,9 +26,7 @@ export function InputProductImage({ initialValue, setImgError }) {
         role="tabpanel"
         tabIndex="0"
         onChange={e => {
-          if (e.target.files[0]) {
-            setProductImg(URL.createObjectURL(e.target.files[0]));
-          }
+          if (e.target.files[0]) setProductImg(URL.createObjectURL(e.target.files[0]));
         }}
       >
         <span className="a11y-hidden">판매 상품 이미지 업로드 버튼</span>
