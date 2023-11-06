@@ -7,6 +7,7 @@ import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ProfileSection, ProductSection, PostSection } from '../components';
 import { getProfileAPI, getProductAPI, getPostAPI } from '../api';
+import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
 
 export function UserProfile() {
   const location = useLocation();
@@ -85,8 +86,7 @@ export function UserProfile() {
             </div>
             <div className="post-sec">
               <ul className="post-list">
-                {/* post 스켈레톤 컴포넌트 넣기 */}
-                <Skeleton />
+                <PostSkeleton />
               </ul>
             </div>
           </div>
