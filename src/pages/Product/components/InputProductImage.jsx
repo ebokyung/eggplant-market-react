@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-export function InputProductImage({ initialValue }) {
+export function InputProductImage({ initialValue, setImgError }) {
   const [productImg, setProductImg] = useState(initialValue);
   const imageRef = useRef();
 
   useEffect(() => {
+    if (productImg) setImgError({ isError: false, errorText: '' });
     imageRef.current.style.backgroundImage = `url(${productImg})`;
   }, [productImg]);
 

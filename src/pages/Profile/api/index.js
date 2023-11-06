@@ -49,3 +49,13 @@ export const deleteFollowAPI = async someone => {
     return e;
   }
 };
+
+export const deleteProductAPI = async productid => {
+  try {
+    const res = await defaultAxios.delete(`/product/${productid}`);
+    return res.data;
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
+};
