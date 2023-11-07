@@ -20,9 +20,8 @@ export function Home() {
     (async () => {
       const res = await getFeedData();
       setPosts(res.data.posts);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 300);
+
+      setIsLoading(false);
     })();
   }, []);
 
@@ -50,7 +49,22 @@ export function Home() {
   return (
     <>
       <Header page="main" text="가지마켓 피드" />
-      {isLoading ? <main>스켈레톤이 들어갈 자리</main> : posts.length ? <HomeWithPost posts={posts} /> : <HomeWithoutPost />}
+      {isLoading ? (
+        <main className="main-with-nav main-with-post">
+          <ul className="post-list">
+            <li>
+              <PostSkeleton />
+            </li>
+            <li>
+              <PostSkeleton />
+            </li>
+          </ul>
+        </main>
+      ) : posts.length ? (
+        <HomeWithPost posts={posts} />
+      ) : (
+        <HomeWithoutPost />
+      )}
       <Footer />
     </>
   );

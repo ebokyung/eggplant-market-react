@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { User } from '../User';
-import ButtonOption from '../Buttons/ButtonOption';
+import { ButtonOptionPost } from '../Buttons';
 import ButtonLike from './ButtonLike';
 
 import './Post.scss';
@@ -10,6 +10,7 @@ import messageCircle from '../../../assets/icon/icon-message-circle.svg';
 import { checkImageUrl } from '../../../utils/imageUrlProcess';
 import { dateProcess } from '../../../utils/date';
 import { imgReg } from '../../../libs/constant/regex';
+import { storage } from '../../../utils/storage';
 
 function returnContentTag(location) {
   if (location.includes('home')) return 'h2';
@@ -65,7 +66,7 @@ export function Post({ post }) {
         <p className="post-date">{dateProcess(createdAt)}</p>
       </div>
 
-      <ButtonOption />
+      <ButtonOptionPost postid={id} isMyPost={author.accountname === storage.getAccountName()} />
     </section>
   );
 }

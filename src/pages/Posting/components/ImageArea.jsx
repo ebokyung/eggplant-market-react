@@ -4,7 +4,6 @@ import uploadIcon from '../../../assets/icon/upload-file.svg';
 import { ImageItem } from './ImageItem';
 
 export function ImageArea({ imgData, setImgData }) {
-  console.log(imgData);
   // 이미지 처리 로직
   const handleImage = e => {
     // e.target.value = null 처리를 위해서 임시로 복사본 생성
@@ -12,9 +11,9 @@ export function ImageArea({ imgData, setImgData }) {
     if (imgData.length + temp.length <= 3) {
       setImgData(prev => [...prev, ...temp]);
       e.target.value = null;
-    } else {
-      alert('이미지가 만아요2');
+      return;
     }
+    alert('이미지가 만아요2');
   };
 
   const checkImageLength = e => {
