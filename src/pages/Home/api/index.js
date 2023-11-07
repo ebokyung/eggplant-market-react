@@ -9,14 +9,3 @@ export const getFeedAPI = async () => {
     return e;
   }
 };
-
-export function fetchClosure(cnt) {
-  let reqCnt = 0;
-
-  const getData = async () => {
-    // eslint-disable-next-line no-plusplus
-    return defaultAxios.get(`/post/feed?skip=${reqCnt++ * cnt}&limit=${cnt}`);
-  };
-
-  return getData;
-}
