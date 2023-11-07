@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import './Modal.scss';
 import { createPortal } from 'react-dom';
@@ -8,6 +8,13 @@ import Alert from './Alert';
 function Modal({ options, children, closeModal }) {
   const [isAlert, setIsAlert] = useRecoilState(isAlertOpen);
   const doFunc = useSetRecoilState(doAlert);
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   const renderModal = (
     <>

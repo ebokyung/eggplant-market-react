@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-export function InputProductImage({ initialValue }) {
+export function InputProductImage({ initialValue, setImgError }) {
   const [productImg, setProductImg] = useState(initialValue);
   const imageRef = useRef();
 
   useEffect(() => {
+    if (productImg) setImgError({ isError: false, errorText: '' });
     imageRef.current.style.backgroundImage = `url(${productImg})`;
   }, [productImg]);
 
@@ -25,8 +26,7 @@ export function InputProductImage({ initialValue }) {
         role="tabpanel"
         tabIndex="0"
         onChange={e => {
-          if (e.target.files.length === 1) setProductImg(e.target.files[0]);
-          else setProductImg('');
+          if (e.target.files[0]) setProductImg(URL.createObjectURL(e.target.files[0]));
         }}
       >
         <span className="a11y-hidden">판매 상품 이미지 업로드 버튼</span>
