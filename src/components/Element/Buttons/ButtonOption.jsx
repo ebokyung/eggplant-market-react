@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './style/OtherButton.scss';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Modal from '../Modal/Modal';
 import { storage } from '../../../utils/storage';
 import { themeAtom } from '../../../recoil/theme/atoms';
@@ -27,6 +27,7 @@ function ButtonOption() {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
+  const theme = useRecoilValue(themeAtom);
 
   useEffect(() => {
     if (!isModal) setIsThemeModalOpen(() => false);
@@ -55,8 +56,8 @@ function ButtonOption() {
         (isThemeModalOpen ? (
           <Modal closeModal={handleModal}>
             <>
-              <ThemeRadio name="colorSet" id="light" label="Light" checked={localStorage.getItem('theme') === 'light'} defaultChecked />
-              <ThemeRadio name="colorSet" id="highContrast" label="HighContrast" checked={localStorage.getItem('theme') === 'highContrast'} />
+              <ThemeRadio name="colorSet" id="light" label="Light" checked={theme === 'light'} defaultChecked />
+              <ThemeRadio name="colorSet" id="highContrast" label="HighContrast" checked={theme === 'highContrast'} />
             </>
           </Modal>
         ) : (
