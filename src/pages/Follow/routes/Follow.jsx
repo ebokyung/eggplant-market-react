@@ -22,9 +22,7 @@ export function Follow() {
       const response = await getFollowAPI(accountName, curr);
       // 10개만 넘어옴
       setData(response);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
+      setIsLoading(false);
     })();
   }, []);
 
