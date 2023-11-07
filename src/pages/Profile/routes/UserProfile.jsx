@@ -6,16 +6,20 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ProfileSection, ProductSection, PostSection } from '../components';
-import { getProfileAPI, getProductAPI, getPostAPI } from '../api';
+import { getProfileAPI, getProductAPI } from '../api';
 import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
+import { scrollHook } from '../../../hooks/scroll';
 
 export function UserProfile() {
   const location = useLocation();
   const accountname = new URLSearchParams(location.search).get('accountName');
-  const [loading, setLoading] = useState(true);
+  const [isloading, setIsLoading] = useState(true);
   const [userProfile, setUserProfile] = useState();
   const [userProduct, setUserProduct] = useState();
   const [userPost, setUserPost] = useState();
+  const [hasMoreData, setHasMoreData] = useState(true);
+
+  scrollHook({ url: `/post/${accountname}/userpost`, cnt: 4, setData: setUserPost, hasMoreData, setHasMoreData });
 
   useEffect(() => {
     document.body.classList.add('profile-body-color');
@@ -25,20 +29,19 @@ export function UserProfile() {
   }, []);
 
   useEffect(() => {
-    setLoading(() => true);
+    setIsLoading(() => true);
     (async () => {
-      const [userProfileData, userProductData, userPostData] = await Promise.all([getProfileAPI(accountname), getProductAPI(accountname), getPostAPI(accountname)]);
+      const [userProfileData, userProductData] = await Promise.all([getProfileAPI(accountname), getProductAPI(accountname)]);
       setUserProfile(userProfileData);
       setUserProduct(userProductData);
-      setUserPost(userPostData);
-      setLoading(() => false);
+      setIsLoading(() => false);
     })();
   }, [location.search]);
 
   return (
     <>
       <Header />
-      {loading ? (
+      {isloading ? (
         <main className='"main-with-nav main-user-profile'>
           <div className="profile-container">
             <div className="profile-header">
@@ -80,7 +83,7 @@ export function UserProfile() {
           <div className="post-container">
             <div className="post-tab">
               <div className="tab-btn-wrap">
-                <Skeleton width={26} height={26} style={{ 'margin-right': 5 }} />
+                <Skeleton width={26} height={26} style={{ marginRight: 5 }} />
                 <Skeleton width={26} height={26} />
               </div>
             </div>
@@ -95,7 +98,7 @@ export function UserProfile() {
         <main className="main-with-nav main-user-profile">
           <ProfileSection data={userProfile?.profile} />
           <ProductSection data={userProduct?.product} />
-          <PostSection data={userPost?.post} />
+          <PostSection data={userPost} />
         </main>
       )}
       <Navbar />

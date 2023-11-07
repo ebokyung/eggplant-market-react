@@ -9,20 +9,27 @@ export const scrollHook = ({ url, cnt, setData, setIsLoading, hasMoreData, setHa
   useEffect(() => {
     (async () => {
       const res = await getData();
-      setData(Object.values(res.data)[0]);
-
-      setIsLoading(false);
+      if (Array.isArray(res.data)) {
+        setData(res.data);
+      } else {
+        setData(Object.values(res.data)[0]);
+      }
+      if (setIsLoading) {
+        setIsLoading(false);
+      }
     })();
   }, []);
 
   const handleScroll = async () => {
     if (!hasMoreData) return;
-
     if (Math.ceil(getScrollTop()) >= getDocumentHeight() - window.innerHeight) {
       const res = await getData();
-      if (Object.values(res.data)[0].length === 0) {
-        setHasMoreData(false);
+
+      if (Array.isArray(res.data)) {
+        if (res.data.length === 0) setHasMoreData(false);
+        setData(prev => prev.concat(res.data));
       } else {
+        if (Object.values(res.data)[0].length === 0) setHasMoreData(false);
         setData(prev => prev.concat(Object.values(res.data)[0]));
       }
     }
