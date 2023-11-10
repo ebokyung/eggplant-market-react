@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
 import Header from '../../../components/Element/Header/Header';
 import Comment from '../components/Comment';
 import { Post } from '../../../components/Element/Post';
@@ -11,6 +10,7 @@ import { getPostDetailAPI } from '../api';
 import CommentSkeleton from '../components/CommentSkeleton';
 import CommentInputSkeleton from '../components/CommentInputSkeleton';
 import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
+import { Meta } from '../../../libs/Meta';
 
 export function PostDetail() {
   const [userImg, setUserImg] = useState('');
@@ -36,6 +36,7 @@ export function PostDetail() {
 
   return (
     <>
+      <Meta title="게시물 상세보기" />
       <Header />
       <main className="main-with-nav main-post">
         {isLoading ? (

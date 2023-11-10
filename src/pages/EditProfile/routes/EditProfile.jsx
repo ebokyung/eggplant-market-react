@@ -9,6 +9,7 @@ import { storage } from '../../../utils/storage';
 import { postImageAPI } from '../../../libs/api/PostImage';
 import { getMyProfileAPI, putEditProfileAPI } from '../api';
 import Fieldset from '../../../components/Skeleton/Fieldset';
+import { Meta } from '../../../libs/Meta';
 
 export function EditProfile() {
   const navigate = useNavigate();
@@ -55,28 +56,33 @@ export function EditProfile() {
     }
   }
 
-  return isLoading ? (
+  return (
     <>
-      <Header page="upload">
-        <Skeleton width={90} height={30} />
-      </Header>
-      <main className="main-profile-edit">
-        <div className="setting-profile-img">
-          <Skeleton className="profile-img main" circle />
-        </div>
-        <Fieldset />
-        <Fieldset />
-        <Fieldset />
-      </main>
-    </>
-  ) : (
-    <>
-      <Header page="upload" btnText="저장" btnDisabled={isCompleteDisabled} formName="form-edit-profile" />
-      <main className="main-profile-edit">
-        <form ref={formRef} onSubmit={handleSubmit} id="form-edit-profile">
-          <Information initialData={data} setIsCompleteDisabled={setIsCompleteDisabled} />
-        </form>
-      </main>
+      <Meta title="프로필 수정" />
+      {isLoading ? (
+        <>
+          <Header page="upload">
+            <Skeleton width={90} height={30} />
+          </Header>
+          <main className="main-profile-edit">
+            <div className="setting-profile-img">
+              <Skeleton className="profile-img main" circle />
+            </div>
+            <Fieldset />
+            <Fieldset />
+            <Fieldset />
+          </main>
+        </>
+      ) : (
+        <>
+          <Header page="upload" btnText="저장" btnDisabled={isCompleteDisabled} formName="form-edit-profile" />
+          <main className="main-profile-edit">
+            <form ref={formRef} onSubmit={handleSubmit} id="form-edit-profile">
+              <Information initialData={data} setIsCompleteDisabled={setIsCompleteDisabled} />
+            </form>
+          </main>
+        </>
+      )}
     </>
   );
 }

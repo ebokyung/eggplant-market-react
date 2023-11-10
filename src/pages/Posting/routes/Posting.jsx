@@ -1,11 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-
 import { useNavigate, useLocation } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
-
 import '../style/Posting.scss';
 import 'react-loading-skeleton/dist/skeleton.css';
-
 import Header from '../../../components/Element/Header/Header';
 import { ProfileImg } from '../../../components/Element/User/ProfileImg';
 import { TextArea } from '../components/TextArea';
@@ -14,6 +11,7 @@ import { postingAPI, postPostImgAPI, getPostAPI, putPostAPI, getUserAPI } from '
 import { storage } from '../../../utils/storage';
 import { imgReg } from '../../../libs/constant/regex';
 import uploadIcon from '../../../assets/icon/upload-file.svg';
+import { Meta } from '../../../libs/Meta';
 
 export function Posting() {
   const formRef = useRef();
@@ -83,6 +81,7 @@ export function Posting() {
 
   return (
     <>
+      <Meta title={`게시글 ${postId ? '수정' : '작성'}`} />
       {isLoading ? (
         <Header page="upload">
           <Skeleton width={90} height={30} />

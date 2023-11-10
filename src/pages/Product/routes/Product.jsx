@@ -7,7 +7,7 @@ import Header from '../../../components/Element/Header/Header';
 import { ProductForm } from '../components/ProductForm';
 import { getProductAPI } from '../api';
 import Fieldset from '../../../components/Skeleton/Fieldset';
-// productId=652b7f9db2cb2056637a0daf
+import { Meta } from '../../../libs/Meta';
 
 export function Product() {
   const location = useLocation();
@@ -38,6 +38,7 @@ export function Product() {
 
   return isLoading ? (
     <>
+      <Meta title="상품 등록" />
       <Header page="upload">
         <Skeleton width={90} height={30} />
       </Header>

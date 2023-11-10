@@ -8,6 +8,7 @@ import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ProfileSection, ProductSection, PostSection } from '../components';
 import { getProfileAPI, getProductAPI, getPostAPI } from '../api';
 import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
+import { Meta } from '../../../libs/Meta';
 
 export function UserProfile() {
   const location = useLocation();
@@ -37,6 +38,7 @@ export function UserProfile() {
 
   return (
     <>
+      <Meta title="사용자 프로필" />
       <Header />
       {loading ? (
         <main className='"main-with-nav main-user-profile'>

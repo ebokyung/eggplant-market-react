@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
 import { useLocation } from 'react-router-dom';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
 import { getFollowAPI } from '../api';
 import FollowItem from '../components/FollowItem';
-
 import '../style/Follow.scss';
 import FollowItemSkeleton from '../../../components/Skeleton/FollowItemSkeleton';
+import { Meta } from '../../../libs/Meta';
 
 export function Follow() {
   const [data, setData] = useState([]);
@@ -30,6 +29,7 @@ export function Follow() {
 
   return (
     <>
+      <Meta title={`${isFollower ? '팔로워' : '팔로잉'} 목록`} />
       <Header page="follow" text={isFollower ? 'Follower' : 'Following'} />
       <main className="main-with-nav">
         <ul className="follow-list">

@@ -7,6 +7,7 @@ import { HomeWithPost } from '../components/HomeWithPost';
 import { HomeWithoutPost } from '../components/HomeWithoutPost';
 import { getFeedAPI } from '../api';
 import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
+import { Meta } from '../../../libs/Meta';
 
 export function Home() {
   const [posts, setPosts] = useState([]);
@@ -23,6 +24,7 @@ export function Home() {
 
   return (
     <>
+      <Meta title="피드" />
       <Header page="main" text="가지마켓 피드" />
       {isLoading ? (
         <main className="main-with-nav main-with-post">

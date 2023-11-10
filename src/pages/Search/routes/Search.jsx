@@ -1,17 +1,15 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-extraneous-dependencies */
-
 import React, { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-
 import Footer from '../../../components/Element/Navbar/Navbar';
 import { SearchItem } from '../components/SearchItem';
-
 import { getSearchAPI } from '../api';
 import { HeaderSearch } from '../../../components/Element/Header/HeaderSearch';
 import '../style/Search.scss';
 import { handleDimension } from '../util';
+import { Meta } from '../../../libs/Meta';
 
 export function Search() {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -46,6 +44,7 @@ export function Search() {
 
   return (
     <>
+      <Meta title="사용자 검색" />
       <HeaderSearch page="search" searchKeyword={searchKeyword} handleSearch={handleSearch} />
       <main className="main-with-nav">
         <ul className="search-user-list">
