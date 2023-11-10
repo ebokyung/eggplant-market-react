@@ -5,6 +5,7 @@
   @include width-height(100%, 100%);
   bottom: 0;
   @include get-color(background-color, dialog-bg-color);
+  z-index: 10;
   .l_modal {
     @include get-color(background-color, bg-color);
     padding: 2.25rem 1.625rem 0.625rem;
