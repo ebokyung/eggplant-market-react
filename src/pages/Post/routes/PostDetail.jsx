@@ -24,15 +24,13 @@ export function PostDetail() {
     (async () => {
       if (isLoading) {
         const [{ image }, { post }, { comments }] = await getPostDetailAPI(postId);
-
         setUserImg(image);
         setPost(post);
         setComments(comments);
-
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [isLoading]);
 
   return (
     <>
