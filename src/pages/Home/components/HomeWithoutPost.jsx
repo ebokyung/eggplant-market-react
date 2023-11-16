@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/Element/Buttons';
 import '../style/Home.scss';
 
-export function HomeWithoutPost() {
+export default function HomeWithoutPost() {
   const navigate = useNavigate();
 
   const handleLink = () => {

@@ -9,7 +9,7 @@ import { ProfileSection, ProductSection, PostSection } from '../components';
 import { getProfileAPI, getProductAPI, getPostAPI } from '../api';
 import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
 
-export function UserProfile() {
+export default function UserProfile() {
   const location = useLocation();
   const accountname = new URLSearchParams(location.search).get('accountName');
   const [loading, setLoading] = useState(true);
