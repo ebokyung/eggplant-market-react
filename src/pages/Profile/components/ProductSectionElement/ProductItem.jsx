@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkImageUrl } from '../../../../utils/imageUrlProcess';
 import Modal from '../../../../components/Element/Modal/Modal';
 import { deleteProductAPI } from '../../api';
+import { useLazyLoad } from '../../../../hooks/useLazyLoad';
 
 export function ProductItem({ item }) {
+  const imgRef = useRef();
+  useLazyLoad(imgRef);
   const { id, itemImage, itemName, price } = item;
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
@@ -39,7 +42,7 @@ export function ProductItem({ item }) {
     <>
       <button className="product" data-product-id={id} type="button" onClick={() => handleModal()}>
         <strong className="product-name">{itemName}</strong>
-        <img className="product-img" src={checkImageUrl(itemImage, 'post')} alt="" />
+        <img className="product-img" data-src={checkImageUrl(itemImage, 'post')} alt="" ref={imgRef} />
         <strong className="product-price">
           <span className="price">{Number(price).toLocaleString()}</span>원
         </strong>
