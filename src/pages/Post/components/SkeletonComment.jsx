@@ -2,7 +2,7 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import ButtonOption from '../../../components/Element/Buttons/ButtonOption';
 
-export default function CommentSkeleton() {
+export default function SkeletonComment() {
   return (
     <section className="comment-sec">
       <h2 className="a11y-hidden">게시물에 대한 답변</h2>

@@ -1,11 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-
 import { useNavigate, useLocation } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
-
 import '../style/Posting.scss';
-import 'react-loading-skeleton/dist/skeleton.css';
-
 import Header from '../../../components/Element/Header/Header';
 import { ProfileImg } from '../../../components/Element/User/ProfileImg';
 import { TextArea } from '../components/TextArea';
@@ -13,7 +8,7 @@ import { ImageArea } from '../components/ImageArea';
 import { postingAPI, postPostImgAPI, getPostAPI, putPostAPI, getUserAPI } from '../api/index';
 import { storage } from '../../../utils/storage';
 import { imgReg } from '../../../libs/constant/regex';
-import uploadIcon from '../../../assets/icon/upload-file.svg';
+import SkeletonPosting from '../components/SkeletonPosting';
 
 export function Posting() {
   const formRef = useRef();
@@ -30,7 +25,28 @@ export function Posting() {
   const [isLoading, setIsLoading] = useState(true);
   const [isPosting, setIsPosting] = useState(false);
 
-  const onSubmit = async e => {
+  useEffect(() => {
+    (async () => {
+      if (postId) {
+        const { author, content, image } = await getPostAPI(postId);
+        setUserImg(author.image);
+        setInitialText(content);
+        setImgData(image.split(imgReg).filter(img => !!img));
+      } else {
+        const {
+          user: { image },
+        } = await getUserAPI();
+        setUserImg(image);
+      }
+      setIsLoading(false);
+    })();
+  }, []);
+
+  useEffect(() => {
+    isTextError && imgData.length === 0 ? setBtnDisabled(true) : setBtnDisabled(false);
+  }, [isTextError, imgData]);
+
+  const handleSubmit = async e => {
     e.preventDefault();
 
     if (isPosting) {
@@ -59,66 +75,18 @@ export function Posting() {
     navigate(`/profile?accountName=${storage.getAccountName()}`);
   };
 
-  // 데이터 처음 불러오기
-  useEffect(() => {
-    (async () => {
-      if (postId) {
-        const { author, content, image } = await getPostAPI(postId);
-        setUserImg(author.image);
-        setInitialText(content);
-        setImgData(image.split(imgReg).filter(img => !!img));
-      } else {
-        const {
-          user: { image },
-        } = await getUserAPI();
-        setUserImg(image);
-      }
-      setIsLoading(false);
-    })();
-  }, []);
-
-  useEffect(() => {
-    isTextError && imgData.length === 0 ? setBtnDisabled(true) : setBtnDisabled(false);
-  }, [isTextError, imgData]);
+  if (isLoading) return <SkeletonPosting />;
 
   return (
     <>
-      {isLoading ? (
-        <Header page="upload">
-          <Skeleton width={90} height={30} />
-        </Header>
-      ) : (
-        <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
-      )}
-
-      {isLoading ? (
-        <main className="main-posting">
-          <div className="profile-img user">
-            <Skeleton style={{ display: 'block', height: '100%' }} />
-          </div>
-          <form action="" className="posting-form">
-            <Skeleton className="textarea" height="150px" />
-
-            <ul className="upload-imgs-list">
-              <li>
-                <Skeleton className="posting-img-cover" style={{ boxShadow: 'none' }} />
-              </li>
-            </ul>
-            <label className="input-file-btn" htmlFor="input-file">
-              <img id="image-upload-btn" src={uploadIcon} alt="" />
-              <input type="file" id="input-file" accept="image/*" multiple />
-            </label>
-          </form>
-        </main>
-      ) : (
-        <main className="main-posting">
-          <ProfileImg profileImg={userImg} category="post" />
-          <form id="form-posting" onSubmit={e => onSubmit(e)} ref={formRef} className="posting-form" action="">
-            <TextArea initialValue={initialText} setIsTextError={setIsTextError} />
-            <ImageArea imgData={imgData} setImgData={setImgData} />
-          </form>
-        </main>
-      )}
+      <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
+      <main className="main-posting">
+        <ProfileImg profileImg={userImg} category="post" />
+        <form id="form-posting" onSubmit={handleSubmit} ref={formRef} className="posting-form" action="">
+          <TextArea initialValue={initialText} setIsTextError={setIsTextError} />
+          <ImageArea imgData={imgData} setImgData={setImgData} />
+        </form>
+      </main>
     </>
   );
 }

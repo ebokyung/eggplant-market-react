@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-
 import { useLocation } from 'react-router-dom';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
 import { getFollowAPI } from '../api';
 import FollowItem from '../components/FollowItem';
-
 import '../style/Follow.scss';
-import FollowItemSkeleton from '../../../components/Skeleton/FollowItemSkeleton';
+import SkeletonFollowItem from '../components/SkeletonFollowItem';
 
 export function Follow() {
   const [data, setData] = useState([]);
@@ -32,7 +30,7 @@ export function Follow() {
       <main className="main-with-nav">
         <ul className="follow-list">
           {isLoading ? (
-            <FollowItemSkeleton />
+            <SkeletonFollowItem />
           ) : (
             data?.map(followitem => (
               <li key={followitem._id} className="follow-item">

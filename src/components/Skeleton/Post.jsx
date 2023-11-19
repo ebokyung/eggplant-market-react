@@ -2,7 +2,7 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import ButtonOption from '../Element/Buttons/ButtonOption';
 
-export default function PostSkeleton() {
+export default function SkeletonPost() {
   return (
     <section id="post" className="home-post">
       <div className="user-container">

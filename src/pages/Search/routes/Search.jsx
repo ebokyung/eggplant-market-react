@@ -2,9 +2,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import React, { useEffect, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-
 import Footer from '../../../components/Element/Navbar/Navbar';
 import { SearchItem } from '../components/SearchItem';
 
@@ -12,6 +9,7 @@ import { getSearchAPI } from '../api';
 import { HeaderSearch } from '../../../components/Element/Header/HeaderSearch';
 import '../style/Search.scss';
 import { handleDimension } from '../util';
+import SkeletonSearch from '../components/SkeletonSearch';
 
 export function Search() {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -50,17 +48,7 @@ export function Search() {
       <main className="main-with-nav">
         <ul className="search-user-list">
           {isLoading ? (
-            <li>
-              <div className="user-container">
-                <div className="profile-img item">
-                  <Skeleton style={{ display: 'block', height: '100%' }} />
-                </div>
-                <div className="user-info">
-                  <Skeleton className="user-name" width={250} />
-                  <Skeleton className="user-id before-none" width={150} />
-                </div>
-              </div>
-            </li>
+            <SkeletonSearch />
           ) : searchKeyword !== '' && data.length === 0 ? (
             <p className="no-data">검색결과가 없습니다.</p>
           ) : (

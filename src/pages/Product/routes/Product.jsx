@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Product.scss';
 import { useLocation } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 import Header from '../../../components/Element/Header/Header';
 import { ProductForm } from '../components/ProductForm';
 import { getProductAPI } from '../api';
-import Fieldset from '../../../components/Skeleton/Fieldset';
+import SkeletonProduct from '../components/SkeletonProduct';
 // productId=652b7f9db2cb2056637a0daf
 
 export function Product() {
@@ -36,24 +34,9 @@ export function Product() {
     }
   }, []);
 
-  return isLoading ? (
-    <>
-      <Header page="upload">
-        <Skeleton width={90} height={30} />
-      </Header>
-      <main className="main-product">
-        <div className="title">
-          <Skeleton width={80} />
-        </div>
-        <div className="formProduct">
-          <Skeleton className="product-img-cover" />
-          <Fieldset />
-          <Fieldset />
-          <Fieldset />
-        </div>
-      </main>
-    </>
-  ) : (
+  if (isLoading) return <SkeletonProduct />;
+
+  return (
     <>
       <Header page="upload" btnDisabled={!isOnSubmit} btnText={btnText} formName="form-product" />
       <main className="main-product">
