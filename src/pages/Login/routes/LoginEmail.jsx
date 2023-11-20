@@ -3,7 +3,7 @@ import '../styles/LoginEmail.scss';
 import { Link } from 'react-router-dom';
 import { LoginForm } from '../components/LoginForm';
 
-export function LoginEmail() {
+export default function LoginEmail() {
   return (
     <main className="main-login-email">
       <h1 className="title">이메일로 로그인</h1>

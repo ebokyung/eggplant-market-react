@@ -5,7 +5,7 @@ import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ChatListItem } from '../components/ChatListItem';
 import { chatListData } from '../../../libs/dummy';
 
-export function ChatList() {
+export default function ChatList() {
   return (
     <>
       {/* fixed header ? */}

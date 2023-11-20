@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Error.scss';
 
-export function Error() {
+export default function Error() {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
