@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/EditProfile.scss';
+import imageCompression from 'browser-image-compression';
 import Header from '../../../components/Element/Header/Header';
 import { Information } from '../../../components/Information';
 import { storage } from '../../../utils/storage';
@@ -34,8 +35,17 @@ export default function EditProfile() {
     const { accountname, username, intro, image } = formRef.current.elements;
 
     let profileImgUrl = data.image;
+
     if (image.files[0]) {
-      profileImgUrl = await postImageAPI(image.files[0]);
+      const options = {
+        maxSizeMB: 10,
+        maxWidthOrHeight: 200,
+      };
+
+      const imgBlob = await imageCompression(image.files[0], options);
+      const imgFile = new File([imgBlob], imgBlob.name, { type: imgBlob.type });
+
+      profileImgUrl = await postImageAPI(imgFile);
     }
 
     const update = {

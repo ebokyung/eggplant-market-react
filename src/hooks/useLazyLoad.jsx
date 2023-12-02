@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export const useLazyLoad = (imgRef, options = {}) => {
+export const useLazyLoad = imgRef => {
   useEffect(() => {
     if (!imgRef.current) return;
 
@@ -14,7 +14,7 @@ export const useLazyLoad = (imgRef, options = {}) => {
       });
     };
 
-    const observer = new IntersectionObserver(callback, options);
+    const observer = new IntersectionObserver(callback);
 
     if (imgRef.current instanceof Array) imgRef.current.forEach(i => observer.observe(i));
     else observer.observe(imgRef.current);
@@ -24,5 +24,5 @@ export const useLazyLoad = (imgRef, options = {}) => {
       if (imgRef.current instanceof Array) imgRef.current.forEach(i => observer.disconnect(i));
       else observer.disconnect(imgRef.current);
     };
-  }, [imgRef, options]);
+  }, [imgRef]);
 };

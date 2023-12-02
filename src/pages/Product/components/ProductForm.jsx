@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import imageCompression from 'browser-image-compression';
 import { Input } from '../../../components/Element/Input';
 import { InputProductImage } from './InputProductImage';
 import { postProductAPI, putProductAPI } from '../api';
@@ -77,7 +78,15 @@ export function ProductForm({ setIsOnSubmit, initialData }) {
 
     let productImgUrl = initialData?.itemImage;
     if (productImg.files[0]) {
-      productImgUrl = await postImageAPI(productImg.files[0]);
+      const options = {
+        maxSizeMB: 10,
+        maxWidthOrHeight: 450,
+      };
+
+      const imgBlob = await imageCompression(productImg.files[0], options);
+      const imgFile = new File([imgBlob], imgBlob.name, { type: imgBlob.type });
+
+      productImgUrl = await postImageAPI(imgFile);
     }
 
     const data = {
