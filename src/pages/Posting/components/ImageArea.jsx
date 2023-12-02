@@ -15,15 +15,12 @@ export function ImageArea({ imgData, setImgData }) {
     if (imgData.length + temp.length <= 3) {
       setImgData(prev => [...prev, ...temp]);
       e.target.value = null;
-      return;
     }
-    alert('이미지가 만아요2');
   };
 
   const checkImageLength = e => {
     if (imgData.length >= 3) {
       e.preventDefault();
-      alert('이미지가 만아요');
     }
   };
 
