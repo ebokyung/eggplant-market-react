@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from 'react';
+import './index.scss';
 import { Route, Routes } from 'react-router-dom';
 
 const Error = lazy(() => import('../pages/Error/Error'));
