@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/EditProfile.scss';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 import Header from '../../../components/Element/Header/Header';
 import { Information } from '../../../components/Information';
 import { storage } from '../../../utils/storage';
 import { postImageAPI } from '../../../libs/api/PostImage';
 import { getMyProfileAPI, putEditProfileAPI } from '../api';
-import Fieldset from '../../../components/Skeleton/Fieldset';
+import SkeletonEditProfile from '../components/SkeletonEditProfile';
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -55,21 +53,9 @@ export default function EditProfile() {
     }
   }
 
-  return isLoading ? (
-    <>
-      <Header page="upload">
-        <Skeleton width={90} height={30} />
-      </Header>
-      <main className="main-profile-edit">
-        <div className="setting-profile-img">
-          <Skeleton className="profile-img main" circle />
-        </div>
-        <Fieldset />
-        <Fieldset />
-        <Fieldset />
-      </main>
-    </>
-  ) : (
+  if (isLoading) return <SkeletonEditProfile />;
+
+  return (
     <>
       <Header page="upload" btnText="저장" btnDisabled={isCompleteDisabled} formName="form-edit-profile" />
       <main className="main-profile-edit">

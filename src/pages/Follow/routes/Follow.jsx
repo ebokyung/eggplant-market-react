@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-
 import { useLocation } from 'react-router-dom';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
 import FollowItem from '../components/FollowItem';
-
 import '../style/Follow.scss';
-import FollowItemSkeleton from '../../../components/Skeleton/FollowItemSkeleton';
+import SkeletonFollowItem from '../components/SkeletonFollowItem';
 import { scrollHook } from '../../../hooks/scroll';
 
 export default function Follow() {
@@ -25,7 +23,7 @@ export default function Follow() {
       <main className="main-with-nav">
         <ul className="follow-list">
           {isLoading ? (
-            <FollowItemSkeleton />
+            <SkeletonFollowItem />
           ) : (
             data?.map(followitem => (
               <li key={followitem._id} className="follow-item">

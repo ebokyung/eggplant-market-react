@@ -5,7 +5,7 @@ import Footer from '../../../components/Element/Navbar/Navbar';
 import '../style/Home.scss';
 import HomeWithPost from '../components/HomeWithPost';
 import HomeWithoutPost from '../components/HomeWithoutPost';
-import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
+import SkeletonHome from '../components/SkeletonHome';
 import { scrollHook } from '../../../hooks/scroll';
 
 export default function Home() {
@@ -17,23 +17,7 @@ export default function Home() {
   return (
     <>
       <Header page="main" text="가지마켓 피드" />
-
-      {isLoading ? (
-        <main className="main-with-nav main-with-post">
-          <ul className="post-list">
-            <li>
-              <PostSkeleton />
-            </li>
-            <li>
-              <PostSkeleton />
-            </li>
-          </ul>
-        </main>
-      ) : posts.length ? (
-        <HomeWithPost posts={posts} />
-      ) : (
-        <HomeWithoutPost />
-      )}
+      {isLoading ? <SkeletonHome /> : posts.length ? <HomeWithPost posts={posts} /> : <HomeWithoutPost />}
       <Footer />
     </>
   );

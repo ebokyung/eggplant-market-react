@@ -1,16 +1,15 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
 import Header from '../../../components/Element/Header/Header';
 import Comment from '../components/Comment';
 import { Post } from '../../../components/Element/Post';
 import '../style/PostDetail.scss';
 import { CommentInput } from '../components/CommentInput';
 import { getPostDetailAPI } from '../api';
-import CommentSkeleton from '../components/CommentSkeleton';
-import CommentInputSkeleton from '../components/CommentInputSkeleton';
-import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
+import SkeletonComment from '../components/SkeletonComment';
+import SkeletonCommentInput from '../components/SkeletonCommentInput';
+import SkeletonPost from '../../../components/Skeleton/Post';
 
 export default function PostDetail() {
   const [userImg, setUserImg] = useState('');
@@ -38,8 +37,8 @@ export default function PostDetail() {
       <main className="main-with-nav main-post">
         {isLoading ? (
           <>
-            <PostSkeleton />
-            <CommentSkeleton />
+            <SkeletonPost />
+            <SkeletonComment />
           </>
         ) : (
           <>
@@ -57,7 +56,7 @@ export default function PostDetail() {
           </>
         )}
       </main>
-      {isLoading ? <CommentInputSkeleton /> : <CommentInput postId={postId} setIsLoading={setIsLoading} userImg={userImg} />}
+      {isLoading ? <SkeletonCommentInput /> : <CommentInput postId={postId} setIsLoading={setIsLoading} userImg={userImg} />}
       <section />
     </>
   );
