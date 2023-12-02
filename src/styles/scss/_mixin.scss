@@ -13,9 +13,27 @@
 @mixin get-color($property, $color) {
     #{$property}: get-color($color);
 
-    @at-root .theme-wrapper.highContrast & {
+    html[data-theme="highContrast"] & {
         #{$property}: get-color($color, highContrast);
     }
+}
+
+@mixin get-body-color {
+  background-color: #ffffff;
+
+  &.login-body-color {
+    background-color: #635CA5;
+  }
+  &.profile-body-color{
+    background-color: #f2f2f2;
+  }
+  
+  html[data-theme="highContrast"] & {
+    background-color: #000000;
+  }
+  html[data-theme="highContrast"] &.login-body-color{
+    background-color: #E4D6FF;
+  }
 }
 
 @mixin image-cover{

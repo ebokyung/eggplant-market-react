@@ -1,0 +1,5 @@
+@import '/src/styles/scss/mixin';
+
+body{
+  @include get-body-color;
+}

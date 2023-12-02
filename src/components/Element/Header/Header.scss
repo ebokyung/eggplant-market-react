@@ -35,8 +35,11 @@
   font-weight: 500;
   margin-right: auto;
   &-main {
-    font-size: map-get($font-sizes, 'size18');
+  @include get-color(color, font-color);
+  font-size: map-get($font-sizes, 'size18');
     font-weight: 500;
+  margin-right: auto;
+
   }
 }
 

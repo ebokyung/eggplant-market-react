@@ -71,15 +71,16 @@
       &>strong {
         font-size: map-get($font-sizes, "size18");
         font-weight: 700;
-        color: $gray300-color;
+        @include get-color(color, followings-num-color);
       }
     }
   
-    .follow-wrap:nth-of-type(1) {
+    .follow-wrap:nth-of-type(1) { 
       transform: translateX(calc(-50% - 1.5rem - 94px));
   
       &>strong {
-        color: $black-color;
+        @include get-color(color, followers-num-color);
+
       }
     }
   }

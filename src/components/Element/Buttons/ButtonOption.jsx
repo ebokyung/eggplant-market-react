@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './style/OtherButton.scss';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Modal from '../Modal/Modal';
 import { storage } from '../../../utils/storage';
+import { themeAtom } from '../../../recoil/theme/atoms';
 
 // 고대비 테마 radio 설정
 function ThemeRadio({ name, id, label, checked }) {
+  const setTheme = useSetRecoilState(themeAtom);
   const handleTheme = theme => {
     localStorage.setItem('theme', theme);
-    // applyTheme();
+    document.documentElement.setAttribute('data-theme', theme); // css 이미지 url
+    setTheme(theme); // 동적으로 생성되어 직접 바꾸어줘야하는 이미지 src (기본 프로필 이미지)
+    // applyThemeToErrorImage(theme);
   };
   return (
     <label htmlFor={id} className="theme-item">
@@ -22,6 +27,7 @@ function ButtonOption() {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
+  const theme = useRecoilValue(themeAtom);
 
   useEffect(() => {
     if (!isModal) setIsThemeModalOpen(() => false);
@@ -50,8 +56,8 @@ function ButtonOption() {
         (isThemeModalOpen ? (
           <Modal closeModal={handleModal}>
             <>
-              <ThemeRadio name="colorSet" id="light" label="Light" checked={localStorage.getItem('theme') === 'light'} defaultChecked />
-              <ThemeRadio name="colorSet" id="highContrast" label="HighContrast" checked={localStorage.getItem('theme') === 'highContrast'} />
+              <ThemeRadio name="colorSet" id="light" label="Light" checked={theme === 'light'} defaultChecked />
+              <ThemeRadio name="colorSet" id="highContrast" label="HighContrast" checked={theme === 'highContrast'} />
             </>
           </Modal>
         ) : (
