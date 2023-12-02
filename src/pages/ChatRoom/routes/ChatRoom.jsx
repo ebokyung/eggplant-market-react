@@ -5,7 +5,7 @@ import Header from '../../../components/Element/Header/Header';
 import { chatData } from '../../../libs/dummy';
 import { ChatBubble } from '../components/ChatBubble';
 
-export function ChatRoom() {
+export default function ChatRoom() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();

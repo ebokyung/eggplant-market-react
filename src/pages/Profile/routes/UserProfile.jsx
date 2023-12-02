@@ -10,7 +10,7 @@ import { getProfileAPI, getProductAPI } from '../api';
 import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
 import { scrollHook } from '../../../hooks/scroll';
 
-export function UserProfile() {
+export default function UserProfile() {
   const location = useLocation();
   const accountname = new URLSearchParams(location.search).get('accountName');
   const [isloading, setIsLoading] = useState(true);

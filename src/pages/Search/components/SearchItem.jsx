@@ -15,9 +15,8 @@ function highlightKeyword(text, keyword) {
   return text;
 }
 
-export function SearchItem({ user, keyword }) {
+export default function SearchItem({ user, keyword }) {
   const { _id, username, accountname, image } = user;
-  // highlight 처리하기
   const content = highlightKeyword(username, keyword);
 
   return (
