@@ -9,7 +9,7 @@ import LogoWhite from '../../assets/logo/logo-white.svg';
 import { storage } from '../../utils/storage';
 import { themeAtom } from '../../recoil/theme/atoms';
 
-export function Splash() {
+export default function Splash() {
   const theme = useRecoilValue(themeAtom);
   const navigate = useNavigate();
 
