@@ -7,7 +7,7 @@ import LogoBlack from '../../assets/logo/logo-black.svg';
 import LogoWhite from '../../assets/logo/logo-white.svg';
 import { storage } from '../../utils/storage';
 
-export function Splash() {
+export default function Splash() {
   const theme = window.localStorage.getItem('theme');
   const navigate = useNavigate();
 

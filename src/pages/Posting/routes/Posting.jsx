@@ -10,7 +10,7 @@ import { storage } from '../../../utils/storage';
 import { imgReg } from '../../../libs/constant/regex';
 import SkeletonPosting from '../components/SkeletonPosting';
 
-export function Posting() {
+export default function Posting() {
   const formRef = useRef();
   const location = useLocation();
   const postId = new URLSearchParams(location.search).get('postId');

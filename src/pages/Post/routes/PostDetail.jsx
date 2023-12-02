@@ -11,7 +11,7 @@ import SkeletonComment from '../components/SkeletonComment';
 import SkeletonCommentInput from '../components/SkeletonCommentInput';
 import SkeletonPost from '../../../components/Skeleton/Post';
 
-export function PostDetail() {
+export default function PostDetail() {
   const [userImg, setUserImg] = useState('');
   const [post, setPost] = useState([]);
   const [comments, setComments] = useState([]);

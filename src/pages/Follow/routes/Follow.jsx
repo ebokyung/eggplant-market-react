@@ -7,7 +7,7 @@ import FollowItem from '../components/FollowItem';
 import '../style/Follow.scss';
 import SkeletonFollowItem from '../components/SkeletonFollowItem';
 
-export function Follow() {
+export default function Follow() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();

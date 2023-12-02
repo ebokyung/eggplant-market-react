@@ -7,7 +7,7 @@ import { getProductAPI } from '../api';
 import SkeletonProduct from '../components/SkeletonProduct';
 // productId=652b7f9db2cb2056637a0daf
 
-export function Product() {
+export default function Product() {
   const location = useLocation();
   const hasProductId = !!location.search;
   const btnText = hasProductId ? '수정' : '업로드';

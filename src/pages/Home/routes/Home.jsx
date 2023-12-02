@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../../components/Element/Header/Header';
 import Footer from '../../../components/Element/Navbar/Navbar';
 import '../style/Home.scss';
-import { HomeWithPost } from '../components/HomeWithPost';
-import { HomeWithoutPost } from '../components/HomeWithoutPost';
 import { getFeedAPI } from '../api';
 import SkeletonHome from '../components/SkeletonHome';
+import HomeWithoutPost from '../components/HomeWithoutPost';
+import HomeWithPost from '../components/HomeWithPost';
 
-export function Home() {
+export default function Home() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

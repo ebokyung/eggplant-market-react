@@ -8,7 +8,7 @@ import { postImageAPI } from '../../../libs/api/PostImage';
 import { getMyProfileAPI, putEditProfileAPI } from '../api';
 import SkeletonEditProfile from '../components/SkeletonEditProfile';
 
-export function EditProfile() {
+export default function EditProfile() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [isCompleteDisabled, setIsCompleteDisabled] = useState(false);
