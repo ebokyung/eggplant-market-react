@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
-import { getFollowAPI } from '../api';
 import FollowItem from '../components/FollowItem';
 
 import '../style/Follow.scss';
 import FollowItemSkeleton from '../../../components/Skeleton/FollowItemSkeleton';
+import { scrollHook } from '../../../hooks/scroll';
 
 export default function Follow() {
   const [data, setData] = useState([]);
@@ -16,15 +16,8 @@ export default function Follow() {
   const isFollower = location.pathname.includes('follower');
   const accountName = new URLSearchParams(location.search).get('accountName');
 
-  useEffect(() => {
-    (async () => {
-      const curr = isFollower ? 'follower' : 'following';
-      const response = await getFollowAPI(accountName, curr);
-      // 10개만 넘어옴
-      setData(response);
-      setIsLoading(false);
-    })();
-  }, []);
+  const [hasMoreData, setHasMoreData] = useState(true);
+  scrollHook({ url: `/profile/${accountName}/${isFollower ? 'follower' : 'following'}`, cnt: 11, setData, setIsLoading, hasMoreData, setHasMoreData });
 
   return (
     <>
