@@ -66,7 +66,7 @@ export function Post({ post }) {
           <ButtonLike postid={id} hearted={hearted} heartCnts={heartCount} />
           <Link className="btn-comment" to={`/post?postId=${id}`} onClick={preventClick} style={preventPointer}>
             <span className="a11y-hidden">게시물 댓글 보러가기</span>
-            <img src={messageCircle} alt="" />
+            <img className="comment-icon" src={messageCircle} alt="" />
             <span className="cnt">{commentCount}</span>
           </Link>
         </div>

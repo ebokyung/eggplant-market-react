@@ -6,9 +6,14 @@
   align-items: center;
   border-bottom: $border-gray100-1px;
   @include get-color(background-color, bg-color);
+
+  .search-icon {
+    width: 24px;
+    height: 24px;
+  }
 }
 
-.fixed-header{
+.fixed-header {
   position: fixed;
   left: 0;
   right: 0;

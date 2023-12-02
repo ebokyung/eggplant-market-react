@@ -24,7 +24,7 @@ function Header({ page, text, btnText, children, className, btnDisabled = true, 
       )}
       {page === 'main' && (
         <Link to="/search" type="button">
-          <img id="search-icon" src={searchSrc} alt="검색하기" />
+          <img className="search-icon" src={searchSrc} alt="검색하기" />
         </Link>
       )}
       {page === 'upload' &&
