@@ -9,7 +9,7 @@ import { postImageAPI } from '../../../libs/api/PostImage';
 import { postSignUpAPI } from '../api';
 import { Meta } from '../../../libs/Meta';
 
-export function SignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const [isNext, setIsNext] = useState(false);
   const [isCompleteDisabled, setIsCompleteDisabled] = useState(true);

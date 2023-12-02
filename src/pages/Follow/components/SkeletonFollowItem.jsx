@@ -1,7 +1,7 @@
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-export default function FollowItemSkeleton() {
+export default function SkeletonFollowItem() {
   return (
     <li className="follow-item">
       <div className="user-container">

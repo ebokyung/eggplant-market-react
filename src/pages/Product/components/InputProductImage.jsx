@@ -48,7 +48,7 @@ export function InputProductImage({ initialValue, setImgError }) {
           />
           <path d="M26.2502 20.7498L21.6668 16.1665L11.5835 26.2498" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <input id="product-img-input" type="file" name="productImg" accept="image/*" />
+        <input id="product-img-input" type="file" name="productImg" accept=".jpg, .gif, .png, .jpeg, .bmp, .tif, .heic" />
       </label>
     </article>
   );

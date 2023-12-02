@@ -7,12 +7,12 @@ import { Post } from '../../../components/Element/Post';
 import '../style/PostDetail.scss';
 import { CommentInput } from '../components/CommentInput';
 import { getPostDetailAPI } from '../api';
-import CommentSkeleton from '../components/CommentSkeleton';
-import CommentInputSkeleton from '../components/CommentInputSkeleton';
-import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
+import SkeletonComment from '../components/SkeletonComment';
+import SkeletonCommentInput from '../components/SkeletonCommentInput';
+import SkeletonPost from '../../../components/Skeleton/Post';
 import { Meta } from '../../../libs/Meta';
 
-export function PostDetail() {
+export default function PostDetail() {
   const [userImg, setUserImg] = useState('');
   const [post, setPost] = useState([]);
   const [comments, setComments] = useState([]);
@@ -24,15 +24,13 @@ export function PostDetail() {
     (async () => {
       if (isLoading) {
         const [{ image }, { post }, { comments }] = await getPostDetailAPI(postId);
-
         setUserImg(image);
         setPost(post);
         setComments(comments);
-
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [isLoading]);
 
   return (
     <>
@@ -41,8 +39,8 @@ export function PostDetail() {
       <main className="main-with-nav main-post">
         {isLoading ? (
           <>
-            <PostSkeleton />
-            <CommentSkeleton />
+            <SkeletonPost />
+            <SkeletonComment />
           </>
         ) : (
           <>
@@ -60,7 +58,7 @@ export function PostDetail() {
           </>
         )}
       </main>
-      {isLoading ? <CommentInputSkeleton /> : <CommentInput postId={postId} setIsLoading={setIsLoading} userImg={userImg} />}
+      {isLoading ? <SkeletonCommentInput /> : <CommentInput postId={postId} setIsLoading={setIsLoading} userImg={userImg} />}
       <section />
     </>
   );

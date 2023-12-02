@@ -1,11 +1,14 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable consistent-return */
+import { useRecoilValue } from 'recoil';
 import defaultProfile from '../assets/basic-profile.png';
 import hcProfile from '../assets/basic-profile-hc.png';
 import defaultError from '../assets/error-image.png';
 import hcError from '../assets/error-image-hc.png';
+import { themeAtom } from '../recoil/theme/atoms';
 
 export function checkImageUrl(Img, position) {
+  const theme = useRecoilValue(themeAtom);
   const LightProfile = defaultProfile;
   const LightPost = defaultError;
   const ContrastProfile = hcProfile;
@@ -31,12 +34,12 @@ export function checkImageUrl(Img, position) {
 
   if (Img.includes('Ellipse') || !fileNameWithExtension) {
     if (position === 'profile') {
-      if (localStorage.getItem('theme') === 'light') return LightProfile;
-      if (localStorage.getItem('theme') === 'highContrast') return ContrastProfile;
+      if (theme === 'light') return LightProfile;
+      if (theme === 'highContrast') return ContrastProfile;
     }
     if (position === 'post') {
-      if (localStorage.getItem('theme') === 'light') return LightPost;
-      if (localStorage.getItem('theme') === 'highContrast') return ContrastPost;
+      if (theme === 'light') return LightPost;
+      if (theme === 'highContrast') return ContrastPost;
     }
   }
 }

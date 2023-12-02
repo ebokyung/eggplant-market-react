@@ -3,7 +3,7 @@ import '../styles/Login.scss';
 import { Link } from 'react-router-dom';
 import { Meta } from '../../../libs/Meta';
 
-export function Login() {
+export default function Login() {
   useEffect(() => {
     document.body.classList.add('login-body-color');
     return () => {

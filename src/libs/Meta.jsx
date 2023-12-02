@@ -10,7 +10,7 @@ export function Meta({ title }) {
       <link rel="icon" href="../assets/favicon.ico" />
       <meta charset="UTF-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="keywords" content="바자회, 플리마켓, 환경, 재활용, 나눔, 기부, 중고거래" />
       <meta
         name="description"

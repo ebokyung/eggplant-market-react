@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/EditProfile.scss';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 import Header from '../../../components/Element/Header/Header';
 import { Information } from '../../../components/Information';
 import { storage } from '../../../utils/storage';
 import { postImageAPI } from '../../../libs/api/PostImage';
 import { getMyProfileAPI, putEditProfileAPI } from '../api';
-import Fieldset from '../../../components/Skeleton/Fieldset';
+import SkeletonEditProfile from '../components/SkeletonEditProfile';
 import { Meta } from '../../../libs/Meta';
 
-export function EditProfile() {
+export default function EditProfile() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [isCompleteDisabled, setIsCompleteDisabled] = useState(false);
@@ -56,33 +54,17 @@ export function EditProfile() {
     }
   }
 
+  if (isLoading) return <SkeletonEditProfile />;
+
   return (
     <>
       <Meta title="프로필 수정" />
-      {isLoading ? (
-        <>
-          <Header page="upload">
-            <Skeleton width={90} height={30} />
-          </Header>
-          <main className="main-profile-edit">
-            <div className="setting-profile-img">
-              <Skeleton className="profile-img main" circle />
-            </div>
-            <Fieldset />
-            <Fieldset />
-            <Fieldset />
-          </main>
-        </>
-      ) : (
-        <>
-          <Header page="upload" btnText="저장" btnDisabled={isCompleteDisabled} formName="form-edit-profile" />
-          <main className="main-profile-edit">
-            <form ref={formRef} onSubmit={handleSubmit} id="form-edit-profile">
-              <Information initialData={data} setIsCompleteDisabled={setIsCompleteDisabled} />
-            </form>
-          </main>
-        </>
-      )}
+      <Header page="upload" btnText="저장" btnDisabled={isCompleteDisabled} formName="form-edit-profile" />
+      <main className="main-profile-edit">
+        <form ref={formRef} onSubmit={handleSubmit} id="form-edit-profile">
+          <Information initialData={data} setIsCompleteDisabled={setIsCompleteDisabled} />
+        </form>
+      </main>
     </>
   );
 }

@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import './Splash.scss';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import SymbolImg from '../../assets/symbol/light-basic.svg';
 import SymbolImgHC from '../../assets/symbol/hc-basic.svg';
 import LogoBlack from '../../assets/logo/logo-black.svg';
 import LogoWhite from '../../assets/logo/logo-white.svg';
 import { storage } from '../../utils/storage';
+import { themeAtom } from '../../recoil/theme/atoms';
 
-export function Splash() {
-  const theme = window.localStorage.getItem('theme');
+export default function Splash() {
+  const theme = useRecoilValue(themeAtom);
   const navigate = useNavigate();
 
   useEffect(() => {

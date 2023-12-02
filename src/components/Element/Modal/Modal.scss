@@ -4,7 +4,8 @@
   position: fixed;
   @include width-height(100%, 100%);
   bottom: 0;
-  @include get-color(background-color, background-color);
+  @include get-color(background-color, dialog-bg-color);
+  z-index: 10;
   .l_modal {
     @include get-color(background-color, bg-color);
     padding: 2.25rem 1.625rem 0.625rem;
@@ -25,14 +26,14 @@
     left: 50%;
     transform: translateX(-50%);
   }
-    button, .theme-item {
-      display: block;
-      width: 100%;
-      text-align: left;
-      padding: 0.875rem 0rem;
-      @include get-color(color, font-color);
-      font-size: map-get($font-sizes, size14);
-      line-height: 1.125rem;
+  button, .theme-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.875rem 0rem;
+    @include get-color(color, font-color);
+    font-size: map-get($font-sizes, size14);
+    line-height: 1.125rem;
   }
   .theme-item > input {
     margin-right: 0.9375rem;

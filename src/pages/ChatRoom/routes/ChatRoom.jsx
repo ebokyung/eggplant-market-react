@@ -6,7 +6,7 @@ import { chatData } from '../../../libs/dummy';
 import { ChatBubble } from '../components/ChatBubble';
 import { Meta } from '../../../libs/Meta';
 
-export function ChatRoom() {
+export default function ChatRoom() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
@@ -61,7 +61,7 @@ export function ChatRoom() {
                   />
                   <path d="M26.2502 20.7498L21.6668 16.1665L11.5835 26.2498" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <input id="inputImg" type="file" accept="image/*" />
+                <input id="inputImg" type="file" accept=".jpg, .gif, .png, .jpeg, .bmp, .tif, .heic" />
               </label>
               <button type="submit" className="btn-send" disabled>
                 <span className="a11y-hidden">메세지</span>전송
