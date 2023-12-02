@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../style/Posting.scss';
+import imageCompression from 'browser-image-compression';
 import Header from '../../../components/Element/Header/Header';
 import { ProfileImg } from '../../../components/Element/User/ProfileImg';
 import { TextArea } from '../components/TextArea';
@@ -54,12 +55,29 @@ export default function Posting() {
       return;
     }
 
+    const options = {
+      maxSizeMB: 10,
+      maxWidthOrHeight: 600,
+    };
+
+    const compressedBlob = await Promise.all(
+      imgData.map(async fileItem => {
+        const data = fileItem instanceof File ? await imageCompression(fileItem, options) : fileItem;
+        return data;
+      }),
+    );
+
+    const compressedFile = compressedBlob.map(fileItem => {
+      const data = fileItem instanceof Blob ? new File([fileItem], fileItem.name, { type: fileItem.type }) : fileItem;
+      return data;
+    });
+
     setIsPosting(true);
 
     const { textarea } = formRef.current.elements;
 
     const postImgData = await Promise.all(
-      imgData.map(async fileItem => {
+      compressedFile.map(async fileItem => {
         const data = fileItem instanceof File ? await postPostImgAPI(fileItem) : fileItem;
         return data;
       }),
