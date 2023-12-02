@@ -1,13 +1,5 @@
 @import '/src/styles/scss/mixin';
 
-@mixin get-color($property, $color) {
-  #{$property}: get-color($color);
-
-  @at-root .home-wrapper.highContrast & {
-    #{$property}: get-color($color, highContrast);
-  }
-}
-
 .main-with-post {
   padding : {
     top: 1.25rem;

@@ -1,9 +1,13 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import uploadIcon from '../../../assets/icon/upload-file.svg';
+import { useRecoilValue } from 'recoil';
+import uploadFileIconHc from '../../../assets/icon/upload-file-hc.svg';
+import uploadFileIcon from '../../../assets/icon/upload-file.svg';
 import { ImageItem } from './ImageItem';
+import { themeAtom } from '../../../recoil/theme/atoms';
 
 export function ImageArea({ imgData, setImgData }) {
+  const theme = useRecoilValue(themeAtom);
   // 이미지 처리 로직
   const handleImage = e => {
     // e.target.value = null 처리를 위해서 임시로 복사본 생성
@@ -37,8 +41,8 @@ export function ImageArea({ imgData, setImgData }) {
         ))}
       </ul>
       <label className="input-file-btn" htmlFor="input-file">
-        <img id="image-upload-btn" src={uploadIcon} alt="" />
-        <input type="file" id="input-file" accept="image/*" multiple onClick={e => checkImageLength(e)} onChange={e => handleImage(e)} />
+        <img id="image-upload-btn" src={theme === 'light' ? uploadFileIcon : uploadFileIconHc} alt="" />
+        <input type="file" id="input-file" accept=".jpg, .gif, .png, .jpeg, .bmp, .tif, .heic" multiple onClick={e => checkImageLength(e)} onChange={e => handleImage(e)} />
       </label>
     </>
   );

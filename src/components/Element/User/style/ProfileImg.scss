@@ -19,6 +19,7 @@ $img-sizes: (
 .profile-img {
   @include image-cover;
   @include profile-img-tag;
+  border: $border-gray100-1px;
 }
 
 @each $name, $size in $img-sizes {

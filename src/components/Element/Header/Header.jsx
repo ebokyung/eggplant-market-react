@@ -1,11 +1,18 @@
 import React from 'react';
 import './Header.scss';
 import { Link } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import searchIcon from '../../../assets/icon/icon-search.svg';
+import searchIconHc from '../../../assets/icon/icon-search-hc.svg';
 import { Button, ButtonOption, ButtonBack } from '../Buttons';
+import { themeAtom } from '../../../recoil/theme/atoms';
 
 function Header({ page, text, btnText, children, className, btnDisabled = true, formName }) {
   // props : page (main || upload || follow) , text , btnText
+
+  const theme = useRecoilValue(themeAtom);
+  const searchSrc = theme === 'light' ? searchIcon : searchIconHc;
+
   return (
     <header className={`l_header header-${page || 'basic'} ${className}`}>
       {text && (
@@ -17,7 +24,7 @@ function Header({ page, text, btnText, children, className, btnDisabled = true, 
       )}
       {page === 'main' && (
         <Link to="/search" type="button">
-          <img src={searchIcon} alt="검색하기" />
+          <img id="search-icon" src={searchSrc} alt="검색하기" />
         </Link>
       )}
       {page === 'upload' &&

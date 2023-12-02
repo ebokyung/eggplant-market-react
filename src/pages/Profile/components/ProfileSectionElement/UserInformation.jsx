@@ -6,7 +6,7 @@ import { ProfileImg } from '../../../../components/Element/User';
 import { Followers } from './Follwers';
 
 export function UserInfomation({ data }) {
-  const { username, accountname, intro, followerCount, followingCount } = data;
+  const { image, username, accountname, intro, followerCount, followingCount } = data;
   const setterFollwerCnt = useSetRecoilState(followerCnt);
   useEffect(() => {
     setterFollwerCnt(followerCount);
@@ -15,7 +15,7 @@ export function UserInfomation({ data }) {
   return (
     <header className="profile-header">
       <h2 className="a11y-hidden">사용자 정보</h2>
-      <ProfileImg />
+      <ProfileImg profileImg={image} />
       <strong className="profile-name">
         <span className="a11y-hidden">이름:</span>
         {username}

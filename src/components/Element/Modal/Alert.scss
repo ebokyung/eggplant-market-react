@@ -5,8 +5,9 @@
   top: 0;
   left: 0;
   @include width-height(100%, 100%);
-  @include get-color(background-color, background-color);
+  @include get-color(background-color, dialog-bg-color);
   display: flex;
+  z-index: 20;
   .modal-content {
     width: 15.75rem;
     @include get-color(background-color, bg-color);

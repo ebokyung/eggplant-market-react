@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 export default function SkeletonCommentInput() {
   return (
     <footer className="comment-section">
-      <form action="">
+      <form action="" style={{ zIndex: 1 }}>
         <div id="commemt-input">
           <Skeleton />
         </div>

@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from 'react';
+import './index.scss';
 import { Route, Routes } from 'react-router-dom';
 
 const Error = lazy(() => import('../pages/Error/Error'));
@@ -20,6 +21,9 @@ const Posting = lazy(() => import('../pages/Posting/routes/Posting'));
 export default function AppRoutes() {
   if (!localStorage.getItem('theme')) {
     localStorage.setItem('theme', 'light');
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
   }
 
   return (
