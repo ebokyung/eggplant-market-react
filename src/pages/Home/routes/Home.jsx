@@ -1,29 +1,23 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Header from '../../../components/Element/Header/Header';
 import Footer from '../../../components/Element/Navbar/Navbar';
 import '../style/Home.scss';
-import { HomeWithPost } from '../components/HomeWithPost';
-import { HomeWithoutPost } from '../components/HomeWithoutPost';
-import { getFeedAPI } from '../api';
+import HomeWithPost from '../components/HomeWithPost';
+import HomeWithoutPost from '../components/HomeWithoutPost';
 import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
+import { scrollHook } from '../../../hooks/scroll';
 
-export function Home() {
+export default function Home() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      const res = await getFeedAPI('/post/feed/');
-      setPosts(res.posts);
-
-      setIsLoading(false);
-    })();
-  }, []);
+  const [hasMoreData, setHasMoreData] = useState(true);
+  scrollHook({ url: '/post/feed', cnt: 4, setData: setPosts, setIsLoading, hasMoreData, setHasMoreData });
 
   return (
     <>
       <Header page="main" text="가지마켓 피드" />
+
       {isLoading ? (
         <main className="main-with-nav main-with-post">
           <ul className="post-list">

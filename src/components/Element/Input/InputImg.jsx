@@ -43,7 +43,7 @@ export function InputImg({ initialImg }) {
           />
           <path d="M26.2502 20.7498L21.6668 16.1665L11.5835 26.2498" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <input name="image" type="file" id="btn-upload" className="btn-upload" accept="image/*" />
+        <input name="image" type="file" id="btn-upload" className="btn-upload" accept=".jpg, .gif, .png, .jpeg, .bmp, .tif, .heic" />
       </label>
     </section>
   );

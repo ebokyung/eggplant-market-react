@@ -8,7 +8,7 @@ import { Button } from '../../../components/Element/Buttons';
 import { postImageAPI } from '../../../libs/api/PostImage';
 import { postSignUpAPI } from '../api';
 
-export function SignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const [isNext, setIsNext] = useState(false);
   const [isCompleteDisabled, setIsCompleteDisabled] = useState(true);

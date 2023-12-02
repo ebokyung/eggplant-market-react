@@ -12,7 +12,7 @@ import CommentSkeleton from '../components/CommentSkeleton';
 import CommentInputSkeleton from '../components/CommentInputSkeleton';
 import PostSkeleton from '../../../components/Skeleton/PostSkeleton';
 
-export function PostDetail() {
+export default function PostDetail() {
   const [userImg, setUserImg] = useState('');
   const [post, setPost] = useState([]);
   const [comments, setComments] = useState([]);
@@ -24,15 +24,13 @@ export function PostDetail() {
     (async () => {
       if (isLoading) {
         const [{ image }, { post }, { comments }] = await getPostDetailAPI(postId);
-
         setUserImg(image);
         setPost(post);
         setComments(comments);
-
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [isLoading]);
 
   return (
     <>

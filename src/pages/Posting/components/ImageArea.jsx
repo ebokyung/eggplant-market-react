@@ -42,7 +42,7 @@ export function ImageArea({ imgData, setImgData }) {
       </ul>
       <label className="input-file-btn" htmlFor="input-file">
         <img id="image-upload-btn" src={theme === 'light' ? uploadFileIcon : uploadFileIconHc} alt="" />
-        <input type="file" id="input-file" accept="image/*" multiple onClick={e => checkImageLength(e)} onChange={e => handleImage(e)} />
+        <input type="file" id="input-file" accept=".jpg, .gif, .png, .jpeg, .bmp, .tif, .heic" multiple onClick={e => checkImageLength(e)} onChange={e => handleImage(e)} />
       </label>
     </>
   );

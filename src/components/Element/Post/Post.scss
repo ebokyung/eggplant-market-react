@@ -38,7 +38,7 @@
   }
 
   .img-cover {
-    max-width: 19rem;
+    width: 304px;
     height: 304px;
     margin-bottom: 0.75rem;
     border-radius: 0.625rem;
@@ -80,6 +80,11 @@
 .btn-comment,
 .post-date {
   @include get-color(color, gray-color);
+}
+
+.btn-comment {
+  width: 20px;
+  height: 20px;
 }
 
 .post-date {
