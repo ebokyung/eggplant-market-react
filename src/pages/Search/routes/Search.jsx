@@ -8,6 +8,7 @@ import { handleDimension } from '../util';
 import SkeletonSearch from '../components/SkeletonSearch';
 import '../style/Search.scss';
 import SearchItem from '../components/SearchItem';
+import { Meta } from '../../../libs/Meta';
 
 export default function Search() {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -42,6 +43,7 @@ export default function Search() {
 
   return (
     <>
+      <Meta title="사용자 검색" />
       <HeaderSearch page="search" searchKeyword={searchKeyword} handleSearch={handleSearch} />
       <main className="main-with-nav">
         <ul className="search-user-list">

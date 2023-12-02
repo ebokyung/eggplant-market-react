@@ -9,6 +9,7 @@ import { postingAPI, postPostImgAPI, getPostAPI, putPostAPI, getUserAPI } from '
 import { storage } from '../../../utils/storage';
 import { imgReg } from '../../../libs/constant/regex';
 import SkeletonPosting from '../components/SkeletonPosting';
+import { Meta } from '../../../libs/Meta';
 
 export default function Posting() {
   const formRef = useRef();
@@ -79,6 +80,7 @@ export default function Posting() {
 
   return (
     <>
+      <Meta title={`게시글 ${postId ? '수정' : '작성'}`} />
       <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
       <main className="main-posting">
         <ProfileImg profileImg={userImg} category="post" />

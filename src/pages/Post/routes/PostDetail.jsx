@@ -10,6 +10,7 @@ import { getPostDetailAPI } from '../api';
 import SkeletonComment from '../components/SkeletonComment';
 import SkeletonCommentInput from '../components/SkeletonCommentInput';
 import SkeletonPost from '../../../components/Skeleton/Post';
+import { Meta } from '../../../libs/Meta';
 
 export default function PostDetail() {
   const [userImg, setUserImg] = useState('');
@@ -33,6 +34,7 @@ export default function PostDetail() {
 
   return (
     <>
+      <Meta title="게시물 상세보기" />
       <Header />
       <main className="main-with-nav main-post">
         {isLoading ? (

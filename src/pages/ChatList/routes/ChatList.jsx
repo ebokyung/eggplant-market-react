@@ -4,10 +4,12 @@ import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ChatListItem } from '../components/ChatListItem';
 import { chatListData } from '../../../libs/dummy';
+import { Meta } from '../../../libs/Meta';
 
 export default function ChatList() {
   return (
     <>
+      <Meta title="채팅 목록" />
       {/* fixed header ? */}
       <Header>
         <span className="a11y-hidden">채팅목록</span>

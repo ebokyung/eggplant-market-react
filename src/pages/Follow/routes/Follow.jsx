@@ -6,6 +6,7 @@ import FollowItem from '../components/FollowItem';
 import '../style/Follow.scss';
 import SkeletonFollowItem from '../components/SkeletonFollowItem';
 import { scrollHook } from '../../../hooks/scroll';
+import { Meta } from '../../../libs/Meta';
 
 export default function Follow() {
   const [data, setData] = useState([]);
@@ -19,6 +20,7 @@ export default function Follow() {
 
   return (
     <>
+      <Meta title={`${isFollower ? '팔로워' : '팔로잉'} 목록`} />
       <Header page="follow" text={isFollower ? 'Follower' : 'Following'} />
       <main className="main-with-nav">
         <ul className="follow-list">

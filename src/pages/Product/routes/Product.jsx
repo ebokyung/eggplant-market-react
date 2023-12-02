@@ -5,6 +5,7 @@ import Header from '../../../components/Element/Header/Header';
 import { ProductForm } from '../components/ProductForm';
 import { getProductAPI } from '../api';
 import SkeletonProduct from '../components/SkeletonProduct';
+import { Meta } from '../../../libs/Meta';
 // productId=652b7f9db2cb2056637a0daf
 
 export default function Product() {
@@ -38,6 +39,7 @@ export default function Product() {
 
   return (
     <>
+      <Meta title="상품 등록" />
       <Header page="upload" btnDisabled={!isOnSubmit} btnText={btnText} formName="form-product" />
       <main className="main-product">
         <h1 className="title">상품 등록</h1>

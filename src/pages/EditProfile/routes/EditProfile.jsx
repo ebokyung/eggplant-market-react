@@ -7,6 +7,7 @@ import { storage } from '../../../utils/storage';
 import { postImageAPI } from '../../../libs/api/PostImage';
 import { getMyProfileAPI, putEditProfileAPI } from '../api';
 import SkeletonEditProfile from '../components/SkeletonEditProfile';
+import { Meta } from '../../../libs/Meta';
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ export default function EditProfile() {
 
   return (
     <>
+      <Meta title="프로필 수정" />
       <Header page="upload" btnText="저장" btnDisabled={isCompleteDisabled} formName="form-edit-profile" />
       <main className="main-profile-edit">
         <form ref={formRef} onSubmit={handleSubmit} id="form-edit-profile">

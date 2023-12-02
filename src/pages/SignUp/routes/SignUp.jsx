@@ -7,6 +7,7 @@ import { Information } from '../../../components/Information';
 import { Button } from '../../../components/Element/Buttons';
 import { postImageAPI } from '../../../libs/api/PostImage';
 import { postSignUpAPI } from '../api';
+import { Meta } from '../../../libs/Meta';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -75,6 +76,7 @@ export default function SignUp() {
 
   return (
     <>
+      <Meta title="회원가입" />
       <header className="signup-header">
         {!isNext ? (
           <h1 className="signup-title">이메일로 회원가입</h1>
