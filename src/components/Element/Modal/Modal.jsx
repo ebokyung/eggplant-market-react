@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import './Modal.scss';
@@ -18,9 +21,17 @@ function Modal({ options, children, closeModal }) {
 
   const renderModal = (
     <>
-      <article className="modal-background">
+      <article
+        className="modal-background"
+        onClick={() => closeModal()}
+        onKeyDown={e => {
+          if (e.key === 'Escape') {
+            closeModal();
+          }
+        }}
+      >
         <h2 className="a11y-hidden">모달창</h2>
-        <div className="l_modal">
+        <div className="l_modal" onClick={e => e.stopPropagation()}>
           {options?.map(i => (
             <button
               key={i.text}
