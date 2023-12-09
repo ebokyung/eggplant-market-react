@@ -8,7 +8,7 @@ import Alert from './Alert';
 function Modal({ options, children, closeModal }) {
   const [isAlert, setIsAlert] = useRecoilState(isAlertOpen);
   const doFunc = useSetRecoilState(doAlert);
-  const firstBtnRef = useRef(null);
+  const modalRef = useRef(null);
   const lastBtnRef = useRef(null);
 
   useEffect(() => {
@@ -27,13 +27,13 @@ function Modal({ options, children, closeModal }) {
           if (e.key === 'Escape') {
             closeModal();
           }
-          if (e.key === 'Tab' && !!firstBtnRef.current) {
+          if (e.key === 'Tab') {
             if (!e.shiftKey) {
               if (document.activeElement === lastBtnRef.current) {
                 e.preventDefault();
-                firstBtnRef.current.focus();
+                modalRef.current.firstChild.focus();
               }
-            } else if (document.activeElement === firstBtnRef.current) {
+            } else if (document.activeElement === modalRef.current.firstChild) {
               e.preventDefault();
               lastBtnRef.current.focus();
             }
@@ -41,7 +41,7 @@ function Modal({ options, children, closeModal }) {
         }}
       >
         <h2 className="a11y-hidden">모달창</h2>
-        <div className="l_modal" onClick={e => e.stopPropagation()}>
+        <div className="l_modal" onClick={e => e.stopPropagation()} ref={modalRef}>
           {options?.map((i, idx) => (
             <button
               key={i.text}
@@ -55,7 +55,6 @@ function Modal({ options, children, closeModal }) {
                 }
               }}
               autoFocus={idx === 0}
-              ref={idx === 0 ? firstBtnRef : null}
             >
               {i.text}
             </button>
@@ -66,7 +65,7 @@ function Modal({ options, children, closeModal }) {
           </button>
         </div>
       </article>
-      {isAlert && <Alert modalBtn={firstBtnRef} closeModal={closeModal} />}
+      {isAlert && <Alert modalBtn={modalRef.current.firstChild} closeModal={closeModal} />}
     </>
   );
 

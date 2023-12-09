@@ -19,7 +19,7 @@ function Alert({ modalBtn, closeModal }) {
         if (e.key === 'Escape') {
           isAlert(false);
         }
-        if (e.key === 'Tab' && !!firstBtnRef.current) {
+        if (e.key === 'Tab') {
           if (!e.shiftKey) {
             if (document.activeElement === lastBtnRef.current) {
               e.preventDefault();
@@ -51,7 +51,7 @@ function Alert({ modalBtn, closeModal }) {
           <button
             type="button"
             onClick={() => {
-              modalBtn.current.focus();
+              modalBtn.focus();
               isAlert(false);
             }}
             ref={lastBtnRef}
