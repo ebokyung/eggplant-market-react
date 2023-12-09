@@ -54,20 +54,6 @@ export default function SignUp() {
     const result = await postSignUpAPI(update);
     if (result.status === 422 || result.message === '잘못된 접근입니다.') {
       console.log(result);
-      /* FAIL
-        // email, password, accountname, username 중 하나라도 작성하지 않을 경우
-        필수 입력사항을 입력해주세요.
-        // password를 6자 이상 입력하지 않을 경우
-        비밀번호는 6자 이상이어야 합니다.
-        // eamil 형식이 잘못될 경우
-        잘못된 이메일 형식입니다.
-        // 가입된 email일 경우
-        이미 가입된 이메일 주소입니다.
-        // accountname에 지정된 문자 이외의 문자가 들어갈 경우
-        영문, 숫자, 밑줄, 마침표만 사용할 수 있습니다.
-        // 가입된 accountname일 경우
-        이미 사용중인 계정 ID입니다.
-      */
     }
     if (result.message === '회원가입 성공') {
       navigate('/login');
