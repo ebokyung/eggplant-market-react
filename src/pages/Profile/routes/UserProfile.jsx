@@ -8,6 +8,7 @@ import { getProfileAPI, getProductAPI } from '../api';
 import SkeletonProfile from '../components/SkeletonProfile';
 import { scrollHook } from '../../../hooks/scroll';
 import { Meta } from '../../../libs/Meta';
+import { SkipNav } from '../../../components/Element/SkipNav/SkipNav';
 
 export default function UserProfile() {
   const location = useLocation();
@@ -40,6 +41,7 @@ export default function UserProfile() {
   return (
     <>
       <Meta title="사용자 프로필" />
+      <SkipNav page="profile" />
       <Header />
       {isloading ? (
         <SkeletonProfile />

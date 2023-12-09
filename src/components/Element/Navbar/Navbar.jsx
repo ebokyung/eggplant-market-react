@@ -14,7 +14,7 @@ function Navbar() {
       <p className="a11y-hidden">하단 탭 메뉴</p>
       <ul className="tab-item-list">
         <li className="tab-item-home">
-          <Link to="/home" onClick={() => setCurPage('/home')} className={curPage === '/home' ? 'here' : undefined}>
+          <Link id="footer" to="/home" onClick={() => setCurPage('/home')} className={curPage === '/home' ? 'here' : undefined}>
             홈<span className="a11y-hidden">으로 이동</span>
           </Link>
         </li>
