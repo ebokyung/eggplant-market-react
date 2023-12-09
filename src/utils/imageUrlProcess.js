@@ -1,14 +1,12 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable consistent-return */
-import { useRecoilValue } from 'recoil';
 import defaultProfile from '../assets/basic-profile.png';
 import hcProfile from '../assets/basic-profile-hc.png';
 import defaultError from '../assets/error-image.png';
 import hcError from '../assets/error-image-hc.png';
-import { themeAtom } from '../recoil/theme/atoms';
 
 export function checkImageUrl(Img, position) {
-  const theme = useRecoilValue(themeAtom);
+  const theme = localStorage.getItem('theme');
   const LightProfile = defaultProfile;
   const LightPost = defaultError;
   const ContrastProfile = hcProfile;
