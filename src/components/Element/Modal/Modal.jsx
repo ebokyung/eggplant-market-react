@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -32,7 +33,7 @@ function Modal({ options, children, closeModal }) {
       >
         <h2 className="a11y-hidden">모달창</h2>
         <div className="l_modal" onClick={e => e.stopPropagation()}>
-          {options?.map(i => (
+          {options?.map((i, idx) => (
             <button
               key={i.text}
               type="button"
@@ -44,6 +45,7 @@ function Modal({ options, children, closeModal }) {
                   i.func();
                 }
               }}
+              autoFocus={idx === 0}
             >
               {i.text}
             </button>
