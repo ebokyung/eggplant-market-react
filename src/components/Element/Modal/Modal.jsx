@@ -1,8 +1,4 @@
-/* eslint-disable jsx-a11y/no-autofocus */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import './Modal.scss';
 import { createPortal } from 'react-dom';
@@ -12,6 +8,8 @@ import Alert from './Alert';
 function Modal({ options, children, closeModal }) {
   const [isAlert, setIsAlert] = useRecoilState(isAlertOpen);
   const doFunc = useSetRecoilState(doAlert);
+  const firstBtnRef = useRef(null);
+  const lastBtnRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -28,6 +26,17 @@ function Modal({ options, children, closeModal }) {
         onKeyDown={e => {
           if (e.key === 'Escape') {
             closeModal();
+          }
+          if (e.key === 'Tab' && !!firstBtnRef.current) {
+            if (!e.shiftKey) {
+              if (document.activeElement === lastBtnRef.current) {
+                e.preventDefault();
+                firstBtnRef.current.focus();
+              }
+            } else if (document.activeElement === firstBtnRef.current) {
+              e.preventDefault();
+              lastBtnRef.current.focus();
+            }
           }
         }}
       >
@@ -46,17 +55,18 @@ function Modal({ options, children, closeModal }) {
                 }
               }}
               autoFocus={idx === 0}
+              ref={idx === 0 ? firstBtnRef : null}
             >
               {i.text}
             </button>
           ))}
           {children}
-          <button type="button" onClick={() => closeModal()}>
+          <button type="button" onClick={() => closeModal()} ref={lastBtnRef}>
             취소
           </button>
         </div>
       </article>
-      {isAlert && <Alert closeModal={closeModal} />}
+      {isAlert && <Alert modalBtn={firstBtnRef} closeModal={closeModal} />}
     </>
   );
 

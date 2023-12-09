@@ -1,15 +1,15 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useRef } from 'react';
 import './Alert.scss';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { createPortal } from 'react-dom';
 import { isAlertOpen, doAlert } from '../../../recoil/modal/atoms';
 
-function Alert({ closeModal }) {
+function Alert({ modalBtn, closeModal }) {
   const isAlert = useSetRecoilState(isAlertOpen);
   const doFunc = useRecoilValue(doAlert);
+
+  const firstBtnRef = useRef(null);
+  const lastBtnRef = useRef(null);
 
   const renderAlert = (
     <dialog
@@ -18,6 +18,17 @@ function Alert({ closeModal }) {
       onKeyDown={e => {
         if (e.key === 'Escape') {
           isAlert(false);
+        }
+        if (e.key === 'Tab' && !!firstBtnRef.current) {
+          if (!e.shiftKey) {
+            if (document.activeElement === lastBtnRef.current) {
+              e.preventDefault();
+              firstBtnRef.current.focus();
+            }
+          } else if (document.activeElement === firstBtnRef.current) {
+            e.preventDefault();
+            lastBtnRef.current.focus();
+          }
         }
       }}
     >
@@ -32,10 +43,19 @@ function Alert({ closeModal }) {
               isAlert(false);
               closeModal();
             }}
+            autoFocus
+            ref={firstBtnRef}
           >
             {doFunc?.text}
           </button>
-          <button type="button" onClick={() => isAlert(false)}>
+          <button
+            type="button"
+            onClick={() => {
+              modalBtn.current.focus();
+              isAlert(false);
+            }}
+            ref={lastBtnRef}
+          >
             취소
           </button>
         </div>
