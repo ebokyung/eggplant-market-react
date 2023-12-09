@@ -4,14 +4,11 @@ import { useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Modal from '../Modal/Modal';
 import { deleteCommentAPI, postCommentReportAPI } from './api';
-import { openModalHook } from '../../../hooks/optionBtn';
 
 function ButtonOptionComment({ commentid, isMyCmt }) {
   const [isModal, setIsModal] = useState(false);
   const location = useLocation();
   const postid = new URLSearchParams(location.search).get('postId');
-
-  openModalHook(isModal);
 
   const handleModal = () => {
     setIsModal(prev => !prev);

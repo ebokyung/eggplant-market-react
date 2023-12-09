@@ -5,7 +5,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Modal from '../Modal/Modal';
 import { storage } from '../../../utils/storage';
 import { themeAtom } from '../../../recoil/theme/atoms';
-import { openModalHook } from '../../../hooks/optionBtn';
 
 // 고대비 테마 radio 설정
 function ThemeRadio({ name, id, label, checked }) {
@@ -33,8 +32,6 @@ function ButtonOption() {
   useEffect(() => {
     if (!isModal) setIsThemeModalOpen(() => false);
   }, [isModal]);
-
-  openModalHook(isModal);
 
   const handleModal = () => {
     setIsModal(prev => !prev);

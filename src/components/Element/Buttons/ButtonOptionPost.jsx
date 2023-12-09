@@ -4,14 +4,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Modal from '../Modal/Modal';
 import { deletePostAPI, postPostReportAPI } from './api';
-import { openModalHook } from '../../../hooks/optionBtn';
 
 function ButtonOptionPost({ postid, isMyPost }) {
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  openModalHook(isModal);
 
   const handleModal = () => {
     setIsModal(prev => !prev);
