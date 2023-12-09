@@ -46,7 +46,7 @@ export default function SkeletonProfile() {
       <div className="post-container">
         <div className="post-tab">
           <div className="tab-btn-wrap">
-            <Skeleton width={26} height={26} style={{ 'margin-right': 5 }} />
+            <Skeleton width={26} height={26} style={{ marginRight: 5 }} />
             <Skeleton width={26} height={26} />
           </div>
         </div>
