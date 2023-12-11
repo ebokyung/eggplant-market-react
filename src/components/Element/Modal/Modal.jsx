@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import './Modal.scss';
 import { createPortal } from 'react-dom';
@@ -8,6 +8,8 @@ import Alert from './Alert';
 function Modal({ options, children, closeModal }) {
   const [isAlert, setIsAlert] = useRecoilState(isAlertOpen);
   const doFunc = useSetRecoilState(doAlert);
+  const modalRef = useRef(null);
+  const lastBtnRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -18,10 +20,29 @@ function Modal({ options, children, closeModal }) {
 
   const renderModal = (
     <>
-      <article className="modal-background">
+      <article
+        className="modal-background"
+        onClick={() => closeModal()}
+        onKeyDown={e => {
+          if (e.key === 'Escape') {
+            closeModal();
+          }
+          if (e.key === 'Tab') {
+            if (!e.shiftKey) {
+              if (document.activeElement === lastBtnRef.current) {
+                e.preventDefault();
+                modalRef.current.firstChild.focus();
+              }
+            } else if (document.activeElement === modalRef.current.firstChild) {
+              e.preventDefault();
+              lastBtnRef.current.focus();
+            }
+          }
+        }}
+      >
         <h2 className="a11y-hidden">모달창</h2>
-        <div className="l_modal">
-          {options?.map(i => (
+        <div className="l_modal" onClick={e => e.stopPropagation()} ref={modalRef}>
+          {options?.map((i, idx) => (
             <button
               key={i.text}
               type="button"
@@ -33,17 +54,18 @@ function Modal({ options, children, closeModal }) {
                   i.func();
                 }
               }}
+              autoFocus={idx === 0}
             >
               {i.text}
             </button>
           ))}
           {children}
-          <button type="button" onClick={() => closeModal()}>
+          <button type="button" onClick={() => closeModal()} ref={lastBtnRef}>
             취소
           </button>
         </div>
       </article>
-      {isAlert && <Alert closeModal={closeModal} />}
+      {isAlert && <Alert modalBtn={modalRef.current.firstChild} closeModal={closeModal} />}
     </>
   );
 
