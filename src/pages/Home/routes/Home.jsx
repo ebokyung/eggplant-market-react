@@ -8,6 +8,7 @@ import HomeWithoutPost from '../components/HomeWithoutPost';
 import SkeletonHome from '../components/SkeletonHome';
 import { scrollHook } from '../../../hooks/scroll';
 import { Meta } from '../../../libs/Meta';
+import { SkipNav } from '../../../components/Element/SkipNav/SkipNav';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -18,6 +19,7 @@ export default function Home() {
   return (
     <>
       <Meta title="피드" />
+      <SkipNav page="home" />
       <Header page="main" text="가지마켓 피드" />
       {isLoading ? <SkeletonHome /> : posts.length ? <HomeWithPost posts={posts} /> : <HomeWithoutPost />}
       <Footer />

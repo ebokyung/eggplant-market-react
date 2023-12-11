@@ -14,7 +14,7 @@ function Header({ page, text, btnText, children, className, btnDisabled = true, 
   const searchSrc = theme === 'light' ? searchIcon : searchIconHc;
 
   return (
-    <header className={`l_header header-${page || 'basic'} ${className}`}>
+    <header id="header" className={`l_header header-${page || 'basic'} ${className}`}>
       {text && (
         <h1 className={page === 'main' ? 'title-main' : 'title'}>
           {text}

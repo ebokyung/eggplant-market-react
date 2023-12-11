@@ -4,7 +4,7 @@ import '../style/Home.scss';
 
 export default function HomeWithPost({ posts }) {
   return (
-    <main className="main-with-nav main-with-post">
+    <main id="main" className="main-with-nav main-with-post">
       <ul className="post-list">
         {posts?.map(post => (
           <li key={post.id}>

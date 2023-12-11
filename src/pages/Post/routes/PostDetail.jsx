@@ -11,6 +11,7 @@ import SkeletonComment from '../components/SkeletonComment';
 import SkeletonCommentInput from '../components/SkeletonCommentInput';
 import SkeletonPost from '../../../components/Skeleton/Post';
 import { Meta } from '../../../libs/Meta';
+import { SkipNav } from '../../../components/Element/SkipNav/SkipNav';
 
 export default function PostDetail() {
   const [userImg, setUserImg] = useState('');
@@ -35,6 +36,7 @@ export default function PostDetail() {
   return (
     <>
       <Meta title="게시물 상세보기" />
+      <SkipNav page="post" />
       <Header />
       <main className="main-with-nav main-post">
         {isLoading ? (
@@ -45,7 +47,7 @@ export default function PostDetail() {
         ) : (
           <>
             <Post post={post} />
-            <section className="comment-sec">
+            <section id="comment" className="comment-sec">
               <h2 className="a11y-hidden">게시물에 대한 답변</h2>
               <ul className="comment-list">
                 {comments?.map(comment => (

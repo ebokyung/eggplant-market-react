@@ -13,7 +13,7 @@ export default function HomeWithoutPost() {
   return (
     <main className="main-without-post">
       <p>유저를 검색해 팔로우 해보세요!</p>
-      <Button className="size-m" onClick={handleLink}>
+      <Button id="main" className="size-m" onClick={handleLink}>
         검색하기
       </Button>
     </main>
