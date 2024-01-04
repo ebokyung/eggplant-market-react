@@ -6,7 +6,6 @@ export function Meta({ title }) {
   return (
     <Helmet>
       <title>{`${title} | `}가지마켓</title>
-
       <link rel="icon" href="../assets/favicon.ico" />
       <meta charset="UTF-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
