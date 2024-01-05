@@ -14,7 +14,7 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMoreData, setHasMoreData] = useState(true);
-  scrollHook({ url: '/post/feed', cnt: 4, setData: setPosts, setIsLoading, hasMoreData, setHasMoreData });
+  scrollHook({ url: '/post/feed', cnt: 6, setData: setPosts, setIsLoading, hasMoreData, setHasMoreData });
 
   return (
     <>
