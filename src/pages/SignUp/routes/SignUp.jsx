@@ -81,7 +81,7 @@ export default function SignUp() {
             <>
               <Information setIsCompleteDisabled={setIsCompleteDisabled} />
               <Button className="size-l" onClick={e => handleSignUp(e)} disabled={isCompleteDisabled}>
-                감귤마켓 시작하기
+                가지마켓 시작하기
               </Button>
             </>
           )}
