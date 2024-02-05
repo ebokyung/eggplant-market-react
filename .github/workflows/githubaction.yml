@@ -15,19 +15,18 @@ jobs:
       - name: Checkout source code.
         uses: actions/checkout@v1
 
-      - name: Cache node_modules
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
-
+      # - name: Cache node_modules
+      #   id: cache
+      #   uses: actions/cache@v5
+      #   with:
+      #     path: '**/node_modules'
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.OS }}-build-
+      #       ${{ runner.OS }}-
       - name: Install dependencies
-        run: npm install --force
-        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+        # if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Build
         run: npm run build
