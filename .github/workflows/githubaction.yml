@@ -7,19 +7,16 @@ on:
 
 jobs:
   run:
-    # 최신 Ubuntu 버전에서 실행 (빌드 운영체제)
+    # 빌드 운영체제(Mac OS, Window 등) 설정
+    # 최신 Ubuntu 버전에서 실행
     runs-on: ubuntu-latest
 
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-
     steps:
+      # 아무것도 없는 OS에서 자동으로 우리 코드를 클론하고 다운받아 실행하게 해주는 소스코드
       - name: Checkout source code.
         uses: actions/checkout@v3
 
-      # actions/setup-node 실행기에 지정된 버전의 소프트웨어 패키지를 설치
+      # Node 버전 설정
       - name: Setup node
         uses: actions/setup-node@v4
         with:
@@ -27,18 +24,35 @@ jobs:
           # npm 명령어를 사용하여 종속성을 설치할 때, 이전에 캐시된 패키지를 사용하여 다운로드 및 설치 시간을 단축
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install
+      # 모듈 설치
+      - name: Clean Install dependencies
+        run: npm ci
 
+      # 프로젝트 빌드
       - name: Build
-        run: CI='' npm run build
+        run: npm run build
+        env:
+          CI: false
 
-      - name: Deploy
-        # S3에 빌드 폴더 업로드 및
-        # CloudFront 배포의 캐시 무효화로 변경사항 즉시 반영
-        uses: lbertenasco/s3-deploy@v1
+      # AWS 자격증명 설정
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          folder: build
-          bucket: ${{ secrets.S3_BUCKET }}
-          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-          invalidation: /*
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # S3에 빌드 폴더 업로드
+      - name: Deploy S3
+        # aws s3 sync <source> <destination> [options]
+        # 빌드된 폴더를 S3 버킷에 동기화
+        # sync는 원본과 타깃 경로에 존재하는 파일의 차이를 비교하여 차이가 있는 파일만을 변경
+        # --delete는 원본 경로에서 삭제되었을 경우 타깃 경로에서도 삭제
+        # --acl은 업로드된 객체의 ACL(Access Control List)을 설정
+        run: aws s3 sync ./build s3://${{ secrets.S3_BUCKET }}/  --delete --acl bucket-owner-full-control
+
+      # CloudFront 캐시 무효화
+      - name: Invalidate CloudFront Cache
+        # aws cloudfront <command> [options]
+        # CloudFront 배포의 캐시를 무효화하여 변경사항을 즉시 반영
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
