@@ -1,40 +1,44 @@
-name: S3 deploy with cloud front
+name: CI/CD
 on:
   push:
     branches:
+      # githubaction 브랜치에 코드가 푸시될 때 이 워크플로우를 실행
       - githubaction
 
 jobs:
   run:
+    # 최신 Ubuntu 버전에서 실행 (빌드 운영체제)
     runs-on: ubuntu-latest
+
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+
     steps:
       - name: Checkout source code.
         uses: actions/checkout@v1
 
-      # - name: Cache node_modules
-      #   id: cache
-      #   uses: actions/cache@v5
-      #   with:
-      #     path: '**/node_modules'
-      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      #     restore-keys: |
-      #       ${{ runner.OS }}-build-
-      #       ${{ runner.OS }}-
+      # actions/setup-node 실행기에 지정된 버전의 소프트웨어 패키지를 설치
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # npm 명령어를 사용하여 종속성을 설치할 때, 이전에 캐시된 패키지를 사용하여 다운로드 및 설치 시간을 단축
+          cache: 'npm'
+
       - name: Install dependencies
         run: npm install
-        # if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Build
         run: CI='' npm run build
 
       - name: Deploy
+        # S3에 빌드 폴더 업로드 및
+        # CloudFront 배포의 캐시 무효화로 변경사항 즉시 반영
         uses: lbertenasco/s3-deploy@v1
         with:
           folder: build
           bucket: ${{ secrets.S3_BUCKET }}
           dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-          invalidation: / *
+          invalidation: /*
