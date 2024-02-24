@@ -1,6 +1,8 @@
 @import '/src/styles/scss/mixin';
 
 #post {
+  max-width: 500px;
+  margin: auto;
   position: relative;
   .btn-option {
     width: 1.5rem;

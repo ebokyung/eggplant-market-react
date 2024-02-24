@@ -6,7 +6,7 @@ export function PostSection({ data }) {
   const [islistViewOn, setIsListViewOn] = useState(true);
 
   return (
-    <section id="post" className="post-container">
+    <section id="my-post" className="post-container">
       <PostViewTab islistViewOn={islistViewOn} setIsListViewOn={setIsListViewOn} />
       {data?.length ? (
         <section className="post-sec">{islistViewOn ? <ListView post={data} /> : <AlbumView post={data} />}</section>
