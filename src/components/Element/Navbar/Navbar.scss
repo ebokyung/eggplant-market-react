@@ -4,11 +4,27 @@
   width: 100%;
   position: fixed;
   bottom: 0;
-  background-color: $white-color;
+  border-top: 0.0625rem solid $gray250-color;
+
+  @media screen and (min-width: 768px) {
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: unset;
+    border-top: unset;
+    border-right: 0.0625rem solid $gray250-color;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1246px) {
+    width: 80px;
+  }
+
+  @media screen and (min-width: 1247px) {
+    width: 200px;
+  }
 }
 
 .tab-item-list {
-  border-top: 0.0313rem solid $gray100-color;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -26,8 +42,7 @@
       text-align: center;
       color: $gray300-color;
       font-size: map-get($font-sizes, 'size10');
-      padding-top: 2.5rem;
-      padding-bottom: 0.625rem;
+      padding: 2.5rem 0.625rem 0.625rem;
 
       &::before {
         content: '';
@@ -44,7 +59,7 @@
       }
 
       &.here {
-        @include get-color(color, font-color); //수정
+        @include get-color(color, enabled-btn-color);
       }
 
       &:hover {
@@ -91,6 +106,42 @@
 
     a.here::before {
       background-position: -274px -10px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: column;
+    li {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 0;
+      margin: 8px 0;
+      & > * {
+        width: 80px;
+        color: transparent;
+        &::before {
+          top: 50%;
+          left: 40px;
+        }
+        &.here {
+          color: transparent;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1247px) {
+    li {
+      & > * {
+        width: 200px;
+        color: $gray300-color;
+        font-size: 1rem;
+        text-align: left;
+        padding: 1.5625rem 0.625rem 1.5625rem 80px;
+        &.here {
+          @include get-color(color, enabled-btn-color);
+        }
+      }
     }
   }
 }

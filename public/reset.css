@@ -232,3 +232,13 @@ footer {
   text-align: center;
   color: #d0d0d0;
 }
+
+main {
+  @media screen and (min-width: 768px) and (max-width: 1246px) {
+    margin-left: 80px;
+  }
+
+  @media screen and (min-width: 1247px) {
+    margin-left: 200px;
+  }
+}
