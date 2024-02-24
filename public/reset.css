@@ -226,3 +226,9 @@ nav,
 footer {
   z-index: 1;
 }
+
+.null-text {
+  padding: 1.5rem;
+  text-align: center;
+  color: #d0d0d0;
+}
