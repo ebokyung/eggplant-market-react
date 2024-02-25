@@ -240,10 +240,11 @@ footer {
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1246px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   main:not(.main-login, .main-login-email, .signup-main),
   header.header-search,
-  header.header-upload {
+  header.header-upload,
+  footer {
     margin-left: 80px;
   }
   header:not(.signup-header, .profile-header, .header-search, .header-upload) {
@@ -253,7 +254,8 @@ footer {
 @media screen and (min-width: 1024px) {
   main:not(.main-login, .main-login-email, .signup-main),
   header.header-search,
-  header.header-upload {
+  header.header-upload,
+  footer {
     margin-left: 200px;
   }
   header:not(.signup-header, .profile-header, .header-search, .header-upload) {
