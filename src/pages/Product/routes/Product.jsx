@@ -6,7 +6,7 @@ import { ProductForm } from '../components/ProductForm';
 import { getProductAPI } from '../api';
 import SkeletonProduct from '../components/SkeletonProduct';
 import { Meta } from '../../../libs/Meta';
-// productId=652b7f9db2cb2056637a0daf
+import Navbar from '../../../components/Element/Navbar/Navbar';
 
 export default function Product() {
   const location = useLocation();
@@ -42,9 +42,12 @@ export default function Product() {
       <Meta title="상품 등록" />
       <Header page="upload" btnDisabled={!isOnSubmit} btnText={btnText} formName="form-product" />
       <main className="main-product">
-        <h1 className="title">상품 등록</h1>
-        <ProductForm setIsOnSubmit={setIsOnSubmit} initialData={data} />
+        <div className="l_main-product">
+          <h1 className="title">상품 등록</h1>
+          <ProductForm setIsOnSubmit={setIsOnSubmit} initialData={data} />
+        </div>
       </main>
+      <Navbar />
     </>
   );
 }
