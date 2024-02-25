@@ -233,12 +233,20 @@ footer {
   color: #d0d0d0;
 }
 
-main {
-  @media screen and (min-width: 768px) and (max-width: 1246px) {
+@media screen and (min-width: 768px) {
+  .main-with-nav {
+    height: 100%;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1246px) {
+  main {
     margin-left: 80px;
   }
-
-  @media screen and (min-width: 1247px) {
+}
+@media screen and (min-width: 1247px) {
+  main {
     margin-left: 200px;
   }
 }

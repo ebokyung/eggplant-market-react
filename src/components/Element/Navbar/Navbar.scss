@@ -5,6 +5,7 @@
   position: fixed;
   bottom: 0;
   border-top: 0.0625rem solid $gray250-color;
+  @include get-color(background-color, bg-color);
 
   @media screen and (min-width: 768px) {
     height: 100%;
@@ -28,7 +29,6 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  @include get-color(background-color, bg-color);
 
   li {
     flex-grow: 1;
@@ -123,7 +123,7 @@
           top: 50%;
           left: 40px;
         }
-        &.here {
+        html[data-theme] &.here {
           color: transparent;
         }
       }
@@ -138,7 +138,7 @@
         font-size: 1rem;
         text-align: left;
         padding: 1.5625rem 0.625rem 1.5625rem 80px;
-        &.here {
+        html[data-theme] &.here {
           @include get-color(color, enabled-btn-color);
         }
       }
