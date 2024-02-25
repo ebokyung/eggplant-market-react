@@ -245,7 +245,7 @@ footer {
     margin-left: 80px;
   }
 }
-@media screen and (min-width: 1247px) {
+@media screen and (min-width: 1024px) {
   main {
     margin-left: 200px;
   }
