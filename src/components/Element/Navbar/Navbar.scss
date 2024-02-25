@@ -109,6 +109,10 @@
     }
   }
 
+  .tab-item-more {
+    display: none;
+  }
+
   @media screen and (min-width: 768px) {
     flex-direction: column;
     li {
@@ -116,6 +120,19 @@
       flex-direction: column;
       flex-grow: 0;
       margin: 8px 0;
+      &.tab-item-more {
+        display: inline-block;
+        position: absolute;
+        bottom: 0;
+        ::before {
+          display: none;
+        }
+        .btn-option {
+          display: flex;
+          align-items: center;
+          background-position: 25px;
+        }
+      }
       & > * {
         width: 80px;
         color: transparent;
@@ -123,7 +140,8 @@
           top: 50%;
           left: 40px;
         }
-        html[data-theme] &.here {
+        &.here,
+        html[data-theme='highContrast'] &.here {
           color: transparent;
         }
       }
@@ -138,7 +156,7 @@
         font-size: 1rem;
         text-align: left;
         padding: 1.5625rem 0.625rem 1.5625rem 80px;
-        html[data-theme] &.here {
+        &.here {
           @include get-color(color, enabled-btn-color);
         }
       }
