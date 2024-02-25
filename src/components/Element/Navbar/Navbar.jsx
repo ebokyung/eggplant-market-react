@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Navbar.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { storage } from '../../../utils/storage';
-import { ButtonOption } from '../Buttons';
+import { ButtonOption, ButtonSearch } from '../Buttons';
 
 function Navbar() {
   const location = useLocation();
@@ -33,6 +33,9 @@ function Navbar() {
           <Link to={`/profile?accountName=${accountName}`} onClick={() => setCurPage('/profile')} className={curPage === '/profile' && isMyPage ? 'here' : undefined}>
             프로필<span className="a11y-hidden">로 이동</span>
           </Link>
+        </li>
+        <li className="tab-item-search">
+          <ButtonSearch isViewText curPage={curPage} />
         </li>
         <li className="tab-item-more">
           <ButtonOption isViewText />
