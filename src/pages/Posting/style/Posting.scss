@@ -1,11 +1,13 @@
 @import '/src/styles/scss/mixin';
 
 .main-posting {
-  padding: 1.25rem 1rem;
-  display: flex;
-  justify-content: center;
-  max-width: 50rem;
-  margin: auto;
+  .l_main-posting {
+    padding: 1.25rem 1rem;
+    display: flex;
+    justify-content: center;
+    max-width: 50rem;
+    margin: auto;
+  }
 
   .posting-form {
     width: 100%;
@@ -48,5 +50,12 @@
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1246px) {
+    margin-left: 80px;
+  }
+  @media screen and (min-width: 1024px) {
+    margin-left: 200px;
   }
 }

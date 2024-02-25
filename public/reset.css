@@ -242,19 +242,21 @@ footer {
 
 @media screen and (min-width: 768px) and (max-width: 1246px) {
   main,
-  header.header-search {
+  header.header-search,
+  header.header-upload {
     margin-left: 80px;
   }
-  header:not(.profile-header, .header-search) {
+  header:not(.profile-header, .header-search, .header-upload) {
     display: none;
   }
 }
 @media screen and (min-width: 1024px) {
   main,
-  header.header-search {
+  header.header-search,
+  header.header-upload {
     margin-left: 200px;
   }
-  header:not(.profile-header, .header-search) {
+  header:not(.profile-header, .header-search, .header-upload) {
     display: none;
   }
 }
