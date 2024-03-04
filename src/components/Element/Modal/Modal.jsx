@@ -1,17 +1,55 @@
-import React, { useEffect, useRef } from 'react';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import React, { useCallback, useLayoutEffect, useRef } from 'react';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import './Modal.scss';
 import { createPortal } from 'react-dom';
 import { isAlertOpen, doAlert } from '../../../recoil/modal/atoms';
 import Alert from './Alert';
 
-function Modal({ options, children, closeModal }) {
-  const [isAlert, setIsAlert] = useRecoilState(isAlertOpen);
+function ModalItemButton({ option, idx }) {
+  const setIsAlert = useSetRecoilState(isAlertOpen);
   const doFunc = useSetRecoilState(doAlert);
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        if (option.openAlert) {
+          setIsAlert(true);
+          doFunc({ text: option.text, func: option.func });
+        } else {
+          option.func();
+        }
+      }}
+      autoFocus={idx === 0}
+    >
+      {option.text}
+    </button>
+  );
+}
+
+function Modal({ options, children, closeModal }) {
+  const isAlert = useRecoilValue(isAlertOpen);
   const modalRef = useRef(null);
   const lastBtnRef = useRef(null);
 
-  useEffect(() => {
+  const handleKeyDown = useCallback(e => {
+    e.preventDefault();
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+    if (e.key === 'Tab') {
+      if (!e.shiftKey) {
+        if (document.activeElement === lastBtnRef.current) {
+          // e.preventDefault();
+          modalRef.current.firstChild.focus();
+        }
+      } else if (document.activeElement === modalRef.current.firstChild) {
+        // e.preventDefault();
+        lastBtnRef.current.focus();
+      }
+    }
+  }, []);
+
+  useLayoutEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = 'auto';
@@ -20,44 +58,11 @@ function Modal({ options, children, closeModal }) {
 
   const renderModal = (
     <>
-      <article
-        className="modal-background"
-        onClick={() => closeModal()}
-        onKeyDown={e => {
-          if (e.key === 'Escape') {
-            closeModal();
-          }
-          if (e.key === 'Tab') {
-            if (!e.shiftKey) {
-              if (document.activeElement === lastBtnRef.current) {
-                e.preventDefault();
-                modalRef.current.firstChild.focus();
-              }
-            } else if (document.activeElement === modalRef.current.firstChild) {
-              e.preventDefault();
-              lastBtnRef.current.focus();
-            }
-          }
-        }}
-      >
+      <article className="modal-background" onClick={() => closeModal()} onKeyDown={e => handleKeyDown(e)}>
         <h2 className="a11y-hidden">모달창</h2>
         <div className="l_modal" onClick={e => e.stopPropagation()} ref={modalRef}>
           {options?.map((i, idx) => (
-            <button
-              key={i.text}
-              type="button"
-              onClick={() => {
-                if (i.openAlert) {
-                  setIsAlert(true);
-                  doFunc({ text: i.text, func: i.func });
-                } else {
-                  i.func();
-                }
-              }}
-              autoFocus={idx === 0}
-            >
-              {i.text}
-            </button>
+            <ModalItemButton key={i.text} option={i} idx={idx} />
           ))}
           {children}
           <button type="button" onClick={() => closeModal()} ref={lastBtnRef}>
