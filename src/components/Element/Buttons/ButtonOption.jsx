@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './style/OtherButton.scss';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -23,46 +23,56 @@ function ThemeRadio({ name, id, label, checked }) {
   );
 }
 
+function ThemeModal({ handleModal }) {
+  const theme = useRecoilValue(themeAtom);
+  const themeList = [
+    { label: 'Light', themeName: 'light' },
+    { label: 'HighContrast', themeName: 'highContrast' },
+  ];
+
+  return (
+    <Modal closeModal={handleModal}>
+      <>
+        {themeList.map((item, idx) => (
+          <ThemeRadio name="colorSet" id={item.themeName} label={item.label} checked={theme === item.themeName} defaultChecked={idx === 0} />
+        ))}
+      </>
+    </Modal>
+  );
+}
+
 function ButtonOption({ isViewText = false }) {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
-  const theme = useRecoilValue(themeAtom);
-
-  useEffect(() => {
-    if (!isModal) setIsThemeModalOpen(() => false);
-  }, [isModal]);
 
   const handleModal = () => {
     setIsModal(prev => !prev);
   };
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(function 로그아웃() {
     storage.clearStorage();
     navigate('/login');
-  };
+  }, []);
 
   const options = [
     { text: '테마 변경', func: () => setIsThemeModalOpen(true) },
     { text: '로그아웃', func: handleLogout, openAlert: true },
   ];
 
+  useEffect(
+    function 테마모달닫기() {
+      if (!isModal) setIsThemeModalOpen(() => false);
+    },
+    [isModal],
+  );
+
   return (
     <>
       <button type="button" className="btn-option" onClick={() => handleModal()}>
         <span className={isViewText ? '' : 'a11y-hidden'}>설정</span>
       </button>
-      {isModal &&
-        (isThemeModalOpen ? (
-          <Modal closeModal={handleModal}>
-            <>
-              <ThemeRadio name="colorSet" id="light" label="Light" checked={theme === 'light'} defaultChecked />
-              <ThemeRadio name="colorSet" id="highContrast" label="HighContrast" checked={theme === 'highContrast'} />
-            </>
-          </Modal>
-        ) : (
-          <Modal options={options} closeModal={handleModal} />
-        ))}
+      {isModal && (isThemeModalOpen ? <ThemeModal handleModal={handleModal} /> : <Modal options={options} closeModal={handleModal} />)}
     </>
   );
 }
