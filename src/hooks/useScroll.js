@@ -30,12 +30,17 @@ export const useScroll = ({ getData, setData, setIsLoading }) => {
     }
   };
 
+  const fetchData = useCallback(async () => {
+    await loadData();
+    setIsLoading(false);
+  });
+
   useEffect(() => {
-    if (hasMoreData) loadData();
-    else {
+    if (hasMoreData) {
+      fetchData();
+    } else {
       window.removeEventListener('scroll', handleScrollEvent);
     }
-    setIsLoading(false);
   }, [page]);
 
   useEffect(() => {
