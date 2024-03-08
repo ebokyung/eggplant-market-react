@@ -15,6 +15,7 @@ export default function UserProfile() {
   const location = useLocation();
   const accountname = new URLSearchParams(location.search).get('accountName');
   const [isloading, setIsLoading] = useState(true);
+  const [isPostloading, setIsPostLoading] = useState(true);
   const [userProfile, setUserProfile] = useState({});
   const [userProduct, setUserProduct] = useState({});
   const [userPost, setUserPost] = useState([]);
@@ -24,10 +25,9 @@ export default function UserProfile() {
     return defaultAxios.get(`/post/${accountname}/userpost?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
   };
 
-  useScroll({ getData, setData: setUserPost, setIsLoading });
+  useScroll({ getData, setData: setUserPost, setIsLoading: setIsPostLoading });
 
   useEffect(() => {
-    setIsLoading(() => true);
     (async () => {
       const [userProfileData, userProductData] = await Promise.all([getProfileAPI(accountname), getProductAPI(accountname)]);
       setUserProfile(userProfileData);
@@ -48,7 +48,7 @@ export default function UserProfile() {
       <Meta title="사용자 프로필" />
       <SkipNav page="profile" />
       <Header />
-      {isloading ? (
+      {isloading || isPostloading ? (
         <SkeletonProfile />
       ) : (
         <main className="main-with-nav main-user-profile">
