@@ -5,8 +5,9 @@ import Navbar from '../../../components/Element/Navbar/Navbar';
 import FollowItem from '../components/FollowItem';
 import '../style/Follow.scss';
 import SkeletonFollowItem from '../components/SkeletonFollowItem';
-import { scrollHook } from '../../../hooks/scroll';
+import { useScroll } from '../../../hooks/useScroll';
 import { Meta } from '../../../libs/Meta';
+import { defaultAxios } from '../../../libs/api/axios';
 
 export default function Follow() {
   const [data, setData] = useState([]);
@@ -15,8 +16,12 @@ export default function Follow() {
   const isFollower = location.pathname.includes('follower');
   const accountName = new URLSearchParams(location.search).get('accountName');
 
-  const [hasMoreData, setHasMoreData] = useState(true);
-  scrollHook({ url: `/profile/${accountName}/${isFollower ? 'follower' : 'following'}`, cnt: 11, setData, setIsLoading, hasMoreData, setHasMoreData });
+  const VIEW_COUNT = 11;
+  const getData = async page => {
+    return defaultAxios.get(`/profile/${accountName}/${isFollower ? 'follower' : 'following'}?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
+  };
+
+  useScroll({ getData, setData, setIsLoading });
 
   return (
     <>
