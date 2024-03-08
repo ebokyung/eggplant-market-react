@@ -6,15 +6,21 @@ import '../style/Home.scss';
 import HomeWithPost from '../components/HomeWithPost';
 import HomeWithoutPost from '../components/HomeWithoutPost';
 import SkeletonHome from '../components/SkeletonHome';
-import { scrollHook } from '../../../hooks/scroll';
+import { useScroll } from '../../../hooks/useScroll';
 import { Meta } from '../../../libs/Meta';
 import { SkipNav } from '../../../components/Element/SkipNav/SkipNav';
+import { defaultAxios } from '../../../libs/api/axios';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [hasMoreData, setHasMoreData] = useState(true);
-  scrollHook({ url: '/post/feed', cnt: 6, setData: setPosts, setIsLoading, hasMoreData, setHasMoreData });
+
+  const VIEW_COUNT = 6;
+  const getData = async page => {
+    return defaultAxios.get(`/post/feed?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
+  };
+
+  useScroll({ getData, setData: setPosts, setIsLoading });
 
   return (
     <>
