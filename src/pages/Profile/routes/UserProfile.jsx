@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/UserProfile.scss';
 import Header from '../../../components/Element/Header/Header';
@@ -6,20 +6,25 @@ import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ProfileSection, ProductSection, PostSection } from '../components';
 import { getProfileAPI, getProductAPI } from '../api';
 import SkeletonProfile from '../components/SkeletonProfile';
-import { scrollHook } from '../../../hooks/scroll';
+import { useScroll } from '../../../hooks/useScroll';
 import { Meta } from '../../../libs/Meta';
 import { SkipNav } from '../../../components/Element/SkipNav/SkipNav';
+import { defaultAxios } from '../../../libs/api/axios';
 
 export default function UserProfile() {
   const location = useLocation();
   const accountname = new URLSearchParams(location.search).get('accountName');
   const [isloading, setIsLoading] = useState(true);
-  const [userProfile, setUserProfile] = useState();
-  const [userProduct, setUserProduct] = useState();
-  const [userPost, setUserPost] = useState();
-  const [hasMoreData, setHasMoreData] = useState(true);
+  const [userProfile, setUserProfile] = useState({});
+  const [userProduct, setUserProduct] = useState({});
+  const [userPost, setUserPost] = useState([]);
 
-  scrollHook({ url: `/post/${accountname}/userpost`, cnt: 4, setData: setUserPost, hasMoreData, setHasMoreData });
+  const VIEW_COUNT = 4;
+  const getData = async page => {
+    return defaultAxios.get(`/post/${accountname}/userpost?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
+  };
+
+  useScroll({ getData, setData: setUserPost, setIsLoading });
 
   useEffect(() => {
     document.body.classList.add('profile-body-color');
