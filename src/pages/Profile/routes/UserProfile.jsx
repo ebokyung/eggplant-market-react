@@ -27,13 +27,6 @@ export default function UserProfile() {
   useScroll({ getData, setData: setUserPost, setIsLoading });
 
   useEffect(() => {
-    document.body.classList.add('profile-body-color');
-    return () => {
-      document.body.classList.remove('profile-body-color');
-    };
-  }, []);
-
-  useEffect(() => {
     setIsLoading(() => true);
     (async () => {
       const [userProfileData, userProductData] = await Promise.all([getProfileAPI(accountname), getProductAPI(accountname)]);
@@ -42,6 +35,13 @@ export default function UserProfile() {
       setIsLoading(() => false);
     })();
   }, [location.search]);
+
+  useLayoutEffect(() => {
+    document.body.classList.add('profile-body-color');
+    return () => {
+      document.body.classList.remove('profile-body-color');
+    };
+  }, []);
 
   return (
     <>
