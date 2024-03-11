@@ -21,4 +21,4 @@ function FollowItem({ user }) {
   );
 }
 
-export default FollowItem;
+export default React.memo(FollowItem);
