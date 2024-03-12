@@ -1,6 +1,7 @@
 import React from 'react';
-import { Post } from '../../../components/Element/Post';
+// import { Post } from '../../../components/Element/Post';
 import '../style/Home.scss';
+import { Post } from '../../../components/Element/Post/Post';
 
 export default function HomeWithPost({ posts }) {
   return (
