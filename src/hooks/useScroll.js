@@ -2,19 +2,22 @@ import { throttle } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { getDocumentHeight, getScrollTop } from '../utils/scroll';
 
-export const useScroll = ({ getData, setData, setIsLoading }) => {
+export const useScroll = fetchData => {
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [hasMoreData, setHasMoreData] = useState(true);
+  const [fetchStatus, setFetchStatus] = useState({ isLoading: true, isFetching: true });
 
   const handleScroll = throttle(async () => {
     if (Math.ceil(getScrollTop()) >= getDocumentHeight() - window.innerHeight) {
-      setPage(prev => prev + 1);
+      setFetchStatus(prev => ({ ...prev, isFetching: true }));
     }
   }, 500);
   const handleScrollEvent = useCallback(handleScroll);
 
   const loadData = async () => {
-    const res = await getData(page);
+    const res = await fetchData(page);
+
     if (Array.isArray(res.data)) {
       if (res.data.length === 0) {
         setHasMoreData(false);
@@ -30,18 +33,16 @@ export const useScroll = ({ getData, setData, setIsLoading }) => {
     }
   };
 
-  const fetchData = useCallback(async () => {
+  const executeLoadData = useCallback(async () => {
     await loadData();
-    setIsLoading(false);
+    setPage(prev => prev + 1);
+    setFetchStatus(prev => ({ ...prev, isLoading: false, isFetching: false }));
   });
 
   useEffect(() => {
-    if (hasMoreData) {
-      fetchData();
-    } else {
-      window.removeEventListener('scroll', handleScrollEvent);
-    }
-  }, [page]);
+    if (hasMoreData && fetchStatus.isFetching) executeLoadData();
+    else if (!hasMoreData) setFetchStatus(prev => ({ ...prev, isLoading: false, isFetching: false }));
+  }, [fetchStatus.isFetching]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScrollEvent);
@@ -49,4 +50,6 @@ export const useScroll = ({ getData, setData, setIsLoading }) => {
       window.removeEventListener('scroll', handleScrollEvent);
     };
   }, []);
+
+  return { data, fetchStatus };
 };
