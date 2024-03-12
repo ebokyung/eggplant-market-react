@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { throttle } from 'lodash'; //
 import { getDocumentHeight, getScrollTop } from '../utils/scroll';
 import { defaultAxios } from '../libs/api/axios';
-import StylesSpinner from './spinner.module.scss';
+import Spinner from '../components/Element/Spinner/Spinner';
 
 const getData = async (url, cnt, page) => {
   return defaultAxios.get(`${url}?skip=${page * cnt}&limit=${cnt}`);
@@ -63,12 +63,7 @@ const withInfiniteScroll = (Skeleton, Element, url, cnt) => {
     return (
       <>
         <Element {...props} data={data} />
-        {isLoading && !!page && (
-          <div className={StylesSpinner.spinner}>
-            <div className={StylesSpinner.loading} />
-            <p>Loading</p>
-          </div>
-        )}
+        {isLoading && !!page && <Spinner />}
       </>
     );
   };

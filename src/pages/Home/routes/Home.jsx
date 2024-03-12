@@ -4,10 +4,10 @@ import React from 'react';
 import Header from '../../../components/Element/Header/Header';
 import Footer from '../../../components/Element/Navbar/Navbar';
 import '../style/Home.scss';
-import StylesSpinner from '../../../hocs/spinner.module.scss';
 import HomeWithPost from '../components/HomeWithPost';
 import HomeWithoutPost from '../components/HomeWithoutPost';
 import SkeletonHome from '../components/SkeletonHome';
+import Spinner from '../../../components/Element/Spinner/Spinner';
 import { useScroll } from '../../../hooks/useScroll';
 import { Meta } from '../../../libs/Meta';
 import { SkipNav } from '../../../components/Element/SkipNav/SkipNav';
@@ -32,12 +32,7 @@ export default function Home() {
       ) : posts.length ? (
         <>
           <HomeWithPost posts={posts} />
-          {fetchStatus.isFetching && (
-            <div className={StylesSpinner.spinner}>
-              <div className={StylesSpinner.loading} />
-              <p>Loading</p>
-            </div>
-          )}
+          {fetchStatus.isFetching && <Spinner />}
         </>
       ) : (
         <HomeWithoutPost />
