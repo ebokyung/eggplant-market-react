@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { throttle } from 'lodash'; //
 import { getDocumentHeight, getScrollTop } from '../utils/scroll';
 import { defaultAxios } from '../libs/api/axios';
+import StylesSpinner from './spinner.module.scss';
 
 const getData = async (url, cnt, page) => {
   return defaultAxios.get(`${url}?skip=${page * cnt}&limit=${cnt}`);
 };
 
-const withInfiniteScroll = (Element, url, cnt) => {
+const withInfiniteScroll = (Skeleton, Element, url, cnt) => {
   return function 무한스크롤컴포넌트(props) {
     const [page, setPage] = useState(0);
     const [data, setData] = useState([]);
@@ -16,7 +17,7 @@ const withInfiniteScroll = (Element, url, cnt) => {
 
     const handleScroll = throttle(async () => {
       if (Math.ceil(getScrollTop()) >= getDocumentHeight() - window.innerHeight) {
-        setPage(prev => prev + 1);
+        setIsLoading(true);
       }
     }, 500);
     const handleScrollEvent = useCallback(handleScroll);
@@ -29,29 +30,26 @@ const withInfiniteScroll = (Element, url, cnt) => {
           setHasMoreData(false);
           return;
         }
-        setData(prev => [...prev, ...res.data]);
+        setData(prev => prev.concat(res.data));
       } else {
         if (Object.values(res.data)[0].length === 0) {
           setHasMoreData(false);
           return;
         }
-        setData(prev => [...prev, ...Object.values(res.data)[0]]);
+        setData(prev => prev.concat(Object.values(res.data)[0]));
       }
     };
 
     const fetchData = useCallback(async () => {
       await loadData();
+      setPage(prev => prev + 1);
       setIsLoading(false);
     });
 
     useEffect(() => {
-      if (hasMoreData) {
-        setIsLoading(true);
-        fetchData();
-      } else {
-        window.removeEventListener('scroll', handleScrollEvent);
-      }
-    }, [page]);
+      if (isLoading && hasMoreData) fetchData();
+      else if (!hasMoreData) setIsLoading(false);
+    }, [isLoading]);
 
     useEffect(() => {
       window.addEventListener('scroll', handleScrollEvent);
@@ -60,10 +58,17 @@ const withInfiniteScroll = (Element, url, cnt) => {
       };
     }, []);
 
+    if (isLoading && page === 0) return <Skeleton />;
+
     return (
       <>
         <Element {...props} data={data} />
-        {isLoading && '스피너...'}
+        {isLoading && !!page && (
+          <div className={StylesSpinner.spinner}>
+            <div className={StylesSpinner.loading} />
+            <p>Loading</p>
+          </div>
+        )}
       </>
     );
   };
