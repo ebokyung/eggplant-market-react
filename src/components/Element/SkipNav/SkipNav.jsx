@@ -29,7 +29,7 @@ export function SkipNav({ page }) {
         <a href="#product" className="skip-link">
           판매중인 상품으로 가기
         </a>
-        <a href="#post" className="skip-link">
+        <a href="#post0" className="skip-link">
           게시글 목록으로 가기
         </a>
         <a href="#footer" className="skip-link">
@@ -44,7 +44,7 @@ export function SkipNav({ page }) {
         <a href="#header" className="skip-link">
           상단 탭으로 가기
         </a>
-        <a href="#post" className="skip-link">
+        <a href="#post0" className="skip-link">
           게시글로 가기
         </a>
         <a href="#comment" className="skip-link">
