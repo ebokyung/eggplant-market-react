@@ -1,17 +1,18 @@
 import React, { createContext, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
-
 import './Post.scss';
+
 import { User } from '../User';
 import { ButtonOptionPost } from '../Buttons';
-import { ReactComponent as MessageCircleSVG } from '../../../assets/icon/icon-message-circle.svg';
 import { ReactComponent as HeartSVG } from './icon-heart.svg';
+import { ReactComponent as MessageCircleSVG } from '../../../assets/icon/icon-message-circle.svg';
+
+import useLike from './hooks/useLike';
+import { useLazyLoad } from '../../../hooks/useLazyLoad';
 
 import { returnTextTag, 이미지전처리 } from './utils';
 import { dateProcess } from '../../../utils/date';
 import { storage } from '../../../utils/storage';
-import { useLazyLoad } from '../../../hooks/useLazyLoad';
-import useLike from './hooks/useLike';
 
 const PostContext = createContext({
   id: '',
@@ -100,17 +101,6 @@ function withLinkTag(Component, text) {
   };
 }
 
-const ContentsWithLink = withLinkTag(
-  () => (
-    <>
-      <TextContents />
-      <ImageContents />
-    </>
-  ),
-  '게시글 보기',
-);
-const CommentWithLink = withLinkTag(Comment, '댓글 보기');
-
 function Date() {
   const { createdAt } = useContext(PostContext);
   const date = dateProcess(createdAt);
@@ -137,10 +127,8 @@ export function Post({ post, children, path = 'home', idx = 0 }) {
 }
 Post.TextContents = TextContents;
 Post.ImageContents = ImageContents;
-Post.ContentsWithLink = ContentsWithLink;
 Post.Like = Like;
 Post.Comment = Comment;
-Post.CommentWithLink = CommentWithLink;
 Post.Date = Date;
 
 export function PostWithoutLink({ post }) {
@@ -157,12 +145,23 @@ export function PostWithoutLink({ post }) {
 }
 
 export function PostWithLink({ post, path, idx }) {
+  const ContentsWithLink = withLinkTag(
+    () => (
+      <>
+        <Post.TextContents />
+        <Post.ImageContents />
+      </>
+    ),
+    '게시글 보기',
+  );
+  const CommentWithLink = withLinkTag(Post.Comment, '댓글 보기');
+
   return (
     <Post post={post} path={path} idx={idx}>
-      <Post.ContentsWithLink />
+      <ContentsWithLink />
       <div className="post-icon">
         <Post.Like />
-        <Post.CommentWithLink />
+        <CommentWithLink />
       </div>
     </Post>
   );
