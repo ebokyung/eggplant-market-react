@@ -37,6 +37,10 @@ function TextContents() {
 
 // 리팩토링 필요
 function ImageContents() {
+  // 요소 최대 3개 -> 메모이제이션 불필요
+  const { image } = useContext(PostContext);
+  const imgs = 이미지전처리(image);
+
   // lazy load
   const imgRef = useRef([]);
   imgRef.current = [];
@@ -45,10 +49,6 @@ function ImageContents() {
     imgRef.current.push(el);
   };
   useLazyLoad(imgRef);
-
-  // 요소 최대 3개 -> 메모이제이션 불필요
-  const { image } = useContext(PostContext);
-  const imgs = 이미지전처리(image);
 
   return (
     <>
@@ -77,7 +77,6 @@ function Comment() {
 }
 function Like() {
   const { id, hearted, heartCount } = useContext(PostContext);
-
   const { isHeart, heartCnt, toggleHeart } = useLike({ id, hearted, heartCount });
 
   return (
