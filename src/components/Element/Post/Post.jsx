@@ -10,7 +10,7 @@ import { ReactComponent as MessageCircleSVG } from '../../../assets/icon/icon-me
 import useLike from './hooks/useLike';
 import { useLazyLoad } from '../../../hooks/useLazyLoad';
 
-import { returnTextTag, 이미지전처리 } from './utils';
+import { returnTextTag, 이미지문자열전처리 } from './utils';
 import { dateProcess } from '../../../utils/date';
 import { storage } from '../../../utils/storage';
 
@@ -39,7 +39,7 @@ function TextContents() {
 function ImageContents() {
   // 요소 최대 3개 -> 메모이제이션 불필요
   const { image } = useContext(PostContext);
-  const imgs = 이미지전처리(image);
+  const imgs = 이미지문자열전처리(image);
 
   // lazy load
   const imgRef = useRef([]);
