@@ -63,19 +63,17 @@
   margin-bottom: 1rem;
   color: $gray300-color;
   font-size: map-get($font-sizes, 'size12');
-  & > * {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    color: inherit;
-  }
-}
-.post-icon {
   path {
     @include get-color(stroke, gray-color);
   }
   span {
     @include get-color(color, gray-color);
+  }
+  & > * {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: inherit;
   }
 }
 
