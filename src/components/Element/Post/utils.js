@@ -1,7 +1,7 @@
 import { checkImageUrl } from '../../../utils/imageUrlProcess';
 import { imgReg } from '../../../libs/constant/regex';
 
-function returnTextContentTag(path) {
+function returnTextTag(path) {
   switch (path) {
     case 'profile':
       return 'h3';
@@ -19,4 +19,4 @@ function 이미지전처리(image) {
     .map(img => checkImageUrl(img, 'post'));
 }
 
-export { returnTextContentTag, 이미지전처리 };
+export { returnTextTag, 이미지전처리 };
