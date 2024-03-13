@@ -87,17 +87,14 @@ function Like() {
   );
 }
 
-// 링크 다는 고차컴포넌트
-function withLinkTag(Component, text) {
-  return function () {
-    const { id } = useContext(PostContext);
-    return (
-      <Link to={`/post?postId=${id}`}>
-        <span className="a11y-hidden">{text}</span>
-        <Component />
-      </Link>
-    );
-  };
+function LinkWrapper({ children, hiddenText }) {
+  const { id } = useContext(PostContext);
+  return (
+    <Link to={`/post?postId=${id}`}>
+      <span className="a11y-hidden">{hiddenText}</span>
+      {children}
+    </Link>
+  );
 }
 
 function Date() {
@@ -144,23 +141,17 @@ export function PostWithoutLink({ post }) {
 }
 
 export function PostWithLink({ post, path, idx }) {
-  const ContentsWithLink = withLinkTag(
-    () => (
-      <>
-        <Post.TextContents />
-        <Post.ImageContents />
-      </>
-    ),
-    '게시글 보기',
-  );
-  const CommentWithLink = withLinkTag(Post.Comment, '댓글 보기');
-
   return (
     <Post post={post} path={path} idx={idx}>
-      <ContentsWithLink />
+      <LinkWrapper hiddenText="게시글 보기">
+        <Post.TextContents />
+        <Post.ImageContents />
+      </LinkWrapper>
       <div className="post-icon">
         <Post.Like />
-        <CommentWithLink />
+        <LinkWrapper hiddenText="댓글 보기">
+          <CommentWithLink />
+        </LinkWrapper>
       </div>
     </Post>
   );
