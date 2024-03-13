@@ -1,38 +1,16 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useLayoutEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import '../styles/UserProfile.scss';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ProfileSection, ProductSection, PostSection } from '../components';
-import { getProfileAPI, getProductAPI } from '../api';
-import SkeletonProfile from '../components/SkeletonProfile';
-import { useScroll } from '../../../hooks/useScroll';
+// import SkeletonProfile from '../components/SkeletonProfile';
 import { Meta } from '../../../libs/Meta';
 import { SkipNav } from '../../../components/Element/SkipNav/SkipNav';
-import { defaultAxios } from '../../../libs/api/axios';
 
 export default function UserProfile() {
-  const location = useLocation();
-  const accountname = new URLSearchParams(location.search).get('accountName');
-  const [isloading, setIsLoading] = useState(true);
-  const [userProfile, setUserProfile] = useState({});
-  const [userProduct, setUserProduct] = useState({});
-
-  const VIEW_COUNT = 4;
-  const getData = async page => {
-    return defaultAxios.get(`/post/${accountname}/userpost?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
-  };
-
-  const { data: userPost, fetchStatus } = useScroll(getData);
-
-  useEffect(() => {
-    (async () => {
-      const [userProfileData, userProductData] = await Promise.all([getProfileAPI(accountname), getProductAPI(accountname)]);
-      setUserProfile(userProfileData);
-      setUserProduct(userProductData);
-      setIsLoading(() => false);
-    })();
-  }, [location.search]);
+  const [searchParams] = useSearchParams();
+  const accountname = searchParams.get('accountName');
 
   useLayoutEffect(() => {
     document.body.classList.add('profile-body-color');
@@ -46,15 +24,13 @@ export default function UserProfile() {
       <Meta title="사용자 프로필" />
       <SkipNav page="profile" />
       <Header />
-      {isloading || fetchStatus.isLoading ? (
-        <SkeletonProfile />
-      ) : (
-        <main className="main-with-nav main-user-profile">
-          <ProfileSection data={userProfile?.profile} />
-          <ProductSection data={userProduct?.product} />
-          <PostSection data={userPost} />
-        </main>
-      )}
+      <main className="main-with-nav main-user-profile">
+        {/* <Suspense fallback={<SkeletonProfile />}> */}
+        <ProfileSection accountname={accountname} />
+        <ProductSection accountname={accountname} />
+        <PostSection accountname={accountname} />
+        {/* </Suspense> */}
+      </main>
       <Navbar />
     </>
   );
