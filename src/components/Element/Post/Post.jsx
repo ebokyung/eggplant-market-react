@@ -150,7 +150,7 @@ export function PostWithLink({ post, path, idx }) {
       <div className="post-icon">
         <Post.Like />
         <LinkWrapper hiddenText="댓글 보기">
-          <CommentWithLink />
+          <Post.Comment />
         </LinkWrapper>
       </div>
     </Post>
