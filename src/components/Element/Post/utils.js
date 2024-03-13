@@ -12,11 +12,11 @@ function returnTextTag(path) {
   }
 }
 
-function 이미지전처리(image) {
+function 이미지문자열전처리(image) {
   return image
     .split(imgReg)
     .filter(img => !!img)
     .map(img => checkImageUrl(img, 'post'));
 }
 
-export { returnTextTag, 이미지전처리 };
+export { returnTextTag, 이미지문자열전처리 };
