@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import './Post.scss';
 import { User } from '../User';
 import { ButtonOptionPost } from '../Buttons';
-import { ReactComponent as MessageCircle } from '../../../assets/icon/icon-message-circle.svg';
-import { ReactComponent as Heart } from './icon-heart.svg';
+import { ReactComponent as MessageCircleSVG } from '../../../assets/icon/icon-message-circle.svg';
+import { ReactComponent as HeartSVG } from './icon-heart.svg';
 
 import { returnTextTag, 이미지전처리 } from './utils';
 import { dateProcess } from '../../../utils/date';
@@ -69,7 +69,7 @@ function Comment() {
   const { commentCount } = useContext(PostContext);
   return (
     <>
-      <MessageCircle />
+      <MessageCircleSVG />
       <Count value={commentCount} />
     </>
   );
@@ -81,7 +81,7 @@ function Like() {
 
   return (
     <button type="button" className={`btn-like${isHeart ? ' like' : ''}`} onClick={toggleHeart}>
-      <Heart />
+      <HeartSVG />
       <Count value={heartCnt} />
     </button>
   );
