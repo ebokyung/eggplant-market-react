@@ -1,0 +1,90 @@
+@import '/src/styles/scss/mixin';
+
+.home-post {
+  position: relative;
+}
+.btn-option {
+  width: 1.5rem;
+  position: absolute;
+  top: 0;
+  right: -0.75rem;
+  transform: translateX(-25%);
+  img {
+    width: 100%;
+  }
+}
+.btn-like.like {
+  svg {
+    fill: $highlight-color;
+    path {
+      stroke: $highlight-color;
+    }
+  }
+}
+.comment-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.post-edit {
+  margin: 1rem auto 1rem 3.375rem;
+
+  .img-cover {
+    margin-bottom: 0.75rem;
+    border-radius: 0.625rem;
+    overflow: hidden;
+    border: $border-gray100-1px;
+
+    .post-img {
+      object-fit: contain;
+    }
+  }
+  .img-cover,
+  .post-img {
+    @include width-height(304px, 304px);
+  }
+}
+
+.post-text {
+  @include get-color(color, font-color);
+  margin-bottom: 1rem;
+  line-height: 1.125rem;
+  word-break: break-all;
+  white-space: pre-line;
+}
+
+.post-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  @include get-color(color, gray-color);
+  font-size: map-get($font-sizes, 'size12');
+  path {
+    @include get-color(stroke, gray-color);
+  }
+  span {
+    @include get-color(color, gray-color);
+  }
+  & > * {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: inherit;
+  }
+}
+
+.cnt,
+.btn-comment,
+.post-date {
+  @include get-color(color, gray-color);
+}
+
+.btn-comment {
+  width: 20px;
+  height: 20px;
+}
+
+.post-date {
+  font-size: map-get($font-sizes, 'size10');
+}
