@@ -20,21 +20,12 @@ const detailClassMap = {
 export function UserInfo({ category = 'post', userName, detail }) {
   const { NameTag, detailCategory } = categoryMap[category];
 
-  const preventClick = e => {
-    e.stopPropagation();
-    e.preventDefault();
-  };
-
   return (
     <div className="user-info">
       {/* NameTag : strong(default), h2, h3, p */}
       <NameTag className="user-name">{userName}</NameTag>
       {/* detailcategory : chat, intro, id(default) */}
-      {detailCategory && (
-        <p onClick={detailCategory === 'intro' ? e => preventClick(e) : undefined} className={detailClassMap[detailCategory]}>
-          {detail}
-        </p>
-      )}
+      {detailCategory && <p className={detailClassMap[detailCategory]}>{detail}</p>}
     </div>
   );
 }

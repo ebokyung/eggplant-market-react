@@ -21,19 +21,28 @@ function returnSize(category) {
   }
 }
 
-// 이미지 처리 함수 추가 필요
-export function ProfileImg({ profileImg = '', category }) {
+const useProfileImage = profileImage => {
   const theme = useRecoilValue(themeAtom);
+
   const lightProfileUrl = 'https://api.mandarin.weniv.co.kr/1687141773353.png';
   const hcProfileUrl = 'https://api.mandarin.weniv.co.kr/1687827693364.png';
+
   let imgsrc;
-  if (profileImg instanceof File) imgsrc = URL.createObjectURL(profileImg);
-  else if (profileImg === lightProfileUrl || profileImg === hcProfileUrl) imgsrc = checkImageUrl('Ellipse', 'profile');
-  else imgsrc = checkImageUrl(profileImg, 'profile');
+
+  if (profileImage instanceof File) imgsrc = URL.createObjectURL(profileImage);
+  else if (profileImage === lightProfileUrl || profileImage === hcProfileUrl) imgsrc = checkImageUrl('Ellipse', 'profile');
+  else imgsrc = checkImageUrl(profileImage, 'profile');
 
   useEffect(() => {
     imgsrc = theme === 'light' ? defaultProfile : hcProfile;
   }, [theme]);
+
+  return imgsrc;
+};
+
+// 이미지 처리 함수 추가 필요
+export function ProfileImg({ profileImage = '', category }) {
+  const imgsrc = useProfileImage(profileImage);
 
   return (
     <div className={`profile-img ${returnSize(category)}`}>
