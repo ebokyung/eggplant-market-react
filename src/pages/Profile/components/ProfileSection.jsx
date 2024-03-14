@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { storage } from '../../../utils/storage';
 import '../styles/ProfileSection.scss';
 import { UserInfomation, ButtonsYourProfile, ButtonsMyProfile } from './ProfileSectionElement';
+import { getProfileAPI } from '../api';
 
-export function ProfileSection({ fetchData, accountname }) {
+export function ProfileSection({ accountname }) {
   const who = storage.getAccountName();
-  const userProfile = fetchData.read().profile;
+  const [userProfile, setUserProfile] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const userProfileData = await getProfileAPI(accountname);
+      setUserProfile(() => userProfileData.profile);
+      setIsLoading(false);
+    })();
+  }, [accountname]);
+
+  if (isLoading) return 'loading profile';
 
   return (
     <section id="profile" className="profile-container">
