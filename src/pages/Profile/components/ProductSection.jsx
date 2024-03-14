@@ -1,21 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../styles/ProductSection.scss';
 import { ProductItem } from './ProductSectionElement/ProductItem';
-import { getProductAPI } from '../api';
 
-export function ProductSection({ accountname }) {
-  const [userProduct, setUserProduct] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      const userProductData = await getProductAPI(accountname);
-      setUserProduct(() => userProductData.product);
-      setIsLoading(false);
-    })();
-  }, [accountname]);
-
-  if (isLoading) return 'loading products ...';
+export function ProductSection({ fetchData }) {
+  const userProduct = fetchData.read().product;
 
   return (
     <section id="product" className="product-container">

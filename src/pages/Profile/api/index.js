@@ -1,4 +1,5 @@
 import { defaultAxios } from '../../../libs/api/axios';
+import wrapPromise from '../../../libs/api/wrapPromise';
 
 export const getProfileAPI = async accountname => {
   try {
@@ -20,14 +21,11 @@ export const getProductAPI = async accountname => {
   }
 };
 
-export const getPostAPI = async accountname => {
-  try {
-    const res = await defaultAxios.get(`/post/${accountname}/userpost`);
-    return res.data;
-  } catch (e) {
-    console.log(e);
-    return e;
-  }
+export const fetchData = accountname => {
+  return {
+    profile: wrapPromise(getProfileAPI(accountname)),
+    product: wrapPromise(getProductAPI(accountname)),
+  };
 };
 
 export const postFollowAPI = async someone => {
