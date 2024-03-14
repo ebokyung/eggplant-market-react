@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../styles/ProductSection.scss';
+import { useRecoilValue } from 'recoil';
 import { ProductItem } from './ProductSectionElement/ProductItem';
-import { getProductAPI } from '../api';
+import { userProductState } from '../recoils/selector';
 
 export function ProductSection({ accountname }) {
-  const [userProduct, setUserProduct] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      const userProductData = await getProductAPI(accountname);
-      setUserProduct(() => userProductData.product);
-      setIsLoading(false);
-    })();
-  }, [accountname]);
-
-  if (isLoading) return 'loading products ...';
+  const userProduct = useRecoilValue(userProductState(accountname));
 
   return (
     <section id="product" className="product-container">
