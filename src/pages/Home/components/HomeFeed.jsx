@@ -1,5 +1,5 @@
 import React from 'react';
-import { useScroll } from '../../../hooks/useScroll';
+import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 import { defaultAxios } from '../../../libs/api/axios';
 import HomeWithPost from './HomeWithPost';
 import HomeWithoutPost from './HomeWithoutPost';
@@ -12,7 +12,7 @@ const fetchPosts = async page => {
 };
 
 export default function HomeFeed() {
-  const { data: posts, fetchStatus } = useScroll(fetchPosts);
+  const { data: posts, fetchStatus } = useInfiniteScroll(fetchPosts);
 
   // eslint-disable-next-line no-nested-ternary
   return fetchStatus.isLoading ? (

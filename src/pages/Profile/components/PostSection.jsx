@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import '../styles/PostSection.scss';
 import { PostViewTab, AlbumView, ListView } from './PostSectionElement';
-import { useScroll } from '../../../hooks/useScroll';
+import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 import { defaultAxios } from '../../../libs/api/axios';
 import { SkeletonPostSection } from './SkeletonProfile';
 import Spinner from '../../../components/Element/Spinner/Spinner';
@@ -14,7 +14,7 @@ export function PostSection({ accountname }) {
     return defaultAxios.get(`/post/${accountname}/userpost?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
   });
 
-  const { data: userPost, fetchStatus } = useScroll(fetchUserPosts);
+  const { data: userPost, fetchStatus } = useInfiniteScroll(fetchUserPosts);
 
   if (fetchStatus.isLoading) return <SkeletonPostSection />;
 

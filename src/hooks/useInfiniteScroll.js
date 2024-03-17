@@ -2,7 +2,7 @@ import { throttle } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { getDocumentHeight, getScrollTop } from '../utils/scroll';
 
-export const useScroll = fetchData => {
+export const useInfiniteScroll = fetchData => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [hasMoreData, setHasMoreData] = useState(true);

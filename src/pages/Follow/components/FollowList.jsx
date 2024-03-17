@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { defaultAxios } from '../../../libs/api/axios';
-import { useScroll } from '../../../hooks/useScroll';
+import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 import FollowItem from './FollowItem';
 import SkeletonFollowItem from './SkeletonFollowItem';
 import Spinner from '../../../components/Element/Spinner/Spinner';
@@ -17,7 +17,7 @@ export default function FollowList({ isFollower }) {
     return defaultAxios.get(`/profile/${accountName}/${isFollower ? 'follower' : 'following'}?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
   });
 
-  const { data, fetchStatus } = useScroll(fetchFollow);
+  const { data, fetchStatus } = useInfiniteScroll(fetchFollow);
 
   return (
     <ul className="follow-list">
