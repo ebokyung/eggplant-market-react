@@ -8,7 +8,8 @@ import Spinner from '../../../components/Element/Spinner/Spinner';
 
 const VIEW_COUNT = 6;
 const fetchPosts = async page => {
-  return defaultAxios.get(`/post/feed?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
+  const res = await defaultAxios.get(`/post/feed?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
+  return res.data.posts;
 };
 
 export default function HomeFeed() {

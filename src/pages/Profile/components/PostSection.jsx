@@ -11,7 +11,8 @@ export function PostSection({ accountname }) {
 
   const VIEW_COUNT = 4;
   const fetchUserPosts = useCallback(async page => {
-    return defaultAxios.get(`/post/${accountname}/userpost?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
+    const res = await defaultAxios.get(`/post/${accountname}/userpost?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
+    return res.data.post;
   });
 
   const { data: userPost, fetchStatus } = useInfiniteScroll(fetchUserPosts);

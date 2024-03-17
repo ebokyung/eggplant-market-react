@@ -14,7 +14,8 @@ export default function FollowList({ isFollower }) {
   const accountName = searchParams.get('accountName');
 
   const fetchFollow = useCallback(async page => {
-    return defaultAxios.get(`/profile/${accountName}/${isFollower ? 'follower' : 'following'}?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
+    const res = await defaultAxios.get(`/profile/${accountName}/${isFollower ? 'follower' : 'following'}?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
+    return res.data;
   });
 
   const { data, fetchStatus } = useInfiniteScroll(fetchFollow);

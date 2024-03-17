@@ -16,21 +16,12 @@ export const useInfiniteScroll = fetchData => {
   const handleScrollEvent = useCallback(handleScroll);
 
   const loadData = async () => {
-    const res = await fetchData(page);
-
-    if (Array.isArray(res.data)) {
-      if (res.data.length === 0) {
-        setHasMoreData(false);
-        return;
-      }
-      setData(prev => prev.concat(res.data));
-    } else {
-      if (Object.values(res.data)[0].length === 0) {
-        setHasMoreData(false);
-        return;
-      }
-      setData(prev => prev.concat(Object.values(res.data)[0]));
+    const newData = await fetchData(page);
+    if (newData.length === 0) {
+      setHasMoreData(false);
+      return;
     }
+    setData(prev => prev.concat(newData));
   };
 
   const executeLoadData = useCallback(async () => {
