@@ -3,6 +3,8 @@ import '../styles/PostSection.scss';
 import { PostViewTab, AlbumView, ListView } from './PostSectionElement';
 import { useScroll } from '../../../hooks/useScroll';
 import { defaultAxios } from '../../../libs/api/axios';
+import { SkeletonPostSection } from './SkeletonProfile';
+import Spinner from '../../../components/Element/Spinner/Spinner';
 
 export function PostSection({ accountname }) {
   const [islistViewOn, setIsListViewOn] = useState(true);
@@ -12,12 +14,15 @@ export function PostSection({ accountname }) {
     return defaultAxios.get(`/post/${accountname}/userpost?skip=${page * VIEW_COUNT}&limit=${VIEW_COUNT}`);
   });
 
-  const { data: userPost } = useScroll(fetchUserPosts);
+  const { data: userPost, fetchStatus } = useScroll(fetchUserPosts);
+
+  if (fetchStatus.isLoading) return <SkeletonPostSection />;
 
   return (
     <section id="post" className="post-container">
       <PostViewTab islistViewOn={islistViewOn} setIsListViewOn={setIsListViewOn} />
       <section className="post-sec">{islistViewOn ? <ListView post={userPost} /> : <AlbumView post={userPost} />}</section>
+      {fetchStatus.isFetching && <Spinner />}
     </section>
   );
 }

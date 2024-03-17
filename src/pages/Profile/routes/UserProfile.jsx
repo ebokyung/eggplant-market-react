@@ -1,14 +1,21 @@
 import React, { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-// import { useSetRecoilState } from 'recoil';
-// import { accountnameState } from '../recoils/atoms';
 import '../styles/UserProfile.scss';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
-import { ProfileSection, ProductSection } from '../components';
-import SkeletonProfile from '../components/SkeletonProfile';
+import { ProfileSection, ProductSection, PostSection } from '../components';
+import { SkeletonProfileSection, SkeletonProductSection } from '../components/SkeletonProfile';
 import { Meta } from '../../../libs/Meta';
 import { SkipNav } from '../../../components/Element/SkipNav/SkipNav';
+
+function SkeletonTopSection() {
+  return (
+    <>
+      <SkeletonProfileSection />
+      <SkeletonProductSection />
+    </>
+  );
+}
 
 export default function UserProfile() {
   const [searchParams] = useSearchParams();
@@ -27,11 +34,11 @@ export default function UserProfile() {
       <SkipNav page="profile" />
       <Header />
       <main className="main-with-nav main-user-profile">
-        <React.Suspense fallback={<SkeletonProfile />}>
+        <React.Suspense fallback={<SkeletonTopSection />}>
           <ProfileSection accountname={accountname} />
           <ProductSection accountname={accountname} />
-          {/* <PostSection accountname={accountname} /> */}
         </React.Suspense>
+        <PostSection accountname={accountname} />
       </main>
       <Navbar />
     </>
