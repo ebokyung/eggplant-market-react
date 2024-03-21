@@ -1,38 +1,11 @@
 import React, { createElement } from 'react';
 import { Link } from 'react-router-dom';
 
-// const userContext = createContext({
-//   id: '',
-//   username: '',
-//   accountname: '',
-//   image: '',
-//   intro: '',
-// });
-
-const useProfileImage = profileImage => {
-  const theme = useRecoilValue(themeAtom);
-
-  const lightProfileUrl = 'https://api.mandarin.weniv.co.kr/1687141773353.png';
-  const hcProfileUrl = 'https://api.mandarin.weniv.co.kr/1687827693364.png';
-
-  let imgsrc;
-
-  if (profileImage instanceof File) imgsrc = URL.createObjectURL(profileImage);
-  else if (profileImage === lightProfileUrl || profileImage === hcProfileUrl) imgsrc = checkImageUrl('Ellipse', 'profile');
-  else imgsrc = checkImageUrl(profileImage, 'profile');
-
-  useEffect(() => {
-    imgsrc = theme === 'light' ? defaultProfile : hcProfile;
-  }, [theme]);
-
-  return imgsrc;
-};
-
-function ProfileImage({ src }) {
-  const imgsrc = useProfileImage(profileImage);
+export function ProfileImage({ src, size }) {
+  // 이미지 처리 들어감
 
   return (
-    <div>
+    <div className={`profile-img ${size}`}>
       <img src={src} alt="" />
     </div>
   );
@@ -56,39 +29,13 @@ function SubInfo({ value, type }) {
       className = 'chat-comment ellipsis';
       break;
     default:
-      return null;
+      break;
   }
 
-  return <p className={className}>{value}</p>;
+  return createElement('p', { className }, value);
 }
 
-// 경우의 수
-// post
-/// name : p, subclass user-id
-// chat
-/// name : p, subclass chat-content ellipsis
-// search
-/// name : h3, subclass user-id
-// follow
-/// name : strong subclass user-intro ellipsis
-// comment
-/// name : strong subclass null & null -> 렌더링 x
-
-const categoryMap = {
-  post: { NameTag: 'p', detailCategory: 'id' },
-  chat: { NameTag: 'p', detailCategory: 'chat' },
-  search: { NameTag: 'h3', detailCategory: 'id' },
-  follow: { NameTag: 'strong', detailCategory: 'intro' },
-  comment: { NameTag: 'strong', detailCategory: null },
-};
-
-const detailClassMap = {
-  id: 'user-id',
-  chat: 'chat-content ellipsis',
-  intro: 'user-intro ellipsis',
-};
-
-function User({ children, accountname }) {
+export function User({ children, accountname }) {
   return (
     <Link className="user-info-container" to={`/profile?accountName=${accountname}`}>
       {children}
@@ -96,19 +43,75 @@ function User({ children, accountname }) {
   );
 }
 
-User.ProfileImage = ProfileImage;
 User.Name = Name;
 User.SubInfo = SubInfo;
+User.ProfileImage = ProfileImage;
 
-function PostUser({ author }) {
+//! Usage
+
+export function PostUser({ author }) {
   const { username, accountname, image } = author;
   return (
     <User accountname={accountname}>
-      <User.ProfileImage src={image} />
+      <User.ProfileImage src={image} size="regular" />
+      <div className="user-info">
+        <User.Name value={username} tagName="p" />
+        <User.SubInfo value={accountname} type="accountname" />
+      </div>
+    </User>
+  );
+}
+
+export function ChatUser({ author }) {
+  const { username, accountname, image } = author;
+  const contents = '';
+  return (
+    <User accountname={accountname}>
+      <User.ProfileImage src={image} size="regular" />
+      <div className="user-info">
+        <User.Name value={username} tagName="p" />
+        <User.SubInfo value={contents} type="chat" />
+      </div>
+    </User>
+  );
+}
+
+// highlight
+export function SearchUser({ author }) {
+  const { username, accountname, image } = author;
+
+  return (
+    <User accountname={accountname}>
+      <User.ProfileImage src={image} size="medium" />
       <div className="user-info">
         <User.Name value={username} tagName="h3" />
         <User.SubInfo value={accountname} type="accountname" />
       </div>
     </User>
   );
+}
+
+export function FollowUser({ author }) {
+  const { username, accountname, image, intro } = author;
+
+  return (
+    <User accountname={accountname}>
+      <User.ProfileImage src={image} size="medium" />
+      <div className="user-info">
+        <User.Name value={username} tagName="strong" />
+        <User.SubInfo value={intro} type="intro" />
+      </div>
+    </User>
+  );
+}
+
+export function CommentUser({ author }) {
+  const { username, accountname, image } = author;
+
+  <User accountname={accountname}>
+    <User.ProfileImage src={image} size="small" />
+    <div className="user-info">
+      <User.Name value={username} tagName="strong" />
+    </div>
+  </User>;
 }
