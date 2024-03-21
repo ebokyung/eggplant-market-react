@@ -1,6 +1,11 @@
 import React from 'react';
 import { User } from '../../../components/Element/User';
 
+// 문제 있어보이는디?
+/**
+ * ! split을 하면 안될거 같음
+ */
+
 function highlightKeyword(text, keyword) {
   if (text.indexOf(keyword) !== -1) {
     const parts = text.split(keyword);
