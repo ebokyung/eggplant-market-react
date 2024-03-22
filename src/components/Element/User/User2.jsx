@@ -1,16 +1,7 @@
 import React, { createElement } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './style/User.module.scss';
-
-export function ProfileImage({ src, size }) {
-  // 이미지 처리 들어감
-
-  return (
-    <div className={`${styles.ProfileImage} ${styles[size]}`}>
-      <img src={src} alt="" />
-    </div>
-  );
-}
+import { ProfileImage } from './ProfileImage';
 
 function Name({ value, tagName }) {
   return createElement(tagName, { className: styles.UserName }, value);
