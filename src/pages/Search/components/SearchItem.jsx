@@ -1,5 +1,6 @@
 import React from 'react';
-import { User } from '../../../components/Element/User';
+// import { User } from '../../../components/Element/User';
+import { SearchUser } from '../../../components/Element/User/User2';
 
 // 문제 있어보이는디?
 /**
@@ -21,12 +22,13 @@ function highlightKeyword(text, keyword) {
 }
 
 export default function SearchItem({ user, keyword }) {
-  const { _id, username, accountname, image } = user;
+  const { _id, username } = user;
   const content = highlightKeyword(username, keyword);
+  console.log(content);
 
   return (
     <li key={_id}>
-      <User profileImg={image} category="search" userName={content} accountName={accountname} detail={accountname} />
+      <SearchUser author={user} />
     </li>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './style/ProfileImg.scss';
 import { useRecoilValue } from 'recoil';
-import { checkImageUrl } from '../../../utils/imageUrlProcess';
+import { getImage } from '../../../utils/imageUrlProcess';
 import { themeAtom } from '../../../recoil/theme/atoms';
 import defaultProfile from '../../../assets/basic-profile.png';
 import hcProfile from '../../../assets/basic-profile-hc.png';
@@ -24,17 +24,18 @@ function returnSize(category) {
 const useProfileImage = profileImage => {
   const theme = useRecoilValue(themeAtom);
 
-  const lightProfileUrl = 'https://api.mandarin.weniv.co.kr/1687141773353.png';
-  const hcProfileUrl = 'https://api.mandarin.weniv.co.kr/1687827693364.png';
-
   let imgsrc;
 
-  if (profileImage instanceof File) imgsrc = URL.createObjectURL(profileImage);
-  else if (profileImage === lightProfileUrl || profileImage === hcProfileUrl) imgsrc = checkImageUrl('Ellipse', 'profile');
-  else imgsrc = checkImageUrl(profileImage, 'profile');
+  if (profileImage instanceof File) {
+    imgsrc = URL.createObjectURL(profileImage);
+    return imgsrc; // ?
+  }
+  imgsrc = getImage({ img: profileImage, type: 'profile' });
 
   useEffect(() => {
-    imgsrc = theme === 'light' ? defaultProfile : hcProfile;
+    if (imgsrc === defaultProfile || imgsrc === hcProfile) {
+      imgsrc = theme === 'light' ? defaultProfile : hcProfile;
+    }
   }, [theme]);
 
   return imgsrc;

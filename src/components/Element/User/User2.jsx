@@ -1,32 +1,33 @@
 import React, { createElement } from 'react';
 import { Link } from 'react-router-dom';
+import styles from './style/User.module.scss';
 
 export function ProfileImage({ src, size }) {
   // 이미지 처리 들어감
 
   return (
-    <div className={`profile-img ${size}`}>
+    <div className={`${styles.ProfileImage} ${styles[size]}`}>
       <img src={src} alt="" />
     </div>
   );
 }
 
 function Name({ value, tagName }) {
-  return createElement(tagName, { className: 'user-name' }, value);
+  return createElement(tagName, { className: styles.UserName }, value);
 }
 
 function SubInfo({ value, type }) {
-  let className = '';
+  let className = `${styles.SubInfoFont}`;
 
   switch (type) {
     case 'accountname':
-      className = 'user-id';
+      className += ` ${styles.UserId}`;
       break;
     case 'intro':
-      className = 'user-intro ellipsis';
+      className += ` ${styles.UserIntro} ellipsis`;
       break;
     case 'chat':
-      className = 'chat-comment ellipsis';
+      className = ` ${styles.ChatContents} ellipsis`;
       break;
     default:
       break;
@@ -37,7 +38,7 @@ function SubInfo({ value, type }) {
 
 export function User({ children, accountname }) {
   return (
-    <Link className="user-info-container" to={`/profile?accountName=${accountname}`}>
+    <Link className={styles.UserContainer} to={`/profile?accountName=${accountname}`}>
       {children}
     </Link>
   );
@@ -53,8 +54,8 @@ export function PostUser({ author }) {
   const { username, accountname, image } = author;
   return (
     <User accountname={accountname}>
-      <User.ProfileImage src={image} size="regular" />
-      <div className="user-info">
+      <User.ProfileImage src={image} size="Regular" />
+      <div className={styles.UserInfo}>
         <User.Name value={username} tagName="p" />
         <User.SubInfo value={accountname} type="accountname" />
       </div>
@@ -67,8 +68,8 @@ export function ChatUser({ author }) {
   const contents = '';
   return (
     <User accountname={accountname}>
-      <User.ProfileImage src={image} size="regular" />
-      <div className="user-info">
+      <User.ProfileImage src={image} size="Regular" />
+      <div className={styles.UserInfo}>
         <User.Name value={username} tagName="p" />
         <User.SubInfo value={contents} type="chat" />
       </div>
@@ -82,8 +83,8 @@ export function SearchUser({ author }) {
 
   return (
     <User accountname={accountname}>
-      <User.ProfileImage src={image} size="medium" />
-      <div className="user-info">
+      <User.ProfileImage src={image} size="Medium" />
+      <div className={styles.UserInfo}>
         <User.Name value={username} tagName="h3" />
         <User.SubInfo value={accountname} type="accountname" />
       </div>
@@ -96,8 +97,8 @@ export function FollowUser({ author }) {
 
   return (
     <User accountname={accountname}>
-      <User.ProfileImage src={image} size="medium" />
-      <div className="user-info">
+      <User.ProfileImage src={image} size="Medium" />
+      <div className={styles.UserInfo}>
         <User.Name value={username} tagName="strong" />
         <User.SubInfo value={intro} type="intro" />
       </div>
@@ -108,10 +109,14 @@ export function FollowUser({ author }) {
 export function CommentUser({ author }) {
   const { username, accountname, image } = author;
 
-  <User accountname={accountname}>
-    <User.ProfileImage src={image} size="small" />
-    <div className="user-info">
-      <User.Name value={username} tagName="strong" />
-    </div>
-  </User>;
+  console.log(username, accountname, image);
+
+  return (
+    <User accountname={accountname}>
+      <User.ProfileImage src={image} size="Small" />
+      <div className={styles.UserInfo}>
+        <User.Name value={username} tagName="strong" />
+      </div>
+    </User>
+  );
 }

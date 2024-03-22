@@ -8,23 +8,11 @@
 
   .profile-img {
     margin-right: 0.75rem;
-    box-shadow: 0 0 0 .0625rem inset #dbdbdb;
+    box-shadow: 0 0 0 0.0625rem inset #dbdbdb;
   }
 
   .user-info {
     margin-right: 0.75rem;
     // display: inline-block;
-  }
-}
-
-.new-chat {
-  position: relative;
-  .profile-dot {
-    position: absolute;
-    left: 0.125rem;
-    @include width-height(0.75rem, 0.75rem);
-    background-color: $enabled-color;
-    border-radius: 50%;
-    z-index: 1;
   }
 }

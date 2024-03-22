@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { User } from '../User';
+// import { User } from '../User';
 import { ButtonOptionPost } from '../Buttons';
 import ButtonLike from './ButtonLike';
 
@@ -12,6 +12,7 @@ import { dateProcess } from '../../../utils/date';
 import { imgReg } from '../../../libs/constant/regex';
 import { storage } from '../../../utils/storage';
 import { useLazyLoad } from '../../../hooks/useLazyLoad';
+import { PostUser } from '../User/User2';
 
 function returnContentTag(location) {
   if (location.includes('home')) return 'h2';
@@ -48,7 +49,7 @@ export function Post({ post }) {
 
   return (
     <section id="post" className="home-post" data-postid={id}>
-      <User category="post" accountName={author.accountname} userName={author.username} detail={author.accountname} profileImg={author.image} />
+      <PostUser author={author} />
       <div className="post-edit">
         <Link to={`/post?postId=${id}`} onClick={preventClick} style={preventPointer}>
           <span className="a11y-hidden">게시글 상세보기</span>
