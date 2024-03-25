@@ -9,8 +9,6 @@ import { CommentUser } from '../../../components/Element/User/User2';
 function Comment({ comment }) {
   const { id, author, content, createdAt } = comment;
 
-  console.log(author);
-
   return (
     <>
       <CommentUser author={author} />

@@ -7,7 +7,7 @@ import ButtonLike from './ButtonLike';
 
 import './Post.scss';
 import messageCircle from '../../../assets/icon/icon-message-circle.svg';
-import { checkImageUrl } from '../../../utils/imageUrlProcess';
+import { getImageWithTheme } from '../../../utils/imageUrlProcess';
 import { dateProcess } from '../../../utils/date';
 import { imgReg } from '../../../libs/constant/regex';
 import { storage } from '../../../utils/storage';
@@ -59,7 +59,7 @@ export function Post({ post }) {
             .filter(img => !!img)
             .map(img => (
               <div key={img} className="img-cover">
-                <img className="post-img" data-src={checkImageUrl(img, 'post')} alt="" ref={addToRefs} />
+                <img className="post-img" data-src={getImageWithTheme({ img, type: 'post' })} alt="" ref={addToRefs} />
               </div>
             ))}
         </Link>

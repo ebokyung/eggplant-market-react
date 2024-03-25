@@ -21,9 +21,7 @@ function useProfileImage(initialImg) {
   // revoke
   useEffect(() => {
     return () => {
-      blobArray.current.forEach(src => {
-        URL.revokeObjectURL(src);
-      });
+      blobArray.current.forEach(blob => URL.revokeObjectURL(blob));
     };
   }, []);
 

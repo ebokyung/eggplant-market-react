@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../style/ImageItem.scss';
 import closeIcon from '../../../assets/icon/x.svg';
-import { checkImageUrl } from '../../../utils/imageUrlProcess';
+import { getImageWithTheme } from '../../../utils/imageUrlProcess';
 
 export function ImageItem({ img, onRemove }) {
   const [imgSrc, setImgSrc] = useState('');
+  const blobArray = useRef([]);
 
   useEffect(() => {
-    const temp = img instanceof File ? URL.createObjectURL(img) : checkImageUrl(img);
-    setImgSrc(temp);
+    let src;
+    if (img instanceof File) {
+      src = URL.createObjectURL(img);
+      blobArray.current.push(src);
+    } else {
+      src = getImageWithTheme({ img, type: 'post' });
+    }
+    setImgSrc(src);
 
     return () => {
-      if (img instanceof File) URL.revokeObjectURL(imgSrc);
+      blobArray.current.forEach(blob => URL.revokeObjectURL(blob));
     };
   }, []);
 
