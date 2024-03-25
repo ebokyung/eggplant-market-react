@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import './InputImg.scss';
 import { ProfileImage } from '../User/ProfileImage';
 import { ReactComponent as UploadIconSVG } from './upload_img_icon.svg';
+import { useBlob } from '../../../hooks/useBlob';
 
 function useProfileImage(initialImg) {
   const [profileImg, setProfileImg] = useState(initialImg);
-  const blobArray = useRef([]);
+  const blobArray = useBlob();
 
   const handleChange = e => {
     const { files } = e.target;
@@ -17,13 +18,6 @@ function useProfileImage(initialImg) {
       blobArray.current.push(src);
     } else setProfileImg('');
   };
-
-  // revoke
-  useEffect(() => {
-    return () => {
-      blobArray.current.forEach(blob => URL.revokeObjectURL(blob));
-    };
-  }, []);
 
   return { profileImg, handleChange };
 }

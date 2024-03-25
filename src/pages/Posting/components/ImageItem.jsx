@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/ImageItem.scss';
 import closeIcon from '../../../assets/icon/x.svg';
 import { getImageWithTheme } from '../../../utils/imageUrlProcess';
+import { useBlob } from '../../../hooks/useBlob';
 
 export function ImageItem({ img, onRemove }) {
   const [imgSrc, setImgSrc] = useState('');
-  const blobArray = useRef([]);
+  const blobArray = useBlob();
 
   useEffect(() => {
     let src;
@@ -16,10 +17,6 @@ export function ImageItem({ img, onRemove }) {
       src = getImageWithTheme({ img, type: 'post' });
     }
     setImgSrc(src);
-
-    return () => {
-      blobArray.current.forEach(blob => URL.revokeObjectURL(blob));
-    };
   }, []);
 
   return (
