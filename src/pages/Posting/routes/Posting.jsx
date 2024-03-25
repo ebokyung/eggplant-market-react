@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import '../style/Posting.scss';
 import imageCompression from 'browser-image-compression';
 import Header from '../../../components/Element/Header/Header';
-import { ProfileImg } from '../../../components/Element/User/ProfileImg';
 import { TextArea } from '../components/TextArea';
 import { ImageArea } from '../components/ImageArea';
 import { postingAPI, postPostImgAPI, getPostAPI, putPostAPI, getUserAPI } from '../api/index';
@@ -11,6 +10,7 @@ import { storage } from '../../../utils/storage';
 import { imgReg } from '../../../libs/constant/regex';
 import SkeletonPosting from '../components/SkeletonPosting';
 import { Meta } from '../../../libs/Meta';
+import { ProfileImage } from '../../../components/Element/User/ProfileImage';
 
 export default function Posting() {
   const formRef = useRef();
@@ -101,7 +101,7 @@ export default function Posting() {
       <Meta title={`게시글 ${postId ? '수정' : '작성'}`} />
       <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
       <main className="main-posting">
-        <ProfileImg profileImg={userImg} category="post" />
+        <ProfileImage src={userImg} size="Regular" />
         <form id="form-posting" onSubmit={handleSubmit} ref={formRef} className="posting-form" action="">
           <TextArea initialValue={initialText} setIsTextError={setIsTextError} />
           <ImageArea imgData={imgData} setImgData={setImgData} />

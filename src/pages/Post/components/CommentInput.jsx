@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 
-import { ProfileImg } from '../../../components/Element/User';
 import { postCommentAPI } from '../api';
 import '../style/CommentInput.scss';
+import { ProfileImage } from '../../../components/Element/User/ProfileImage';
 
 export function CommentInput({ postId, setIsLoading, userImg }) {
   const [inpValue, setInpValue] = useState('');
@@ -39,7 +39,7 @@ export function CommentInput({ postId, setIsLoading, userImg }) {
           게시물에 대한 댓글 입력
         </label>
         <input value={inpValue} onChange={e => setInpValue(e.target.value)} type="text" id="commemt-input" placeholder="댓글 입력하기..." />
-        <ProfileImg profileImg={userImg} category="comment" />
+        <ProfileImage src={userImg} size="Small" />
         <button type="submit" className="btn-comment" disabled={!inpValue}>
           게시
         </button>

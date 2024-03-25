@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { followerCnt } from '../../recoils/atoms';
-// import { ProfileImg } from '../../../../components/Element/User';
 import { Followers } from './Follwers';
 import { ProfileImage } from '../../../../components/Element/User/ProfileImage';
 

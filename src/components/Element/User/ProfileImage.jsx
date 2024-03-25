@@ -1,31 +1,12 @@
-import React, { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
-
+import React from 'react';
 import styles from './style/ProfileImage.module.scss';
-import { getImage } from '../../../utils/imageUrlProcess';
-import defaultProfile from '../../../assets/basic-profile.png';
-import hcProfile from '../../../assets/basic-profile-hc.png';
-import { themeAtom } from '../../../recoil/theme/atoms';
-
-const useProfileImage = profileImage => {
-  const theme = useRecoilValue(themeAtom);
-
-  let imgsrc;
-
-  imgsrc = getImage({ img: profileImage, type: 'profile' });
-
-  // 작동 제대로 안하는듯
-  useEffect(() => {
-    imgsrc = theme === 'light' ? defaultProfile : hcProfile;
-  }, [theme]);
-
-  return imgsrc;
-};
+import { getImageWithTheme } from '../../../utils/imageUrlProcess';
 
 export function ProfileImage({ src, size = 'Large' }) {
   // 이미지 처리 들어감
 
-  const img = src instanceof File ? URL.createObjectURL(src) : useProfileImage(src);
+  // File인 경우 : InputImg 에서 받아온 경우일때만
+  const img = src.startsWith('blob') ? src : getImageWithTheme({ img: src, type: 'profile' });
 
   return (
     <div className={`${styles.ProfileImage} ${styles[size]}`}>
