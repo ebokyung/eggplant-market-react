@@ -13,9 +13,9 @@ function useProfileImage(initialImg) {
   const handleChange = e => {
     const { files } = e.target;
     if (files.length === 1) {
-      const src = URL.createObjectURL(files[0]);
-      setProfileImg(src);
-      blobArray.push(src);
+      const blob = URL.createObjectURL(files[0]);
+      setProfileImg(blob);
+      blobArray.push(blob);
     } else setProfileImg('');
   };
 
