@@ -15,7 +15,7 @@ function useProfileImage(initialImg) {
     if (files.length === 1) {
       const src = URL.createObjectURL(files[0]);
       setProfileImg(src);
-      blobArray.current.push(src);
+      blobArray.push(src);
     } else setProfileImg('');
   };
 

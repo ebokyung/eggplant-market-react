@@ -12,7 +12,7 @@ export function ImageItem({ img, onRemove }) {
     let src;
     if (img instanceof File) {
       src = URL.createObjectURL(img);
-      blobArray.current.push(src);
+      blobArray.push(src);
     } else {
       src = getImageWithTheme({ img, type: 'post' });
     }

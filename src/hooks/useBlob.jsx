@@ -8,5 +8,5 @@ export const useBlob = () => {
     };
   }, []);
 
-  return blobArray;
+  return blobArray.current;
 };

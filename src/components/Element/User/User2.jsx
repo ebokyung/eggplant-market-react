@@ -1,30 +1,32 @@
-import React, { createElement } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import styles from './style/User.module.scss';
 import { ProfileImage } from './ProfileImage';
 
-function Name({ value, tagName }) {
-  return createElement(tagName, { className: styles.UserName }, value);
+function Name({ value, type }) {
+  const tagNames = {
+    post: 'p',
+    chat: 'p',
+    follow: 'strong',
+    comment: 'strong',
+    search: 'h3',
+  };
+
+  const TagName = tagNames[type] || 'p'; // 기본값으로 'p' 설정
+
+  return <TagName className={styles.UserName}>{value}</TagName>;
 }
 
 function SubInfo({ value, type }) {
-  let className = `${styles.SubInfoFont}`;
+  const className = classNames(styles.SubInfoFont, {
+    [styles.UserId]: type === 'accountname',
+    [styles.UserIntro]: type === 'intro',
+    [styles.ChatContents]: type === 'chat',
+    ellipsis: type === 'chat' || type === 'intro', // 조건부로 여러 타입에 적용
+  });
 
-  switch (type) {
-    case 'accountname':
-      className += ` ${styles.UserId}`;
-      break;
-    case 'intro':
-      className += ` ${styles.UserIntro} ellipsis`;
-      break;
-    case 'chat':
-      className = ` ${styles.ChatContents} ellipsis`;
-      break;
-    default:
-      break;
-  }
-
-  return createElement('p', { className }, value);
+  return <p className={className}>{value}</p>;
 }
 
 export function User({ children, accountname }) {
@@ -47,7 +49,7 @@ export function PostUser({ author }) {
     <User accountname={accountname}>
       <User.ProfileImage src={image} size="Regular" />
       <div className={styles.UserInfo}>
-        <User.Name value={username} tagName="p" />
+        <User.Name value={username} type="post" />
         <User.SubInfo value={accountname} type="accountname" />
       </div>
     </User>
@@ -61,7 +63,7 @@ export function ChatUser({ author }) {
     <User accountname={accountname}>
       <User.ProfileImage src={image} size="Regular" />
       <div className={styles.UserInfo}>
-        <User.Name value={username} tagName="p" />
+        <User.Name value={username} type="chat" />
         <User.SubInfo value={contents} type="chat" />
       </div>
     </User>
@@ -76,7 +78,7 @@ export function SearchUser({ author }) {
     <User accountname={accountname}>
       <User.ProfileImage src={image} size="Medium" />
       <div className={styles.UserInfo}>
-        <User.Name value={username} tagName="h3" />
+        <User.Name value={username} type="search" />
         <User.SubInfo value={accountname} type="accountname" />
       </div>
     </User>
@@ -90,7 +92,7 @@ export function FollowUser({ author }) {
     <User accountname={accountname}>
       <User.ProfileImage src={image} size="Medium" />
       <div className={styles.UserInfo}>
-        <User.Name value={username} tagName="strong" />
+        <User.Name value={username} type="follow" />
         <User.SubInfo value={intro} type="intro" />
       </div>
     </User>
@@ -100,13 +102,11 @@ export function FollowUser({ author }) {
 export function CommentUser({ author }) {
   const { username, accountname, image } = author;
 
-  console.log(username, accountname, image);
-
   return (
     <User accountname={accountname}>
       <User.ProfileImage src={image} size="Small" />
       <div className={styles.UserInfo}>
-        <User.Name value={username} tagName="strong" />
+        <User.Name value={username} type="comment" />
       </div>
     </User>
   );
