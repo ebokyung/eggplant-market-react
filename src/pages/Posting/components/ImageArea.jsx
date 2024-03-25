@@ -1,5 +1,6 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// ! uuidv4 : cleanup이 마운트시에도 실행되는 원인
+// import { v4 as uuidv4 } from 'uuid';
 import { useRecoilValue } from 'recoil';
 import uploadFileIconHc from '../../../assets/icon/upload-file-hc.svg';
 import uploadFileIcon from '../../../assets/icon/upload-file.svg';
@@ -32,7 +33,7 @@ export function ImageArea({ imgData, setImgData }) {
     <>
       <ul className="upload-imgs-list">
         {imgData.map(image => (
-          <li key={uuidv4()}>
+          <li key={image}>
             <ImageItem img={image} onRemove={removedImage => handleRemoveImage(removedImage)} />
           </li>
         ))}
