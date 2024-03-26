@@ -47,12 +47,3 @@ h3.UserName {
   font-size: map-get($font-sizes, 'size12');
   font-weight: 400;
 }
-
-.ProfileDot {
-  position: absolute;
-  left: 0.125rem;
-  @include width-height(0.75rem, 0.75rem);
-  background-color: $enabled-color;
-  border-radius: 50%;
-  z-index: 1;
-}

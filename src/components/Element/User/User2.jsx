@@ -56,17 +56,17 @@ export function PostUser({ author }) {
   );
 }
 
+// 링크 x
 export function ChatUser({ author }) {
-  const { username, accountname, image } = author;
-  const contents = '';
+  const { username, image, contents } = author;
   return (
-    <User accountname={accountname}>
+    <div className={styles.UserContainer}>
       <User.ProfileImage src={image} size="Regular" />
       <div className={styles.UserInfo}>
         <User.Name value={username} type="chat" />
         <User.SubInfo value={contents} type="chat" />
       </div>
-    </User>
+    </div>
   );
 }
 
