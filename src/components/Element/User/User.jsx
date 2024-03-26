@@ -4,7 +4,11 @@ import classNames from 'classnames';
 import styles from './style/User.module.scss';
 import { ProfileImage } from './ProfileImage';
 
+// ! 리뷰 받을 부분 (Name, SubInfo)
+
+// username 컴포넌트
 function Name({ value, type }) {
+  // tag name map
   const tagNames = {
     post: 'p',
     chat: 'p',
@@ -13,22 +17,25 @@ function Name({ value, type }) {
     search: 'h3',
   };
 
+  // default : p
   const TagName = tagNames[type] || 'p'; // 기본값으로 'p' 설정
 
   return <TagName className={styles.UserName}>{value}</TagName>;
 }
 
 function SubInfo({ value, type }) {
+  // type에 따라 classname 조정
   const className = classNames(styles.SubInfoFont, {
     [styles.UserId]: type === 'accountname',
     [styles.UserIntro]: type === 'intro',
     [styles.ChatContents]: type === 'chat',
-    ellipsis: type === 'chat' || type === 'intro', // 조건부로 여러 타입에 적용
+    ellipsis: type === 'chat' || type === 'intro',
   });
 
   return <p className={className}>{value}</p>;
 }
 
+// User Container
 export function User({ children, accountname }) {
   return (
     <Link className={styles.UserContainer} to={`/profile?accountName=${accountname}`}>
@@ -41,8 +48,7 @@ User.Name = Name;
 User.SubInfo = SubInfo;
 User.ProfileImage = ProfileImage;
 
-//! Usage
-
+//! Usage : 우선 User파일에 생성해두었습니다
 export function PostUser({ author }) {
   const { username, accountname, image } = author;
   return (
@@ -56,7 +62,7 @@ export function PostUser({ author }) {
   );
 }
 
-// 링크 x
+// 프로필 링크 x
 export function ChatUser({ author }) {
   const { username, image, contents } = author;
   return (
