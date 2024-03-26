@@ -93,7 +93,7 @@ export function FollowUser({ author }) {
       <User.ProfileImage src={image} size="Medium" />
       <div className={styles.UserInfo}>
         <User.Name value={username} type="follow" />
-        <User.SubInfo value={intro} type="intro" />
+        <User.SubInfo value={intro} type="intro" className="1" />
       </div>
     </User>
   );

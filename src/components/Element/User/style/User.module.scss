@@ -4,10 +4,12 @@
   display: flex;
   align-items: center;
   width: fit-content;
+  min-width: 0;
 }
 
 .UserInfo {
   margin-right: 0.75rem;
+  overflow: hidden;
 }
 
 h3.UserName {
@@ -33,7 +35,6 @@ h3.UserName {
   line-height: 0.9375rem;
   margin-top: 0.375rem;
   cursor: default;
-  max-width: calc(100vw - 50px - 56px - 32px - 24px);
 }
 
 .ChatContents {
