@@ -5,12 +5,15 @@ import Modal from '../../../../components/Element/Modal/Modal';
 import { deleteProductAPI } from '../../api';
 import { useLazyLoad } from '../../../../hooks/useLazyLoad';
 
+// Todo : lazy 관련 리팩토링시에 customhook 분리
 export function ProductItem({ item }) {
   const imgRef = useRef();
   useLazyLoad(imgRef);
   const { id, itemImage, itemName, price } = item;
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
+
+  const src = getImageWithTheme({ img: itemImage, type: 'post' });
 
   const handleModal = () => {
     setIsModal(prev => !prev);
@@ -42,7 +45,7 @@ export function ProductItem({ item }) {
     <>
       <button className="product" data-product-id={id} type="button" onClick={() => handleModal()}>
         <strong className="product-name">{itemName}</strong>
-        <img className="product-img" data-src={getImageWithTheme({ img: itemImage, type: 'post' })} alt="" ref={imgRef} />
+        <img className="product-img" data-src={src} alt="" ref={imgRef} />
         <strong className="product-price">
           <span className="price">{Number(price).toLocaleString()}</span>원
         </strong>
