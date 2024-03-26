@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable consistent-return */
 import { useRecoilValue } from 'recoil';
 import defaultProfile from '../assets/basic-profile.png';
 import hcProfile from '../assets/basic-profile-hc.png';
@@ -7,12 +5,14 @@ import defaultError from '../assets/error-image.png';
 import hcError from '../assets/error-image-hc.png';
 import { themeAtom } from '../recoil/theme/atoms';
 
+// 상수 정의
 const LIGHT_PROFILE = '1687141773353.png';
 const HC_PROFILE = '1687827693364.png';
 const LIGHT_POST = '1687742174893.png';
 const HC_POST = '1687742585629.png';
 const BASE_URL = 'https://api.mandarin.weniv.co.kr/';
 
+// type(profile, post)에 맞는 default Image 설정
 function setDefaultImage(type) {
   let Light;
   let Contrast;
@@ -30,6 +30,7 @@ function setDefaultImage(type) {
   return { Light, Contrast };
 }
 
+// 문자열 처리
 function processName(imgString) {
   let newImg = imgString;
 
@@ -46,6 +47,7 @@ function processName(imgString) {
   return newImg;
 }
 
+// imgString에서 filename 추출 (없으면 null)
 function getFileName(imgString) {
   const regex = /(\d+)\.(PNG|JPG|png|svg|jpg|jpeg|gif|webp)$/;
   const FILENAME_LEGNTH = 13;
@@ -56,6 +58,7 @@ function getFileName(imgString) {
   return fileNameWithExtension;
 }
 
+// 이미지 처리
 export function getImageWithTheme({ img, type }) {
   const theme = useRecoilValue(themeAtom);
 
@@ -74,7 +77,6 @@ export function getImageWithTheme({ img, type }) {
   // url에서 파일 이름 떼오기
   const fileNameWithExtension = getFileName(imgURL);
 
-  // ! 테마 정보에 맞게 리턴해야하지 않나?
   // 디폴트 이미지 1차 리턴
 
   switch (fileNameWithExtension) {
