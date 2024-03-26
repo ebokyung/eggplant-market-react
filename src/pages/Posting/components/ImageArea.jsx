@@ -7,20 +7,24 @@ import uploadFileIcon from '../../../assets/icon/upload-file.svg';
 import { ImageItem } from './ImageItem';
 import { themeAtom } from '../../../recoil/theme/atoms';
 
+const MAX_IMAGE_LENGTH = 3;
+
 export function ImageArea({ imgData, setImgData }) {
   const theme = useRecoilValue(themeAtom);
   // 이미지 처리 로직
   const handleImage = e => {
+    const { target } = e;
+
     // e.target.value = null 처리를 위해서 임시로 복사본 생성
-    const temp = [...e.target.files];
-    if (imgData.length + temp.length <= 3) {
-      setImgData(prev => [...prev, ...temp]);
-      e.target.value = null;
+    const copyFiles = [...target.files];
+    if (imgData.length + copyFiles.length <= MAX_IMAGE_LENGTH) {
+      setImgData(prev => [...prev, ...copyFiles]);
+      target.value = null;
     }
   };
 
   const checkImageLength = e => {
-    if (imgData.length >= 3) {
+    if (imgData.length >= MAX_IMAGE_LENGTH) {
       e.preventDefault();
     }
   };
@@ -33,6 +37,7 @@ export function ImageArea({ imgData, setImgData }) {
     <>
       <ul className="upload-imgs-list">
         {imgData.map(image => (
+          // key 는 이미지로 처리해둠
           <li key={image}>
             <ImageItem img={image} onRemove={removedImage => handleRemoveImage(removedImage)} />
           </li>
