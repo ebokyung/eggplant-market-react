@@ -1,7 +1,7 @@
 import React from 'react';
 // import { User } from '../../../components/Element/User';
 import FollowButton from './FollowButton';
-import { FollowUser } from '../../../components/Element/User/User2';
+import { FollowUser } from '../../../components/Element/User';
 
 function FollowItem({ user }) {
   const { accountname, isfollow } = user;

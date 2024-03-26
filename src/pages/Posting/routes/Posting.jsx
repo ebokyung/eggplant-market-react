@@ -10,7 +10,7 @@ import { storage } from '../../../utils/storage';
 import { imgReg } from '../../../libs/constant/regex';
 import SkeletonPosting from '../components/SkeletonPosting';
 import { Meta } from '../../../libs/Meta';
-import { ProfileImage } from '../../../components/Element/User/ProfileImage';
+import { ProfileImage } from '../../../components/Element/User';
 
 export default function Posting() {
   const formRef = useRef();

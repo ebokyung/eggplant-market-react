@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { followerCnt } from '../../recoils/atoms';
 import { Followers } from './Follwers';
-import { ProfileImage } from '../../../../components/Element/User/ProfileImage';
+import { ProfileImage } from '../../../../components/Element/User';
 
 export function UserInfomation({ data }) {
   const { image, username, accountname, intro, followerCount, followingCount } = data;

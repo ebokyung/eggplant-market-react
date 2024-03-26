@@ -1,1 +1,2 @@
-export * from './UserInfo';
+export * from './ProfileImage';
+export * from './User';

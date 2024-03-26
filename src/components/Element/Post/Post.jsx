@@ -12,7 +12,7 @@ import { dateProcess } from '../../../utils/date';
 import { imgReg } from '../../../libs/constant/regex';
 import { storage } from '../../../utils/storage';
 import { useLazyLoad } from '../../../hooks/useLazyLoad';
-import { PostUser } from '../User/User2';
+import { PostUser } from '../User';
 
 function returnContentTag(location) {
   if (location.includes('home')) return 'h2';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ChatUser } from '../../../components/Element/User/User2';
+import { ChatUser } from '../../../components/Element/User';
 
 export function ChatListItem({ data }) {
   const { roomId, members, memberImg, lastMessage, lastChatDate, unreadCount } = data;

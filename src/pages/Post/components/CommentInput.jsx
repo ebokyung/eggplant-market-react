@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { postCommentAPI } from '../api';
 import '../style/CommentInput.scss';
-import { ProfileImage } from '../../../components/Element/User/ProfileImage';
+import { ProfileImage } from '../../../components/Element/User';
 
 export function CommentInput({ postId, setIsLoading, userImg }) {
   const [inpValue, setInpValue] = useState('');

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import './InputImg.scss';
-import { ProfileImage } from '../User/ProfileImage';
+import { ProfileImage } from '../User';
 import { ReactComponent as UploadIconSVG } from './upload_img_icon.svg';
 import { useBlob } from '../../../hooks/useBlob';
 

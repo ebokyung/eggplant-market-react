@@ -4,7 +4,7 @@ import { ButtonOptionComment } from '../../../components/Element/Buttons';
 import '../style/Comment.scss';
 import { displayedAt } from '../../../utils/date';
 import { storage } from '../../../utils/storage';
-import { CommentUser } from '../../../components/Element/User/User2';
+import { CommentUser } from '../../../components/Element/User';
 
 function Comment({ comment }) {
   const { id, author, content, createdAt } = comment;

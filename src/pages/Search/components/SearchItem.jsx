@@ -1,6 +1,6 @@
 import React from 'react';
 // import { User } from '../../../components/Element/User';
-import { SearchUser } from '../../../components/Element/User/User2';
+import { SearchUser } from '../../../components/Element/User';
 
 // 문제 있어보이는디?
 /**
