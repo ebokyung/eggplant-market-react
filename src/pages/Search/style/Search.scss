@@ -6,10 +6,15 @@
 
 .search-user-list {
   margin-left: 1rem;
+  margin-right: 1rem;
   margin-top: 1.25rem;
 
   li {
-    width: fit-content;
+    width: 100%;
     margin-bottom: 1rem;
+  }
+
+  li a {
+    width: 100%;
   }
 }

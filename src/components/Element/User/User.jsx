@@ -25,11 +25,10 @@ function Name({ value, type }) {
 
 function SubInfo({ value, type }) {
   // type에 따라 classname 조정
-  const className = classNames(styles.SubInfoFont, {
+  const className = classNames(styles.SubInfoFont, 'ellipsis', {
     [styles.UserId]: type === 'accountname',
     [styles.UserIntro]: type === 'intro',
     [styles.ChatContents]: type === 'chat',
-    ellipsis: type === 'chat' || type === 'intro',
   });
 
   return <p className={className}>{value}</p>;
