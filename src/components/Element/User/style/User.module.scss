@@ -23,6 +23,10 @@ h3.UserName {
   @include get-color(color, font-color);
 }
 
+.UserName strong {
+  @include get-color(color, point-color);
+}
+
 .UserId {
   margin-top: 0.125rem;
   &:before {

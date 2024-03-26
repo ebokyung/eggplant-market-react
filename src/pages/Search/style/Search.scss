@@ -12,10 +12,4 @@
     width: fit-content;
     margin-bottom: 1rem;
   }
-
-  .user-name {
-    strong {
-      @include get-color(color, point-color);
-    }
-  }
 }
