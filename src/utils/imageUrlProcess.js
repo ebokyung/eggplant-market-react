@@ -17,14 +17,17 @@ function setDefaultImage(type) {
   let Light;
   let Contrast;
 
-  if (type === 'profile') {
-    Light = defaultProfile;
-    Contrast = hcProfile;
-  } else if (type === 'post') {
-    Light = defaultError;
-    Contrast = hcError;
-  } else {
-    console.error('Error');
+  switch (type) {
+    case 'profile':
+      Light = defaultProfile;
+      Contrast = hcProfile;
+      break;
+    case 'post':
+      Light = defaultError;
+      Contrast = hcError;
+      break;
+    default:
+      console.error('Error');
   }
 
   return { Light, Contrast };
