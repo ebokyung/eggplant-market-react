@@ -4,12 +4,12 @@ import { useSearchParams } from 'react-router-dom';
 import { deleteCommentAPI, postCommentReportAPI } from '../components/Element/Buttons/api';
 
 const useHandleCmtOptionButton = (commentid, isMyCmt) => {
-  const [isModal, setIsModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchParam] = useSearchParams();
   const postid = searchParam.get('postId');
 
   const handleModal = () => {
-    setIsModal(prev => !prev);
+    setIsModalOpen(prev => !prev);
   };
 
   const handleDelete = async () => {
@@ -27,7 +27,7 @@ const useHandleCmtOptionButton = (commentid, isMyCmt) => {
 
   const options = isMyCmt ? myOptions : yourOptions;
 
-  return { isModal, handleModal, options };
+  return { isModalOpen, handleModal, options };
 };
 
 export default useHandleCmtOptionButton;
