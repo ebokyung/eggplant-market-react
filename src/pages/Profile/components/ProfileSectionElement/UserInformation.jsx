@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { followerCnt } from '../../recoils/atoms';
-import { ProfileImg } from '../../../../components/Element/User';
 import { Followers } from './Follwers';
+import { ProfileImage } from '../../../../components/Element/User';
 
 export function UserInfomation({ data }) {
   const { image, username, accountname, intro, followerCount, followingCount } = data;
@@ -15,7 +15,7 @@ export function UserInfomation({ data }) {
   return (
     <header className="profile-header">
       <h2 className="a11y-hidden">사용자 정보</h2>
-      <ProfileImg profileImg={image} />
+      <ProfileImage src={image} />
       <strong className="profile-name">
         <span className="a11y-hidden">이름:</span>
         {username}

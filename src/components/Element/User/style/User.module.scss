@@ -1,0 +1,53 @@
+@import '/src/styles/scss/mixin';
+
+.UserContainer {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  min-width: 0;
+}
+
+.UserInfo {
+  margin-right: 0.75rem;
+  overflow: hidden;
+}
+
+h3.UserName {
+  margin-bottom: 6px;
+}
+
+.UserName {
+  font-size: map-get($font-sizes, 'size14');
+  font-weight: 500;
+  line-height: 1.125rem;
+  @include get-color(color, font-color);
+}
+
+.UserName strong {
+  @include get-color(color, point-color);
+}
+
+.UserId {
+  margin-top: 0.125rem;
+  &:before {
+    content: '@ ';
+  }
+}
+
+// style refactoring 필요
+.UserIntro {
+  line-height: 0.9375rem;
+  margin-top: 0.375rem;
+  cursor: default;
+}
+
+.ChatContents {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.SubInfoFont {
+  @include get-color(color, gray-color);
+  font-size: map-get($font-sizes, 'size12');
+  font-weight: 400;
+}

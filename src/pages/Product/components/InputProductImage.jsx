@@ -1,34 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useBlob } from '../../../hooks/useBlob';
 
 export function InputProductImage({ initialValue, setImgError }) {
   const [productImg, setProductImg] = useState(initialValue);
   const imageRef = useRef();
+  const blobArray = useBlob();
+
+  const handleChange = e => {
+    const { files } = e.target;
+    if (files.length === 1) {
+      const blob = URL.createObjectURL(files[0]);
+      setProductImg(blob);
+      blobArray.push(blob);
+    } else {
+      setProductImg('');
+    }
+  };
 
   useEffect(() => {
     if (productImg) setImgError({ isError: false, errorText: '' });
     imageRef.current.style.backgroundImage = `url(${productImg})`;
   }, [productImg]);
 
-  useEffect(() => {
-    return () => {
-      if (productImg !== '' || productImg !== initialValue) {
-        URL.revokeObjectURL(productImg);
-      }
-    };
-  }, []);
-
   return (
     <article className="product-img-cover" ref={imageRef}>
       <h2 className="a11y-hidden">판매 상품 이미지</h2>
-      <label
-        className="btn-upload"
-        htmlFor="product-img-input"
-        role="tabpanel"
-        tabIndex="0"
-        onChange={e => {
-          if (e.target.files[0]) setProductImg(URL.createObjectURL(e.target.files[0]));
-        }}
-      >
+      <label className="btn-upload" htmlFor="product-img-input" role="tabpanel" tabIndex="0" onChange={handleChange}>
         <span className="a11y-hidden">판매 상품 이미지 업로드 버튼</span>
         <svg className="btn-upload-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="18" cy="18" r="18" fill="#C4C4C4" />
