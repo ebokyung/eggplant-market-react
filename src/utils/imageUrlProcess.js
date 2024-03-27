@@ -13,10 +13,8 @@ const HC_POST = '1687742585629.png';
 const BASE_URL = 'https://api.mandarin.weniv.co.kr/';
 
 // type(profile, post)에 맞는 default Image 설정
+// ? default를 어떻게 할지?
 function setDefaultImage(type) {
-  let Light;
-  let Contrast;
-
   switch (type) {
     case 'profile':
       return {
@@ -32,7 +30,7 @@ function setDefaultImage(type) {
       console.error('Error');
   }
 
-  return { Light, Contrast };
+  return {};
 }
 
 // 문자열 처리
