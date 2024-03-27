@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import './style/OtherButton.scss';
-import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Modal from '../Modal/Modal';
-import { storage } from '../../../utils/storage';
 import { themeAtom } from '../../../recoil/theme/atoms';
+import useHandleSettingOptionButton from '../../../hooks/useHandleSettingOptionButton';
 
 // 고대비 테마 radio 설정
 function ThemeRadio({ name, id, label, checked }) {
@@ -42,37 +41,14 @@ function ThemeModal({ handleModal }) {
 }
 
 function ButtonOption({ isViewText = false }) {
-  const navigate = useNavigate();
-  const [isModal, setIsModal] = useState(false);
-  const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
-
-  const handleModal = () => {
-    setIsModal(prev => !prev);
-  };
-
-  const handleLogout = useCallback(function 로그아웃() {
-    storage.clearStorage();
-    navigate('/login');
-  }, []);
-
-  const options = [
-    { text: '테마 변경', func: () => setIsThemeModalOpen(true) },
-    { text: '로그아웃', func: handleLogout, openAlert: true },
-  ];
-
-  useEffect(
-    function 테마모달닫기() {
-      if (!isModal) setIsThemeModalOpen(() => false);
-    },
-    [isModal],
-  );
+  const { isModalOpen, isThemeModalOpen, handleModal, options } = useHandleSettingOptionButton();
 
   return (
     <>
       <button type="button" className="btn-option" onClick={() => handleModal()}>
         <span className={isViewText ? '' : 'a11y-hidden'}>설정</span>
       </button>
-      {isModal && (isThemeModalOpen ? <ThemeModal handleModal={handleModal} /> : <Modal options={options} closeModal={handleModal} />)}
+      {isModalOpen && (isThemeModalOpen ? <ThemeModal handleModal={handleModal} /> : <Modal options={options} closeModal={handleModal} />)}
     </>
   );
 }
