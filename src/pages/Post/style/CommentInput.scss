@@ -1,38 +1,40 @@
 @import '/src/styles/scss/mixin';
 
-.comment-section form {
+.comment-section {
   position: fixed;
   bottom: 0;
-  width: 100%;
-  @include get-color(background-color, bg-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 18px;
-
-  border-top: $border-gray100-1px;
-  border-bottom: $border-gray100-1px;
-  padding: 10px 20px 10px 16px;
-
-  #commemt-input {
-    padding: 0.5rem;
-    @include get-color(color, font-color);
+  right: 0;
+  left: 0;
+  form {
     @include get-color(background-color, bg-color);
-    order: 1;
-    flex-grow: 1;
-  }
-  #comment-input::placeholder {
-    @include get-color(color, comment-placeholder);
-  }
-  .btn-comment {
-    order: 2;
-    width: 40px;
-  }
-  button {
-    font-size: map-get($font-sizes, 'size14');
-  }
-  button:not(:disabled) {
-    @include get-color(color, comment-btn);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+
+    border-top: $border-gray100-1px;
+    padding: 10px 20px 10px 16px;
+
+    #commemt-input {
+      padding: 0.5rem;
+      @include get-color(color, font-color);
+      @include get-color(background-color, bg-color);
+      order: 1;
+      flex-grow: 1;
+    }
+    #comment-input::placeholder {
+      @include get-color(color, comment-placeholder);
+    }
+    .btn-comment {
+      order: 2;
+      width: 40px;
+    }
+    button {
+      font-size: map-get($font-sizes, 'size14');
+    }
+    button:not(:disabled) {
+      @include get-color(color, comment-btn);
+    }
   }
 }
 
@@ -40,4 +42,19 @@
   position: fixed;
   bottom: 0;
   padding: 10px 20px 10px 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .comment-section + .tab-menu {
+    display: none;
+  }
+}
+
+.comment-section {
+  @media screen and (min-width: 768px) and (max-width: 1246px) {
+    left: 80px;
+  }
+  @media screen and (min-width: 1024px) {
+    left: 200px;
+  }
 }

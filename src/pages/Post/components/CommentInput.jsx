@@ -32,7 +32,7 @@ export function CommentInput({ postId, setIsLoading, userImg }) {
   };
 
   return (
-    <footer id="footer" className="comment-section">
+    <section id="footer" className="comment-section">
       <h2 className="a11y-hidden">댓글 입력하기</h2>
       <form onSubmit={e => handleClick(e)} action="">
         <label htmlFor="commemt-input" className="a11y-hidden">
@@ -44,6 +44,6 @@ export function CommentInput({ postId, setIsLoading, userImg }) {
           게시
         </button>
       </form>
-    </footer>
+    </section>
   );
 }

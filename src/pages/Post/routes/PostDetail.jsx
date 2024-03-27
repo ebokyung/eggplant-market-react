@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../../../components/Element/Header/Header';
+import Navbar from '../../../components/Element/Navbar/Navbar';
 import Comment from '../components/Comment';
 import { Post } from '../../../components/Element/Post';
 import '../style/PostDetail.scss';
@@ -61,7 +62,7 @@ export default function PostDetail() {
         )}
       </main>
       {isLoading ? <SkeletonCommentInput /> : <CommentInput postId={postId} setIsLoading={setIsLoading} userImg={userImg} />}
-      <section />
+      <Navbar />
     </>
   );
 }

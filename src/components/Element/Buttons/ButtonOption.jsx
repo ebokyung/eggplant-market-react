@@ -23,7 +23,7 @@ function ThemeRadio({ name, id, label, checked }) {
   );
 }
 
-function ButtonOption() {
+function ButtonOption({ isViewText = false }) {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
@@ -50,7 +50,7 @@ function ButtonOption() {
   return (
     <>
       <button type="button" className="btn-option" onClick={() => handleModal()}>
-        <span className="a11y-hidden">설정</span>
+        <span className={isViewText ? '' : 'a11y-hidden'}>설정</span>
       </button>
       {isModal &&
         (isThemeModalOpen ? (
