@@ -19,13 +19,15 @@ function setDefaultImage(type) {
 
   switch (type) {
     case 'profile':
-      Light = defaultProfile;
-      Contrast = hcProfile;
-      break;
+      return {
+        Light: defaultProfile,
+        Contrast: hcProfile,
+      };
     case 'post':
-      Light = defaultError;
-      Contrast = hcError;
-      break;
+      return {
+        Light: defaultError,
+        Contrast: hcError,
+      };
     default:
       console.error('Error');
   }
