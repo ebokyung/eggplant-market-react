@@ -7,14 +7,14 @@ import Alert from './Alert';
 
 function ModalItemButton({ option, idx }) {
   const setIsAlert = useSetRecoilState(isAlertOpen);
-  const doFunc = useSetRecoilState(doAlert);
+  const setDoFunc = useSetRecoilState(doAlert);
   return (
     <button
       type="button"
       onClick={() => {
         if (option.openAlert) {
           setIsAlert(true);
-          doFunc({ text: option.text, func: option.func });
+          setDoFunc({ text: option.text, func: option.func });
         } else {
           option.func();
         }
