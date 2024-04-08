@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 
 export default function SkeletonCommentInput() {
   return (
-    <footer className="comment-section">
+    <section className="comment-section">
       <form action="" style={{ zIndex: 1 }}>
         <div id="commemt-input">
           <Skeleton />
@@ -15,6 +15,6 @@ export default function SkeletonCommentInput() {
           게시
         </button>
       </form>
-    </footer>
+    </section>
   );
 }

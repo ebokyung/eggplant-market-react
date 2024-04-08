@@ -1,6 +1,8 @@
 @import '/src/styles/scss/mixin';
 
 #post {
+  max-width: 500px;
+  margin: auto;
   position: relative;
   .btn-option {
     width: 1.5rem;
@@ -43,15 +45,33 @@
 
   .img-cover {
     width: 304px;
-    height: 304px;
+    aspect-ratio: 1/1;
     margin-bottom: 0.75rem;
     border-radius: 0.625rem;
     overflow: hidden;
     border: $border-gray100-1px;
 
     .post-img {
-      @include width-height(304px, 304px);
+      @include width-height(100%, 100%);
       object-fit: contain;
+    }
+  }
+  @media screen and (max-width: 390px) {
+    .img-cover {
+      width: 280px;
+    }
+  }
+}
+@media screen and (max-width: 360px) {
+  .post-edit {
+    margin: 1rem 0.5rem 1rem calc(100% - 280px - 0.5rem);
+  }
+}
+@media screen and (max-width: 330px) {
+  .post-edit {
+    margin: 1rem 0 1rem calc(100% - 248px);
+    .img-cover {
+      width: 248px;
     }
   }
 }

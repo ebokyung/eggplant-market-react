@@ -11,12 +11,14 @@ export default function SkeletonEditProfile() {
         <Skeleton width={90} height={30} />
       </Header>
       <main className="main-profile-edit">
-        <div className="setting-profile-img">
-          <Skeleton className="profile-img main" circle />
+        <div className="l_main-profile-edit">
+          <div className="setting-profile-img">
+            <Skeleton className="profile-img main" circle />
+          </div>
+          <SkeletonFieldset />
+          <SkeletonFieldset />
+          <SkeletonFieldset />
         </div>
-        <SkeletonFieldset />
-        <SkeletonFieldset />
-        <SkeletonFieldset />
       </main>
     </>
   );

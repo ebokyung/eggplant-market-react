@@ -2,17 +2,12 @@
 
 .main-post {
   padding: 20px 15px 0;
-  .home-post {
-    border-bottom: $border-gray100-1px;
-    margin-top: 0;
-  }
+  margin-bottom: 80px;
   .comment-list {
-    &,
+    margin-top: 20px;
+    border-top: $border-gray100-1px;
     & > li {
       margin-top: 20px;
-    }
-    li:first-child {
-      margin-top: 0;
     }
   }
 }
