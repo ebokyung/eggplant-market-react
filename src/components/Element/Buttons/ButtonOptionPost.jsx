@@ -1,10 +1,10 @@
 import React from 'react';
 import './style/OtherButton.scss';
 import Modal from '../Modal/Modal';
-import useHandleCmtOptionButton from '../../../hooks/useHandlePostOptionButton';
+import useHandlePostOptionButton from '../../../hooks/useHandlePostOptionButton';
 
 function ButtonOptionPost({ postid, isMyPost }) {
-  const { isModalOpen, handleModal, options } = useHandleCmtOptionButton(postid, isMyPost);
+  const { isModalOpen, handleModal, options } = useHandlePostOptionButton(postid, isMyPost);
 
   return (
     <>
