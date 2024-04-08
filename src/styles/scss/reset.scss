@@ -182,3 +182,83 @@ img {
 body {
   font-family: 'Spoqa Han Sans Neo';
 }
+
+.a11y-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+button {
+  border: none;
+  background-color: initial;
+  padding: 0;
+}
+input {
+  border: none;
+}
+
+a {
+  color: initial;
+  text-decoration: initial;
+}
+
+.main-with-nav {
+  height: calc(100% + 61px);
+  margin-bottom: 3.8125rem;
+}
+.before-none::before {
+  display: none;
+}
+
+nav,
+footer {
+  z-index: 1;
+}
+
+.null-text {
+  padding: 1.5rem;
+  text-align: center;
+  color: #d0d0d0;
+}
+
+@media screen and (min-width: 768px) {
+  .main-with-nav {
+    height: 100%;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  main:not(.main-login, .main-login-email, .signup-main),
+  header.header-search,
+  header.header-upload,
+  footer {
+    margin-left: 80px;
+  }
+  header:not(.signup-header, .profile-header, .header-search, .header-upload) {
+    display: none;
+  }
+}
+@media screen and (min-width: 1024px) {
+  main:not(.main-login, .main-login-email, .signup-main),
+  header.header-search,
+  header.header-upload,
+  footer {
+    margin-left: 200px;
+  }
+  header:not(.signup-header, .profile-header, .header-search, .header-upload) {
+    display: none;
+  }
+}
