@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import '../style/Posting.scss';
 import imageCompression from 'browser-image-compression';
 import Header from '../../../components/Element/Header/Header';
+import Navbar from '../../../components/Element/Navbar/Navbar';
 import { ProfileImg } from '../../../components/Element/User/ProfileImg';
 import { TextArea } from '../components/TextArea';
 import { ImageArea } from '../components/ImageArea';
@@ -94,19 +95,26 @@ export default function Posting() {
     navigate(`/profile?accountName=${storage.getAccountName()}`);
   };
 
-  if (isLoading) return <SkeletonPosting />;
-
   return (
     <>
       <Meta title={`게시글 ${postId ? '수정' : '작성'}`} />
-      <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
-      <main className="main-posting">
-        <ProfileImg profileImg={userImg} category="post" />
-        <form id="form-posting" onSubmit={handleSubmit} ref={formRef} className="posting-form" action="">
-          <TextArea initialValue={initialText} setIsTextError={setIsTextError} />
-          <ImageArea imgData={imgData} setImgData={setImgData} />
-        </form>
-      </main>
+      {isLoading ? (
+        <SkeletonPosting />
+      ) : (
+        <>
+          <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
+          <main className="main-posting">
+            <div className="l_main-posting">
+              <ProfileImg profileImg={userImg} category="post" />
+              <form id="form-posting" onSubmit={handleSubmit} ref={formRef} className="posting-form" action="">
+                <TextArea initialValue={initialText} setIsTextError={setIsTextError} />
+                <ImageArea imgData={imgData} setImgData={setImgData} />
+              </form>
+            </div>
+          </main>
+        </>
+      )}
+      <Navbar />
     </>
   );
 }

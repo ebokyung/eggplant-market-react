@@ -20,10 +20,18 @@ export function PostSection({ accountname }) {
   if (fetchStatus.isLoading) return <SkeletonPostSection />;
 
   return (
-    <section id="post" className="post-container">
+    <section id="my-post" className="post-container">
       <PostViewTab islistViewOn={islistViewOn} setIsListViewOn={setIsListViewOn} />
-      <section className="post-sec">{islistViewOn ? <ListView post={userPost} /> : <AlbumView post={userPost} />}</section>
-      {fetchStatus.isFetching && <Spinner />}
+      {userPost?.length ? (
+        <>
+          <section className="post-sec">{islistViewOn ? <ListView post={userPost} /> : <AlbumView post={userPost} />}</section>
+          {fetchStatus.isFetching && <Spinner />}
+        </>
+      ) : (
+        <div className="null-text" style={{ padding: '3rem' }}>
+          게시글이 없어요.
+        </div>
+      )}
     </section>
   );
 }
