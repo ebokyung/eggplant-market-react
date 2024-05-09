@@ -14,7 +14,7 @@ const BASE_URL = 'https://api.mandarin.weniv.co.kr/';
 
 // type(profile, post)에 맞는 default Image 설정
 // ? default를 어떻게 할지?
-function setDefaultImage(type) {
+function setDefaultImageForType(type) {
   switch (type) {
     case 'profile':
       return {
@@ -34,7 +34,7 @@ function setDefaultImage(type) {
 }
 
 // 문자열 처리
-function processName(imgString) {
+function refineImageUrl(imgString) {
   let newImg = imgString;
 
   if (newImg.includes('madarin.api')) {
@@ -51,7 +51,7 @@ function processName(imgString) {
 }
 
 // imgString에서 filename 추출 (없으면 null)
-function getFileName(imgString) {
+function extractFileNameFromUrl(imgString) {
   const regex = /(\d+)\.(PNG|JPG|png|svg|jpg|jpeg|gif|webp)$/;
   const FILENAME_LEGNTH = 13;
 
@@ -65,7 +65,7 @@ function getFileName(imgString) {
 export function getImageWithTheme({ img, type }) {
   const theme = useRecoilValue(themeAtom);
 
-  const { Light, Contrast } = setDefaultImage(type);
+  const { Light, Contrast } = setDefaultImageForType(type);
 
   // toString
   const imgToString = `${img}`;
@@ -76,9 +76,9 @@ export function getImageWithTheme({ img, type }) {
   }
 
   // url 정제
-  const imgURL = processName(imgToString);
+  const imgURL = refineImageUrl(imgToString);
   // url에서 파일 이름 떼오기
-  const fileNameWithExtension = getFileName(imgURL);
+  const fileNameWithExtension = extractFileNameFromUrl(imgURL);
 
   // 디폴트 이미지 1차 리턴
 
