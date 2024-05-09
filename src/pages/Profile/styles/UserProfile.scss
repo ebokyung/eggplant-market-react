@@ -1,13 +1,13 @@
 @import '/src/styles/scss/mixin';
 
 .main-user-profile {
-  min-width: 24.375rem;
+  // min-width: 24.375rem;
 
-  &>section {
+  & > section {
     background-color: $white-color;
 
     &:not(:first-child) {
-      margin-top: .1875rem;
+      margin-top: 0.1875rem;
     }
   }
 }
