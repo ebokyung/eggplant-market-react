@@ -4,7 +4,6 @@ import '../style/Posting.scss';
 import imageCompression from 'browser-image-compression';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
-import { ProfileImg } from '../../../components/Element/User/ProfileImg';
 import { TextArea } from '../components/TextArea';
 import { ImageArea } from '../components/ImageArea';
 import { postingAPI, postPostImgAPI, getPostAPI, putPostAPI, getUserAPI } from '../api/index';
