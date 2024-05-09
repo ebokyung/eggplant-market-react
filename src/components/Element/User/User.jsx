@@ -7,20 +7,10 @@ import { ProfileImage } from './ProfileImage';
 // ! 리뷰 받을 부분 (Name, SubInfo)
 
 // username 컴포넌트
-function Name({ value, type }) {
-  // tag name map
-  const tagNames = {
-    post: 'p',
-    chat: 'p',
-    follow: 'strong',
-    comment: 'strong',
-    search: 'h3',
-  };
-
+function Name({ value, as = 'p' }) {
   // default : p
-  const TagName = tagNames[type] || 'p'; // 기본값으로 'p' 설정
-
-  return <TagName className={styles.UserName}>{value}</TagName>;
+  const Component = as;
+  return <Component className={styles.UserName}>{value}</Component>;
 }
 
 function SubInfo({ value, type }) {
@@ -54,7 +44,7 @@ export function PostUser({ author }) {
     <User accountname={accountname}>
       <User.ProfileImage src={image} size="Regular" />
       <div className={styles.UserInfo}>
-        <User.Name value={username} type="post" />
+        <User.Name value={username} as="h3" />
         <User.SubInfo value={accountname} type="accountname" />
       </div>
     </User>
@@ -97,7 +87,7 @@ export function FollowUser({ author }) {
     <User accountname={accountname}>
       <User.ProfileImage src={image} size="Medium" />
       <div className={styles.UserInfo}>
-        <User.Name value={username} type="follow" />
+        <User.Name value={username} as="strong" />
         <User.SubInfo value={intro} type="intro" />
       </div>
     </User>
@@ -111,7 +101,7 @@ export function CommentUser({ author }) {
     <User accountname={accountname}>
       <User.ProfileImage src={image} size="Small" />
       <div className={styles.UserInfo}>
-        <User.Name value={username} type="comment" />
+        <User.Name value={username} as="strong" />
       </div>
     </User>
   );
