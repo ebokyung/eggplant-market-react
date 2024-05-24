@@ -1,0 +1,28 @@
+@import '/src/styles/scss/mixin';
+
+.spinner {
+  margin-bottom: 6rem;
+  .loading {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid $gray300-color;
+    border-top: 3px solid $gray200-color;
+    border-radius: 50%;
+    margin: 0 auto 1rem auto;
+    animation: spin 1s linear infinite;
+  }
+  p {
+    text-align: center;
+    font-size: 1rem;
+    color: $gray300-color;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
