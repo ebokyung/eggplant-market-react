@@ -1,68 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import './style/OtherButton.scss';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import React from 'react';
 import Modal from '../Modal/Modal';
-import { storage } from '../../../utils/storage';
-import { themeAtom } from '../../../recoil/theme/atoms';
-
-// 고대비 테마 radio 설정
-function ThemeRadio({ name, id, label, checked }) {
-  const setTheme = useSetRecoilState(themeAtom);
-  const handleTheme = theme => {
-    localStorage.setItem('theme', theme);
-    document.documentElement.setAttribute('data-theme', theme); // css 이미지 url
-    setTheme(theme); // 동적으로 생성되어 직접 바꾸어줘야하는 이미지 src (기본 프로필 이미지)
-    // applyThemeToErrorImage(theme);
-  };
-  return (
-    <label htmlFor={id} className="theme-item">
-      <input type="radio" name={name} id={id} defaultChecked={checked} className="theme" onClick={() => handleTheme(id)} />
-      {label}
-    </label>
-  );
-}
+import ThemeModal from '../Theme/ThemeModal';
+import useHandleSettingOptionButton from '../../../hooks/useHandleSettingOptionButton';
+import './style/OtherButton.scss';
 
 function ButtonOption({ isViewText = false }) {
-  const navigate = useNavigate();
-  const [isModal, setIsModal] = useState(false);
-  const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
-  const theme = useRecoilValue(themeAtom);
-
-  useEffect(() => {
-    if (!isModal) setIsThemeModalOpen(() => false);
-  }, [isModal]);
-
-  const handleModal = () => {
-    setIsModal(prev => !prev);
-  };
-
-  const handleLogout = () => {
-    storage.clearStorage();
-    navigate('/login');
-  };
-
-  const options = [
-    { text: '테마 변경', func: () => setIsThemeModalOpen(true) },
-    { text: '로그아웃', func: handleLogout, openAlert: true },
-  ];
+  const { isModalOpen, isThemeModalOpen, handleModal, options } = useHandleSettingOptionButton();
 
   return (
     <>
       <button type="button" className="btn-option" onClick={() => handleModal()}>
         <span className={isViewText ? '' : 'a11y-hidden'}>설정</span>
       </button>
-      {isModal &&
-        (isThemeModalOpen ? (
-          <Modal closeModal={handleModal}>
-            <>
-              <ThemeRadio name="colorSet" id="light" label="Light" checked={theme === 'light'} defaultChecked />
-              <ThemeRadio name="colorSet" id="highContrast" label="HighContrast" checked={theme === 'highContrast'} />
-            </>
-          </Modal>
-        ) : (
-          <Modal options={options} closeModal={handleModal} />
-        ))}
+      {isModalOpen && (isThemeModalOpen ? <ThemeModal handleModal={handleModal} /> : <Modal options={options} closeModal={handleModal} />)}
     </>
   );
 }
