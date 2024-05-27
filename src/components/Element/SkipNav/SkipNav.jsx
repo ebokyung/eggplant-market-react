@@ -1,6 +1,7 @@
 import React from 'react';
 import './SkipNav.scss';
 
+// ! 리팩토링 필요
 export function SkipNav({ page }) {
   if (page === 'home') {
     return (

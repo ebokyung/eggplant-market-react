@@ -1,43 +1,99 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable consistent-return */
+import { useRecoilValue } from 'recoil';
 import defaultProfile from '../assets/basic-profile.png';
 import hcProfile from '../assets/basic-profile-hc.png';
 import defaultError from '../assets/error-image.png';
 import hcError from '../assets/error-image-hc.png';
+import { themeAtom } from '../recoil/theme/atoms';
 
-export function checkImageUrl(Img, position) {
-  const theme = localStorage.getItem('theme');
-  const LightProfile = defaultProfile;
-  const LightPost = defaultError;
-  const ContrastProfile = hcProfile;
-  const ContrastPost = hcError;
+// 상수 정의
+const LIGHT_PROFILE = '1687141773353.png';
+const HC_PROFILE = '1687827693364.png';
+const LIGHT_POST = '1687742174893.png';
+const HC_POST = '1687742585629.png';
+const BASE_URL = 'https://api.mandarin.weniv.co.kr/';
 
-  Img += '';
-
-  if (Img.includes('https://api.mandarin.weniv.co.kr/https://api.mandarin.weniv.co.kr/')) {
-    const result = Img.replace('https://api.mandarin.weniv.co.kr/https://api.mandarin.weniv.co.kr/', 'https://api.mandarin.weniv.co.kr/');
-    return checkImageUrl(result, position);
+// type(profile, post)에 맞는 default Image 설정
+// ? default를 어떻게 할지?
+function setDefaultImageForType(type) {
+  switch (type) {
+    case 'profile':
+      return {
+        Light: defaultProfile,
+        Contrast: hcProfile,
+      };
+    case 'post':
+      return {
+        Light: defaultError,
+        Contrast: hcError,
+      };
+    default:
+      console.error('Error');
   }
-  if (Img.includes('mandarin.api')) {
-    const result = Img.replace('mandarin.api', 'api.mandarin');
-    return checkImageUrl(result, position);
+
+  return {};
+}
+
+// 문자열 처리
+function refineImageUrl(imgString) {
+  let newImg = imgString;
+
+  if (newImg.includes('madarin.api')) {
+    newImg = newImg.replaceAll('mandarin.api', 'api.mandarin');
   }
 
+  const pattern = BASE_URL.repeat(2);
+
+  while (newImg.includes(pattern)) {
+    newImg = newImg.replace(pattern, BASE_URL);
+  }
+
+  return newImg;
+}
+
+// imgString에서 filename 추출 (없으면 null)
+function extractFileNameFromUrl(imgString) {
   const regex = /(\d+)\.(PNG|JPG|png|svg|jpg|jpeg|gif|webp)$/;
-  const match = Img.match(regex);
-  const fileNameWithExtension = match && match[1].length === 13 ? `${match[1]}.${match[2]}` : null;
-  if (fileNameWithExtension) {
-    return `https://api.mandarin.weniv.co.kr/${fileNameWithExtension}`;
+  const FILENAME_LEGNTH = 13;
+
+  const match = imgString.match(regex);
+  const fileNameWithExtension = match && match[1].length === FILENAME_LEGNTH ? `${match[1]}.${match[2]}` : null;
+
+  return fileNameWithExtension;
+}
+
+// 이미지 처리
+export function getImageWithTheme({ img, type }) {
+  const theme = useRecoilValue(themeAtom);
+
+  const { Light, Contrast } = setDefaultImageForType(type);
+
+  // toString
+  const imgToString = `${img}`;
+
+  if (imgToString.includes('Ellipse')) {
+    if (theme === 'light') return Light;
+    if (theme === 'highContrast') return Contrast;
   }
 
-  if (Img.includes('Ellipse') || !fileNameWithExtension) {
-    if (position === 'profile') {
-      if (theme === 'light') return LightProfile;
-      if (theme === 'highContrast') return ContrastProfile;
-    }
-    if (position === 'post') {
-      if (theme === 'light') return LightPost;
-      if (theme === 'highContrast') return ContrastPost;
-    }
+  // url 정제
+  const imgURL = refineImageUrl(imgToString);
+  // url에서 파일 이름 떼오기
+  const fileNameWithExtension = extractFileNameFromUrl(imgURL);
+
+  // 디폴트 이미지 1차 리턴
+
+  switch (fileNameWithExtension) {
+    case LIGHT_PROFILE:
+    case LIGHT_POST:
+    case HC_PROFILE:
+    case HC_POST:
+    case null:
+      if (theme === 'light') return Light;
+      if (theme === 'highContrast') return Contrast;
+      break;
+    default:
+      break;
   }
+
+  return BASE_URL + fileNameWithExtension;
 }

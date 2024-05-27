@@ -1,33 +1,108 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ProfileImg } from './ProfileImg';
-import { UserInfo } from './UserInfo';
-import './style/User.scss';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+import styles from './style/User.module.scss';
+import { ProfileImage } from './ProfileImage';
 
-// 링크 분기처리 필요
-// 링크 분기 : profile 페이지의 경우 링크 작동 x
-// follow의 경우 UserInfo 내부의 p태크는 링크 작동 x
-export function User({ category, accountName, userName, detail, profileImg }) {
-  const linkClassName = category === 'comment' ? 'comment-user-info' : 'user-container';
+// ! 리뷰 받을 부분 (Name, SubInfo)
 
-  const location = useLocation();
+// username 컴포넌트
+function Name({ value, as = 'p' }) {
+  // default : p
+  const Component = as;
+  return <Component className={styles.UserName}>{value}</Component>;
+}
 
-  const preventClick = e => {
-    if (location.pathname.includes('profile')) {
-      e.preventDefault();
-    }
-  };
+function SubInfo({ value, type }) {
+  // type에 따라 classname 조정
+  const className = classNames(styles.SubInfoFont, 'ellipsis', {
+    [styles.UserId]: type === 'accountname',
+    [styles.UserIntro]: type === 'intro',
+    [styles.ChatContents]: type === 'chat',
+  });
 
-  const preventPointer = location.pathname.includes('profile')
-    ? {
-        pointerEvents: 'none',
-      }
-    : null;
+  return <p className={className}>{value}</p>;
+}
+
+// User Container
+export function User({ children, accountname }) {
+  return (
+    <Link className={styles.UserContainer} to={`/profile?accountName=${accountname}`}>
+      {children}
+    </Link>
+  );
+}
+
+User.Name = Name;
+User.SubInfo = SubInfo;
+User.ProfileImage = ProfileImage;
+
+//! Usage : 우선 User파일에 생성해두었습니다
+export function PostUser({ author }) {
+  const { username, accountname, image } = author;
+  return (
+    <User accountname={accountname}>
+      <User.ProfileImage src={image} size="Regular" />
+      <div className={styles.UserInfo}>
+        <User.Name value={username} as="h3" />
+        <User.SubInfo value={accountname} type="accountname" />
+      </div>
+    </User>
+  );
+}
+
+// 프로필 링크 x
+export function ChatUser({ author }) {
+  const { username, image, contents } = author;
+  return (
+    <div className={styles.UserContainer}>
+      <User.ProfileImage src={image} size="Regular" />
+      <div className={styles.UserInfo}>
+        <User.Name value={username} type="chat" />
+        <User.SubInfo value={contents} type="chat" />
+      </div>
+    </div>
+  );
+}
+
+// highlight
+export function SearchUser({ author }) {
+  const { username, accountname, image } = author;
 
   return (
-    <Link style={preventPointer} onClick={e => preventClick(e)} className={linkClassName} to={`/profile?accountName=${accountName}`}>
-      <ProfileImg profileImg={profileImg} category={category} />
-      <UserInfo category={category} userName={userName} detail={detail || accountName} />
-    </Link>
+    <User accountname={accountname}>
+      <User.ProfileImage src={image} size="Medium" />
+      <div className={styles.UserInfo}>
+        <User.Name value={username} type="search" />
+        <User.SubInfo value={accountname} type="accountname" />
+      </div>
+    </User>
+  );
+}
+
+export function FollowUser({ author }) {
+  const { username, accountname, image, intro } = author;
+
+  return (
+    <User accountname={accountname}>
+      <User.ProfileImage src={image} size="Medium" />
+      <div className={styles.UserInfo}>
+        <User.Name value={username} as="strong" />
+        <User.SubInfo value={intro} type="intro" />
+      </div>
+    </User>
+  );
+}
+
+export function CommentUser({ author }) {
+  const { username, accountname, image } = author;
+
+  return (
+    <User accountname={accountname}>
+      <User.ProfileImage src={image} size="Small" />
+      <div className={styles.UserInfo}>
+        <User.Name value={username} as="strong" />
+      </div>
+    </User>
   );
 }

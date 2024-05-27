@@ -1,0 +1,26 @@
+@import '/src/styles/scss/mixin';
+
+.ProfileImage {
+  margin-right: 0.75rem;
+  box-shadow: 0 0 0 0.0625rem inset #dbdbdb;
+  @include image-cover;
+  @include profile-img-tag;
+  border: $border-gray100-1px;
+}
+
+$img-sizes: (
+  Small: 36px,
+  Regular: 42px,
+  Medium: 50px,
+  Large: 110px,
+);
+
+@each $name, $size in $img-sizes {
+  .#{$name} {
+    @include width-height($size, $size);
+  }
+}
+
+.Large {
+  margin: 0 auto;
+}

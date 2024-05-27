@@ -1,17 +1,18 @@
 import React, { useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { User } from '../User';
+// import { User } from '../User';
 import { ButtonOptionPost } from '../Buttons';
 import ButtonLike from './ButtonLike';
 
 import './Post.scss';
 import messageCircle from '../../../assets/icon/icon-message-circle.svg';
-import { checkImageUrl } from '../../../utils/imageUrlProcess';
+import { getImageWithTheme } from '../../../utils/imageUrlProcess';
 import { dateProcess } from '../../../utils/date';
 import { imgReg } from '../../../libs/constant/regex';
 import { storage } from '../../../utils/storage';
 import { useLazyLoad } from '../../../hooks/useLazyLoad';
+import { PostUser } from '../User';
 
 function returnContentTag(location) {
   if (location.includes('home')) return 'h2';
@@ -48,7 +49,7 @@ export function Post({ post }) {
 
   return (
     <section id="post" className="home-post" data-postid={id}>
-      <User category="post" accountName={author.accountname} userName={author.username} detail={author.accountname} profileImg={author.image} />
+      <PostUser author={author} />
       <div className="post-edit">
         <Link to={`/post?postId=${id}`} onClick={preventClick} style={preventPointer}>
           <span className="a11y-hidden">게시글 상세보기</span>
@@ -58,7 +59,7 @@ export function Post({ post }) {
             .filter(img => !!img)
             .map(img => (
               <div key={img} className="img-cover">
-                <img className="post-img" data-src={checkImageUrl(img, 'post')} alt="" ref={addToRefs} />
+                <img className="post-img" data-src={getImageWithTheme({ img, type: 'post' })} alt="" ref={addToRefs} />
               </div>
             ))}
         </Link>

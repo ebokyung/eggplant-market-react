@@ -4,7 +4,6 @@ import '../style/Posting.scss';
 import imageCompression from 'browser-image-compression';
 import Header from '../../../components/Element/Header/Header';
 import Navbar from '../../../components/Element/Navbar/Navbar';
-import { ProfileImg } from '../../../components/Element/User/ProfileImg';
 import { TextArea } from '../components/TextArea';
 import { ImageArea } from '../components/ImageArea';
 import { postingAPI, postPostImgAPI, getPostAPI, putPostAPI, getUserAPI } from '../api/index';
@@ -12,6 +11,7 @@ import { storage } from '../../../utils/storage';
 import { imgReg } from '../../../libs/constant/regex';
 import SkeletonPosting from '../components/SkeletonPosting';
 import { Meta } from '../../../libs/Meta';
+import { ProfileImage } from '../../../components/Element/User';
 
 export default function Posting() {
   const formRef = useRef();
@@ -105,7 +105,7 @@ export default function Posting() {
           <Header page="upload" btnDisabled={btnDisabled} formName="form-posting" />
           <main className="main-posting">
             <div className="l_main-posting">
-              <ProfileImg profileImg={userImg} category="post" />
+              <ProfileImage src={userImg} size="Regular" />
               <form id="form-posting" onSubmit={handleSubmit} ref={formRef} className="posting-form" action="">
                 <TextArea initialValue={initialText} setIsTextError={setIsTextError} />
                 <ImageArea imgData={imgData} setImgData={setImgData} />

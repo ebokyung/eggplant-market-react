@@ -1,12 +1,12 @@
 import React from 'react';
 import '../styles/ChatBubble.scss';
-import { ProfileImg } from '../../../components/Element/User';
+import { ProfileImage } from '../../../components/Element/User';
 
 export function ChatBubble({ data }) {
   const { who, body, src, time } = data;
   return (
     <div className={`chat-cover ${who ? 'my-chat' : 'your-chat'}`}>
-      {!who && <ProfileImg category="chat" />}
+      {!who && <ProfileImage src="" size="Regular" />}
       {!src && <p className="chat-content">{body}</p>}
       {src && <img src={src} alt="" />}
       <p className="chat-time">{time}</p>
