@@ -105,7 +105,7 @@
   - 팔로우 / 팔로잉
 
 <br />
-<img width= "800" src="https://user-images.githubusercontent.com/121578822/249671612-68272f12-e7e1-4f6b-bea3-a5f3dcfd4bff.png">
+<img width= "800" src="https://github.com/ebokyung/eggplant-market-react/assets/126536351/591515db-14f2-4cb4-81ba-efc307e660e9">
 <br />
 
 ## <span id = "pageFunction">5. 페이지 기능</span>
