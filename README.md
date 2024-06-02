@@ -3,6 +3,12 @@
 > 배포 URL: </br>id: eggplant@market.com <br>pw: 123123123
 > <br />
 
+```
+node : v18.18.2
+
+npm start
+```
+
 ## 팀원 소개
 
 |                                                                      **박재영**                                                                       |                                                                        **이보경**                                                                         |
