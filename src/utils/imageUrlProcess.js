@@ -1,9 +1,7 @@
-import { useRecoilValue } from 'recoil';
 import defaultProfile from '../assets/basic-profile.png';
 import hcProfile from '../assets/basic-profile-hc.png';
 import defaultError from '../assets/error-image.png';
 import hcError from '../assets/error-image-hc.png';
-import { themeAtom } from '../recoil/theme/atoms';
 
 // 상수 정의
 const LIGHT_PROFILE = '1687141773353.png';
@@ -62,9 +60,7 @@ function extractFileNameFromUrl(imgString) {
 }
 
 // 이미지 처리
-export function getImageWithTheme({ img, type }) {
-  const theme = useRecoilValue(themeAtom);
-
+export function getImageWithTheme({ img, type, theme }) {
   const { Light, Contrast } = setDefaultImageForType(type);
 
   // toString

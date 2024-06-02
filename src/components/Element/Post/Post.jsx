@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 // import { User } from '../User';
+import { useRecoilValue } from 'recoil';
 import { ButtonOptionPost } from '../Buttons';
 import ButtonLike from './ButtonLike';
 
@@ -13,6 +14,7 @@ import { imgReg } from '../../../libs/constant/regex';
 import { storage } from '../../../utils/storage';
 import { useLazyLoad } from '../../../hooks/useLazyLoad';
 import { PostUser } from '../User';
+import { themeAtom } from '../../../recoil/theme/atoms';
 
 function returnContentTag(location) {
   if (location.includes('home')) return 'h2';
@@ -24,6 +26,7 @@ function returnContentTag(location) {
 // Post 링크 분기
 // 게시글 상세 페이지에서는 게시글 상세보기 링크 막기
 export function Post({ post }) {
+  const theme = useRecoilValue(themeAtom);
   const imgRef = useRef([]);
   imgRef.current = [];
   const addToRefs = el => {
@@ -59,7 +62,7 @@ export function Post({ post }) {
             .filter(img => !!img)
             .map(img => (
               <div key={img} className="img-cover">
-                <img className="post-img" data-src={getImageWithTheme({ img, type: 'post' })} alt="" ref={addToRefs} />
+                <img className="post-img" data-src={getImageWithTheme({ img, type: 'post', theme })} alt="" ref={addToRefs} />
               </div>
             ))}
         </Link>

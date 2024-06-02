@@ -1,19 +1,22 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import { getImageWithTheme } from '../../../../utils/imageUrlProcess';
 import Modal from '../../../../components/Element/Modal/Modal';
 import { deleteProductAPI } from '../../api';
 import { useLazyLoad } from '../../../../hooks/useLazyLoad';
+import { themeAtom } from '../../../../recoil/theme/atoms';
 
 // Todo : lazy 관련 리팩토링시에 customhook 분리
 export function ProductItem({ item }) {
+  const theme = useRecoilValue(themeAtom);
   const imgRef = useRef();
   useLazyLoad(imgRef);
   const { id, itemImage, itemName, price } = item;
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
 
-  const src = getImageWithTheme({ img: itemImage, type: 'post' });
+  const src = getImageWithTheme({ img: itemImage, type: 'post', theme });
 
   const handleModal = () => {
     setIsModal(prev => !prev);
