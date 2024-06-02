@@ -11,9 +11,11 @@ function Comment({ comment }) {
 
   return (
     <>
-      <CommentUser author={author} />
-      {/* 날짜 함수 적용 필요 */}
-      <p className="comment-time">{displayedAt(createdAt)}</p>
+      <div className="div-flex">
+        <CommentUser author={author} />
+        {/* 날짜 함수 적용 필요 */}
+        <span className="comment-time">{displayedAt(createdAt)}</span>
+      </div>
       <h3 className="comment-text">{content}</h3>
       <ButtonOptionComment commentid={id} isMyCmt={author.accountname === storage.getAccountName()} />
     </>
