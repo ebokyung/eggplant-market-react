@@ -38,8 +38,8 @@ export function ImageArea({ imgData, setImgData }) {
       <ul className="upload-imgs-list">
         {imgData.map(image => (
           // key 는 이미지로 처리해둠
-          <li key={image}>
-            <ImageItem img={image} onRemove={removedImage => handleRemoveImage(removedImage)} />
+          <li key={image.name ?? image}>
+            <ImageItem img={image} onRemove={handleRemoveImage} />
           </li>
         ))}
       </ul>
