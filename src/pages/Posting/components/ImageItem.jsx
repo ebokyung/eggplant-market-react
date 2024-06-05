@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import '../style/ImageItem.scss';
+import { useRecoilValue } from 'recoil';
 import closeIcon from '../../../assets/icon/x.svg';
 import { getImageWithTheme } from '../../../utils/imageUrlProcess';
 import { useBlob } from '../../../hooks/useBlob';
+import { themeAtom } from '../../../recoil/theme/atoms';
 
 export function ImageItem({ img, onRemove }) {
+  const theme = useRecoilValue(themeAtom);
+
   const [imgSrc, setImgSrc] = useState('');
   const blobArray = useBlob();
 
@@ -14,7 +18,7 @@ export function ImageItem({ img, onRemove }) {
       src = URL.createObjectURL(img);
       blobArray.push(src);
     } else {
-      src = getImageWithTheme({ img, type: 'post' });
+      src = getImageWithTheme({ img, type: 'post', theme });
     }
     setImgSrc(src);
   }, []);

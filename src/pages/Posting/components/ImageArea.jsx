@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 // ! uuidv4 : cleanup이 마운트시에도 실행되는 원인
 // import { v4 as uuidv4 } from 'uuid';
 import { useRecoilValue } from 'recoil';
@@ -38,8 +38,10 @@ export function ImageArea({ imgData, setImgData }) {
       <ul className="upload-imgs-list">
         {imgData.map(image => (
           // key 는 이미지로 처리해둠
-          <li key={image}>
-            <ImageItem img={image} onRemove={removedImage => handleRemoveImage(removedImage)} />
+          <li key={image.name ?? image}>
+            <Suspense fallback={<div>loading</div>}>
+              <ImageItem img={image} onRemove={handleRemoveImage} />
+            </Suspense>
           </li>
         ))}
       </ul>

@@ -6,7 +6,6 @@
 
   a,
   .a {
-    display: inline-block;
     height: fit-content;
   }
 
@@ -47,4 +46,8 @@
     left: calc(100% - 44px);
     transform: translate(0, 25%);
   }
+}
+
+.div-flex {
+  display: flex;
 }
